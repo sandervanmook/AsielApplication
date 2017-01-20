@@ -13,7 +13,7 @@ inputField.keyup(function() {
     if (inputLength == 15) {
         // Search in our DB
         $.ajax({
-            url: Routing.generate('asiel_animal_findonchipnumber',{ chipnumber: chipnumber} , true),
+            url: Routing.generate('backend_animal_find_on_chipnumber',{ chipnumber: chipnumber} , true),
             type: "GET",
             dataType : "json",
         }).done(function( json ) {
@@ -24,7 +24,7 @@ inputField.keyup(function() {
             } else {
                 choiceLinks.hide();
                 var animalId = json[0]["id"];
-                var link = Routing.generate('asiel_animal_show',{ id: animalId} , true)
+                var link = Routing.generate('backend_animal_show',{ id: animalId} , true)
                 $("#chipresult").html( 'Dit dier staat al in <a href="'+link+'">onze</a> database' );
             }
         })

@@ -1,8 +1,8 @@
 {% block editAnimal %}
     <ul class="nav nav-tabs">
-        <li role="presentation" {% if app.request.get('_route') == 'asiel_animal_show' %} class="active" {% endif %}><a href="#">Overzicht</a></li>
-        <li role="presentation" {% if app.request.get('_route') == 'asiel_animal_edit' %} class="active" {% endif %}><a href="#">Aanpassen</a></li>
-        <li role="presentation" {% if 'incident' in app.request.get('_route') %} class="active" {% endif %}><a href="#">Incidenten</a></li>
+        <li role="presentation" {% if app.request.get('_route') == 'backend_animal_show' %} class="active" {% endif %}><a href="{{ path('backend_animal_show', {'id' : app.request.get('id')}) }}">Overzicht</a></li>
+        <li role="presentation" {% if app.request.get('_route') == 'backend_animal_edit' %} class="active" {% endif %}><a href="{{ path('backend_animal_edit', {'id' : app.request.get('id')}) }}">Aanpassen</a></li>
+        <li role="presentation" {% if 'incident' in app.request.get('_route') %} class="active" {% endif %}><a href="{{ path('backend_animal_incident_index', {'id': app.request.get('id')}) }}">Incidenten</a></li>
         <li role="presentation" {% if 'medical' in app.request.get('_route') %} class="active" {% endif %}><a href="#">Medisch dossier</a></li>
         <li role="presentation" {% if 'status' in app.request.get('_route') %} class="active" {% endif %}><a href="#">Status</a></li>
         <li role="presentation" {% if 'picture' in app.request.get('_route') %} class="active" {% endif %}><a href="#">Foto's</a></li>

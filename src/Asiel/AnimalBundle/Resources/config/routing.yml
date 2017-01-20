@@ -1,3 +1,4 @@
+# Backend Animal
 backend_animal_index:
     path:     /backend/animal
     defaults: { _controller: AnimalBundle:Backend:index }
@@ -9,3 +10,37 @@ backend_animal_create:
 backend_animal_register:
     path:     /backend/animal/register/{type}
     defaults: { _controller: AnimalBundle:Backend:register }
+
+backend_animal_find_on_chipnumber:
+    path:     /backend/animal/findonchipnumber/{chipnumber}
+    defaults: { _controller: AnimalBundle:Backend:findOnChipnumber }
+    options:
+           expose: true
+
+backend_animal_show:
+    path:     /backend/animal/show/{id}
+    defaults: { _controller: AnimalBundle:Backend:show }
+    options:
+           expose: true
+
+backend_animal_edit:
+    path:     /backend/animal/edit/{id}
+    defaults: { _controller: AnimalBundle:Backend:edit }
+# End Backend Animal
+
+# Backend Incident
+backend_animal_incident_index:
+    path:     /backend/animal/{animalid}/incident
+    defaults: { _controller: AnimalBundle:BackendIncident:index }
+
+backend_animal_incident_create:
+    path:     /backend/animal/{animalid}/incident/create
+    defaults: { _controller: AnimalBundle:BackendIncident:create }
+
+backend_animal_incident_show:
+    path:     /backend/animal/incident/show/{incidentid}
+    defaults: { _controller: AnimalBundle:BackendIncident:show }
+    options:
+           expose: true
+
+# End Backend Incident

@@ -1,0 +1,11 @@
+<div class="pull-right">
+<input id="animalId" type="hidden" value="{{ info.id }}">
+    {% if opentasks|length > 0 %}
+<span class="text-alert">Open taken: {{ opentasks|length }}</span>
+    {% endif %}
+{{ info.name }}
+({{ info.getclassname|trans }})
+{% for picture in info.pictures|slice(0,1) %}
+    <img src="{{ picture.publicurl }}" height="40">
+{% endfor %}
+</div>

@@ -1,0 +1,45 @@
+{% extends '@Backend/Base/Base.html.twig' %}
+{% block pagetitle %}Incidenten{% endblock %}
+{% block body %}
+    <br />
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <td>Datum</td>
+                        <td>Omschrijving</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for incident in incidents %}
+                        <tr>
+                            <td>{{ incident.date|date('d-m-Y') }}</td>
+                            <td>{{ incident.title|length > 10 ? incident.title|slice(0, 10)~'..' : incident.title }}</td>
+                            <td><span id="{{ incident.id }}" class="glyphicon glyphicon-eye-open view" aria-hidden="true"></span>
+                                <span id="{{ incident.id }}" class="glyphicon glyphicon-trash delete" aria-hidden="true"></span>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                        <tr>
+                            <td><a href="{{ path('backend_animal_incident_create', {'animalid' : app.request.attributes.get('animalid')}) }}"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="result" class="col-md-8"></div>
+        </div>
+    </div>
+    <div id="dialog-confirm" title="Incident verwijderen">
+        <p><span class="ui-icon ui-icon-alert"></span>Weet u zeker dat u het incident wil verwijderen?</p>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/views/Animal/Incident/IncidentConfirmDelete.js') }}"></script>
+    <script src="{{ asset('js/views/AnimalBundle/Incident/IncidentShow.js') }}"></script>
+{% endblock %}

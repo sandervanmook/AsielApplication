@@ -27,7 +27,7 @@
                         <img src="{{ asset('img/no_picture.jpg') }}" height="20" alt="no_animal_picture">
                     {% endif %}
                 </td>
-                <td><a href="#">{{ animal.name }}</a></td>
+                <td><a href="{{ path('backend_animal_show', {'id' : animal.id}) }}">{{ animal.name }}</a></td>
                 <td>{{ animal.getclassname|trans }}</td>
 
                 {% if animal.status is empty %}

@@ -2,10 +2,11 @@
 
 namespace Asiel\AnimalBundle\Repository;
 
-use AsielBundle\AnimalFactory\AnimalType;
-use AsielBundle\Entity\Animal;
-use AsielBundle\StatusFactory\StatusFactory;
-use AsielBundle\StatusFactory\StatusType;
+use Asiel\AnimalBundle\AnimalFactory\AnimalType;
+use Asiel\AnimalBundle\Entity\Animal;
+use Asiel\AnimalBundle\Entity\Status;
+use Asiel\AnimalBundle\StatusFactory\StatusFactory;
+use Asiel\AnimalBundle\StatusFactory\StatusType;
 use Doctrine\ORM\EntityRepository;
 use Ivory\CKEditorBundle\Exception\Exception;
 
@@ -88,9 +89,9 @@ class AnimalRepository extends EntityRepository
 
     /**
      * @param $animal Animal
-     * @return null
+     * @return null|Status
      */
-    public function getActiveState($animal)
+    public function getActiveState(Animal $animal)
     {
         foreach ($animal->getStatus() as $state) {
             if (!$state->isArchived()) {

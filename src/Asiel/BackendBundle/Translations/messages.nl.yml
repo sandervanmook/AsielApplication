@@ -1,0 +1,44 @@
+# Animal types
+Dog: Hond
+Cat: Kat
+
+#Animal states
+ReturnedOwner: Terug naar eigenaar
+Adopted: Geadopteerd
+Lost: Kwijt
+Deceased: Overleden
+Abandoned: Afgestaan
+Found: Gevonden
+Seized: In beslag genomen
+put_down: Ingeslapen
+natural_death: Natuurlijke dood
+
+#Gender
+Male: Mannelijk
+Female: Vrouwelijk
+Unknown: Onbekend
+
+#Days
+Mon: Maandag
+Tue: Dinsdag
+Wed: Woensdag
+Thu: Donderdag
+Fri: Vrijdag
+Sat: Zaterdag
+Sun: Zondag
+
+#Months short notation
+Mar: Maa
+May: Mei
+Oct: Okt
+
+#Roles
+ROLE_USER: Gebruiker
+ROLE_ADMIN: Beheerder
+ROLE_WALK_DOG: Wandelaar honden
+ROLE_NURSE_DOG: Verzorger honden
+ROLE_NURSE_CAT: Verzorger katten
+ROLE_NURSE_ILL: Verzorger ziekenboeg
+ROLE_NURSE_QUAR: Verzorger quarantaine
+ROLE_CATCH_DOG: Hondenvanger
+ROLE_SUPERVISOR: Algemeen opzichter

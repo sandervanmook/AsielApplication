@@ -18,8 +18,8 @@
                 <div id="chipresult"></div>
                 <div id="choices">
                     <br />
-                    <a href="#">Kat aanmelden</a> |
-                    <a href="#">Hond aanmelden</a>
+                    <a href="{{ path('backend_animal_register', {'type': 'Cat'}) }}">Kat aanmelden</a> |
+                    <a href="{{ path('backend_animal_register', {'type': 'Dog'}) }}">Hond aanmelden</a>
                 </div>
             </div>
         </div>
@@ -40,6 +40,6 @@
 {% endblock %}
 {% block javascripts %}
     {{ parent() }}
-    <script src="{{ asset('js/views/Animal/AnimalCreate.js') }}"></script>
+    <script src="{{ asset('js/views/AnimalBundle/Animal/AnimalCreate.js') }}"></script>
 {% endblock %}
 

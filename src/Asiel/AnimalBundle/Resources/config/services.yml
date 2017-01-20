@@ -1,7 +1,14 @@
 services:
     # Services
-    asiel.animalbundle.formhandler:
-      class: Asiel\AnimalBundle\Service\FormHandler
+    asiel.animalbundle.animalformhandler:
+      class: Asiel\AnimalBundle\Service\AnimalFormHandler
+      arguments:
+        - '@doctrine.orm.entity_manager'
+        - '@event_dispatcher'
+        - '@request_stack'
+
+    asiel.animalbundle.incidentformhandler:
+      class: Asiel\AnimalBundle\Service\IncidentFormHandler
       arguments:
         - '@doctrine.orm.entity_manager'
         - '@event_dispatcher'

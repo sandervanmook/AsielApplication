@@ -31,7 +31,7 @@
             </div>
 
             {% if ('animal' in app.request.get('_route')) and (app.request.attributes.get('id'))%}
-                {#{{ render(controller('AsielBundle:Info:animalInfo', {'id': app.request.attributes.get('id')})) }}#}
+                {{ render(controller('AnimalBundle:Backend:animalInfo', {'id': app.request.attributes.get('id')})) }}
                 {% use '@Backend/EditNav/animal.html.twig' %}
                 {% block editAnimal %}{{ parent() }}{% endblock %}
             {% endif %}
@@ -42,7 +42,7 @@
                 {% block editUser %}{{ parent() }}{% endblock %}
             {% endif %}
 
-            {% use '@Backend/Base/flashMessage.html.twig' %}
+            {% use '@Backend/Base/FlashMessage.html.twig' %}
             {% block flashMessage %}{{ parent() }}{% endblock %}
 
             {% block body %}{% endblock %}

@@ -10,7 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Dog
  *
  * @ORM\Table(name="dog")
- * @ORM\Entity(repositoryClass="Asiel\AnimalBundle\Repository\DogRepository")
+ * @ORM\Entity(repositoryClass="Asiel\AnimalBundle\Repository\AnimalType\DogRepository")
  */
 class Dog extends Animal implements TypeInterface
 {

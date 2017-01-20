@@ -1,8 +1,7 @@
 <?php
 
-namespace Asiel\AnimalBundle\Repository;
+namespace Asiel\AnimalBundle\Repository\AnimalType;
 
-use AsielBundle\Model\ValueType\StatusValueType;
 use Doctrine\ORM\EntityRepository;
 
 class DogRepository extends EntityRepository
