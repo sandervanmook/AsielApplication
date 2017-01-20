@@ -4,10 +4,10 @@ namespace Asiel\AnimalBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class DefaultController extends Controller
+class FrontendController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('AnimalBundle:Default:index.html.twig');
+        return $this->render('@Backend/AnimalBundle/index.html.twig');
     }
 }
