@@ -1,1 +1,14 @@
-create location
+{% extends 'BackendBundle:Base:Base.html.twig' %}
+{% block pagetitle %}Locatie aanmaken{% endblock %}
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                {{ form_start(form) }}
+                {{ form_widget(form) }}
+                {{ outputFormButton('Aanmaken') }}
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

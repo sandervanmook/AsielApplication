@@ -2,7 +2,7 @@
 
 namespace Asiel\AnimalBundle\Form\AnimalType;
 
-use AsielBundle\Form\AnimalType\AnimalType;
+use Asiel\AnimalBundle\Form\AnimalType;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -93,7 +93,7 @@ class CatType extends AnimalType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AsielBundle\Entity\AnimalType\Cat',
+            'data_class' => 'Asiel\AnimalBundle\Entity\AnimalType\Cat',
 
         ));
     }

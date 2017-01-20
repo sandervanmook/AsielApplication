@@ -5,3 +5,9 @@ backend_location_index:
 backend_location_create:
     path:     /backend/location/create
     defaults: { _controller: LocationBundle:Default:create }
+
+backend_location_delete:
+    path:     /backend/location/delete/{id}
+    defaults: { _controller: LocationBundle:Default:delete }
+    options:
+           expose: true

@@ -1,4 +1,36 @@
 services:
-#    backend.example:
-#        class: Asiel\BackendBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
+    # Services
+
+
+    # Twig extensions
+    asiel.backendbundle.boolean.twig_extension:
+        class: Asiel\BackendBundle\Twig\BooleanExtension
+        public: false
+        tags:
+          - { name: twig.extension }
+    asiel.backendbundle.gender.twig_extension:
+        class: Asiel\BackendBundle\Twig\GenderExtension
+        public: false
+        tags:
+          - { name: twig.extension }
+    asiel.backendbundle.formbutton.twig_extension:
+        class: Asiel\BackendBundle\Twig\FormButtonExtension
+        public: false
+        tags:
+          - { name: twig.extension }
+
+    # Event listeners
+    # UserAlert Events
+    asiel.backendbundle.useralert.event:
+          class: Asiel\BackendBundle\EventListener\UserAlertListener
+          arguments:
+            - '@session'
+          tags:
+            - { name: kernel.event_listener, event: user_alert.message, method: onUserAlertEvent }
+    # Resource Not Found Events
+    asiel.backendbundle.resourcenotfound.event:
+          class: Asiel\BackendBundle\EventListener\ResourceNotFoundListener
+          arguments:
+            - '@templating'
+          tags:
+            - { name: kernel.event_listener, event: resourcenotfound, method: onResourceNotFoundEvent }

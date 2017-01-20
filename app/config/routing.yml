@@ -9,9 +9,6 @@ backend:
     resource: "@BackendBundle/Resources/config/routing.yml"
     prefix: /backend
 
-form:
-    resource: "@FormBundle/Resources/config/routing.yml"
-
 cms:
     resource: "@CMSBundle/Resources/config/routing.yml"
 

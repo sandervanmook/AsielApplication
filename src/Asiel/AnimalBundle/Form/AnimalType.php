@@ -1,6 +1,6 @@
 <?php
 
-namespace AsielBundle\Form\AnimalType;
+namespace Asiel\AnimalBundle\Form;
 
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -31,12 +31,12 @@ class AnimalType extends AbstractType
             ])
             ->add('dayLocation', EntityType::class, [
                 'label'         => 'Locatie overdag',
-                'class'         => 'AsielBundle\Entity\Location',
+                'class'         => 'Asiel\LocationBundle\Entity\Location',
                 'choice_label'  => 'Name',
             ])
             ->add('nightLocation', EntityType::class, [
                 'label'         => "Locatie 's nachts",
-                'class'         => 'AsielBundle\Entity\Location',
+                'class'         => 'Asiel\LocationBundle\Entity\Location',
                 'choice_label'  => 'Name',
             ])
             ->add('registerDate', DateType::class, [
@@ -174,7 +174,7 @@ class AnimalType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AsielBundle\Entity\Animal',
+            'data_class' => 'Asiel\AnimalBundle\Entity\Animal',
         ));
     }
 

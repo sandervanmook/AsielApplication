@@ -20,7 +20,6 @@ class AppKernel extends Kernel
             new Asiel\EmployeeBundle\EmployeeBundle(),
             new Asiel\CalendarBundle\CalendarBundle(),
             new Asiel\CMSBundle\CMSBundle(),
-            new Asiel\FormBundle\FormBundle(),
             new Asiel\BackendBundle\BackendBundle(),
             new Asiel\FrontendBundle\FrontendBundle(),
             new Asiel\LocationBundle\LocationBundle(),

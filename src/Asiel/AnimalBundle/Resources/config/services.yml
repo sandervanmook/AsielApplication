@@ -1,4 +1,8 @@
 services:
-#    animal.example:
-#        class: Asiel\AnimalBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
+    # Services
+    asiel.animalbundle.formhandler:
+      class: Asiel\AnimalBundle\Service\FormHandler
+      arguments:
+        - '@doctrine.orm.entity_manager'
+        - '@event_dispatcher'
+        - '@request_stack'

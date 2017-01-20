@@ -11,7 +11,7 @@ $('.delete').click(function () {
         draggable: false,
         buttons: {
             "Verwijder locatie": function() {
-                $.get(Routing.generate('asiel_location_delete', { id: id }, true));
+                $.get(Routing.generate('backend_location_delete', { id: id }, true));
                 location.reload();
             },
             Annuleren: function() {
