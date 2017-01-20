@@ -178,7 +178,7 @@ class User implements AdvancedUserInterface, \Serializable
     private $roles;
 
     /**
-     * @ORM\OneToOne(targetEntity="Asiel\EmployeeBundle\Entity\User\UserPicture", mappedBy="user")
+     * @ORM\OneToOne(targetEntity="Asiel\EmployeeBundle\Entity\UserPicture", mappedBy="user")
      */
     private $picture;
 

@@ -3,7 +3,6 @@
 namespace Asiel\AnimalBundle\Entity\AnimalType;
 
 use Asiel\AnimalBundle\Entity\Animal;
-use AsielBundle\Entity\TypeInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 

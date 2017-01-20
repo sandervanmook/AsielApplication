@@ -3,7 +3,6 @@
 namespace Asiel\AnimalBundle\Entity\AnimalType;
 
 use Asiel\AnimalBundle\Entity\Animal;
-use AsielBundle\Entity\TypeInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -26,7 +25,7 @@ class Cat extends Animal implements TypeInterface
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="AsielBundle\Entity\Animal")
+     * @ORM\OneToOne(targetEntity="Asiel\AnimalBundle\Entity\Animal")
      */
     private $animal;
 

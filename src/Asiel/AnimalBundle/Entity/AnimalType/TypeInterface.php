@@ -1,13 +1,13 @@
 <?php
 
-namespace AsielBundle\Entity;
+namespace Asiel\AnimalBundle\Entity\AnimalType;
 
 
 /**
  * Implement this class to all the animal type entities. The methods are used in the controllers.
  *
  * Class AnimalType
- * @package AsielBundle\Entity\AnimalType
+ * @package Asiel\AnimalBundle\Entity\AnimalType
  */
 
 interface TypeInterface

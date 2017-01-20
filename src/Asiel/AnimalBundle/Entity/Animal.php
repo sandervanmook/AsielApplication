@@ -2,11 +2,8 @@
 
 namespace Asiel\AnimalBundle\Entity;
 
-use AsielBundle\Entity\Customer;
-use AsielBundle\Entity\Location;
-use AsielBundle\Entity\Picture;
-use AsielBundle\Entity\Status;
-use AsielBundle\Entity\Task;
+use Asiel\CalendarBundle\Entity\Task;
+use Asiel\CustomerBundle\Entity\Customer;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -44,17 +41,17 @@ class Animal
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="AsielBundle\Entity\Status", mappedBy="animal")
+     * @ORM\OneToMany(targetEntity="Asiel\AnimalBundle\Entity\Status", mappedBy="animal")
      */
     private $status;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AsielBundle\Entity\Location")
+     * @ORM\ManyToOne(targetEntity="Asiel\LocationBundle\Entity\Location")
      */
     private $dayLocation;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AsielBundle\Entity\Location")
+     * @ORM\ManyToOne(targetEntity="Asiel\LocationBundle\Entity\Location")
      */
     private $nightLocation;
 
@@ -129,7 +126,7 @@ class Animal
     private $gender;
 
     /**
-     * @ORM\OneToMany(targetEntity="AsielBundle\Entity\Picture", mappedBy="animal")
+     * @ORM\OneToMany(targetEntity="Asiel\AnimalBundle\Entity\Picture", mappedBy="animal")
      */
     private $pictures;
 
@@ -241,7 +238,7 @@ class Animal
     private $facebookId;
 
     /**
-     * @ORM\OneToMany(targetEntity="AsielBundle\Entity\Task", mappedBy="animal")
+     * @ORM\OneToMany(targetEntity="Asiel\CalendarBundle\Entity\Task", mappedBy="animal")
      */
     private $tasks;
 
@@ -429,20 +426,6 @@ class Animal
     public function getAdmissionDate()
     {
         return $this->admissionDate;
-    }
-
-    /**
-     * Set foundAtLocation
-     *
-     * @param string $foundAtLocation
-     *
-     * @return Animal
-     */
-    public function setFoundAtLocation($foundAtLocation)
-    {
-        $this->foundAtLocation = $foundAtLocation;
-
-        return $this;
     }
 
     /**

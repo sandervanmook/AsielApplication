@@ -62,7 +62,7 @@ class Task
     private $isComplete;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AsielBundle\Entity\Animal", inversedBy="tasks")
+     * @ORM\ManyToOne(targetEntity="Asiel\AnimalBundle\Entity\Animal", inversedBy="tasks")
      */
     private $animal;
 
