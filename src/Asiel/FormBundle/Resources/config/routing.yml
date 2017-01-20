@@ -1,0 +1,3 @@
+form_homepage:
+    path:     /
+    defaults: { _controller: FormBundle:Default:index }

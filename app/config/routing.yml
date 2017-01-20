@@ -1,3 +1,33 @@
-app:
-    resource: "@AppBundle/Controller/"
-    type:     annotation
+frontend:
+    resource: "@FrontendBundle/Resources/config/routing.yml"
+    prefix:   /
+
+backend:
+    resource: "@BackendBundle/Resources/config/routing.yml"
+    prefix:   /backend
+
+form:
+    resource: "@FormBundle/Resources/config/routing.yml"
+    prefix:   /
+
+cms:
+    resource: "@CMSBundle/Resources/config/routing.yml"
+    prefix:   /page
+
+calendar:
+    resource: "@CalendarBundle/Resources/config/routing.yml"
+    prefix:   /calendar
+
+employee:
+    resource: "@EmployeeBundle/Resources/config/routing.yml"
+    prefix:   /employee
+
+customer:
+    resource: "@CustomerBundle/Resources/config/routing.yml"
+    prefix:   /customer
+
+animal:
+    resource: "@AnimalBundle/Resources/config/routing.yml"
+    prefix:   /animal
+
+
