@@ -1,0 +1,37 @@
+{% extends '@Backend/Base/Base.html.twig' %}
+{% block pagetitle %}Locaties{% endblock %}
+{% block body %}
+    <br />
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <td>Naam</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for location in alllocations %}
+                        <tr>
+                            <td>{{ location.name }}</td>
+                            <td><span id="{{ location.id }}" class="glyphicon glyphicon-trash delete" aria-hidden="true"></span></td>
+                        </tr>
+                    {% endfor %}
+                    <tr>
+                        <td><a href="{{ path('backend_location_create') }}"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a></td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div id="dialog-confirm" title="Locatie verwijderen">
+        <p><span class="ui-icon ui-icon-alert"></span>Weet u zeker dat u de locatie wil verwijderen?</p>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/views/Location/LocationConfirmDelete.js') }}"></script>
+{% endblock %}

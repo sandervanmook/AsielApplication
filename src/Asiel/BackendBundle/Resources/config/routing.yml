@@ -2,7 +2,3 @@ backend_index:
     path:     /
     defaults: { _controller: BackendBundle:Default:index }
 
-# Animal Bundle
-backend_animal_index:
-    path:     /animal/index
-    defaults: { _controller: AnimalBundle:Backend:index }

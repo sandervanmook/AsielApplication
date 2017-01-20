@@ -23,7 +23,12 @@ class AppKernel extends Kernel
             new Asiel\FormBundle\FormBundle(),
             new Asiel\BackendBundle\BackendBundle(),
             new Asiel\FrontendBundle\FrontendBundle(),
+            new Asiel\LocationBundle\LocationBundle(),
+            // Third Party
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
+            new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
+            new Vich\UploaderBundle\VichUploaderBundle(),
+
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

@@ -1,0 +1,7 @@
+backend_location_index:
+    path:     /backend/location
+    defaults: { _controller: LocationBundle:Default:index }
+
+backend_location_create:
+    path:     /backend/location/create
+    defaults: { _controller: LocationBundle:Default:create }

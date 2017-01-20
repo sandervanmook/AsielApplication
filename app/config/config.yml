@@ -63,8 +63,35 @@ doctrine:
 
 # Swiftmailer Configuration
 swiftmailer:
-    transport: "%mailer_transport%"
-    host:      "%mailer_host%"
+    #transport: "%mailer_transport%"
+    #host:      "%mailer_host%"
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+vich_uploader:
+    db_driver: orm
+    mappings:
+      animal_picture:
+          uri_prefix:         /pictures/animals
+          upload_destination: '%picture_upload_destination%'
+          namer: vich_uploader.namer_origname
+          inject_on_load:     false
+          delete_on_update:   true
+          delete_on_remove:   true
+      user_picture:
+          uri_prefix:         /pictures/users
+          upload_destination: '%userpicture_upload_destination%'
+          namer: vich_uploader.namer_origname
+          inject_on_load:     false
+          delete_on_update:   true
+          delete_on_remove:   true
+
+ivory_ck_editor:
+    default_config : default_config
+    jquery: true
+    jquery_path: "js/jquery-3.1.1.min.js"
+    configs:
+        default_config:
+            toolbar: basic
+            height: 100

@@ -1,0 +1,11 @@
+backend_animal_index:
+    path:     /backend/animal
+    defaults: { _controller: AnimalBundle:Backend:index }
+
+backend_animal_create:
+    path:     /backend/animal/create
+    defaults: { _controller: AnimalBundle:Backend:create }
+
+backend_animal_register:
+    path:     /backend/animal/register/{type}
+    defaults: { _controller: AnimalBundle:Backend:register }
