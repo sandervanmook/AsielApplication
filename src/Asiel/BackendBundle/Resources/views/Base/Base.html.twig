@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Backend{% endblock %}</title>
+
+{% block style %}
+    <link rel="stylesheet" href="{{ asset('css/jquery-ui.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/jquery-ui.structure.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/jquery-ui.theme.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/ie10-viewport-bug-workaround.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/sticky-footer.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+{% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('img/favicon.png') }}" />
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            {% use '@Backend/Base/Nav.html.twig' %}
+            {% block nav %}{{ parent() }}{% endblock %}
+        </div>
+    </div>
+    <div class="container">
+        <div>
+            <div class="page-header">
+                <h2>{% block pagetitle %}{% endblock %}</h2>
+            </div>
+
+            {% if ('animal' in app.request.get('_route')) and (app.request.attributes.get('id'))%}
+                {#{{ render(controller('AsielBundle:Info:animalInfo', {'id': app.request.attributes.get('id')})) }}#}
+                {% use '@Backend/EditNav/animal.html.twig' %}
+                {% block editAnimal %}{{ parent() }}{% endblock %}
+            {% endif %}
+
+            {% if ('user' in app.request.get('_route')) and (app.request.attributes.get('id'))%}
+                {#{{ render(controller('AsielBundle:Info:userInfo', {'id': app.request.attributes.get('id')})) }}#}
+                {% use '@Backend/EditNav/user.html.twig' %}
+                {% block editUser %}{{ parent() }}{% endblock %}
+            {% endif %}
+
+            {% use '@Backend/Base/flashMessage.html.twig' %}
+            {% block flashMessage %}{{ parent() }}{% endblock %}
+
+            {% block body %}{% endblock %}
+        </div>
+    </div> <!-- /container -->
+
+    <footer class="footer">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="container">
+                    <p class="text-center">(c) S. van Mook {{ "now"|date('Y') }}</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+{% block js %}
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+    <script src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
+    <script src="{{ asset('js/ie10-viewport-bug-workaround.js') }}"></script>
+    <script src="{{ asset('js/global.js') }}"></script>
+{% endblock %}
+</body>
+</html>
