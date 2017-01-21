@@ -1,0 +1,36 @@
+{% extends '@Backend/Base/Base.html.twig' %}
+{% block pagetitle %}Facebook{% endblock %}
+{% block body %}
+    {% if facebooklink is not null %}
+        <p class="text-alert">Let op, dit dier staat al op <a href="{{ facebooklink }}" target="_blank">facebook</a></p>
+    {% endif %}
+
+    <form class="form-horizontal" method="post" action="{{ path('backend_animal_facebook_post', {'id' : app.request.attributes.get('id')}) }}">
+        <p>Welke foto moet er worden gepost ?</p>
+        <div class="container">
+            <div class="row">
+                {% for picture in pictures %}
+                    <div class="col-md-4">
+                        <img id="{{ picture.id }}" class="pictureShow Dog" src="{{ picture.getpublicurl }}" height="100">
+                        <br />
+                        <input value="{{ picture.id }}" type="radio" name="picture">
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <br />
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="message">Het bericht bij de post *</label>
+                        <textarea class="form-control" id="message" name="message" placeholder="Vul het bericht in"></textarea>
+                    </div>
+                    <input class="btn btn-default" type="submit" name="submit" value="Plaatsen">
+                    <p>* Aan het einde van de post zal een link naar de website worden geplaatst.
+                        <span class="text-alert">Als het dier niet zichtbaar is voor publiek krijgt de klant een fout te zien.</span></p>
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock %}

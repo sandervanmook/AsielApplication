@@ -9,8 +9,8 @@ $('.delete').click(function () {
         modal: true,
         draggable: false,
         buttons: {
-            "Verwijder taak": function() {
-                $.get(Routing.generate('asiel_animal_edit_task_delete', { id: id }, true));
+            "Verwijder foto": function() {
+                $.get(Routing.generate('backend_animal_picture_delete', { id: id }, true));
                 location.reload();
             },
             Annuleren: function() {

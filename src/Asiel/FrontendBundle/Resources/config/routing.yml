@@ -1,3 +1,17 @@
 frontend_homepage:
     path:     /
     defaults: { _controller: FrontendBundle:Default:index }
+
+
+# TODO this is required by Asiel\AnimalBundle\Service\FacebookFormHandler:publicLinkToAnimal
+# to send a public link with a facebook post
+# the actual controller method : PublicController:facebookLinkAction($id)
+frontend_facebook_link:
+    path:     /facebook/{id}
+    defaults: { _controller: FrontendBundle:Default:index }
+
+# TODO this is required by Asiel\AnimalBundle\Service\FacebookFormHandler:postPhoto
+# to access the base path of the website and append the right directory for a picture
+frontend_index:
+    path:     /
+    defaults: { _controller: FrontendBundle:Default:index }

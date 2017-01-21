@@ -1,0 +1,48 @@
+{% extends '@Backend/Base/Base.html.twig' %}
+{% block pagetitle %}Foto's{% endblock %}
+{% block body %}
+    <br />
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <td>Geupload op</td>
+                        <td>Naam bestand</td>
+                        <td>Voorbeeld</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for picture in pictures %}
+                        <tr>
+                            <td>{{ picture.updatedat|date('d-m-Y') }}</td>
+                            <td>{{ picture.picturename }}</td>
+                            <td><img src="{{ picture.getPublicURL }}" height="40"></td>
+                            <td><span id="{{ picture.id }}" class="glyphicon glyphicon-eye-open view" aria-hidden="true"></span>
+                                <span id="{{ picture.id }}" class="glyphicon glyphicon-trash delete" aria-hidden="true"></span>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                        <tr>
+                            <td><a href="{{ path('backend_animal_picture_create', {'id' : app.request.attributes.get('id')}) }}"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="result" class="col-md-6"></div>
+        </div>
+    </div>
+    <div id="dialog-confirm" title="Foto verwijderen">
+        <p><span class="ui-icon ui-icon-alert"></span>Weet u zeker dat u de foto wil verwijderen?</p>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/views/AnimalBundle/Picture/PictureConfirmDelete.js') }}"></script>
+    <script src="{{ asset('js/views/AnimalBundle/Picture/PictureShow.js') }}"></script>
+{% endblock %}

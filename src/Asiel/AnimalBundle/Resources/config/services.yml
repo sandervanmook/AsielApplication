@@ -27,3 +27,28 @@ services:
         - '@doctrine.orm.entity_manager'
         - '@event_dispatcher'
         - '@request_stack'
+
+    asiel.animalbundle.pictureformhandler:
+      class: Asiel\AnimalBundle\Service\PictureFormHandler
+      arguments:
+        - '@doctrine.orm.entity_manager'
+        - '@event_dispatcher'
+        - '@request_stack'
+
+    asiel.animalbundle.facebookformhandler:
+      class: Asiel\AnimalBundle\Service\FacebookFormHandler
+      arguments:
+        - '%facebook_app_id%'
+        - '%facebook_app_secret%'
+        - '@doctrine.orm.entity_manager'
+        - '@router'
+        - '@request_stack'
+        - '@event_dispatcher'
+
+    asiel.animalbundle.taskformhandler:
+      class: Asiel\AnimalBundle\Service\TaskFormHandler
+      arguments:
+        - '@doctrine.orm.entity_manager'
+        - '@event_dispatcher'
+        - '@request_stack'
+        - '@security.token_storage'

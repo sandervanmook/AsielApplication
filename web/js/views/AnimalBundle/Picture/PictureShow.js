@@ -1,7 +1,7 @@
 $('.view').click(function () {
     var id = $(this).attr("id");
     $.ajax({
-        url: Routing.generate('asiel_animal_edit_picture_show', { pictureid: id }, true),
+        url: Routing.generate('backend_animal_picture_show', { pictureid: id }, true),
         type: "GET",
         dataType : "html",
     })

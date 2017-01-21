@@ -5,8 +5,8 @@
         <li role="presentation" {% if 'incident' in app.request.get('_route') %} class="active" {% endif %}><a href="{{ path('backend_animal_incident_index', {'id': app.request.get('id')}) }}">Incidenten</a></li>
         <li role="presentation" {% if 'medical' in app.request.get('_route') %} class="active" {% endif %}><a href="{{ path('backend_animal_medical_index', {'id': app.request.get('id')}) }}">Medisch dossier</a></li>
         <li role="presentation" {% if 'status' in app.request.get('_route') %} class="active" {% endif %}><a href="{{ path('backend_animal_status_index', {'id': app.request.get('id')}) }}">Status</a></li>
-        <li role="presentation" {% if 'picture' in app.request.get('_route') %} class="active" {% endif %}><a href="#">Foto's</a></li>
-        <li role="presentation" {% if 'facebook' in app.request.get('_route') %} class="active" {% endif %}><a href="#">Facebook</a></li>
-        <li role="presentation" {% if 'task' in app.request.get('_route') %} class="active" {% endif %}><a href="#">Taken</a></li>
+        <li role="presentation" {% if 'picture' in app.request.get('_route') %} class="active" {% endif %}><a href="{{ path('backend_animal_picture_index', {'id': app.request.get('id')}) }}">Foto's</a></li>
+        <li role="presentation" {% if 'facebook' in app.request.get('_route') %} class="active" {% endif %}><a href="{{ path('backend_animal_facebook_index', {'id': app.request.get('id')}) }}">Facebook</a></li>
+        <li role="presentation" {% if 'task' in app.request.get('_route') %} class="active" {% endif %}><a href="{{ path('backend_animal_task_index', {'id': app.request.get('id')}) }}">Taken</a></li>
     </ul>
 {% endblock %}

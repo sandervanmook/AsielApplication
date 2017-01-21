@@ -27,7 +27,6 @@ backend_animal_edit:
     path:     /backend/animal/edit/{id}
     defaults: { _controller: AnimalBundle:Backend:edit }
 # End Backend Animal
-
 # Backend Incident
 backend_animal_incident_index:
     path:     /backend/animal/{id}/incident
@@ -50,7 +49,6 @@ backend_animal_incident_delete:
            expose: true
 
 # End Backend Incident
-
 # Backend Medical
 backend_animal_medical_index:
     path:     /backend/animal/{id}/medical
@@ -73,7 +71,6 @@ backend_animal_medical_delete:
            expose: true
 
 # End Backend Medical
-
 # Backend Status
 backend_animal_status_index:
     path:     /backend/animal/{id}/status
@@ -99,3 +96,53 @@ backend_animal_status_delete:
     options:
            expose: true
 # End Backend Status
+# Backend Picture
+backend_animal_picture_index:
+    path:     /backend/animal/{id}/picture
+    defaults: { _controller: AnimalBundle:BackendPicture:index }
+
+backend_animal_picture_create:
+    path:     /backend/animal/{id}/picture/create
+    defaults: { _controller: AnimalBundle:BackendPicture:create }
+
+backend_animal_picture_show:
+    path:     /backend/animal/picture/show/{pictureid}
+    defaults: { _controller: AnimalBundle:BackendPicture:show }
+    options:
+           expose: true
+
+backend_animal_picture_delete:
+    path:     /backend/animal/picture/delete/{id}
+    defaults: { _controller: AnimalBundle:BackendPicture:delete }
+    options:
+           expose: true
+# End Backend Picture
+# Backend Facebook
+backend_animal_facebook_index:
+    path:     /backend/animal/{id}/facebook/index
+    defaults: { _controller: AnimalBundle:BackendFacebook:index }
+
+backend_animal_facebook_post:
+    path:     /backend/animal/facebook/post/{id}
+    defaults: { _controller: AnimalBundle:BackendFacebook:post }
+
+# End Backend Facebook
+# Backend Task
+backend_animal_task_index:
+    path:     /backend/animal/{id}/task
+    defaults: { _controller: AnimalBundle:BackendTask:index }
+
+backend_animal_task_create:
+    path:     /backend/animal/{id}/task/create
+    defaults: { _controller: AnimalBundle:BackendTask:create }
+
+backend_animal_task_edit:
+    path:     /backend/animal/{id}/task/edit/{taskid}
+    defaults: { _controller: AnimalBundle:BackendTask:edit }
+
+backend_animal_task_delete:
+    path:     /backend/animal/task/delete/{id}
+    defaults: { _controller: AnimalBundle:BackendTask:delete }
+    options:
+           expose: true
+# End Backend Task
