@@ -15,3 +15,10 @@ services:
             - '@doctrine.orm.entity_manager'
             - '@event_dispatcher'
             - '@request_stack'
+
+        asiel.calendarbundle.calendaritemformhandler:
+          class: Asiel\CalendarBundle\Service\CalendarItemFormHandler
+          arguments:
+            - '@doctrine.orm.entity_manager'
+            - '@event_dispatcher'
+            - '@request_stack'

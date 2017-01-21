@@ -139,6 +139,8 @@ backend_animal_task_create:
 backend_animal_task_edit:
     path:     /backend/animal/{id}/task/edit/{taskid}
     defaults: { _controller: AnimalBundle:BackendTask:edit }
+    options:
+           expose: true
 
 backend_animal_task_delete:
     path:     /backend/animal/task/delete/{id}

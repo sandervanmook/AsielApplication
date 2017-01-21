@@ -14,14 +14,14 @@ $(document).ready(function() {
         // }
         // },
         eventSources: [
-            Routing.generate('asiel_task_calendar_data', { }, true),
-            Routing.generate('asiel_calendaritem_data', { }, true),
+            Routing.generate('backend_calendar_data', { }, true),
+            Routing.generate('backend_calendaritem_data', { }, true),
         ],
         eventClick: function(calEvent, jsEvent, view) {
             if (calEvent.animalname) {
-                window.location.replace(Routing.generate('asiel_animal_edit_task_edit', { animalid: calEvent.animalid, taskid: calEvent.id }, true));
+                window.location.replace(Routing.generate('backend_animal_task_edit', { id: calEvent.animalid, taskid: calEvent.id }, true));
             } else {
-                window.location.replace(Routing.generate('asiel_calendaritem_edit', { itemid: calEvent.id }, true));
+                window.location.replace(Routing.generate('backend_calendaritem_edit', { itemid: calEvent.id }, true));
             }
         },
         eventRender: function(event, element) {

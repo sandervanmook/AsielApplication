@@ -1,3 +1,28 @@
-calendar_homepage:
-    path:     /
-    defaults: { _controller: CalendarBundle:Default:index }
+# Backend Calendar (Task)
+backend_calendar:
+    path:     /backend/calendar
+    defaults: { _controller: CalendarBundle:Backend:calendar }
+
+backend_calendar_data:
+    path:     /backend/calendar/data
+    defaults: { _controller: CalendarBundle:Backend:calendarData }
+    options:
+           expose: true
+# End Backend Calendar (Task)
+# Backend CalendarItem
+backend_calendaritem_create:
+    path:     /backend/calendaritem/create
+    defaults: { _controller: CalendarBundle:BackendCalendarItem:create }
+
+backend_calendaritem_edit:
+    path:     /backend/calendaritem/{itemid}/edit
+    defaults: { _controller: CalendarBundle:BackendCalendarItem:edit }
+    options:
+           expose: true
+
+backend_calendaritem_data:
+    path:     /backend/calendaritem/data
+    defaults: { _controller: CalendarBundle:BackendCalendarItem:calendarData }
+    options:
+           expose: true
+# End Backend CalendarItem
