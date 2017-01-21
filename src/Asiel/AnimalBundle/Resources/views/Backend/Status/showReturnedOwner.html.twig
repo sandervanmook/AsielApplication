@@ -1,0 +1,13 @@
+{% if status.archived %}
+    <div class="panel panel-info">
+    {% else %}
+    <div class="panel panel-success">
+{% endif %}
+        <div class="panel-heading">Status {{ status.id }}</div>
+        <div class="panel-body">
+            <p>Datum: {{ status.date|date('d-m-Y') }}</p>
+            <p>Type status:  {{ status.getclassname|trans }}</p>
+            <p>Eigenaar: <a href="{{ path('backend_customer_edit', { 'id' : status.owner.id }) }}">{{ status.owner.firstname }} {{ status.owner.lastname }}</a></p>
+
+        </div>
+    </div>

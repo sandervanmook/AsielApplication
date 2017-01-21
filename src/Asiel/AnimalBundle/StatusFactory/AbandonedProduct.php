@@ -5,7 +5,6 @@ namespace Asiel\AnimalBundle\StatusFactory;
 use Asiel\AnimalBundle\AnimalStateMachine\AnimalStateMachine;
 use Asiel\AnimalBundle\Entity\StatusType\Abandoned;
 use Asiel\AnimalBundle\Form\StatusType\AbandonedType;
-use AsielBundle\StatusFactory\StatusType;
 
 class AbandonedProduct extends Status
 {

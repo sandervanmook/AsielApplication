@@ -6,7 +6,6 @@ namespace Asiel\AnimalBundle\StatusFactory;
 use Asiel\AnimalBundle\AnimalStateMachine\AnimalStateMachine;
 use Asiel\AnimalBundle\Entity\StatusType\Deceased;
 use Asiel\AnimalBundle\Form\StatusType\DeceasedType;
-use AsielBundle\StatusFactory\StatusType;
 
 class DeceasedProduct extends Status
 {

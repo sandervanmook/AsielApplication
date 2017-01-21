@@ -1,0 +1,21 @@
+{% extends '@Backend/Base/Base.html.twig' %}
+{% block pagetitle %}Status aanmaken: Terug naar eigenaar{% endblock %}
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                {{ form_start(form) }}
+                {{ form_row(form.date) }}
+                {{ form_row(form.search) }}
+                {{ form_row(form.owner) }}
+                <div id="result"></div>
+                {{ outputFormButton('Aanmaken') }}
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/views/AnimalBundle/Status/searchCustomerReturnedOwner.js') }}"></script>
+{% endblock %}

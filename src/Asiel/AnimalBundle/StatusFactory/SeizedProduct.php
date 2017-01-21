@@ -6,7 +6,6 @@ namespace Asiel\AnimalBundle\StatusFactory;
 use Asiel\AnimalBundle\AnimalStateMachine\AnimalStateMachine;
 use Asiel\AnimalBundle\Entity\StatusType\Seized;
 use Asiel\AnimalBundle\Form\StatusType\SeizedType;
-use AsielBundle\StatusFactory\StatusType;
 
 class SeizedProduct extends Status
 {

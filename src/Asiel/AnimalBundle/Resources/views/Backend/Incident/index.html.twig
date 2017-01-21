@@ -24,7 +24,7 @@
                         </tr>
                     {% endfor %}
                         <tr>
-                            <td><a href="{{ path('backend_animal_incident_create', {'animalid' : app.request.attributes.get('animalid')}) }}"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a></td>
+                            <td><a href="{{ path('backend_animal_incident_create', {'id' : app.request.attributes.get('id')}) }}"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a></td>
                             <td></td>
                             <td></td>
                         </tr>
@@ -40,6 +40,6 @@
 {% endblock %}
 {% block javascripts %}
     {{ parent() }}
-    <script src="{{ asset('js/views/Animal/Incident/IncidentConfirmDelete.js') }}"></script>
+    <script src="{{ asset('js/views/AnimalBundle/Incident/IncidentConfirmDelete.js') }}"></script>
     <script src="{{ asset('js/views/AnimalBundle/Incident/IncidentShow.js') }}"></script>
 {% endblock %}

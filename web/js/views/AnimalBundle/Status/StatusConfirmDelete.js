@@ -1,7 +1,8 @@
 $('#dialog-confirm').hide();
 
 $('.delete').click(function () {
-    var id = $(this).attr("id");
+    var statusId = $(this).attr("id");
+    var animalId = $('#animalId').val();
     $( "#dialog-confirm" ).dialog({
         resizable: false,
         height: "auto",
@@ -9,8 +10,8 @@ $('.delete').click(function () {
         modal: true,
         draggable: false,
         buttons: {
-            "Verwijder incident": function() {
-                $.get(Routing.generate('asiel_animal_edit_incident_delete', { id: id }, true));
+            "Verwijder status": function() {
+                $.get(Routing.generate('backend_animal_status_delete', { id: animalId, statusid: statusId }, true));
                 location.reload();
             },
             Annuleren: function() {

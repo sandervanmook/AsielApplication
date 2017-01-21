@@ -30,11 +30,11 @@ backend_animal_edit:
 
 # Backend Incident
 backend_animal_incident_index:
-    path:     /backend/animal/{animalid}/incident
+    path:     /backend/animal/{id}/incident
     defaults: { _controller: AnimalBundle:BackendIncident:index }
 
 backend_animal_incident_create:
-    path:     /backend/animal/{animalid}/incident/create
+    path:     /backend/animal/{id}/incident/create
     defaults: { _controller: AnimalBundle:BackendIncident:create }
 
 backend_animal_incident_show:
@@ -43,4 +43,59 @@ backend_animal_incident_show:
     options:
            expose: true
 
+backend_animal_incident_delete:
+    path:     /backend/animal/incident/delete/{id}
+    defaults: { _controller: AnimalBundle:BackendIncident:delete }
+    options:
+           expose: true
+
 # End Backend Incident
+
+# Backend Medical
+backend_animal_medical_index:
+    path:     /backend/animal/{id}/medical
+    defaults: { _controller: AnimalBundle:BackendMedical:index }
+
+backend_animal_medical_create:
+    path:     /backend/animal/{id}/medical/create
+    defaults: { _controller: AnimalBundle:BackendMedical:create }
+
+backend_animal_medical_show:
+    path:     /backend/animal/medical/show/{medicalid}
+    defaults: { _controller: AnimalBundle:BackendMedical:show }
+    options:
+           expose: true
+
+backend_animal_medical_delete:
+    path:     /backend/animal/medical/delete/{id}
+    defaults: { _controller: AnimalBundle:BackendMedical:delete }
+    options:
+           expose: true
+
+# End Backend Medical
+
+# Backend Status
+backend_animal_status_index:
+    path:     /backend/animal/{id}/status
+    defaults: { _controller: AnimalBundle:BackendStatus:index }
+
+backend_animal_status_create:
+    path:     /backend/animal/{id}/status/create
+    defaults: { _controller: AnimalBundle:BackendStatus:create }
+
+backend_animal_status_create_type:
+    path:     /backend/animal/{id}/status/createtype/{type}
+    defaults: { _controller: AnimalBundle:BackendStatus:createType }
+
+backend_animal_status_show:
+    path:     /backend/animal/status/show/{statusid}
+    defaults: { _controller: AnimalBundle:BackendStatus:show }
+    options:
+           expose: true
+
+backend_animal_status_delete:
+    path:     /backend/animal/{id}/status/delete/{statusid}
+    defaults: { _controller: AnimalBundle:BackendStatus:delete }
+    options:
+           expose: true
+# End Backend Status

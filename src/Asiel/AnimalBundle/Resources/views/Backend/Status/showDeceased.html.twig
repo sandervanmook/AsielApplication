@@ -1,0 +1,12 @@
+{% if status.archived %}
+<div class="panel panel-info">
+    {% else %}
+    <div class="panel panel-success">
+        {% endif %}
+        <div class="panel-heading">Status {{ status.id }}</div>
+        <div class="panel-body">
+            <p>Datum: {{ status.date|date('d-m-Y') }}</p>
+            <p>Manier van overlijden:  {{ status.wayDeceased|trans }}</p>
+            <p>Reden: {{ status.reason|raw }}</p>
+        </div>
+    </div>

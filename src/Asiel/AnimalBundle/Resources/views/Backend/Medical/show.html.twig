@@ -1,0 +1,8 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">Dossier {{ medical.id }}</div>
+    <div class="panel-body">
+        <p>Datum: {{ medical.date|date('d-m-Y') }}</p>
+        <p>Omschrijving: {{ medical.type }}</p>
+        <p>Gebeurtenis: {{ medical.description|raw }}</p>
+    </div>
+</div>

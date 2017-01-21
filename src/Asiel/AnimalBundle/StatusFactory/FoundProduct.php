@@ -6,7 +6,6 @@ namespace Asiel\AnimalBundle\StatusFactory;
 use Asiel\AnimalBundle\AnimalStateMachine\AnimalStateMachine;
 use Asiel\AnimalBundle\Entity\StatusType\Found;
 use Asiel\AnimalBundle\Form\StatusType\FoundType;
-use AsielBundle\StatusFactory\StatusType;
 
 class FoundProduct extends Status
 {

@@ -13,3 +13,17 @@ services:
         - '@doctrine.orm.entity_manager'
         - '@event_dispatcher'
         - '@request_stack'
+
+    asiel.animalbundle.medicalformhandler:
+      class: Asiel\AnimalBundle\Service\MedicalFormHandler
+      arguments:
+        - '@doctrine.orm.entity_manager'
+        - '@event_dispatcher'
+        - '@request_stack'
+
+    asiel.animalbundle.statusformhandler:
+      class: Asiel\AnimalBundle\Service\StatusFormHandler
+      arguments:
+        - '@doctrine.orm.entity_manager'
+        - '@event_dispatcher'
+        - '@request_stack'

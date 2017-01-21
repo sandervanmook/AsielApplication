@@ -1,0 +1,27 @@
+{% extends '@Backend/Base/Base.html.twig' %}
+{% block pagetitle %}Status aanmaken: Afgestaan{% endblock %}
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                {{ form_start(form) }}
+                {{ form_row(form.date) }}
+                {{ form_row(form.price) }}
+                {{ form_row(form.abandonedBy) }}
+                {{ form_row(form.search) }}
+                <div id="result"></div>
+                {{ form_row(form.reason) }}
+                {{ form_row(form.needsChipping) }}
+                {{ form_row(form.needsVaccines) }}
+                {{ form_row(form.needsSterilization) }}
+                {{ form_row(form.needsPassport) }}
+                {{ outputFormButton('Aanmaken') }}
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/views/AnimalBundle/Status/searchCustomerAbandoned.js') }}"></script>
+{% endblock %}

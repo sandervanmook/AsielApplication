@@ -1,0 +1,51 @@
+{% extends '@Backend/Base/Base.html.twig' %}
+{% block pagetitle %}Statussen{% endblock %}
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <td>Datum</td>
+                        <td>Type</td>
+                        <td>Status</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for entry in result %}
+                        <tr>
+                            <td>{{ entry.date|date('d-m-Y') }}</td>
+                            <td>{{ entry.classname|trans }}</td>
+                            {% if entry.archived %}
+                                <td>Archief</td>
+                            {% else %}
+                                <td>Actief</td>
+                            {% endif %}
+                            <td><span id="{{ entry.id }}" class="glyphicon glyphicon-eye-open view" aria-hidden="true"></span>
+                                <span id="{{ entry.id }}" class="glyphicon glyphicon-trash delete" aria-hidden="true"></span>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    <tr>
+                        <td><a href="{{ path('backend_animal_status_create', {'id' : app.request.attributes.get('id')}) }}"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="result" class="col-md-8"></div>
+        </div>
+    </div>
+    <div id="dialog-confirm" title="Status verwijderen">
+        <p><span class="ui-icon ui-icon-alert"></span>Weet u zeker dat u de status wil verwijderen?</p>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/views/AnimalBundle/Status/StatusConfirmDelete.js') }}"></script>
+    <script src="{{ asset('js/views/AnimalBundle/Status/StatusShow.js') }}"></script>
+{% endblock %}

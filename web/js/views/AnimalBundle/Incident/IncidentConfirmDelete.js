@@ -9,8 +9,8 @@ $('.delete').click(function () {
         modal: true,
         draggable: false,
         buttons: {
-            "Verwijder dossier": function() {
-                $.get(Routing.generate('asiel_animal_edit_medical_delete', { id: id }, true));
+            "Verwijder incident": function() {
+                $.get(Routing.generate('backend_animal_incident_delete', { id: id }, true));
                 location.reload();
             },
             Annuleren: function() {

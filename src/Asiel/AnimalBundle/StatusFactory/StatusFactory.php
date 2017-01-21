@@ -6,7 +6,7 @@ class StatusFactory extends Creator
 {
     public function factoryMethod(StatusType $statusType)
     {
-        $statusProduct = 'AsielBundle\StatusFactory\\' . $statusType . 'Product';
+        $statusProduct = 'Asiel\AnimalBundle\StatusFactory\\' . $statusType . 'Product';
         return new $statusProduct;
     }
 }

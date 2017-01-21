@@ -33,19 +33,4 @@ class StatusRepository extends EntityRepository
             $em->flush();
         }
     }
-
-    /**
-     * @param $id integer
-     * @return boolean
-     * TODO Not used anymore ?
-     */
-    public function delete($id)
-    {
-        $qb = $this->createQueryBuilder('s');
-        $qb->delete()
-            ->where('s.id = :id')
-            ->setParameter('id', $id);
-
-        return $qb->getQuery()->getResult();
-    }
 }

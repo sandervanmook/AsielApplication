@@ -1,4 +1,17 @@
 services:
-#    calendar.example:
-#        class: Asiel\CalendarBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
+    # Event listeners
+    # Task Events
+        asiel.calendarbundle.task.event:
+                  class: Asiel\CalendarBundle\EventListener\TaskListener
+                  arguments:
+                   - '@asiel.calendarbundle.taskformhandler'
+                  tags:
+                    - { name: kernel.event_listener, event: createtask, method: onCreateTaskEvent }
+
+    # Form handler
+        asiel.calendarbundle.taskformhandler:
+          class: Asiel\CalendarBundle\Service\TaskFormHandler
+          arguments:
+            - '@doctrine.orm.entity_manager'
+            - '@event_dispatcher'
+            - '@request_stack'

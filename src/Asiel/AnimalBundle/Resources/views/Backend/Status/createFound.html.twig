@@ -1,0 +1,25 @@
+{% extends '@Backend/Base/Base.html.twig' %}
+{% block pagetitle %}Status aanmaken: Gevonden{% endblock %}
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                {{ form_start(form) }}
+                {{ form_row(form.date) }}
+                {{ form_row(form.foundType) }}
+                {{ form_row(form.foundBy) }}
+                {{ form_row(form.search) }}
+                <div id="result"></div>
+                {{ form_row(form.foundAtLocation) }}
+                {{ form_row(form.animalState) }}
+                {{ form_row(form.needsChipping) }}
+                {{ outputFormButton('Aanmaken') }}
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/views/AnimalBundle/Status/searchCustomerFound.js') }}"></script>
+{% endblock %}

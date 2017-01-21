@@ -1,0 +1,22 @@
+{% extends '@Backend/Base/Base.html.twig' %}
+{% block pagetitle %}Status aanmaken: Gedaopteerd{% endblock %}
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                {{ form_start(form) }}
+                {{ form_row(form.date) }}
+                {{ form_row(form.price) }}
+                {{ form_row(form.search) }}
+                <div id="result"></div>
+                {{ form_row(form.customer) }}
+                {{ outputFormButton('Aanmaken') }}
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/views/AnimalBundle/Status/searchCustomerAdopted.js') }}"></script>
+{% endblock %}

@@ -1,9 +1,9 @@
 // Bind the keyup event with the search box
-$('#asielbundle_statustype_returnedowner_search').keyup(function() {
+$('#asielbundle_statustype_abandoned_search').keyup(function() {
     // Get the typed value
     var searchValue = $(this).val();
     $.ajax({
-        url: Routing.generate('asiel_customer_search_lastname', true),
+        url: Routing.generate('backend_customer_search_on_lastname', true),
         data: {
             lastname: searchValue
         },
@@ -20,12 +20,12 @@ $("body")
     .on("click", "#resulttable .customer", function() {
         var customId = $(this).attr("id");
         // Set the hidden field to the right value
-        $('#asielbundle_statustype_returnedowner_owner').attr("value", customId);
+        $('#asielbundle_statustype_abandoned_abandonedBy').attr("value", customId);
         // Return first and lastname in search field
         var customer = $('#'+customId);
         var firstname = customer.find('.firstname').html();
         var lastname = customer.find('.lastname').html();
-        $('#asielbundle_statustype_returnedowner_search').val(firstname+' '+lastname);
+        $('#asielbundle_statustype_abandoned_search').val(firstname+' '+lastname);
         $('#resulttable').hide();
     })
     .click(function () {

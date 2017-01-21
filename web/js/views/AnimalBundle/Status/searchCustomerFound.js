@@ -3,7 +3,7 @@ $('#asielbundle_statustype_found_search').keyup(function() {
     // Get the typed value
     var searchValue = $(this).val();
     $.ajax({
-        url: Routing.generate('asiel_customer_search_lastname', true),
+        url: Routing.generate('backend_customer_search_on_lastname', true),
         data: {
             lastname: searchValue
         },

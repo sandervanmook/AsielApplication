@@ -1,0 +1,45 @@
+{% extends '@Backend/Base/Base.html.twig' %}
+{% block pagetitle %}Medisch dossier{% endblock %}
+{% block body %}
+    <br />
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <td>Datum</td>
+                            <td>Type behandeling</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for entry in result %}
+                        <tr>
+                            <td>{{ entry.date|date('d-m-Y') }}</td>
+                            <td>{{ entry.type }}</td>
+                            <td><span id="{{ entry.id }}" class="glyphicon glyphicon-eye-open view" aria-hidden="true"></span>
+                                <span id="{{ entry.id }}" class="glyphicon glyphicon-trash delete" aria-hidden="true"></span>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        <tr>
+                            <td><a href="{{ path('backend_animal_medical_create', {'id' : app.request.attributes.get('id')}) }}"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="result" class="col-md-8"></div>
+        </div>
+    </div>
+    <div id="dialog-confirm" title="Dossier verwijderen">
+        <p><span class="ui-icon ui-icon-alert"></span>Weet u zeker dat u het dossier wil verwijderen?</p>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/views/AnimalBundle/Medical/MedicalConfirmDelete.js') }}"></script>
+    <script src="{{ asset('js/views/AnimalBundle/Medical/MedicalShow.js') }}"></script>
+{% endblock %}

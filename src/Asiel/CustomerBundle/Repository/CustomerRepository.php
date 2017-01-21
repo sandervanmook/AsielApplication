@@ -1,6 +1,6 @@
 <?php
 
-namespace AsielBundle\Repository;
+namespace Asiel\CustomerBundle\Repository;
 use Doctrine\ORM\EntityRepository;
 
 /**
