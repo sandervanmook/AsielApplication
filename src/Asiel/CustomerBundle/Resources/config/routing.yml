@@ -9,4 +9,12 @@ backend_customer_edit:
     path:     /backend/customer/edit/{id}
     defaults: { _controller: CustomerBundle:BackendCustomer:edit }
 
+backend_customer_index:
+    path:     /backend/customer
+    defaults: { _controller: CustomerBundle:BackendCustomer:index }
+
+backend_customer_create:
+    path:     /backend/customer/create
+    defaults: { _controller: CustomerBundle:BackendCustomer:create }
+
 # End Backend Customer

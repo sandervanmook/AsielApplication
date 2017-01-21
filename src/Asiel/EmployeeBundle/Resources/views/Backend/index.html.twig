@@ -1,0 +1,54 @@
+{% extends '@Backend/Base/Base.html.twig' %}
+{% block pagetitle %}Gebruikers{% endblock %}
+{% block body %}
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <td></td>
+            <td>Gebruikersnaam</td>
+            <td>Naam</td>
+            <td>Email</td>
+            <td>Telefoon</td>
+            <td>Mobiel</td>
+            <td>Actief</td>
+            <td>Rollen</td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>
+                    {% if user.picture %}
+                        <img src="{{ user.picture.publicurl }}" height="30" alt="user_picture">
+                    {% else %}
+                        <img src="{{ asset('img/no_picture.jpg') }}" height="30" alt="no_user_picture">
+                    {% endif %}
+                </td>
+                <td><a href="{{ path('backend_employee_show', {'id' : user.id}) }}">{{ user.username }}</a></td>
+                <td>{{ user.firstname }} {{ user.lastname }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.phone }}</td>
+                <td>{{ user.mobilePhone }}</td>
+                <td>{{ outputBool(user.isactive) }}</td>
+                <td>
+                    <ul>
+                        {% for role in user.roles %}
+                            <li>{{ role|trans }}</li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        <tr>
+            <td><a href="{{ path('backend_employee_create') }}"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        </tbody>
+    </table>
+{% endblock %}

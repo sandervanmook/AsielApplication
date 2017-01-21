@@ -36,8 +36,8 @@
                 {% block editAnimal %}{{ parent() }}{% endblock %}
             {% endif %}
 
-            {% if ('user' in app.request.get('_route')) and (app.request.attributes.get('id'))%}
-                {#{{ render(controller('AsielBundle:Info:userInfo', {'id': app.request.attributes.get('id')})) }}#}
+            {% if ('employee' in app.request.get('_route')) and (app.request.attributes.get('id'))%}
+                {{ render(controller('EmployeeBundle:Backend:userInfo', {'id': app.request.attributes.get('id')})) }}
                 {% use '@Backend/EditNav/user.html.twig' %}
                 {% block editUser %}{{ parent() }}{% endblock %}
             {% endif %}

@@ -1,0 +1,43 @@
+{% extends '@Backend/Base/Base.html.twig' %}
+{% block pagetitle %}Werkschema aanpassen{% endblock %}
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                {{ form_start(form) }}
+                <table class="table-edit-workschedule">
+                    <tr>
+                        <td>{{ form_row(form.monStart) }}</td>
+                        <td>{{ form_row(form.monEnd) }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ form_row(form.tueStart) }}</td>
+                        <td>{{ form_row(form.tueEnd) }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ form_row(form.wedStart) }}</td>
+                        <td>{{ form_row(form.wedEnd) }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ form_row(form.thuStart) }}</td>
+                        <td>{{ form_row(form.thuEnd) }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ form_row(form.friStart) }}</td>
+                        <td>{{ form_row(form.friEnd) }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ form_row(form.satStart) }}</td>
+                        <td>{{ form_row(form.satEnd) }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ form_row(form.sunStart) }}</td>
+                        <td>{{ form_row(form.sunEnd) }}</td>
+                    </tr>
+                </table>
+                {{ outputFormButton('Aanpassen') }}
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

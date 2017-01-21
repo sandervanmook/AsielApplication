@@ -1,0 +1,54 @@
+{% extends '@Backend/Base/Base.html.twig' %}
+{% block pagetitle %}Gebruiker bijwerken{% endblock %}
+{% block body %}
+    <div class="container">
+        {{ form_start(form) }}
+        <div class="row">
+            <div class="col-xs-4">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Persoonlijke informatie</div>
+                    <div class="panel-body">
+                        {{ form_row(form.firstname) }}
+                        {{ form_row(form.lastname) }}
+                        {{ form_row(form.dayOfBirth) }}
+                        {{ form_row(form.citizenServiceNumber) }}
+                        {{ form_row(form.address) }}
+                        {{ form_row(form.houseNumber) }}
+                        {{ form_row(form.city) }}
+                        {{ form_row(form.zipcode) }}
+                        {{ form_row(form.country) }}
+                        {{ form_row(form.phone) }}
+                        {{ form_row(form.mobilePhone) }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-4">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Account informatie</div>
+                    <div class="panel-body">
+                        {{ form_row(form.username) }}
+                        {{ form_row(form.password) }}
+                        {{ form_row(form.email) }}
+                        {{ form_row(form.isActive) }}
+                        {{ form_row(form.roles) }}
+                        <p class="text-alert">* De beheerder heeft alle rechten en kan overal bij</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-4">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Werknemersinformatie</div>
+                    <div class="panel-body">
+                        {{ form_row(form.startContract) }}
+                        {{ form_row(form.endContract) }}
+                        {{ form_row(form.reasonEndContract) }}
+                        {{ form_row(form.emergencyContact) }}
+                        {{ form_row(form.emergencyContactPhone) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{ outputFormButton('Bijwerken') }}
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

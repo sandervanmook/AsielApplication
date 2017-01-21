@@ -1,3 +1,45 @@
-employee_homepage:
-    path:     /
-    defaults: { _controller: EmployeeBundle:Default:index }
+# Backend User
+backend_employee_index:
+    path:     /backend/employee
+    defaults: { _controller: EmployeeBundle:Backend:index }
+
+backend_employee_show:
+    path:     /backend/employee/show/{id}
+    defaults: { _controller: EmployeeBundle:Backend:show }
+
+backend_employee_create:
+    path:     /backend/employee/create
+    defaults: { _controller: EmployeeBundle:Backend:create }
+
+backend_employee_edit:
+    path:     /backend/employee/edit/{id}
+    defaults: { _controller: EmployeeBundle:Backend:edit }
+
+backend_employee_edit_password:
+    path:     /backend/employee/{id}/edit/password
+    defaults: { _controller: EmployeeBundle:Backend:editPassword }
+# End Backend User
+# Backend UserPicture
+backend_employee_user_picture_index:
+    path:     /backend/employee/{id}/userpicture
+    defaults: { _controller: EmployeeBundle:UserPicture:index }
+
+backend_employee_user_picture_create:
+    path:     /backend/employee/{id}/userpicture/create
+    defaults: { _controller: EmployeeBundle:UserPicture:create }
+
+backend_employee_user_picture_delete:
+    path:     /backend/employee/{id}/userpicture/delete
+    defaults: { _controller: EmployeeBundle:UserPicture:delete }
+    options:
+           expose: true
+# End Backend UserPicture
+# Backend WorkSchedule
+backend_employee_workschedule_index:
+    path:     /backend/employee/{id}/workschedule
+    defaults: { _controller: EmployeeBundle:WorkSchedule:index }
+
+backend_employee_workschedule_edit:
+    path:     /backend/employee/{id}/workschedule/edit
+    defaults: { _controller: EmployeeBundle:WorkSchedule:edit }
+# End Backend WorkSchedule

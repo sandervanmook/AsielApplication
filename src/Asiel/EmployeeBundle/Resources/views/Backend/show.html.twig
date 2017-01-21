@@ -1,0 +1,50 @@
+{% extends '@Backend/Base/Base.html.twig' %}
+{% block pagetitle %}Overzicht{% endblock %}
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-4">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Persoonlijke informatie</div>
+                    <div class="panel-body">
+                        <p>Naam: {{ user.firstname }} {{ user.lastname }}</p>
+                        <p>BSN/Rijksnummer: {{ user.citizenServiceNumber }}</p>
+                        <p>Adres: {{ user.address }} {{ user.houseNumber }}</p>
+                        <p>Stad: {{ user.city }}</p>
+                        <p>Postcode: {{ user.zipcode }}</p>
+                        <p>Land: {{ user.country }}</p>
+                        <p>Telefoonnummer: {{ user.phone }}</p>
+                        <p>Mobiel: {{ user.mobilePhone }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-4">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Account informatie</div>
+                    <div class="panel-body">
+                        <p>Gebruikersnaam: {{ user.username }}</p>
+                        <p>Email: {{ user.email }}</p>
+                        <p>Account is actief: {{ outputBool(user.isActive) }}</p>
+                        <p>Rollen:
+                            {% for role in user.roles %}
+                                {{ role|trans }},
+                            {% endfor %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-4">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Werknemersinformatie</div>
+                    <div class="panel-body">
+                        <p>Start contract: {{ user.startContract|date('d/m/Y') }}</p>
+                        <p>Einde contract: {{ user.endContract|date('d/m/Y') }}</p>
+                        <p>Reden einde contract: {{ user.reasonEndContract|raw }}</p>
+                        <p>Noodgeval contactpersoon: {{ user.emergencyContact }}</p>
+                        <p>Noodgeval contact telefoonnummer: {{ user.emergencyContactPhone }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

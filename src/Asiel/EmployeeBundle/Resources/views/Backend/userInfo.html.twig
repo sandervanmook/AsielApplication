@@ -1,0 +1,7 @@
+<div class="pull-right">
+    <input id="userId" type="hidden" value="{{ user.id }}">
+    {{ user.firstname }} {{ user.lastname }}
+    {% if user.picture %}
+        <img src="{{ user.picture.publicurl }}" height="40" alt="user_picture">
+    {% endif %}
+</div>

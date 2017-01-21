@@ -1,0 +1,48 @@
+{% extends '@Backend/Base/Base.html.twig' %}
+{% block pagetitle %}Werkschema{% endblock %}
+{% block body %}
+    <div class="container">
+        <div class="row">
+            {% if schedule %}
+            <div class="col-xs-3">
+                <table class="table">
+                    <tr>
+                        <td>Maandag</td>
+                        <td>{{ schedule.monStart|date('G:i') }} | {{ schedule.monEnd|date('G:i') }}</td>
+                    </tr>
+                    <tr>
+                        <td>Dinsdag</td>
+                        <td>{{ schedule.tueStart|date('G:i') }} | {{ schedule.tueEnd|date('G:i') }}</td>
+                    </tr>
+                    <tr>
+                        <td>Woensdag</td>
+                        <td>{{ schedule.wedStart|date('G:i') }} | {{ schedule.wedEnd|date('G:i') }}</td>
+                    </tr>
+                    <tr>
+                        <td>Donderdag</td>
+                        <td>{{ schedule.thuStart|date('G:i') }} | {{ schedule.thuEnd|date('G:i') }}</td>
+                    </tr>
+                    <tr>
+                        <td>Vrijdag</td>
+                        <td>{{ schedule.friStart|date('G:i') }} | {{ schedule.friEnd|date('G:i') }}</td>
+                    </tr>
+                    <tr>
+                        <td>Zaterdag</td>
+                        <td>{{ schedule.satStart|date('G:i') }} | {{ schedule.satEnd|date('G:i') }}</td>
+                    </tr>
+                    <tr>
+                        <td>Zondag</td>
+                        <td>{{ schedule.sunStart|date('G:i') }} | {{ schedule.sunEnd|date('G:i') }}</td>
+                    </tr>
+                    <tr>
+                        <td><a href="{{ path('backend_employee_workschedule_edit', {'id' : app.request.attributes.get('id')}) }}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+            {% else %}
+                 <p>Er is nog geen schema voor deze werknemer, <a href="{{ path('backend_employee_workschedule_edit', {'id' : app.request.attributes.get('id')}) }}">maak</a> er 1 aan.</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

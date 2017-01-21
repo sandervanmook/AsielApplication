@@ -10,7 +10,7 @@ $('.delete').click(function () {
         draggable: false,
         buttons: {
             "Verwijder foto": function() {
-                $.get(Routing.generate('asiel_user_picture_delete', { id: id }, true));
+                $.get(Routing.generate('backend_employee_user_picture_delete', { id: id }, true));
                 location.reload();
             },
             Annuleren: function() {

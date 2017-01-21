@@ -1,0 +1,33 @@
+{% extends '@Backend/Base/Base.html.twig' %}
+{% block pagetitle %}Foto{% endblock %}
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-4">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        {% if picture %}
+                            <img class="center-block" src="{{ picture.publicURL }}" alt="no_picture_yet" height="120">
+                        {% else %}
+                            <img class="center-block" src="{{ asset('img/no_picture.jpg') }}" alt="no_picture_yet" height="100">
+                        {% endif %}
+                    </div>
+                    <div class="panel-footer">
+                        <a href="{{ path('backend_employee_user_picture_create', {'id' : app.request.get('id')}) }}"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
+                        {% if picture is not null %}
+                            <span id="{{ picture.id }}" class="glyphicon glyphicon-trash delete" aria-hidden="true"></span>
+                        {% endif %}
+                    </div>
+                </div>
+                <p>Er kan maar 1 foto tegelijk aanwezig zijn, als u een nieuwe upload zal de huidige worden verwijderd.</p>
+            </div>
+        </div>
+    </div>
+    <div id="dialog-confirm" title="Foto verwijderen">
+        <p><span class="ui-icon ui-icon-alert"></span>Weet u zeker dat u de foto wil verwijderen?</p>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/views/EmployeeBundle/UserPicture/UserPictureConfirmDelete.js') }}"></script>
+{% endblock %}

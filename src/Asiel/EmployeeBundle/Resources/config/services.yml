@@ -1,4 +1,21 @@
 services:
-#    employee.example:
-#        class: Asiel\EmployeeBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
+      asiel.employeebundle.userformhandler:
+        class: Asiel\EmployeeBundle\Service\UserFormHandler
+        arguments:
+          - '@doctrine.orm.entity_manager'
+          - '@event_dispatcher'
+          - '@request_stack'
+
+      asiel.employeebundle.userpictureformhandler:
+        class: Asiel\EmployeeBundle\Service\UserPictureFormHandler
+        arguments:
+          - '@doctrine.orm.entity_manager'
+          - '@event_dispatcher'
+          - '@request_stack'
+
+      asiel.employeebundle.workscheduleformhandler:
+        class: Asiel\EmployeeBundle\Service\WorkScheduleFormHandler
+        arguments:
+          - '@doctrine.orm.entity_manager'
+          - '@event_dispatcher'
+          - '@request_stack'
