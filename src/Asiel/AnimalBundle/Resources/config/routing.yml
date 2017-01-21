@@ -1,49 +1,49 @@
 # Backend Animal
 backend_animal_index:
-    path:     /backend/animal
+    path:     /
     defaults: { _controller: AnimalBundle:Backend:index }
 
 backend_animal_create:
-    path:     /backend/animal/create
+    path:     /create
     defaults: { _controller: AnimalBundle:Backend:create }
 
 backend_animal_register:
-    path:     /backend/animal/register/{type}
+    path:     /register/{type}
     defaults: { _controller: AnimalBundle:Backend:register }
 
 backend_animal_find_on_chipnumber:
-    path:     /backend/animal/findonchipnumber/{chipnumber}
+    path:     /findonchipnumber/{chipnumber}
     defaults: { _controller: AnimalBundle:Backend:findOnChipnumber }
     options:
            expose: true
 
 backend_animal_show:
-    path:     /backend/animal/show/{id}
+    path:     /show/{id}
     defaults: { _controller: AnimalBundle:Backend:show }
     options:
            expose: true
 
 backend_animal_edit:
-    path:     /backend/animal/edit/{id}
+    path:     /edit/{id}
     defaults: { _controller: AnimalBundle:Backend:edit }
 # End Backend Animal
 # Backend Incident
 backend_animal_incident_index:
-    path:     /backend/animal/{id}/incident
+    path:     /{id}/incident
     defaults: { _controller: AnimalBundle:BackendIncident:index }
 
 backend_animal_incident_create:
-    path:     /backend/animal/{id}/incident/create
+    path:     /{id}/incident/create
     defaults: { _controller: AnimalBundle:BackendIncident:create }
 
 backend_animal_incident_show:
-    path:     /backend/animal/incident/show/{incidentid}
+    path:     /incident/show/{incidentid}
     defaults: { _controller: AnimalBundle:BackendIncident:show }
     options:
            expose: true
 
 backend_animal_incident_delete:
-    path:     /backend/animal/incident/delete/{id}
+    path:     /incident/delete/{id}
     defaults: { _controller: AnimalBundle:BackendIncident:delete }
     options:
            expose: true
@@ -51,21 +51,21 @@ backend_animal_incident_delete:
 # End Backend Incident
 # Backend Medical
 backend_animal_medical_index:
-    path:     /backend/animal/{id}/medical
+    path:     /{id}/medical
     defaults: { _controller: AnimalBundle:BackendMedical:index }
 
 backend_animal_medical_create:
-    path:     /backend/animal/{id}/medical/create
+    path:     /{id}/medical/create
     defaults: { _controller: AnimalBundle:BackendMedical:create }
 
 backend_animal_medical_show:
-    path:     /backend/animal/medical/show/{medicalid}
+    path:     /medical/show/{medicalid}
     defaults: { _controller: AnimalBundle:BackendMedical:show }
     options:
            expose: true
 
 backend_animal_medical_delete:
-    path:     /backend/animal/medical/delete/{id}
+    path:     /medical/delete/{id}
     defaults: { _controller: AnimalBundle:BackendMedical:delete }
     options:
            expose: true
@@ -73,77 +73,77 @@ backend_animal_medical_delete:
 # End Backend Medical
 # Backend Status
 backend_animal_status_index:
-    path:     /backend/animal/{id}/status
+    path:     /{id}/status
     defaults: { _controller: AnimalBundle:BackendStatus:index }
 
 backend_animal_status_create:
-    path:     /backend/animal/{id}/status/create
+    path:     /{id}/status/create
     defaults: { _controller: AnimalBundle:BackendStatus:create }
 
 backend_animal_status_create_type:
-    path:     /backend/animal/{id}/status/createtype/{type}
+    path:     /{id}/status/createtype/{type}
     defaults: { _controller: AnimalBundle:BackendStatus:createType }
 
 backend_animal_status_show:
-    path:     /backend/animal/status/show/{statusid}
+    path:     /status/show/{statusid}
     defaults: { _controller: AnimalBundle:BackendStatus:show }
     options:
            expose: true
 
 backend_animal_status_delete:
-    path:     /backend/animal/{id}/status/delete/{statusid}
+    path:     /{id}/status/delete/{statusid}
     defaults: { _controller: AnimalBundle:BackendStatus:delete }
     options:
            expose: true
 # End Backend Status
 # Backend Picture
 backend_animal_picture_index:
-    path:     /backend/animal/{id}/picture
+    path:     /{id}/picture
     defaults: { _controller: AnimalBundle:BackendPicture:index }
 
 backend_animal_picture_create:
-    path:     /backend/animal/{id}/picture/create
+    path:     /{id}/picture/create
     defaults: { _controller: AnimalBundle:BackendPicture:create }
 
 backend_animal_picture_show:
-    path:     /backend/animal/picture/show/{pictureid}
+    path:     /picture/show/{pictureid}
     defaults: { _controller: AnimalBundle:BackendPicture:show }
     options:
            expose: true
 
 backend_animal_picture_delete:
-    path:     /backend/animal/picture/delete/{id}
+    path:     /picture/delete/{id}
     defaults: { _controller: AnimalBundle:BackendPicture:delete }
     options:
            expose: true
 # End Backend Picture
 # Backend Facebook
 backend_animal_facebook_index:
-    path:     /backend/animal/{id}/facebook/index
+    path:     /{id}/facebook/index
     defaults: { _controller: AnimalBundle:BackendFacebook:index }
 
 backend_animal_facebook_post:
-    path:     /backend/animal/facebook/post/{id}
+    path:     /facebook/post/{id}
     defaults: { _controller: AnimalBundle:BackendFacebook:post }
 
 # End Backend Facebook
 # Backend Task
 backend_animal_task_index:
-    path:     /backend/animal/{id}/task
+    path:     /{id}/task
     defaults: { _controller: AnimalBundle:BackendTask:index }
 
 backend_animal_task_create:
-    path:     /backend/animal/{id}/task/create
+    path:     /{id}/task/create
     defaults: { _controller: AnimalBundle:BackendTask:create }
 
 backend_animal_task_edit:
-    path:     /backend/animal/{id}/task/edit/{taskid}
+    path:     /{id}/task/edit/{taskid}
     defaults: { _controller: AnimalBundle:BackendTask:edit }
     options:
            expose: true
 
 backend_animal_task_delete:
-    path:     /backend/animal/task/delete/{id}
+    path:     /task/delete/{id}
     defaults: { _controller: AnimalBundle:BackendTask:delete }
     options:
            expose: true

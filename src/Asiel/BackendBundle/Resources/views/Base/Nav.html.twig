@@ -3,7 +3,7 @@
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
-                <a class="navbar-brand" href="{{ path('backend_index') }}"><img id="logo" src="{{ asset('img/favicon.png') }}"></a>
+                <a class="navbar-brand" href="{{ path('backend_default_index') }}"><img id="logo" src="{{ asset('img/favicon.png') }}"></a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -21,9 +21,9 @@
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Afmelden</a></li>
-                    <li><a href="#">Publiek</a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {#app.user.username#} </a></li>
+                    <li><a href="{{ path('logout') }}"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Afmelden</a></li>
+                    <li><a href="{{ path('frontend_index') }}">Publiek</a></li>
+                    <li><a href="#"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{ app.user.username }} </a></li>
                 </ul>
             </div><!--/.nav-collapse -->
         </div>

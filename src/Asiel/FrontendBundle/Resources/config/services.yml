@@ -1,4 +1,26 @@
 services:
-#    frontend.example:
-#        class: Asiel\FrontendBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
+    asiel.frontendbundle.defaultformhandler:
+      class: Asiel\FrontendBundle\Service\DefaultFormHandler
+      arguments:
+        - '@doctrine.orm.entity_manager'
+        - '@event_dispatcher'
+        - '@request_stack'
+        - '@form.factory'
+        - '@router'
+        - '@mailer'
+        - '%contact_email%'
+        - '@templating'
+
+    asiel.frontendbundle.catformhandler:
+      class: Asiel\FrontendBundle\Service\CatFormHandler
+      arguments:
+        - '@doctrine.orm.entity_manager'
+        - '@event_dispatcher'
+        - '@request_stack'
+
+    asiel.frontendbundle.dogformhandler:
+      class: Asiel\FrontendBundle\Service\DogFormHandler
+      arguments:
+        - '@doctrine.orm.entity_manager'
+        - '@event_dispatcher'
+        - '@request_stack'

@@ -1,4 +1,4 @@
-backend_index:
-    path:     /
+backend_default_index:
+    path:     /home
     defaults: { _controller: BackendBundle:Default:index }
 

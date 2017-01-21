@@ -1,0 +1,101 @@
+<div>
+    {% for picture in cat.pictures|slice(0,4) %}
+        <img id="{{ picture.id }}" class="pictureShow enlargeable" src="{{ picture.getpublicurl }}" alt="{{ picture.picturename }}" height="130">
+    {% endfor %}
+    {% if cat.pictures is empty %}
+        <img class="center-block" src="{{ asset('img/no_picture.jpg') }}" height="130">
+    {% endif %}
+</div>
+<br />
+<table class="table table-hover table-responsive">
+    <tbody>
+    <tr>
+        <td>Ras</td>
+        <td>{{ cat.race }}</td>
+    </tr>
+    <tr>
+        <td>In asiel sinds</td>
+        <td>{{ cat.admissionDate|date('d/m/Y') }}</td>
+    </tr>
+    <tr>
+        <td>Kleur</td>
+        <td>{{ cat.colour }}</td>
+    </tr>
+    <tr>
+        <td>Geboortedatum</td>
+        <td>{{ cat.dayOfBirth|date('d/m/Y') }}</td>
+    </tr>
+    <tr>
+        <td>Leeftijd</td>
+        <td>{{ cat.age }} Jaar</td>
+    </tr>
+    <tr>
+        <td>Omschrijving</td>
+        <td>{{ cat.description|raw }}</td>
+    </tr>
+    <tr>
+        <td>Karakter eigenschappen</td>
+        <td>{{ cat.characteristics|raw }}</td>
+    </tr>
+    <tr>
+        <td>Medische problemen</td>
+        <td>{{ cat.medicalproblems|raw }}</td>
+    </tr>
+    <tr>
+        <td>Bekend met agressie</td>
+        <td>{{ cat.knownAggression|raw }}</td>
+    <tr>
+        <td>Geslacht</td>
+        <td>{{ outputGender(cat.gender) }}</td>
+    </tr>
+    <tr>
+        <td>Gesteriliseerd / Gecastereerd</td>
+        <td>{{ outputBool(cat.sterilized) }}</td>
+    </tr>
+    <tr>
+        <td>Zindelijk</td>
+        <td>{{ outputBool(cat.toiletTrained) }}</td>
+    </tr>
+    <tr>
+        <td>Kan met kinderen onder de 10 jaar</td>
+        <td>{{ outputBool(cat.compatibleChildrenBelow10y) }}</td>
+    </tr>
+    <tr>
+        <td>Kan met kinderen boven de 10 jaar</td>
+        <td>{{ outputBool(cat.compatibleChildrenAbove10y) }}</td>
+    </tr>
+    <tr>
+        <td>Kan met kinderen onder de 7 jaar</td>
+        <td>{{ outputBool(cat.compatibleChildrenBelow7y) }}</td>
+    </tr>
+    <tr>
+        <td>Kan met kinderen boven de 7 jaar</td>
+        <td>{{ outputBool(cat.compatibleChildrenAbove7y) }}</td>
+    </tr>
+    <tr>
+        <td>Ontsnapt vaak</td>
+        <td>{{ outputBool(cat.escapesAlot) }}</td>
+    </tr>
+    <tr>
+        <td>Geschikt voor oudere mensen</td>
+        <td>{{ outputBool(cat.compatibleOldPeople) }}</td>
+    </tr>
+    <tr>
+        <td>Kan het dier met kleine honden overweg</td>
+        <td>{{ cat.compatibleSmallDog|raw }}</td>
+    </tr>
+    <tr>
+        <td>Kan het dier met grote honden overweg</td>
+        <td>{{ cat.compatibleLargeDog|raw }}</td>
+    </tr>
+    <tr>
+        <td>Kan samen met andere katten</td>
+        <td>{{ cat.compatibleCat|raw }}</td>
+    </tr>
+    <tr>
+        <td>Kan het met andere dieren overweg</td>
+        <td>{{ cat.compatibleOtheranimals|raw }}</td>
+    </tr>
+    </tbody>
+</table>
+

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>{% block title %}Asiel Software{% endblock %}</title>
+
+    {% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/jquery-ui.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/jquery-ui.structure.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/jquery-ui.theme.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/ie10-viewport-bug-workaround.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/sticky-footer-public.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/public.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    {% endblock %}
+
+    <link rel="icon" type="image/x-icon" href="{{ asset('img/favicon.png') }}" />
+</head>
+    <body>
+        <!-- Header -->
+        <div class="container-fluid">
+            <div class="row header">
+                <div class="col-md-6 col-md-offset-2">
+                    <a class="navbar-brand" href="{{ path('frontend_index') }}"><img id="logo" src="{{ asset('img/public_logo.png') }}"></a>
+                    <h1>vzw Dier in Nood</h1>
+                    <h4 class="subtitle">Katten- en hondenasiel voor de maasregio in Belgisch Limburg</h4>
+                </div>
+            </div>
+        </div>
+        <!-- Navbar -->
+        <div class="container nav">
+            <div class="row">
+                <nav>
+                    <ul class="nav nav-tabs center-block">
+                        <li role="presentation" {% if app.request.get('_route') == 'frontend_cat_index' %} class="active" {% endif %} ><a href="{{ path('frontend_cat_index', {'option' : 'both'}) }}">Katten <span class="badge">{{ render(controller('FrontendBundle:Cat:catCountPublic', {'option': 'both'})) }}</span></a></li>
+                        <li role="presentation" {% if app.request.get('_route') == 'frontend_dog_index' %} class="active" {% endif %} ><a href="{{ path('frontend_dog_index', {'option' : 'both'}) }}">Honden <span class="badge">{{ render(controller('FrontendBundle:Dog:dogCountPublic', {'option': 'both'})) }}</span></a></li>
+                        <li role="presentation" {% if app.request.get('_route') == 'frontend_about' %} class="active" {% endif %} ><a href="{{ path('frontend_about') }}">Over ons</a></li>
+                        <li role="presentation" {% if app.request.get('_route') == 'frontend_contact' %} class="active" {% endif %} ><a href="{{ path('frontend_contact') }}">Contact</a></li>
+                        <li class="navbar-right" role="presentation"><a href="{{ path('backend_default_index') }}">Backoffice</a></li>
+                        <li id="searchbutton" class="navbar-right" role="presentation"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></li>
+                    </ul>
+                </nav>
+                <div id="searchform"></div>
+            </div>
+        </div>
+        <!-- Page -->
+        <div class="container page">
+            <div>
+                <div class="page-header">
+                    <h2>{% block pagetitle %}{% endblock %}</h2>
+                    {% block pagesubtitle %}{% endblock %}
+                </div>
+                {% block flash %}{% endblock %}
+                {% block body %}{% endblock %}
+            </div>
+        </div>
+        <footer class="footer">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xs-2 col-xs-offset-2">
+                        <h4>Copyright</h4>
+                        <p>(c) S. van Mook {{ "now"|date('Y') }}</p>
+                    </div>
+                    <div class="col-xs-2">
+                        <h4>Doneer info hier</h4>
+                    </div>
+                    <div class="col-xs-2">
+                        <h4>Algmene informatie</h4>
+                        <p>vzw Dieren in Nood</p>
+                        <p>Eygenweg 1</p>
+                        <p>3640 Kinrooi</p>
+                        <p><span class="fa fa-envelope-o" aria-hidden="true"></span> info@vzwdiereninnood.be</p>
+                        <p><span class="fa fa-phone" aria-hidden="true"></span> 0471 74 36 91</p>
+                        <p><span class="fa fa-file" aria-hidden="true"></span> Ondernemingsnummer 0838-237-871</p>
+                    </div>
+                    <div class="col-xs-2 social">
+                        <h4>Volg ons</h4>
+                        <ul>
+                            <li><a href="http://www.facebook.com/diereninnooddino" target="_blank"><img src="{{ asset('img/facebook.png') }}" height="40" alt="facebook_logo"></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    {% block javascripts %}
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+    <script src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
+    <script src="{{ asset('js/ie10-viewport-bug-workaround.js') }}"></script>
+    <script src="{{ asset('js/global.js') }}"></script>
+    <script src="{{ asset('js/views/FrontendBundle/Default/SearchPublic.js') }}"></script>
+    {% endblock %}
+    </body>
+</html>

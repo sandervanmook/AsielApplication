@@ -1,27 +1,27 @@
 # Backend Calendar (Task)
 backend_calendar:
-    path:     /backend/calendar
+    path:     /calendar
     defaults: { _controller: CalendarBundle:Backend:calendar }
 
 backend_calendar_data:
-    path:     /backend/calendar/data
+    path:     /calendar/data
     defaults: { _controller: CalendarBundle:Backend:calendarData }
     options:
            expose: true
 # End Backend Calendar (Task)
 # Backend CalendarItem
 backend_calendaritem_create:
-    path:     /backend/calendaritem/create
+    path:     /calendaritem/create
     defaults: { _controller: CalendarBundle:BackendCalendarItem:create }
 
 backend_calendaritem_edit:
-    path:     /backend/calendaritem/{itemid}/edit
+    path:     /calendaritem/{itemid}/edit
     defaults: { _controller: CalendarBundle:BackendCalendarItem:edit }
     options:
            expose: true
 
 backend_calendaritem_data:
-    path:     /backend/calendaritem/data
+    path:     /calendaritem/data
     defaults: { _controller: CalendarBundle:BackendCalendarItem:calendarData }
     options:
            expose: true

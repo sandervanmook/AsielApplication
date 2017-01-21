@@ -1,0 +1,41 @@
+{% extends 'FrontendBundle:Base:Base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/showCatPublic.css') }}" />
+{% endblock %}
+{% block pagetitle %}Katten{% endblock %}
+{% block body %}
+    <ul class="nav nav-pills nav-justified">
+        <li><li id="cat" role="presentation"><a href="#"><span class="badge">{{ render(controller('FrontendBundle:Cat:catCountPublic', {'option': 'cat'})) }}</span> Volwassen Katten</a></li></li>
+        <li><li id="kitten" role="presentation"><a href="#"><span class="badge">{{ render(controller('FrontendBundle:Cat:catCountPublic', {'option': 'kitten'})) }}</span> Alleen Kittens</a></li></li>
+        <li><li id="both" role="presentation"><a href="#"><span class="badge">{{ render(controller('FrontendBundle:Cat:catCountPublic', {'option': 'both'})) }}</span> Beide</a></li></li>
+    </ul>
+    <br />
+    <div class="container">
+        <div class="row">
+        {% for cat in cats %}
+            <div  class="col-md-4">
+            {% for picture in cat.pictures|slice(0,1) %}
+                <img id="{{ cat.id }}" class="pictureShow Cat" src="{{ picture.getpublicurl }}" height="100">
+            {% endfor %}
+            {% if cat.pictures is empty %}
+                <img id="{{ cat.id }}" class="pictureShow Cat" src="{{ asset('img/no_picture.jpg') }}" height="100">
+            {% endif %}
+                <p>{{ cat.name }}</p>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div id="result"></div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/views/FrontendBundle/Cat/PublicShowCat.js') }}"></script>
+    <script src="{{ asset('js/views/FrontendBundle/Cat/PublicCat.js') }}"></script>
+{% endblock %}

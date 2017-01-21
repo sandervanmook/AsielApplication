@@ -5,6 +5,7 @@ namespace Asiel\LocationBundle\Service;
 use Asiel\BackendBundle\Event\ResourceNotFoundEvent;
 use Asiel\BackendBundle\Event\UserAlertEvent;
 use Asiel\LocationBundle\Entity\Location;
+use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -25,6 +26,10 @@ class FormHandler
         $this->requestStack     = $requestStack;
     }
 
+    /**
+     * @param int $locationId
+     * @return Location|null
+     */
     public function find(int $locationId)
     {
         $location = $this->em->getRepository('LocationBundle:Location')->find($locationId);
@@ -36,6 +41,9 @@ class FormHandler
         return $location;
     }
 
+    /**
+     * @param Location $location
+     */
     public function create(Location $location)
     {
         $this->em->persist($location);
@@ -43,10 +51,18 @@ class FormHandler
         $this->eventDispatcher->dispatch('user_alert.message', new UserAlertEvent(UserAlertEvent::SUCCESS, 'Locatie is aangemaakt.'));
     }
 
-    public function delete(Location $object)
+    /**
+     * @param Location $location
+     */
+    public function delete(Location $location)
     {
-        $this->em->remove($object);
-        $this->em->flush();
-        $this->eventDispatcher->dispatch('user_alert.message', new UserAlertEvent(UserAlertEvent::SUCCESS, 'Locatie verwijderd.'));
+        $this->em->remove($location);
+
+        try { $this->em->flush();
+        } catch (ForeignKeyConstraintViolationException $e) {
+            $this->eventDispatcher->dispatch('user_alert.message', new UserAlertEvent(UserAlertEvent::DANGER, 'Locatie kan niet worden verwijderd, er zitten nog dieren aan gekoppeld.'));
+            exit;
+        }
+        $this->eventDispatcher->dispatch('user_alert.message', new UserAlertEvent(UserAlertEvent::SUCCESS, 'Locatie verwijderd'));
     }
 }

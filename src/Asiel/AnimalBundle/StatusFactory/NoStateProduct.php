@@ -1,6 +1,6 @@
 <?php
 
-namespace AsielBundle\StatusFactory;
+namespace Asiel\AnimalBundle\StatusFactory;
 
 class NoStateProduct
 {

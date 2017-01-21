@@ -1,17 +1,62 @@
-frontend_homepage:
-    path:     /
-    defaults: { _controller: FrontendBundle:Default:index }
+# Login
+login:
+    path:     /login
+    defaults: { _controller: FrontendBundle:Security:login }
 
+logout:
+    path: /logout
 
-# TODO this is required by Asiel\AnimalBundle\Service\FacebookFormHandler:publicLinkToAnimal
-# to send a public link with a facebook post
-# the actual controller method : PublicController:facebookLinkAction($id)
-frontend_facebook_link:
-    path:     /facebook/{id}
-    defaults: { _controller: FrontendBundle:Default:index }
+# End Login
 
-# TODO this is required by Asiel\AnimalBundle\Service\FacebookFormHandler:postPhoto
-# to access the base path of the website and append the right directory for a picture
+# Frontend Default
 frontend_index:
     path:     /
     defaults: { _controller: FrontendBundle:Default:index }
+
+frontend_animal_search:
+    path:     /animal/search
+    defaults: { _controller: FrontendBundle:Default:search }
+    options:
+           expose: true
+
+frontend_contact:
+    path:     /contact
+    defaults: { _controller: FrontendBundle:Default:contact }
+
+frontend_about:
+    path:     /aboutus
+    defaults: { _controller: FrontendBundle:Default:about }
+
+frontend_facebook_link:
+    path:     /facebook/{id}
+    defaults: { _controller: FrontendBundle:Default:facebookLink }
+
+# End Frontend Default
+# Frontend Dog
+frontend_dog_index:
+    path:     /dogs/{option}
+    defaults: { _controller: FrontendBundle:Dog:showDogs }
+    options:
+           expose: true
+
+frontend_dog_show:
+    path:     /dog/show/{id}
+    defaults: { _controller: FrontendBundle:Dog:showDog }
+    options:
+           expose: true
+
+# Frontend Dog End
+
+# Frontend Cat
+frontend_cat_index:
+    path:     /cats/{option}
+    defaults: { _controller: FrontendBundle:Cat:showCats }
+    options:
+           expose: true
+
+frontend_cat_show:
+    path:     /cat/show/{id}
+    defaults: { _controller: FrontendBundle:Cat:showCat }
+    options:
+           expose: true
+# Frontend Cat End

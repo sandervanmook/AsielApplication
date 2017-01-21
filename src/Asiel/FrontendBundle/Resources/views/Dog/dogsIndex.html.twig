@@ -1,0 +1,41 @@
+{% extends 'FrontendBundle:Base:Base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/showCatPublic.css') }}" />
+{% endblock %}
+{% block pagetitle %}Honden{% endblock %}
+{% block body %}
+    <ul class="nav nav-pills nav-justified">
+        <li><li id="dog" role="presentation"><a href="#"><span class="badge">{{ render(controller('FrontendBundle:Dog:dogCountPublic', {'option': 'dog'})) }}</span> Volwassen Honden</a></li></li>
+        <li><li id="puppy" role="presentation"><a href="#"><span class="badge">{{ render(controller('FrontendBundle:Dog:dogCountPublic', {'option': 'puppy'})) }}</span> Alleen Puppies</a></li></li>
+        <li><li id="both" role="presentation"><a href="#"><span class="badge">{{ render(controller('FrontendBundle:Dog:dogCountPublic', {'option': 'both'})) }}</span> Beide</a></li></li>
+    </ul>
+    <br />
+    <div class="container">
+        <div class="row">
+        {% for dog in dogs %}
+            <div  class="col-md-4">
+                {% for picture in dog.pictures|slice(0,1) %}
+                    <img id="{{ dog.id }}" class="pictureShow Dog" src="{{ picture.getpublicurl }}" height="100">
+                {% endfor %}
+                {% if dog.pictures is empty %}
+                    <img id="{{ dog.id }}" class="pictureShow Dog" src="{{ asset('img/no_picture.jpg') }}" height="100">
+                {% endif %}
+                <p>{{ dog.name }}</p>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div id="result"></div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/views/FrontendBundle/Dog/PublicShowDog.js') }}"></script>
+    <script src="{{ asset('js/views/FrontendBundle/Dog/PublicDog.js') }}"></script>
+{% endblock %}

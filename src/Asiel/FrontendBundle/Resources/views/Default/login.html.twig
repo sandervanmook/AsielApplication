@@ -1,0 +1,24 @@
+{% extends 'FrontendBundle:Base:Base.html.twig' %}
+{% block pagetitle %}Inloggen{% endblock %}
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-4">
+                <form class="form-signin" action="{{ path('login') }}" method="post">
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                    <label for="username" class="sr-only">Emailadres of gebruikersnaam</label>
+                    <input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control" placeholder="Emailadres / Gebruikersnaam" required autofocus>
+
+                    <label for="password" class="sr-only">Password</label>
+                    <input type="password" id="password" name="_password" class="form-control" placeholder="Wachtwoord" required>
+                    <span>Gebruikersnaam en wachtwoord <b>"admin"</b></span>
+                    <button class="btn btn-primary btn-block" type="submit">Inloggen</button>
+                </form>
+                {% if error %}
+                    <span class="text-alert">{{ error.messageKey|trans(error.messageData, 'security') }}</span>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
