@@ -16,7 +16,7 @@ class BackendFacebookController extends Controller
     {
         $formHandler = $this->get('asiel.animalbundle.facebookformhandler');
         // TODO Remove me after testing (expires after 1 hour)
-        $_SESSION['facebook_access_token'] = 'EAAQUKHKsIswBAHmsolaPJvB0XIILaZCO8sXmZBuRqu68rZB7xGi6gGWmoowjtdJQ5vSdwofitWZAYnpcbbfvZCmsG6R2jF7ro3j7cBVjnq4FWIYyGhDkQM7Ou1EG46d7tvyH60iTmZCWDQcJ2rVBCZBZCJ3Fsl3W7kgv3budCW1PZA5T1P60elkZAV0ZCJ1ZB9Q8sB8ZD';
+        //$_SESSION['facebook_access_token'] = 'EAAQUKHKsIswBAHmsolaPJvB0XIILaZCO8sXmZBuRqu68rZB7xGi6gGWmoowjtdJQ5vSdwofitWZAYnpcbbfvZCmsG6R2jF7ro3j7cBVjnq4FWIYyGhDkQM7Ou1EG46d7tvyH60iTmZCWDQcJ2rVBCZBZCJ3Fsl3W7kgv3budCW1PZA5T1P60elkZAV0ZCJ1ZB9Q8sB8ZD';
 
         $loginUrl = $formHandler->getLoginUrl();
 

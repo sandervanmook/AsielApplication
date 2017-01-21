@@ -14,6 +14,7 @@ class LoadAnimalData implements FixtureInterface
         $animal  = new Cat();
         $animal->setName('Sam');
         $animal->setGender('Male');
+        $animal->setRace('test');
         $animal->setRegisterDate(new \DateTime('now'));
         $animal->setAdmissionDate(new \DateTime('now'));
         $animal->setDayOfBirth(new \DateTime('yesterday'));
