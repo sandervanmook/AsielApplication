@@ -17,7 +17,7 @@ class LoadAnimalData implements FixtureInterface
         $animal->setRegisterDate(new \DateTime('now'));
         $animal->setAdmissionDate(new \DateTime('now'));
         $animal->setDayOfBirth(new \DateTime('yesterday'));
-        $animal->setOutsideAnimal(true);
+        $animal->setOutsideAnimal('Ja');
         $animal->setNotChipped(true);
         $animal->setColour('Rood');
         $animal->setCompatibleChildrenAbove7y(true);
