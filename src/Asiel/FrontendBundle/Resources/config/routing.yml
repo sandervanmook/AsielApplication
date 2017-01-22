@@ -7,7 +7,6 @@ logout:
     path: /logout
 
 # End Login
-
 # Frontend Default
 frontend_index:
     path:     /
@@ -46,7 +45,6 @@ frontend_dog_show:
            expose: true
 
 # Frontend Dog End
-
 # Frontend Cat
 frontend_cat_index:
     path:     /cats/{option}
