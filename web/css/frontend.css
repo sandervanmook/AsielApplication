@@ -9,6 +9,11 @@ Site and Site-content provide sticky footer.
 
 .Site-content {
     flex: 1;
-    min-height: 600px; /* Fix causing the sticky footer to change main menu vertical size when page has little on it */
     margin-top: 30px;
+    margin-bottom: 50px;
+}
+
+/* Fix causing the sticky footer to change main menu vertical size when page has little on it */
+.ui.menu>.container, .ui.menu>.grid {
+    max-height: 38px;
 }
