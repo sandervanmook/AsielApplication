@@ -5,37 +5,60 @@
 {% endblock %}
 {% block pagetitle %}Katten{% endblock %}
 {% block body %}
-    <ul class="nav nav-pills nav-justified">
-        <li><li id="cat" role="presentation"><a href="#"><span class="badge">{{ render(controller('FrontendBundle:Cat:catCountPublic', {'option': 'cat'})) }}</span> Volwassen Katten</a></li></li>
-        <li><li id="kitten" role="presentation"><a href="#"><span class="badge">{{ render(controller('FrontendBundle:Cat:catCountPublic', {'option': 'kitten'})) }}</span> Alleen Kittens</a></li></li>
-        <li><li id="both" role="presentation"><a href="#"><span class="badge">{{ render(controller('FrontendBundle:Cat:catCountPublic', {'option': 'both'})) }}</span> Beide</a></li></li>
-    </ul>
-    <br />
-    <div class="container">
-        <div class="row">
-        {% for cat in cats %}
-            <div  class="col-md-4">
-            {% for picture in cat.pictures|slice(0,1) %}
-                <img id="{{ cat.id }}" class="pictureShow Cat" src="{{ picture.getpublicurl }}" height="100">
-            {% endfor %}
-            {% if cat.pictures is empty %}
-                <img id="{{ cat.id }}" class="pictureShow Cat" src="{{ asset('img/no_picture.jpg') }}" height="100">
-            {% endif %}
-                <p>{{ cat.name }}</p>
-            </div>
-        {% endfor %}
+    <div class="ui top attached tabular menu">
+        <a href="{{ path('frontend_cat_index', {'option' : 'both'}) }}" class="item
+        {% if 'both' in app.request.get('option') %} active {% endif %}
+        ">
+            Beide
+            <div class="ui left pointing label">{{ render(controller('FrontendBundle:Cat:catCountPublic', {'option': 'both'})) }}</div>
+        </a>
+        <a href="{{ path('frontend_cat_index', {'option' : 'cat'}) }}" class="item
+                {% if 'cat' in app.request.get('option') %} active {% endif %}
+                ">
+            Volwassen Katten
+            <div class="ui left pointing label">{{ render(controller('FrontendBundle:Cat:catCountPublic', {'option': 'cat'})) }}</div>
+        </a>
+        <a href="{{ path('frontend_cat_index', {'option' : 'kitten'}) }}" class="item
+                {% if 'kitten' in app.request.get('option') %} active {% endif %}
+                ">
+            Kittens
+            <div class="ui left pointing label">{{ render(controller('FrontendBundle:Cat:catCountPublic', {'option': 'kitten'})) }}</div>
+        </a>
+    </div>
+    <div class="ui bottom attached segment">
+        <div>
+            <table class="ui striped table">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>Naam</th>
+                    <th>Leeftijd</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for cat in cats %}
+                <tr>
+                    <td>
+                        {% for picture in cat.pictures|slice(0,1) %}
+                            <img id="{{ cat.id }}" class="pictureShow Cat" src="{{ picture.getpublicurl }}" height="50">
+                        {% endfor %}
+                        {% if cat.pictures is empty %}
+                            <img id="{{ cat.id }}" class="pictureShow Cat" src="{{ asset('img/no_picture.jpg') }}" height="50">
+                        {% endif %}
+                    </td>
+                    <td>{{ cat.name }}</td>
+                    <td>{{ cat.age }}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
         </div>
     </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div id="result"></div>
-            </div>
-        </div>
-    </div>
+    <!-- Output the animal information when you click on one -->
+    <div id="result"></div>
+
 {% endblock %}
 {% block javascripts %}
     {{ parent() }}
     <script src="{{ asset('js/views/FrontendBundle/Cat/PublicShowCat.js') }}"></script>
-    <script src="{{ asset('js/views/FrontendBundle/Cat/PublicCat.js') }}"></script>
 {% endblock %}
