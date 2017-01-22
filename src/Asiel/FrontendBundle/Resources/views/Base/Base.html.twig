@@ -27,9 +27,7 @@
         <!-- Menu -->
         <div class="ui borderless main menu">
             <div class="ui text container">
-                <div class="header item" href="{{ path('frontend_index') }}">
-                    <img src="{{ asset('img/public_logo.png') }}" alt="logo">
-                </div>
+                <a class="header item" href="{{ path('frontend_index') }}"><img src="{{ asset('img/public_logo.png') }}" alt="logo"></a>
                 <a class="item" href="{{ path('frontend_cat_index', {'option' : 'both'}) }}">Katten<div class="floating ui teal label">{{ render(controller('FrontendBundle:Cat:catCountPublic', {'option': 'both'} )) }}</div></a>
                 <a class="item" href="{{ path('frontend_dog_index', {'option' : 'both'}) }}">Honden<div class="floating ui teal label">{{ render(controller('FrontendBundle:Dog:dogCountPublic', {'option': 'both'} )) }}</div></a>
                 <a class="item" href="{{ path('frontend_about') }}">Over ons</a>
