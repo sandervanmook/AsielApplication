@@ -110,7 +110,7 @@ class DefaultFormHandler
      */
     public function findAnimal(int $id)
     {
-        $animal = $this->getAnimalRepository()->findOneBy(['id' => $id, 'visiblePublic' => true]);
+        $animal = $this->getAnimalRepository()->findBy(['id' => $id, 'visiblePublic' => true]);
 
         if (!$animal) {
             $this->eventDispatcher->dispatch('resourcenotfound', new ResourceNotFoundEvent('Dier', $id));
