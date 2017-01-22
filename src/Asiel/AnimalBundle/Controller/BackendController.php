@@ -12,6 +12,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 class BackendController extends Controller
 {
+    /**
+     * @return Response
+     */
     public function indexAction()
     {
         $formHandler = $this->get('asiel.animalbundle.animalformhandler');
@@ -23,12 +26,20 @@ class BackendController extends Controller
         ]);
     }
 
+    /**
+     * @return Response
+     */
     public function createAction()
     {
         return $this->render('@Animal/Backend/Animal/create.html.twig');
     }
 
-    public function registerAction(Request $request, $type)
+    /**
+     * @param Request $request
+     * @param string $type
+     * @return RedirectResponse|Response
+     */
+    public function registerAction(Request $request, string $type)
     {
         $animalType = new AnimalType($type);
         $animalFactory = new AnimalFactory();
@@ -51,7 +62,11 @@ class BackendController extends Controller
         ]);
     }
 
-    public function showAction($id)
+    /**
+     * @param int $id
+     * @return Response
+     */
+    public function showAction(int $id)
     {
         $formHandler = $this->get('asiel.animalbundle.animalformhandler');
         return $this->render('@Animal/Backend/Animal/show.html.twig', [
@@ -60,7 +75,12 @@ class BackendController extends Controller
         ]);
     }
 
-    public function editAction($id, Request $request)
+    /**
+     * @param int $id
+     * @param Request $request
+     * @return RedirectResponse|Response
+     */
+    public function editAction(int $id, Request $request)
     {
         $formHandler = $this->get('asiel.animalbundle.animalformhandler');
         $animal = $formHandler->find($id);
@@ -85,7 +105,7 @@ class BackendController extends Controller
      * Ajax Calls
      */
 
-    public function findOnChipnumberAction($chipnumber)
+    public function findOnChipnumberAction(int $chipnumber)
     {
         $result = $this->getDoctrine()->getRepository('AnimalBundle:Animal')->findOnChipnumber($chipnumber);
 
@@ -101,7 +121,7 @@ class BackendController extends Controller
      * @param $id
      * @return Response
      */
-    public function animalInfoAction($id)
+    public function animalInfoAction(int $id)
     {
         $formHandler = $this->get('asiel.animalbundle.animalformhandler');
         $openTasks = $formHandler->getRepository()->findIncompleteTasks($id);
