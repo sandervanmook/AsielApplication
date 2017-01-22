@@ -8,7 +8,7 @@
                 <p>{{ error.messageKey|trans(error.messageData, 'security') }}</p>
             </div>
         {% endif %}
-        <form class="ui small form" action="{{ path('login') }}" method="post">
+        <form class="ui form" action="{{ path('login') }}" method="post">
             <div class="two fields">
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
                 <div class="field">
