@@ -1,24 +1,27 @@
 {% extends 'FrontendBundle:Base:Base.html.twig' %}
 {% block pagetitle %}Inloggen{% endblock %}
 {% block body %}
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-4">
-                <form class="form-signin" action="{{ path('login') }}" method="post">
-                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-
-                    <label for="username" class="sr-only">Emailadres of gebruikersnaam</label>
-                    <input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control" placeholder="Emailadres / Gebruikersnaam" required autofocus>
-
-                    <label for="password" class="sr-only">Password</label>
-                    <input type="password" id="password" name="_password" class="form-control" placeholder="Wachtwoord" required>
-                    <span>Gebruikersnaam en wachtwoord <b>"admin"</b></span>
-                    <button class="btn btn-primary btn-block" type="submit">Inloggen</button>
-                </form>
-                {% if error %}
-                    <span class="text-alert">{{ error.messageKey|trans(error.messageData, 'security') }}</span>
-                {% endif %}
+    <div>
+        {% if error %}
+            <div class="ui error message">
+                <div class="header">Er is een fout opgetreden</div>
+                <p>{{ error.messageKey|trans(error.messageData, 'security') }}</p>
             </div>
-        </div>
+        {% endif %}
+        <form class="ui small form" action="{{ path('login') }}" method="post">
+            <div class="two fields">
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                <div class="field">
+                    <label for="username">Gebruikersnaam</label>
+                    <input id="username" value="{{ last_username }}" type="text" name="_username" placeholder="Emailadres / Gebruikersnaam" required autofocus>
+                </div>
+                <div class="field">
+                    <label for="password">Wachtwoord</label>
+                    <input type="password" id="password" name="_password" placeholder="Wachtwoord" required>
+                </div>
+            </div>
+            <button class="ui button" type="submit">Inloggen</button>
+        </form>
+        <span>Gebruikersnaam en wachtwoord <b>"admin"</b></span>
     </div>
 {% endblock %}
