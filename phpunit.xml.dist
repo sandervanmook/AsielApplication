@@ -13,8 +13,9 @@
     </php>
 
     <testsuites>
-        <testsuite name="Project Test Suite">
-            <directory>tests</directory>
+        <testsuite name="Asiel Project Test Ssuite">
+            <directory>src/Asiel/*Bundle/Test</directory>
+            <exclude>./src/Asiel/Shared/Test/BaseFunctionalTest.php</exclude>
         </testsuite>
     </testsuites>
 
@@ -22,9 +23,10 @@
         <whitelist>
             <directory>src</directory>
             <exclude>
-                <directory>src/*Bundle/Resources</directory>
-                <directory>src/*/*Bundle/Resources</directory>
-                <directory>src/*/Bundle/*Bundle/Resources</directory>
+                <directory>src/Asiel/*Bundle/Resources</directory>
+                <directory>src/Asiel/*/*Bundle/Resources</directory>
+                <directory>src/Asiel/*/Bundle/*Bundle/Resources</directory>
+                <directory>src/Asiel/Shared/*</directory>
             </exclude>
         </whitelist>
     </filter>

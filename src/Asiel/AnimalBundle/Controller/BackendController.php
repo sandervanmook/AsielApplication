@@ -101,20 +101,18 @@ class BackendController extends Controller
         ]);
     }
 
-    /**
-     * Ajax Calls
-     */
 
+    /**
+     * Ajax Call
+     * @param int $chipnumber
+     * @return JsonResponse
+     */
     public function findOnChipnumberAction(int $chipnumber)
     {
         $result = $this->getDoctrine()->getRepository('AnimalBundle:Animal')->findOnChipnumber($chipnumber);
 
         return new JsonResponse($result);
     }
-
-    /**
-     * Embedded controller methods
-     */
 
     /**
      * Embedded as controller in template when editing an animal.
