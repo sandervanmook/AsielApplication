@@ -15,9 +15,3 @@ Site and Site-content provide sticky footer.
     margin-bottom: 20%;
 }
 
-
-/*!* Fix causing the sticky footer to change main menu vertical size when page has little on it *!*/
-/*.ui.menu>.container, .ui.menu>.grid {*/
-    /*max-height: 38px;*/
-/*}*/
-
