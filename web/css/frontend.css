@@ -1,19 +1,23 @@
 /**
 Site and Site-content provide sticky footer.
  */
-.Site {
+.pusher {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
 }
 
-.Site-content {
-    flex: 1;
-    margin-top: 30px;
-    margin-bottom: 50px;
+.pusher > .footer {
+    flex: 2;
 }
 
-/* Fix causing the sticky footer to change main menu vertical size when page has little on it */
-.ui.menu>.container, .ui.menu>.grid {
-    max-height: 38px;
+.page {
+    margin-bottom: 20%;
 }
+
+
+/*!* Fix causing the sticky footer to change main menu vertical size when page has little on it *!*/
+/*.ui.menu>.container, .ui.menu>.grid {*/
+    /*max-height: 38px;*/
+/*}*/
+

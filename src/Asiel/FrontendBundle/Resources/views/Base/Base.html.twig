@@ -2,7 +2,8 @@
 <html xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
     <title>{% block title %}Asiel Software{% endblock %}</title>
 
@@ -10,124 +11,135 @@
     <link rel="stylesheet" href="{{ asset('css/jquery-ui.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/jquery-ui.structure.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/jquery-ui.theme.min.css') }}" />
-    <link rel="stylesheet" type="text/css" href="{{ asset('semantic/dist/semantic.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/frontend.css') }}">
-    {#<link rel="stylesheet" href="{{ asset('css/app.css') }}">#}
-{% endblock %}
-    <link rel="icon" type="image/x-icon" href="{{ asset('img/favicon.png') }}" />
-</head>
-    <body class="Site">
-        <!-- Header -->
-        <div class="ui main text container center">
-            <img src="{{ asset('img/frontpage_logo.jpg') }}" alt="logo" height="150">
-        </div>
-        <!-- /Header -->
 
-        <!-- Menu -->
-        <div class="ui borderless main menu">
-            <div class="ui text container">
-                <a class="header item" href="{{ path('frontend_index') }}"><img src="{{ asset('img/public_logo.png') }}" alt="logo"></a>
-                <a class="item" href="{{ path('frontend_cat_index', {'option' : 'both'}) }}">Katten<div class="floating ui teal label">{{ render(controller('FrontendBundle:Cat:catCountPublic', {'option': 'both'} )) }}</div></a>
-                <a class="item" href="{{ path('frontend_dog_index', {'option' : 'both'}) }}">Honden<div class="floating ui teal label">{{ render(controller('FrontendBundle:Dog:dogCountPublic', {'option': 'both'} )) }}</div></a>
-                <a class="item" href="{{ path('frontend_about') }}">Over ons</a>
-                <a class="item" href="{{ path('frontend_contact') }}">Contact</a>
-                <a class="item right" href="{{ path('backend_default_index') }}">Inloggen</a>
-            </div>
-        </div>
-        <!-- /Menu -->
+    <!-- Semantic-UI CSS -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('semantic/dist/semantic.min.css') }}">
 
-        <!-- Page -->
-        <div class="ui text container Site-content">
-            <h2 class="ui header">{% block pagetitle %}{% endblock %}</h2>
-            {% block pagesubtitle %}{% endblock %}
-            {% block flash %}{% endblock %}
-            {% block body %}{% endblock %}
-        </div>
-        <!-- /Page -->
-
-        <!-- Footer -->
-        <div class="ui bottom fixed inverted vertical footer segment">
-            <div class="ui center aligned container">
-                <div class="ui stackable inverted divided grid">
-                    <div class="three wide column">
-                        <div class="ui inverted link list">
-                            <a class="item" href="#">Link 1</a>
-                            <a class="item" href="#">Link 2</a>
-                            <a class="item" href="#">Link 3</a>
-                            <a class="item" href="#">Link 4</a>
-                        </div>
-                    </div>
-                    <div class="three wide column">
-                        <h4 class="ui inverted header">Doneer</h4>
-                        <div class="ui inverted link list">
-                            <a class="item" href="#">Link 1</a>
-                            <a class="item" href="#">Link 2</a>
-                            <a class="item" href="#">Link 3</a>
-                            <a class="item" href="#">Link 4</a>
-                        </div>
-                    </div>
-                    <div class="four wide column">
-                        <h4 class="ui inverted header">Algemene informatie</h4>
-                        <div class="ui list">
-                            <div class="item">
-                                <i class="users icon"></i>
-                                <div class="content">
-                                    vzw Dieren in Nood
-                                </div>
-                            </div>
-                            <div class="item">
-                                <i class="marker icon"></i>
-                                <div class="content">
-                                    Eygenweg 1, 3640 Kinrooi
-                                </div>
-                            </div>
-                            <div class="item">
-                                <i class="phone icon"></i>
-                                <div class="content">
-                                    0471 74 36 91
-                                </div>
-                            </div>
-                            <div class="item">
-                                <i class="mail icon"></i>
-                                <div class="content">
-                                    <a href="mailto:info@vzwdiereninnood.be">info@vzwdiereninnood.be</a>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <i class="folder icon"></i>
-                                <div class="content">
-                                    0838-237-871
-                                </div>
-                            </div>
-                            <div class="item">
-                                <i class="linkify icon"></i>
-                                <div class="content">
-                                    <a href="http://vzwdiereninnood.be/">vzwdiereninnood.be</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="three wide column">
-                        <h4 class="ui inverted header">Volg Ons</h4>
-                        <div class="ui inverted link list">
-                            <a class="item" href="http://www.facebook.com/diereninnooddino"><i class="facebook icon" style="font-size: 1.9em"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="ui inverted section divider"></div>
-                <p><i class="copyright icon"></i> S. van Mook {{ "now"|date('Y') }}</p>
-            </div>
-        </div>
-        <!-- /Footer -->
-{% block javascripts %}
-    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
-    <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+    <!-- Semantic-UI JS -->
     <script src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>
     <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
     <script src="{{ asset('semantic/dist/semantic.min.js') }}"></script>
+
+{% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('img/favicon.png') }}" />
+</head>
+    <body>
+        <div class="ui sidebar thin inverted vertical menu">
+            <div class="item">
+                <img class="ui centered tiny image" src="{{ asset('img/public_logo.png') }}" alt="logo">
+            </div>
+            <a class="item"
+               href="{{ path('frontend_cat_index', {'option' : 'both'}) }}"
+            >Katten
+                <div class="ui teal label left pointing">{{ render(controller('FrontendBundle:Cat:catCountPublic', {'option': 'both'} )) }}</div>
+            </a>
+            <a class="item"
+               href="{{ path('frontend_dog_index', {'option' : 'both'}) }}"
+            >Honden
+                <div class="ui teal label left pointing">{{ render(controller('FrontendBundle:Dog:dogCountPublic', {'option': 'both'} )) }}</div>
+            </a>
+            <a class="item" href="{{ path('frontend_animal_search') }}"><i class="search icon"></i>Zoeken</a>
+        </div>
+        <div class="ui top fixed menu borderless">
+            <div id="menu">
+                <a class="item"><i class="sidebar icon"></i>Menu</a>
+            </div>
+            <a class="item" href="{{ path('frontend_index') }}"><i class="home icon"></i></a>
+            <a class="item" href="{{ path('frontend_about') }}">Over Ons</a>
+            <a class="item" href="{{ path('frontend_contact') }}">Contact</a>
+            <a class="item right" href="{{ path('login') }}">Inloggen</a>
+        </div>
+        <div class="pusher">
+            <br />
+            <div class="ui vertical masthead center aligned segment">
+                <img class="image" src="{{ asset('img/frontpage_logo.jpg') }}">
+            </div>
+            <div class="ui text container page">
+                <h1 class="ui header">{% block pagetitle %}{% endblock %}</h1>
+                {% block pagesubtitle %}{% endblock %}
+                {% block flash %}{% endblock %}
+                {% block body %}{% endblock %}
+            </div>
+            <div class="ui inverted vertical footer segment">
+                <div class="ui container">
+                    <div class="ui stackable inverted divided equal height stackable grid">
+                        <div class="three wide column">
+                            <div class="ui inverted link list">
+                                <a class="item" href="#">Link 1</a>
+                                <a class="item" href="#">Link 2</a>
+                                <a class="item" href="#">Link 3</a>
+                                <a class="item" href="#">Link 4</a>
+                            </div>
+                        </div>
+                        <div class="three wide column">
+                            <h4 class="ui inverted header">Doneer</h4>
+                            <div class="ui inverted link list">
+                                <a class="item" href="#">Link 1</a>
+                                <a class="item" href="#">Link 2</a>
+                                <a class="item" href="#">Link 3</a>
+                                <a class="item" href="#">Link 4</a>
+                            </div>
+                        </div>
+                        <div class="four wide column">
+                            <h4 class="ui inverted header">Algemene informatie</h4>
+                            <div class="ui list">
+                                <div class="item">
+                                    <i class="users icon"></i>
+                                    <div class="content">
+                                        vzw Dieren in Nood
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <i class="marker icon"></i>
+                                    <div class="content">
+                                        Eygenweg 1, 3640 Kinrooi
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <i class="phone icon"></i>
+                                    <div class="content">
+                                        0471 74 36 91
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <i class="mail icon"></i>
+                                    <div class="content">
+                                        <a href="mailto:info@vzwdiereninnood.be">info@vzwdiereninnood.be</a>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <i class="folder icon"></i>
+                                    <div class="content">
+                                        0838-237-871
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <i class="linkify icon"></i>
+                                    <div class="content">
+                                        <a href="http://vzwdiereninnood.be/">vzwdiereninnood.be</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="three wide column">
+                            <h4 class="ui inverted header">Volg Ons</h4>
+                            <div class="ui inverted link list">
+                                <a class="item" href="http://www.facebook.com/diereninnooddino"><i class="facebook icon" style="font-size: 1.9em"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui inverted section divider"></div>
+                    <p><center><i class="copyright icon"></i> S. van Mook {{ "now"|date('Y') }}</center></p>
+                </div>
+            </div>
+        </div>
+{% block javascripts %}
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
     <script src="{{ asset('js/global.js') }}"></script>
-    <script src="{{ asset('js/views/FrontendBundle/Default/SearchPublic.js') }}"></script>
+    <script src="{{ asset('js/frontend.js') }}"></script>
 {% endblock %}
     </body>
 </html>
