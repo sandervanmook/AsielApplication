@@ -5,6 +5,7 @@
 {% endblock %}
 {% block pagetitle %}Zoek een dier{% endblock %}
 {% block body %}
+    <h2 class="ui header">Filter</h2>
     <div class="ui tiny form">
         <div class="fields">
             <div class="two wide field">
@@ -68,39 +69,7 @@
 {% block javascripts %}
     {{ parent() }}
     <script type="text/javascript" src="{{ asset('datatables.min.js') }}"></script>
-    <script>
-        $.fn.dataTable.ext.search.push(
-            function( settings, data, dataIndex ) {
-                var min = parseInt( $('#min').val(), 10 );
-                var max = parseInt( $('#max').val(), 10 );
-                var age = parseFloat( data[5] ) || 0; // use data for the age column
-
-                if ( ( isNaN( min ) && isNaN( max ) ) ||
-                    ( isNaN( min ) && age <= max ) ||
-                    ( min <= age   && isNaN( max ) ) ||
-                    ( min <= age   && age <= max ) )
-                {
-                    return true;
-                }
-                return false;
-            }
-        );
-
-        $(document).ready( function () {
-            var table = $('#result_table').DataTable(
-                {
-                    "language": {
-                        "url": "../datatables.dutch.json"
-                    },
-                    searching: false,
-                }
-            );
-            // Event listener to the two range filtering inputs to redraw on input
-            $('#min, #max').keyup( function() {
-                table.draw();
-            } );
-        } );
-    </script>
+    <script src="{{ asset('js/views/FrontendBundle/Default/FrontendSearch.js') }}"></script>
     <script src="{{ asset('js/views/FrontendBundle/Cat/PublicShowCat.js') }}"></script>
     <script src="{{ asset('js/views/FrontendBundle/Dog/PublicShowDog.js') }}"></script>
 {% endblock %}
