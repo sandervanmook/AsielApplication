@@ -5,11 +5,7 @@ $(document).ready(function(){
         return false;
     });
     // Let the reset button on the animal search page go back to it's original state
-    $('.btn-reset-animal-index').click(function(){
-        window.location.href = $(location).attr('origin')+'/backoffice/animal/index';
-    });
-    // Let the reset button on the animal search page go back to it's original state
     $('.btn-reset-customer-index').click(function(){
-        window.location.href = $(location).attr('origin')+'/backoffice/customer/index';
+        window.location.href = $(location).attr('origin')+'/backend/customer';
     });
 });

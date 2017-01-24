@@ -32,22 +32,34 @@
                 <tr>
                     <th></th>
                     <th>Naam</th>
+                    <th>Ras</th>
+                    <th>Geslacht</th>
                     <th>Leeftijd</th>
+                    <th>Kleur</th>
+                    <th>Status</th>
                 </tr>
                 </thead>
                 <tbody>
                 {% for cat in cats %}
-                <tr>
+                <tr id="{{ cat.id }}" class="Cat">
                     <td>
                         {% for picture in cat.pictures|slice(0,1) %}
-                            <img id="{{ cat.id }}" class="pictureShow Cat" src="{{ picture.getpublicurl }}" height="50">
+                            <img src="{{ picture.getpublicurl }}" height="30">
                         {% endfor %}
                         {% if cat.pictures is empty %}
-                            <img id="{{ cat.id }}" class="pictureShow Cat" src="{{ asset('img/no_picture.jpg') }}" height="50">
+                            <img src="{{ asset('img/no_picture.jpg') }}" height="20">
                         {% endif %}
                     </td>
                     <td>{{ cat.name }}</td>
+                    <td>{{ cat.race }}</td>
+                    <td>{{ outputGender(cat.gender) }}</td>
                     <td>{{ cat.age }}</td>
+                    <td>{{ cat.colour }}</td>
+                    {% for state in cat.status %}
+                        {% if state.archived == false %}
+                    <td>{{ state.getclassname|trans }}</td>
+                        {% endif %}
+                    {% endfor %}
                 </tr>
                 {% endfor %}
                 </tbody>
