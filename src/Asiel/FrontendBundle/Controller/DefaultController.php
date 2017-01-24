@@ -2,6 +2,7 @@
 
 namespace Asiel\FrontendBundle\Controller;
 
+use Asiel\FrontendBundle\Form\AnimalSearchType;
 use Asiel\FrontendBundle\Form\ContactType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -18,11 +19,12 @@ class DefaultController extends Controller
         return $this->render('@Frontend/Default/index.html.twig');
     }
 
-
+    /**
+     * @return Response
+     */
     public function searchAction()
     {
         $formHandler = $this->get('asiel.frontendbundle.defaultformhandler');
-
         $result = $formHandler->getAnimalRepository()->allPublicAnimals();
 
         return $this->render('@Frontend/Default/search.html.twig', [
@@ -69,7 +71,7 @@ class DefaultController extends Controller
         $result = $formHandler->findAnimal($id);
 
         return $this->render('@Frontend/Default/searchResult.html.twig', [
-            'result'     => $result,
+            'result' => $result,
         ]);
     }
 
