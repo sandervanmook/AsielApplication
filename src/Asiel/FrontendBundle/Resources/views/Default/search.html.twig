@@ -7,20 +7,18 @@
 {% block body %}
     <div class="ui tiny form">
         <div class="fields">
-            <div class="field">
-                <label for="min">Minimale leeftijd</label>
+            <div class="two wide field">
+                <label for="min">Min leeftijd</label>
                 <input type="text" id="min" name="min">
             </div>
-            <div class="field">
-                <label for="max">Maximale leeftijd</label>
+            <div class="two wide field">
+                <label for="max">Max leeftijd</label>
                 <input type="text" id="max" name="max">
             </div>
         </div>
     </div>
-
     <br />
-
-    <div class="ui form">
+    <div>
         <table id="result_table">
             <thead>
                 <tr>
@@ -93,7 +91,8 @@
                 {
                     "language": {
                         "url": "../datatables.dutch.json"
-                    }
+                    },
+                    searching: false,
                 }
             );
             // Event listener to the two range filtering inputs to redraw on input
