@@ -1,0 +1,108 @@
+{% extends 'FrontendBundle:Base:Base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="{{ asset('datatables.min.css') }}"/>
+{% endblock %}
+{% block pagetitle %}Zoek een dier{% endblock %}
+{% block body %}
+    <div class="ui tiny form">
+        <div class="fields">
+            <div class="field">
+                <label for="min">Minimale leeftijd</label>
+                <input type="text" id="min" name="min">
+            </div>
+            <div class="field">
+                <label for="max">Maximale leeftijd</label>
+                <input type="text" id="max" name="max">
+            </div>
+        </div>
+    </div>
+
+    <br />
+
+    <div class="ui form">
+        <table id="result_table">
+            <thead>
+                <tr>
+                    <td></td>
+                    <td>Type</td>
+                    <td>Naam</td>
+                    <td>Ras</td>
+                    <td>Geslacht</td>
+                    <td>Leeftijd</td>
+                    <td>Kleur</td>
+                    <td>Status</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for animal in result %}
+                <tr id="{{ animal.id }}" class="{{ animal.getClassName }}">
+                    <td>{% if animal.pictures is not empty %}
+                            {% for picture in animal.pictures|slice(0,1) %}
+                                <img src="{{ picture.publicurl }}" height="30" alt="animal_picture">
+                            {% endfor %}
+                        {% else %}
+                            <img src="{{ asset('img/no_picture.jpg') }}" height="20" alt="no_animal_picture">
+                        {% endif %}
+                    </td>
+                    <td>{{ animal.getClassName|trans }}</td>
+                    <td>{{ animal.name }}</td>
+                    <td>{{ animal.race }}</td>
+                    <td>{{ animal.gender|trans }}</td>
+                    <td>{{ animal.age }}</td>
+                    <td>{{ animal.colour }}</td>
+                    {% for state in animal.status %}
+                        {% if state.archived == false %}
+                    <td>{{ state.getclassname|trans }}</td>
+                        {% endif %}
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div id="result"></div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('datatables.min.js') }}"></script>
+    <script>
+        $.fn.dataTable.ext.search.push(
+            function( settings, data, dataIndex ) {
+                var min = parseInt( $('#min').val(), 10 );
+                var max = parseInt( $('#max').val(), 10 );
+                var age = parseFloat( data[5] ) || 0; // use data for the age column
+
+                if ( ( isNaN( min ) && isNaN( max ) ) ||
+                    ( isNaN( min ) && age <= max ) ||
+                    ( min <= age   && isNaN( max ) ) ||
+                    ( min <= age   && age <= max ) )
+                {
+                    return true;
+                }
+                return false;
+            }
+        );
+
+        $(document).ready( function () {
+            var table = $('#result_table').DataTable(
+                {
+                    "language": {
+                        "url": "../datatables.dutch.json"
+                    }
+                }
+            );
+            // Event listener to the two range filtering inputs to redraw on input
+            $('#min, #max').keyup( function() {
+                table.draw();
+            } );
+        } );
+    </script>
+    <script src="{{ asset('js/views/FrontendBundle/Cat/PublicShowCat.js') }}"></script>
+    <script src="{{ asset('js/views/FrontendBundle/Dog/PublicShowDog.js') }}"></script>
+{% endblock %}
+

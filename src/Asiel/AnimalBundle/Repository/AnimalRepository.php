@@ -19,7 +19,7 @@ use Ivory\CKEditorBundle\Exception\Exception;
 class AnimalRepository extends EntityRepository
 {
     /**
-     * Used by Search Controller.
+     * Backend search
      * @param $search array
      * @param $limit integer
      * @return mixed
@@ -102,112 +102,128 @@ class AnimalRepository extends EntityRepository
         return null;
     }
 
+//    /**
+//     * @param $search array
+//     * @param $limit int
+//     * @return array
+//     * @throws Exception
+//     */
+//    public function searchAnimalsPublic($search, $limit = 10)
+//    {
+//        $type   = $search['type'];
+//        $gender = $search['gender'];
+//        $age    = $search['age'];
+//
+//        /**
+//         *  Age
+//         * 'Pup/Kitten'      => '0',
+//         *' 1-2 years'       => '1',
+//         * '2 and older'     => '2',
+//         */
+//
+//        $ageOptions = [0,1,2];
+//        if (!in_array($age, $ageOptions)) {
+//            throw new Exception('invalid age options');
+//        }
+//
+//        $qb = $this->createQueryBuilder('a');
+//        $qb->leftJoin('a.status', 's');
+//        $qb->where('s.onsiteLocation = true' );
+//        $qb->andWhere('s.archived = false');
+//        $qb->andWhere('a.visiblePublic = true');
+//        $qb->setMaxResults($limit);
+//
+//        $allOnSiteAnimals = $qb->getQuery()->getResult();
+//        $animalType = new AnimalType($type);
+//
+//        $this->filterType($animalType, $allOnSiteAnimals);
+//        $this->filterGender($gender, $allOnSiteAnimals);
+//        $this->filterAge($age, $allOnSiteAnimals);
+//
+//        return $allOnSiteAnimals;
+//    }
+
     /**
-     * @param $search array
-     * @param $limit int
+     * Used by frontend to get all animals for a search
      * @return array
-     * @throws Exception
      */
-    public function searchAnimalsPublic($search, $limit = 10)
+    public function allPublicAnimals()
     {
-        $type   = $search['type'];
-        $gender = $search['gender'];
-        $age    = $search['age'];
-
-        /**
-         *  Age
-         * 'Pup/Kitten'      => '0',
-         *' 1-2 years'       => '1',
-         * '2 and older'     => '2',
-         */
-
-        $ageOptions = [0,1,2];
-        if (!in_array($age, $ageOptions)) {
-            throw new Exception('invalid age options');
-        }
-
         $qb = $this->createQueryBuilder('a');
         $qb->leftJoin('a.status', 's');
         $qb->where('s.onsiteLocation = true' );
         $qb->andWhere('s.archived = false');
         $qb->andWhere('a.visiblePublic = true');
-        $qb->setMaxResults($limit);
 
-        $allOnSiteAnimals = $qb->getQuery()->getResult();
-        $animalType = new AnimalType($type);
-
-        $this->filterType($animalType, $allOnSiteAnimals);
-        $this->filterGender($gender, $allOnSiteAnimals);
-        $this->filterAge($age, $allOnSiteAnimals);
-
-        return $allOnSiteAnimals;
+        return $qb->getQuery()->getResult();
     }
+
 
     /**
      * @param $animalType string
      * @param $allOnSiteAnimals array
      */
-    private function filterType($animalType, &$allOnSiteAnimals)
-    {
-        $result = [];
-        foreach ($allOnSiteAnimals as $animal) {
-            if ($animal->getClassName() == $animalType->getValue()) {
-                $result[] = $animal;
-            }
-        }
-
-        $allOnSiteAnimals = $result;
-    }
-
-    /**
-     * @param $gender string
-     * @param $allOnSiteAnimals array
-     */
-    private function filterGender($gender, &$allOnSiteAnimals)
-    {
-        $result = [];
-        foreach ($allOnSiteAnimals as $animal) {
-            if ($animal->getGender() == $gender) {
-                $result[] = $animal;
-            }
-        }
-
-        $allOnSiteAnimals = $result;
-    }
-
-    /**
-     * @param $age integer
-     * @param $allOnSiteAnimals array
-     */
-    private function filterAge($age, &$allOnSiteAnimals)
-    {
-        $result = [];
-        switch ($age) {
-            case 0:
-                foreach ($allOnSiteAnimals as $animal) {
-                    if ($animal->getAge() == 0) {
-                        $result[] = $animal;
-                    }
-                }
-                break;
-            case 1:
-                foreach ($allOnSiteAnimals as $animal) {
-                    if (($animal->getAge() === 1) || ($animal->getAge() === 2)) {
-                        $result[] = $animal;
-                    }
-                }
-                break;
-            case 2:
-                foreach ($allOnSiteAnimals as $animal) {
-                    if ($animal->getAge() > 2) {
-                        $result[] = $animal;
-                    }
-                }
-                break;
-        }
-
-        $allOnSiteAnimals = $result;
-    }
+//    private function filterType($animalType, &$allOnSiteAnimals)
+//    {
+//        $result = [];
+//        foreach ($allOnSiteAnimals as $animal) {
+//            if ($animal->getClassName() == $animalType->getValue()) {
+//                $result[] = $animal;
+//            }
+//        }
+//
+//        $allOnSiteAnimals = $result;
+//    }
+//
+//    /**
+//     * @param $gender string
+//     * @param $allOnSiteAnimals array
+//     */
+//    private function filterGender($gender, &$allOnSiteAnimals)
+//    {
+//        $result = [];
+//        foreach ($allOnSiteAnimals as $animal) {
+//            if ($animal->getGender() == $gender) {
+//                $result[] = $animal;
+//            }
+//        }
+//
+//        $allOnSiteAnimals = $result;
+//    }
+//
+//    /**
+//     * @param $age integer
+//     * @param $allOnSiteAnimals array
+//     */
+//    private function filterAge($age, &$allOnSiteAnimals)
+//    {
+//        $result = [];
+//        switch ($age) {
+//            case 0:
+//                foreach ($allOnSiteAnimals as $animal) {
+//                    if ($animal->getAge() == 0) {
+//                        $result[] = $animal;
+//                    }
+//                }
+//                break;
+//            case 1:
+//                foreach ($allOnSiteAnimals as $animal) {
+//                    if (($animal->getAge() === 1) || ($animal->getAge() === 2)) {
+//                        $result[] = $animal;
+//                    }
+//                }
+//                break;
+//            case 2:
+//                foreach ($allOnSiteAnimals as $animal) {
+//                    if ($animal->getAge() > 2) {
+//                        $result[] = $animal;
+//                    }
+//                }
+//                break;
+//        }
+//
+//        $allOnSiteAnimals = $result;
+//    }
 
     /**
      * @param integer $animalId
