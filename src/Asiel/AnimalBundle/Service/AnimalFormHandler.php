@@ -59,8 +59,12 @@ class AnimalFormHandler
             new UserAlertEvent(UserAlertEvent::SUCCESS, 'Dier verwijderd.'));
     }
 
-    public function edit()
+    /**
+     * @param Animal $animal
+     */
+    public function edit(Animal $animal)
     {
+        $animal->setAge();
         $this->em->flush();
         $this->eventDispatcher->dispatch('user_alert.message',
             new UserAlertEvent(UserAlertEvent::SUCCESS, 'De wijziging is opgeslagen.'));

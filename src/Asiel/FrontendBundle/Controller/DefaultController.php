@@ -18,27 +18,15 @@ class DefaultController extends Controller
         return $this->render('@Frontend/Default/index.html.twig');
     }
 
-    /**
-     * @param Request $request
-     * @return Response
-     */
-    public function searchAction(Request $request)
+
+    public function searchAction()
     {
         $formHandler = $this->get('asiel.frontendbundle.defaultformhandler');
 
-        $searchForm = $formHandler->createSearchForm();
-        $searchForm->handleRequest($request);
+        $result = $formHandler->getAnimalRepository()->allPublicAnimals();
 
-        if ($searchForm->isSubmitted() && $searchForm->isValid()) {
-            $result = $formHandler->getAnimalRepository()->searchAnimalsPublic($formHandler->getSearchArray($searchForm), 10);
-
-            return $this->render('@Frontend/Default/searchResult.html.twig', [
-                'result'     => $result,
-            ]);
-        }
-
-        return $this->render('@Frontend/Default/searchForm.html.twig', [
-            'searchform' => $searchForm->createView(),
+        return $this->render('@Frontend/Default/search.html.twig', [
+            'result' => $result,
         ]);
     }
 

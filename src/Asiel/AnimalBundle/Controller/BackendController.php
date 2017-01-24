@@ -91,7 +91,7 @@ class BackendController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $formHandler->edit();
+            $formHandler->edit($animal);
 
             return new RedirectResponse($this->generateUrl('backend_animal_show', ['id' => $animal->getId()]));
         }
