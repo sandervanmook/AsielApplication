@@ -14,9 +14,13 @@ frontend_index:
 
 frontend_animal_search:
     path:     /animal/search
-    defaults: { _controller: FrontendBundle:Default:search }
+    defaults: { _controller: FrontendBundle:Default:searchAnimals }
+
+frontend_animal_search_data:
+    path:     /animal/searchdata
+    defaults: { _controller: FrontendBundle:Default:searchAnimalsData }
     options:
-           expose: true
+          expose : true
 
 frontend_contact:
     path:     /contact
