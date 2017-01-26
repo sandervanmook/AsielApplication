@@ -8,6 +8,7 @@
         <a class="item {% if 'picture' in app.request.get('_route') %} active {% endif %}" href="{{ path('backend_animal_picture_index', {'id': app.request.get('id')}) }}">Foto's</a>
         <a class="item {% if 'facebook' in app.request.get('_route') %} active {% endif %}" href="{{ path('backend_animal_facebook_index', {'id': app.request.get('id')}) }}">Facebook</a>
         <a class="item {% if 'task' in app.request.get('_route') %} active {% endif %}" href="{{ path('backend_animal_task_index', {'id': app.request.get('id')}) }}">Taken</a>
-        {{ render(controller('AnimalBundle:Backend:animalInfo', {'id': app.request.attributes.get('id')})) }}
     </div>
+    {{ render(controller('AnimalBundle:Backend:animalInfo', {'id': app.request.attributes.get('id')})) }}
+
 {% endblock %}

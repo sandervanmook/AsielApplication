@@ -1,18 +1,13 @@
 <input id="animalId" type="hidden" value="{{ info.id }}">
-<a class="item right aligned">
-    {% if opentasks|length > 0 %}
-        <span class="text-alert">Open taken: {{ opentasks|length }}</span>
-    {% endif %}
-</a>
-<a class="item">
-    {{ info.name }} ({{ info.getclassname|trans }})
-</a>
-<a class="item">
-    {% for picture in info.pictures|slice(0,1) %}
-        <img class="ui avatar image mini" src="{{ picture.publicurl }}">
-    {% endfor %}
-</a>
+<div class="ui segment center aligned">
+        <span>
+            {{ info.name }} ({{ info.getclassname|trans }})
+            {% if opentasks|length > 0 %}
+                    <span class="text-alert">Open taken: {{ opentasks|length }}</span>
+            {% endif %}
 
-
-
-
+            {% for picture in info.pictures|slice(0,1) %}
+                    <img class="ui avatar image mini" src="{{ picture.publicurl }}">
+            {% endfor %}
+        </span>
+</div>
