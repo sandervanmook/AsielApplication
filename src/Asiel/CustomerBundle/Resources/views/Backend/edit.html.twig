@@ -1,19 +1,12 @@
 {% extends '@Backend/Base/Base.html.twig' %}
-{% block pagetitle %}Klanten{% endblock %}
+{% block pagetitle %}Klant aanpassen{% endblock %}
 {% block body %}
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">Klantoverzicht</div>
-                    <div class="panel-body">
-                        {{ form_start(form) }}
-                        {{ form_widget(form) }}
-                        {{ outputFormButton('Aanpassen') }}
-                        {{ form_end(form) }}
-                    </div>
-                </div>
-            </div>
+    <div class="ui twelve column grid container">
+        <div class="six wide column">
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            {{ outputFormButton('Aanpassen') }}
+            {{ form_end(form) }}
         </div>
     </div>
 {% endblock %}

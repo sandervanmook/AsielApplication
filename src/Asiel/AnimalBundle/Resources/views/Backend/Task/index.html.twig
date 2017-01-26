@@ -1,57 +1,91 @@
 {% extends '@Backend/Base/Base.html.twig' %}
-{% block pagetitle %}Alle taken{% endblock %}
+{% block pagetitle %}{% endblock %}
 {% block body %}
-    <br />
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-10">
-                <table class="table">
+    <div class="ui tab segment active">
+        <div class="ui sixteen column grid container">
+            <div class="sixteen wide column">
+                <table class="ui table compact striped">
                     <thead>
                     <tr>
-                        <td>Aanmaakdatum</td>
-                        <td>Uitvoerdatum</td>
-                        <td>Aangemaakt door</td>
-                        <td>Omschrijving</td>
-                        <td>Uitgevoerd</td>
-                        <td>&nbsp;</td>
+                        <th>Aanmaakdatum</th>
+                        <th>Uitvoerdatum</th>
+                        <th>Aangemaakt door</th>
+                        <th>Omschrijving</th>
+                        <th>Uitgevoerd</th>
+                        <th>&nbsp;</th>
+                        <th>&nbsp;</th>
                     </tr>
                     </thead>
                     <tbody>
                     {% for task in result %}
                         <tr
-                            {% if task.isComplete == false and task.isOverdue %}
-                                class="alert-danger"
-                            {% endif %}
-                            {% if task.isComplete %}
-                                class="alert-success"
-                            {% endif %}
-                            {% if task.isComplete == false and task.isOverdue == false %}
-                                class="alert-info"
-                            {% endif %}
+                                {% if task.isComplete == false and task.isOverdue %}
+                                    class="error"
+                                {% endif %}
+                                {% if task.isComplete %}
+                                    class="positive"
+                                {% endif %}
+                                {% if task.isComplete == false and task.isOverdue == false %}
+                                    class="warning"
+                                {% endif %}
                         >
                             <td>{{ task.dateCreated|date('d-m-Y') }}</td>
                             <td>{{ task.datedue|date('d-m-Y') }}</td>
                             <td>{{ task.createdBy }}</td>
                             <td><a href="{{ path('backend_animal_task_edit', {'id' : task.animal.id, 'taskid' : task.id}) }}">{{ task.title|length > 25 ? task.title|slice(0, 25)~'..' : task.title }}</a></td>
                             <td>{{ outputBool(task.isComplete) }}</td>
-                            <td><span id="{{ task.id }}" class="glyphicon glyphicon-trash delete" aria-hidden="true"></span></td>
+                            <td>
+                                <div id="{{ task.id }}" class="ui mini negative labeled icon button delete">
+                                    <i class="remove icon"></i> Verwijderen
+                                </div>
+                            </td>
+                            <td>
+                                <a href="{{ path('backend_animal_task_edit', {'taskid': task.id, 'id' : app.request.get('id')}) }}">
+                                    <div id="{{ task.id }}" class="ui mini info labeled icon button view">
+                                        <i class="edit icon"></i> Aanpassen
+                                    </div>
+                                </a>
+                            </td>
                         </tr>
                     {% endfor %}
-                    <tr>
-                        <td><a href="{{ path('backend_animal_task_create', {'id' : app.request.attributes.get('id')}) }}"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
                     </tbody>
+                    <tfoot>
+                    <tr>
+                        <th>
+                            <a href="{{ path('backend_animal_task_create', {'id' : app.request.attributes.get('id')}) }}">
+                                <div class="ui tiny positive labeled icon button">
+                                    <i class="add square icon"></i> Incident toevoegen
+                                </div>
+                            </a>
+                        </th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    </tfoot>
                 </table>
+                <div id="confirmmodal" class="ui basic modal">
+                    <div class="ui icon header">
+                        <i class="archive icon"></i>
+                        Taak verwijderen
+                    </div>
+                    <div class="content">
+                        <p>Weet u zeker dat u de taak wil verwijderen?</p>
+                    </div>
+                    <div class="actions">
+                        <div class="ui red basic cancel inverted button">
+                            <i class="remove icon"></i>
+                        </div>
+                        <div id="approve" class="ui green ok inverted button">
+                            <i class="checkmark icon"></i>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div id="result" class="col-md-8"></div>
         </div>
-    </div>
-    <div id="dialog-confirm" title="Taak verwijderen">
-        <p><span class="ui-icon ui-icon-alert"></span>Weet u zeker dat u de taak wil verwijderen?</p>
     </div>
 {% endblock %}
 {% block javascripts %}

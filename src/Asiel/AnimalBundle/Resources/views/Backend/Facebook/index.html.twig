@@ -1,6 +1,12 @@
 {% extends '@Backend/Base/Base.html.twig' %}
-{% block pagetitle %}Facebook{% endblock %}
+{% block pagetitle %}{% endblock %}
 {% block body %}
-    <p><a href="{{ loginurl }}">Inloggen bij Facebook *</a></p>
-    <p class="text-alert">* Met het Facebook account van het asiel (voor de demo: asieldemo@gmail.com / Test2016</p>
+    <div class="ui tab segment active">
+        <div class="ui sixteen column grid container">
+            <div class="ten wide column">
+                <p><a href="{{ loginurl }}">Inloggen bij Facebook *</a></p>
+                <p class="text-alert">* Met het Facebook account van het asiel (voor de demo: asieldemo@gmail.com / Test2016</p>
+            </div>
+        </div>
+    </div>
 {% endblock %}

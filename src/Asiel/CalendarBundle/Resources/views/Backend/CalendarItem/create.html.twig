@@ -1,14 +1,12 @@
 {% extends '@Backend/Base/Base.html.twig' %}
 {% block pagetitle %}Agendapunt aanmaken{% endblock %}
 {% block body %}
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                {{ form_start(form) }}
-                {{ form_widget(form) }}
-                {{ outputFormButton('Aanmaken') }}
-                {{ form_end(form) }}
-            </div>
+    <div class="ui twelve column grid container">
+        <div class="six wide column">
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            {{ outputFormButton('Aanmaken') }}
+            {{ form_end(form) }}
         </div>
     </div>
 {% endblock %}

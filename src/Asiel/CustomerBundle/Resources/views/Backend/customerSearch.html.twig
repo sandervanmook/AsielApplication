@@ -1,21 +1,21 @@
 <div class="container">
     <div class="row">
         <div class="col-xs-10">
-            <table id="resulttable" class="table table-hover">
+            <table id="resulttable" class="ui table">
                 <thead>
                 <tr>
-                    <td>Voornaam</td>
-                    <td>Achternaam</td>
-                    <td>Geboortedatum</td>
-                    <td>Adres</td>
-                    <td>Zwartelijst</td>
+                    <th>Voornaam</th>
+                    <th>Achternaam</th>
+                    <th>Geboortedatum</th>
+                    <th>Adres</th>
+                    <th>Zwartelijst</th>
                 </tr>
                 </thead>
                 <tbody>
                 {% for customer in results %}
                     <tr id="{{ customer.id }}"
                             {% if customer.blacklisted %}
-                                class="customer alert-danger"
+                                class="customer negative"
                             {% else %}
                                 class="customer"
                             {% endif %}

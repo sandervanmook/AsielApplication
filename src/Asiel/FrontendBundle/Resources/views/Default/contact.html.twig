@@ -1,5 +1,4 @@
 {% extends 'FrontendBundle:Base:Base.html.twig' %}
-{% form_theme form '@Frontend/FormTemplate/semantic-ui-2.2.html.twig' %}
 {% block pagetitle %}Contact{% endblock %}
 {% block body %}
     <div class="row contact-text">
@@ -21,7 +20,7 @@
 
     {{ form_start(form) }}
     {{ form_widget(form) }}
-    {{ outputFormButton('Verstuur', true) }}
+    {{ outputFormButton('Verstuur') }}
     {{ form_end(form) }}
 
     <div class="ui horizontal segments">

@@ -16,12 +16,6 @@
 
     <!-- Semantic-UI CSS -->
     <link rel="stylesheet" type="text/css" href="{{ asset('semantic/dist/semantic.min.css') }}">
-
-    <!-- Semantic-UI JS -->
-    <script src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>
-    <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
-    <script src="{{ asset('semantic/dist/semantic.min.js') }}"></script>
-
 {% endblock %}
     <link rel="icon" type="image/x-icon" href="{{ asset('img/favicon.png') }}" />
 </head>
@@ -49,17 +43,16 @@
             <a class="item" href="{{ path('frontend_index') }}"><i class="home icon"></i></a>
             <a class="item" href="{{ path('frontend_about') }}">Over Ons</a>
             <a class="item" href="{{ path('frontend_contact') }}">Contact</a>
-            <a class="item right" href="{{ path('backend_default_index') }}">Inloggen</a>
+            <a class="item right" href="{{ path('backend_default_index') }}"><i class="sign in icon"></i>Inloggen</a>
         </div>
         <div class="pusher">
-            <br />
+            <div class="ui horizontal divider"></div>
             <div class="ui vertical masthead center aligned segment">
                 <img class="image" src="{{ asset('img/frontpage_logo.jpg') }}">
             </div>
             <div class="ui text container page">
                 <h1 class="ui header">{% block pagetitle %}{% endblock %}</h1>
                 {% block pagesubtitle %}{% endblock %}
-                {% block flash %}{% endblock %}
                 {% block body %}{% endblock %}
             </div>
             <div class="ui inverted vertical footer segment">
@@ -131,11 +124,16 @@
                         </div>
                     </div>
                     <div class="ui inverted section divider"></div>
-                    <p><center><i class="copyright icon"></i> S. van Mook {{ "now"|date('Y') }}</center></p>
+                    <div class="ui header inverted centered aligned"><p><i class="copyright icon"></i> S. van Mook {{ "now"|date('Y') }}</p></div>
                 </div>
             </div>
         </div>
 {% block javascripts %}
+    <!-- Semantic-UI JS -->
+    <script src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>
+    <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
+    <script src="{{ asset('semantic/dist/semantic.min.js') }}"></script>
+
     <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
     <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
     <script src="{{ asset('js/global.js') }}"></script>

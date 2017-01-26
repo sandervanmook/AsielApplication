@@ -1,41 +1,76 @@
 {% extends '@Backend/Base/Base.html.twig' %}
-{% block pagetitle %}Medisch dossier{% endblock %}
+{% block pagetitle %}{% endblock %}
 {% block body %}
-    <br />
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <td>Datum</td>
-                            <td>Type behandeling</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for entry in result %}
-                        <tr>
-                            <td>{{ entry.date|date('d-m-Y') }}</td>
-                            <td>{{ entry.type }}</td>
-                            <td><span id="{{ entry.id }}" class="glyphicon glyphicon-eye-open view" aria-hidden="true"></span>
-                                <span id="{{ entry.id }}" class="glyphicon glyphicon-trash delete" aria-hidden="true"></span>
-                            </td>
-                        </tr>
-                        {% endfor %}
-                        <tr>
-                            <td><a href="{{ path('backend_animal_medical_create', {'id' : app.request.attributes.get('id')}) }}"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                </table>
+    <div class="ui tab segment active">
+        <div class="ui sixteen column grid container">
+            <div class="sixteen wide column">
+                <div class="ui two column very relaxed grid">
+                    <div class="ten wide column">
+                        <table class="ui table compact collapsing striped">
+                            <thead>
+                            <tr>
+                                <td>Datum</td>
+                                <td>Type behandeling</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for entry in result %}
+                                <tr>
+                                    <td>{{ entry.date|date('d-m-Y') }}</td>
+                                    <td>{{ entry.type }}</td>
+                                    <td>
+                                        <div id="{{ entry.id }}" class="ui mini negative labeled icon button delete">
+                                            <i class="remove icon"></i> Verwijderen
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div id="{{ entry.id }}" class="ui mini info labeled icon button view">
+                                            <i class="folder open icon"></i> Bekijken
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <th>
+                                    <a href="{{ path('backend_animal_medical_create', {'id' : app.request.attributes.get('id')}) }}">
+                                        <div class="ui tiny positive labeled icon button">
+                                            <i class="add square icon"></i> Dossier toevoegen
+                                        </div>
+                                    </a>
+                                </th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <div class="six wide column">
+                        <div id="result"></div>
+                    </div>
+                </div>
+                <div id="confirmmodal"class="ui basic modal">
+                    <div class="ui icon header">
+                        <i class="archive icon"></i>
+                        Dossier verwijderen
+                    </div>
+                    <div class="content">
+                        <p>Weet u zeker dat u het dossier wil verwijderen?</p>
+                    </div>
+                    <div class="actions">
+                        <div class="ui red basic cancel inverted button">
+                            <i class="remove icon"></i>
+                        </div>
+                        <div id="approve" class="ui green ok inverted button">
+                            <i class="checkmark icon"></i>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div id="result" class="col-md-8"></div>
         </div>
-    </div>
-    <div id="dialog-confirm" title="Dossier verwijderen">
-        <p><span class="ui-icon ui-icon-alert"></span>Weet u zeker dat u het dossier wil verwijderen?</p>
     </div>
 {% endblock %}
 {% block javascripts %}

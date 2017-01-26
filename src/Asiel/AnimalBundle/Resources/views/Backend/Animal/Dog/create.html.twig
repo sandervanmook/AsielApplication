@@ -1,81 +1,66 @@
 {% extends '@Backend/Base/Base.html.twig' %}
 {% block pagetitle %}Nieuwe hond aanmelden{% endblock %}
 {% block body %}
-    {{ form_start(form) }}
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">Opties</div>
-                    <div class="panel-body">
-                        {{ form_row(form.gender) }}
-                        {{ form_row(form.outsideAnimal) }}
-                        {{ form_row(form.compatibleChildrenBelow10y) }}
-                        {{ form_row(form.compatibleChildrenAbove10y) }}
-                        {{ form_row(form.compatibleChildrenAbove7y) }}
-                        {{ form_row(form.compatibleChildrenBelow7y) }}
-                        {{ form_row(form.compatibleOldPeople) }}
-                        {{ form_row(form.escapesAlot) }}
-                        {{ form_row(form.toiletTrained) }}
-                        {{ form_row(form.sterilized) }}
-                        {{ form_row(form.needsExercise) }}
-                        {{ form_row(form.visiblePublic) }}
-                    </div>
+    <div class="ui sixteen column grid container">
+        <div class="sixteen wide column">
+            {{ form_start(form) }}
+            <div class="ui three column very relaxed grid">
+                <div class="column">
+                    <h3 class="ui header">Opties</h3>
+                    {{ form_row(form.gender) }}
+                    {{ form_row(form.outsideAnimal) }}
+                    {{ form_row(form.compatibleChildrenBelow10y) }}
+                    {{ form_row(form.compatibleChildrenAbove10y) }}
+                    {{ form_row(form.compatibleChildrenAbove7y) }}
+                    {{ form_row(form.compatibleChildrenBelow7y) }}
+                    {{ form_row(form.compatibleOldPeople) }}
+                    {{ form_row(form.escapesAlot) }}
+                    {{ form_row(form.toiletTrained) }}
+                    {{ form_row(form.sterilized) }}
+                    {{ form_row(form.needsExercise) }}
+                    {{ form_row(form.visiblePublic) }}
+                </div>
+
+                <div class="column">
+                    <h3 class="ui header">Algemeen</h3>
+                    {{ form_row(form.name) }}
+                    {{ form_row(form.dayLocation) }}
+                    {{ form_row(form.nightLocation) }}
+                    {{ form_row(form.chipnumber) }}
+                    {{ form_row(form.notChipped) }}
+                    {{ form_row(form.passportNumber) }}
+                    {{ form_row(form.colour) }}
+                    {{ form_row(form.race) }}
+                    {{ form_row(form.furType) }}
+                </div>
+
+                <div class="column">
+                    <h3 class="ui header">Data</h3>
+                    {{ form_row(form.dayOfBirth) }}
+                    {{ form_row(form.registerDate) }}
+                    {{ form_row(form.admissionDate) }}
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">Algemeen</div>
-                    <div class="panel-body">
-                        {{ form_row(form.name) }}
-                        {{ form_row(form.dayLocation) }}
-                        {{ form_row(form.nightLocation) }}
-                        {{ form_row(form.chipnumber) }}
-                        {{ form_row(form.notChipped) }}
-                        {{ form_row(form.passportNumber) }}
-                        {{ form_row(form.colour) }}
-                        {{ form_row(form.race) }}
-                        {{ form_row(form.furType) }}
-                    </div>
+            <div class="ui two column very relaxed grid">
+                <div class="column">
+                    <h3 class="ui header">Specifieke gegevens</h3>
+                    {{ form_row(form.characteristics) }}
+                    {{ form_row(form.medicalProblems) }}
+                    {{ form_row(form.description) }}
+                    {{ form_row(form.knownAggression) }}
+                    {{ form_row(form.knownCommands) }}
+                </div>
+                <div class="column">
+                    <h3 class="ui header">Andere dieren</h3>
+                    {{ form_row(form.compatibleSmallDog) }}
+                    {{ form_row(form.compatibleLargeDog) }}
+                    {{ form_row(form.compatibleCat) }}
+                    {{ form_row(form.compatibleOtherAnimals) }}
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">Data</div>
-                    <div class="panel-body">
-                        {{ form_row(form.dayOfBirth) }}
-                        {{ form_row(form.registerDate) }}
-                        {{ form_row(form.admissionDate) }}
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">Specifieke gegevens</div>
-                    <div class="panel-body">
-                        {{ form_row(form.characteristics) }}
-                        {{ form_row(form.medicalProblems) }}
-                        {{ form_row(form.description) }}
-                        {{ form_row(form.knownAggression) }}
-                        {{ form_row(form.knownCommands) }}
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">Andere dieren</div>
-                    <div class="panel-body">
-                        {{ form_row(form.compatibleSmallDog) }}
-                        {{ form_row(form.compatibleLargeDog) }}
-                        {{ form_row(form.compatibleCat) }}
-                        {{ form_row(form.compatibleOtherAnimals) }}
-                    </div>
-                </div>
-            </div>
+            <div class="ui horizontal divider"></div>
+            {{ outputFormButton('Aanmelden') }}
+            {{ form_end(form) }}
         </div>
     </div>
-    <div class="input">{{ outputFormButton('Aanmelden') }}</div>
-    {{ form_end(form) }}
 {% endblock %}
