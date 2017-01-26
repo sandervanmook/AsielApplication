@@ -1,9 +1,9 @@
 <input id="userId" type="hidden" value="{{ user.id }}">
-<a class="item right aligned">
-    {{ user.firstname }} {{ user.lastname }}
-</a>
-<a class="item">
-    {% if user.picture %}
-        <img class="ui avatar image mini" src="{{ user.picture.publicurl }}" alt="user_picture">
-    {% endif %}
-</a>
+<div class="ui segment center aligned">
+        <span>
+            {{ user.firstname }} {{ user.lastname }}
+            {% if user.picture %}
+                <img class="ui avatar image mini" src="{{ user.picture.publicurl }}" alt="user_picture">
+            {% endif %}
+        </span>
+</div>
