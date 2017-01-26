@@ -91,65 +91,64 @@
         <h3 class="ui header">{% block pagesubtitle %}{% endblock %}</h3>
         {% block body %}{% endblock %}
     </div>
-</div>
 
-{% if app.session.flashBag.has('success') or
-      app.session.flashBag.has('info') or
-      app.session.flashBag.has('warning') or
-      app.session.flashBag.has('danger')
-%}
-    <div id="modalflash" class="ui basic modal">
-        <div class="ui icon header">
-            <i class="announcement icon"></i>
-            Berichten
-        </div>
-        <div class="content">
-            {% for flash_message in app.session.flashBag.get('success') %}
-                <div class="ui positive message">
-                    <i class="close icon"></i>
-                    <div class="header">
-                        Gelukt
+    {% if app.session.flashBag.has('success') or
+    app.session.flashBag.has('info') or
+    app.session.flashBag.has('warning') or
+    app.session.flashBag.has('danger') %}
+        <div id="modalflash" class="ui basic modal">
+            <div class="ui icon header">
+                <i class="announcement icon"></i>
+                Berichten
+            </div>
+            <div class="content">
+                {% for flash_message in app.session.flashBag.get('success') %}
+                    <div class="ui positive message">
+                        <i class="close icon"></i>
+                        <div class="header">
+                            Gelukt
+                        </div>
+                        <p>{{ flash_message }}</p>
                     </div>
-                    <p>{{ flash_message }}</p>
-                </div>
-            {% endfor %}
-            {% for flash_message in app.session.flashBag.get('info') %}
-                <div class="ui info message">
-                    <i class="close icon"></i>
-                    <div class="header">
-                        Info
+                {% endfor %}
+                {% for flash_message in app.session.flashBag.get('info') %}
+                    <div class="ui info message">
+                        <i class="close icon"></i>
+                        <div class="header">
+                            Info
+                        </div>
+                        <p>{{ flash_message }}</p>
                     </div>
-                    <p>{{ flash_message }}</p>
-                </div>
-            {% endfor %}
-            {% for flash_message in app.session.flashBag.get('warning') %}
-                <div class="ui warning message">
-                    <i class="close icon"></i>
-                    <div class="header">
-                        Waarschuwing
+                {% endfor %}
+                {% for flash_message in app.session.flashBag.get('warning') %}
+                    <div class="ui warning message">
+                        <i class="close icon"></i>
+                        <div class="header">
+                            Waarschuwing
+                        </div>
+                        <p>{{ flash_message }}</p>
                     </div>
-                    <p>{{ flash_message }}</p>
-                </div>
-            {% endfor %}
-            {% for flash_message in app.session.flashBag.get('danger') %}
-                <div class="ui negative message">
-                    <i class="close icon"></i>
-                    <div class="header">
-                        Fout
+                {% endfor %}
+                {% for flash_message in app.session.flashBag.get('danger') %}
+                    <div class="ui negative message">
+                        <i class="close icon"></i>
+                        <div class="header">
+                            Fout
+                        </div>
+                        <p>{{ flash_message }}</p>
                     </div>
-                    <p>{{ flash_message }}</p>
+                {% endfor %}
+            </div>
+            <div class="actions">
+                <div class="ui green ok inverted button">
+                    <i class="checkmark icon"></i>
+                    Gezien!
                 </div>
-            {% endfor %}
-        </div>
-        <div class="actions">
-            <div class="ui green ok inverted button">
-                <i class="checkmark icon"></i>
-                Gezien!
             </div>
         </div>
-    </div>
-{% endif %}
+    {% endif %}
 
+</div>
 {% block javascripts %}
     <!-- Semantic-UI JS -->
     <script src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>

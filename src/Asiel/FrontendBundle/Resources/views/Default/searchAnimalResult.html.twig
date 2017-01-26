@@ -1,0 +1,35 @@
+<table class="ui selectable celled table">
+    <thead>
+    <tr>
+        <th>&nbsp;</th>
+        <th>Naam</th>
+        <th>Soort</th>
+        <th>Geslacht</th>
+        <th>Leeftijd</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for animal in result %}
+        <tr id="{{ animal.id }}" class="{{ animal.getclassname }}">
+            <td>
+                {% for picture in animal.pictures|slice(0,1) %}
+                    <img src="{{ picture.publicurl }}" height="20">
+                {% endfor %}
+            </td>
+            <td>{{ animal.name }}</td>
+            <td>{{ animal.getclassname|trans }}</td>
+            <td>{{ outputGender(animal.gender) }}</td>
+            <td>{{ animal.age }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+    <tfoot>
+        <tr>
+            <th>Totaal: {{ result|length }}</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+    </tfoot>
+</table>

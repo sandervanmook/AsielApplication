@@ -2,8 +2,8 @@
 
 namespace Asiel\FrontendBundle\Controller;
 
-use Asiel\FrontendBundle\Form\AnimalSearchType;
 use Asiel\FrontendBundle\Form\ContactType;
+use Asiel\FrontendBundle\SearchAnimal\FilterAnimal;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,13 +22,34 @@ class DefaultController extends Controller
     /**
      * @return Response
      */
-    public function searchAction()
+    public function searchAnimalsAction()
     {
         $formHandler = $this->get('asiel.frontendbundle.defaultformhandler');
-        $result = $formHandler->getAnimalRepository()->allPublicAnimals();
 
-        return $this->render('@Frontend/Default/search.html.twig', [
-            'result' => $result,
+        return $this->render('@Frontend/Default/searchAnimal.html.twig');
+    }
+
+    /**
+     * @param Request $request
+     * @return Response
+     */
+    public function searchAnimalsDataAction(Request $request)
+    {
+        $formHandler = $this->get('asiel.frontendbundle.defaultformhandler');
+
+        $allPublicAnimals = $formHandler->getAnimalRepository()->allPublicAnimals();
+
+        $searchArray['type'] = $request->get('type');
+        $searchArray['gender'] = $request->get('gender');
+        $searchArray['agestart'] = $request->get('agestart');
+        $searchArray['ageend'] = $request->get('ageend');
+
+        $filterAnimal = new FilterAnimal($allPublicAnimals, $searchArray);
+
+        $endResult = $filterAnimal->getFilterResult();
+
+        return $this->render('@Frontend/Default/searchAnimalResult.html.twig', [
+            'result' => $endResult,
         ]);
     }
 
@@ -70,7 +91,7 @@ class DefaultController extends Controller
         $formHandler = $this->get('asiel.frontendbundle.defaultformhandler');
         $result = $formHandler->findAnimal($id);
 
-        return $this->render('@Frontend/Default/searchResult.html.twig', [
+        return $this->render('@Frontend/Default/searchAnimalResult.html.twig', [
             'result' => $result,
         ]);
     }

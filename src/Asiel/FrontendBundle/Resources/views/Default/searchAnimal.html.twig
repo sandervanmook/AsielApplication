@@ -1,0 +1,101 @@
+{% extends 'FrontendBundle:Base:Base.html.twig' %}
+{% block pagetitle %}Zoek een dier{% endblock %}
+{% block body %}
+    <div class="ui divider horizontal"></div>
+    <div class="ui segment">
+        <div class="ui form">
+            <div class="fields">
+                <h4 class="ui header">Type dier</h4>
+                <div class="field inline">
+                    <div class="ui toggle checkbox">
+                        <input id="cat" type="checkbox">
+                        <label for="cat">Kat</label>
+                    </div>
+                </div>
+                <div class="field inline">
+                    <div class="ui toggle checkbox">
+                        <input id="dog" type="checkbox">
+                        <label for="dog">Hond</label>
+                    </div>
+                </div>
+            </div>
+            <div class="fields">
+                <h4 class="ui header">Geslacht</h4>
+                <div class="field inline">
+                    <div class="ui toggle checkbox">
+                        <input id="male" type="checkbox">
+                        <label for="male">{{ outputGender('Male') }}</label>
+                    </div>
+                </div>
+                <div class="field inline">
+                    <div class="ui toggle checkbox">
+                        <input id="female" type="checkbox">
+                        <label for="female">{{ outputGender('Female') }}</label>
+                    </div>
+                </div>
+            </div>
+            <div class="fields">
+                <h4 class="ui header">Leeftijd</h4>
+                <div class="field inline">
+                    <select id="agestart">
+                        <!-- don't go below 1 -->
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                    </select>
+                    <label for="agestart">Van</label>
+                </div>
+                <div class="field inline">
+                    <select id="ageend">
+                        <!-- don't go below 1 -->
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                    </select>
+                    <label for="ageend">Tot</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="ui divider horizontal"></div>
+    <div id="searchresult"></div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/views/FrontendBundle/Default/SearchAnimals.js') }}"></script>
+    <script src="{{ asset('js/views/FrontendBundle/Cat/PublicShowCat.js') }}"></script>
+    <script src="{{ asset('js/views/FrontendBundle/Dog/PublicShowDog.js') }}"></script>
+{% endblock %}

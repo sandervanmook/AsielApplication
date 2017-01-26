@@ -743,6 +743,10 @@ class Animal
      */
     public function getAge()
     {
+        // If you change this, change the frontend animal search as well
+        if ($this->age == 0) {
+            return 1;
+        }
         return $this->age;
     }
 
