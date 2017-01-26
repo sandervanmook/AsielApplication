@@ -1,70 +1,165 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
 <head>
-    <meta charset="UTF-8">
-    <title>{% block title %}Backend{% endblock %}</title>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-{% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('css/jquery-ui.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('css/jquery-ui.structure.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('css/jquery-ui.theme.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/ie10-viewport-bug-workaround.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/sticky-footer.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-{% endblock %}
-    <link rel="icon" type="image/x-icon" href="{{ asset('img/favicon.png') }}" />
+    <title>{% block title %}Asiel Software{% endblock %}</title>
+
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('css/jquery-ui.min.css') }}"/>
+        <link rel="stylesheet" href="{{ asset('css/jquery-ui.structure.min.css') }}"/>
+        <link rel="stylesheet" href="{{ asset('css/jquery-ui.theme.min.css') }}"/>
+        <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/backend.css') }}">
+
+        <!-- Semantic-UI CSS -->
+        <link rel="stylesheet" type="text/css" href="{{ asset('semantic/dist/semantic.min.css') }}">
+    {% endblock %}
+
+    <link rel="icon" type="image/x-icon" href="{{ asset('img/favicon.png') }}"/>
 </head>
 <body>
-    <div class="container-fluid">
-        <div class="row">
-            {% use '@Backend/Base/Nav.html.twig' %}
-            {% block nav %}{{ parent() }}{% endblock %}
+
+<div id="leftsidebar" class="ui sidebar inverted vertical menu">
+    <div class="item">
+        <img class="ui centered aligned tiny image" src="{{ asset('img/public_logo.png') }}" alt="logo">
+    </div>
+    <div class="item">
+        <div class="header">Dieren</div>
+        <div class="menu">
+            <a class="item" href="{{ path('backend_animal_index') }}">Alle Dieren</a>
+            <a class="item" href="{{ path('backend_animal_create') }}">Aanmelden</a>
         </div>
     </div>
-    <div class="container">
-        <div>
-            <div class="page-header">
-                <h2>{% block pagetitle %}{% endblock %}</h2>
-            </div>
-
-            {% if ('animal' in app.request.get('_route')) and (app.request.attributes.get('id'))%}
-                {{ render(controller('AnimalBundle:Backend:animalInfo', {'id': app.request.attributes.get('id')})) }}
-                {% use '@Backend/EditNav/animal.html.twig' %}
-                {% block editAnimal %}{{ parent() }}{% endblock %}
-            {% endif %}
-
-            {% if ('employee' in app.request.get('_route')) and (app.request.attributes.get('id'))%}
-                {{ render(controller('EmployeeBundle:Backend:userInfo', {'id': app.request.attributes.get('id')})) }}
-                {% use '@Backend/EditNav/user.html.twig' %}
-                {% block editUser %}{{ parent() }}{% endblock %}
-            {% endif %}
-
-            {% use '@Backend/Base/FlashMessage.html.twig' %}
-            {% block flashMessage %}{{ parent() }}{% endblock %}
-
-            {% block body %}{% endblock %}
+    <div class="item">
+        <div class="header">Locaties</div>
+        <div class="menu">
+            <a class="item" href="{{ path('backend_location_index') }}">Locatiebeheer</a>
         </div>
-    </div> <!-- /container -->
+    </div>
+    <div class="item">
+        <div class="header">Klanten</div>
+        <div class="menu">
+            <a class="item" href="{{ path('backend_customer_index') }}">Klantbeheer</a>
+        </div>
+    </div>
+    <div class="item">
+        <div class="header">Gebruikers</div>
+        <div class="menu">
+            <a class="item" href="{{ path('backend_employee_index') }}">Gebruikersbeheer</a>
+        </div>
+    </div>
+    <div class="item">
+        <div class="header">Agenda</div>
+        <div class="menu">
+            <a class="item" href="{{ path('backend_calendar') }}">Agenda bekijken</a>
+            <a class="item" href="{{ path('backend_calendaritem_create') }}">Agendapunt aanmaken</a>
+        </div>
+    </div>
+</div>
 
-    <footer class="footer">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="container">
-                    <p class="text-center">(c) S. van Mook {{ "now"|date('Y') }}</p>
+<div class="ui top fixed menu borderless">
+    <div id="menu">
+        <a class="item"><i class="sidebar icon"></i>Menu</a>
+    </div>
+    <a class="item" href="{{ path('backend_default_index') }}"><i class="home icon"></i></a>
+    <a class="item" href="{{ path('logout') }}"><i class="sign out icon"></i> Afmelden</a>
+    <a class="item" href="{{ path('frontend_index') }}"><i class="users icon"></i> Publiek</a>
+    <a class="item right" href="#"><i class="user icon"></i> {{ app.user.username }}</a>
+</div>
+
+<div class="ui horizontal divider"></div>
+
+<div class="pusher page">
+    <div class="ui horizontal divider"></div>
+    <div class="ui container">
+        <h1 class="ui header">{% block pagetitle %}{% endblock %}</h1>
+
+        {% if ('animal' in app.request.get('_route')) and (app.request.attributes.get('id')) %}
+            {% use '@Backend/EditNav/animal.html.twig' %}
+            {% block editAnimal %}{{ parent() }}{% endblock %}
+        {% endif %}
+
+        {% if ('employee' in app.request.get('_route')) and (app.request.attributes.get('id')) %}
+            {% use '@Backend/EditNav/user.html.twig' %}
+            {% block editUser %}{{ parent() }}{% endblock %}
+        {% endif %}
+
+        <h3 class="ui header">{% block pagesubtitle %}{% endblock %}</h3>
+        {% block body %}{% endblock %}
+    </div>
+</div>
+
+{% if app.session.flashBag.has('success') or
+      app.session.flashBag.has('info') or
+      app.session.flashBag.has('warning') or
+      app.session.flashBag.has('danger')
+%}
+    <div id="modalflash" class="ui basic modal">
+        <div class="ui icon header">
+            <i class="announcement icon"></i>
+            Berichten
+        </div>
+        <div class="content">
+            {% for flash_message in app.session.flashBag.get('success') %}
+                <div class="ui positive message">
+                    <i class="close icon"></i>
+                    <div class="header">
+                        Gelukt
+                    </div>
+                    <p>{{ flash_message }}</p>
                 </div>
+            {% endfor %}
+            {% for flash_message in app.session.flashBag.get('info') %}
+                <div class="ui info message">
+                    <i class="close icon"></i>
+                    <div class="header">
+                        Info
+                    </div>
+                    <p>{{ flash_message }}</p>
+                </div>
+            {% endfor %}
+            {% for flash_message in app.session.flashBag.get('warning') %}
+                <div class="ui warning message">
+                    <i class="close icon"></i>
+                    <div class="header">
+                        Waarschuwing
+                    </div>
+                    <p>{{ flash_message }}</p>
+                </div>
+            {% endfor %}
+            {% for flash_message in app.session.flashBag.get('danger') %}
+                <div class="ui negative message">
+                    <i class="close icon"></i>
+                    <div class="header">
+                        Fout
+                    </div>
+                    <p>{{ flash_message }}</p>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="actions">
+            <div class="ui green ok inverted button">
+                <i class="checkmark icon"></i>
+                Gezien!
             </div>
         </div>
-    </footer>
+    </div>
+{% endif %}
+
 {% block javascripts %}
+    <!-- Semantic-UI JS -->
+    <script src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>
+    <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
+    <script src="{{ asset('semantic/dist/semantic.min.js') }}"></script>
+    <script src="{{ asset('js/backend.js') }}"></script>
+    <script src="{{ asset('js/views/BackendBundle/Default/FormFunctions.js') }}"></script>
+
     <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
     <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
-    <script src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>
-    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
-    <script src="{{ asset('js/ie10-viewport-bug-workaround.js') }}"></script>
     <script src="{{ asset('js/global.js') }}"></script>
 {% endblock %}
 </body>

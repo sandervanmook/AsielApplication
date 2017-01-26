@@ -6,15 +6,13 @@
 {% endblock %}
 {% block pagetitle %}Agenda{% endblock %}
 {% block body %}
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12">
-                <div id='calendar'></div>
-            </div>
+    <div class="ui sixteen column grid container">
+        <div class="sixteen wide column">
+            <p class="text-center">Groen = gedaan, Blauw = todo, Rood = overtijd, Grijs = door systeem aangemaakt</p>
+            <div class="ui divider horizontal"></div>
+            <div id='calendar'></div>
         </div>
     </div>
-    <br />
-    <p class="text-center">Groen = gedaan, Blauw = todo, Rood = overtijd, Grijs = door systeem aangemaakt</p>
 {% endblock %}
 {% block javascripts %}
     {{ parent() }}

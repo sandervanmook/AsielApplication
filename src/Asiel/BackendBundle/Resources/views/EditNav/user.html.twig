@@ -1,10 +1,10 @@
 {% block editUser %}
-    <ul class="nav nav-tabs">
-        <li role="presentation" {% if app.request.get('_route') == 'backend_employee_show' %} class="active" {% endif %}><a href="{{ path('backend_employee_show', {'id' : app.request.get('id')}) }}">Overzicht</a></li>
-        <li role="presentation" {% if app.request.get('_route') == 'backend_employee_edit' %} class="active" {% endif %}><a href="{{ path('backend_employee_edit', {'id' : app.request.get('id')}) }}">Aanpassen</a></li>
-        <li role="presentation" {% if 'password' in app.request.get('_route') %} class="active" {% endif %}><a href="{{ path('backend_employee_edit_password', {'id' : app.request.get('id')}) }}">Wachtwoord aanpassen</a></li>
-        <li role="presentation" {% if 'picture' in app.request.get('_route') %} class="active" {% endif %}><a href="{{ path('backend_employee_user_picture_index', {'id' : app.request.get('id')}) }}">Foto Uploaden</a></li>
-        <li><a href="#">Incidenten</a></li>
-        <li role="presentation" {% if 'workschedule' in app.request.get('_route') %} class="active" {% endif %}><a href="{{ path('backend_employee_workschedule_index', {'id' : app.request.get('id')}) }}">Werkschema</a></li>
-    </ul>
+    <div class="ui top attached tabular menu">
+        <a class="item {% if app.request.get('_route') == 'backend_employee_show' %} active {% endif %}" href="{{ path('backend_employee_show', {'id' : app.request.get('id')}) }}">Overzicht</a>
+        <a class="item {% if app.request.get('_route') == 'backend_employee_edit' %} active {% endif %}" href="{{ path('backend_employee_edit', {'id' : app.request.get('id')}) }}">Aanpassen</a>
+        <a class="item {% if 'password' in app.request.get('_route') %} active {% endif %}" href="{{ path('backend_employee_edit_password', {'id' : app.request.get('id')}) }}">Wachtwoord aanpassen</a>
+        <a class="item {% if 'picture' in app.request.get('_route') %} active {% endif %}" href="{{ path('backend_employee_user_picture_index', {'id' : app.request.get('id')}) }}">Foto Uploaden</a>
+        <a class="item {% if 'workschedule' in app.request.get('_route') %} active {% endif %}" href="{{ path('backend_employee_workschedule_index', {'id' : app.request.get('id')}) }}">Werkschema</a>
+        {{ render(controller('EmployeeBundle:Backend:userInfo', {'id': app.request.attributes.get('id')})) }}
+    </div>
 {% endblock %}

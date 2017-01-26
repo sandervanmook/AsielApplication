@@ -1,175 +1,233 @@
 {% extends '@Backend/Base/Base.html.twig' %}
-{% block pagetitle %}Overzicht{% endblock %}
+{% block pagetitle %}{% endblock %}
 {% block body %}
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                {% for picture in animal.pictures|slice(0,5) %}
-                    <img src="{{ picture.getpublicurl }}" height="100">
-                {% endfor %}
-            </div>
-        </div>
-        <h2>{{ activestate.getclassname|trans }}
-            {% if activestate.getclassname == 'Onsite' %}
-                ({{ activestate.registertype|trans }})
-            {% endif %}
-        </h2>
-        <div class="row">
-            <div class="col-md-4">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">Algemeen</div>
-                    <div class="panel-body">
-                        <p class="text-alert">Zichtbaar voor publiek {{ outputBool(animal.visiblePublic) }}</p>
-                        <p class="text-alert">Staat op facebook {{ outputBool(animal.facebookId) }}</p>
-                        <p>Naam: {{ animal.name }}</p>
-                        <p>Ras: {{ animal.race }}</p>
-                        <p>Locatie overdag: {{ animal.dayLocation }}</p>
-                        <p>Locatie 's nachts: {{ animal.nightLocation }}</p>
-                        <p>In asiel sinds: {{ animal.admissionDate|date('d/m/Y') }}</p>
-                        <p>Chipnummer: {{ animal.chipnumber }}</p>
-                        <p>Niet gechipped bij binnenkomst {{ outputBool(animal.notChipped) }}</p>
-                        <p>Paspoortnummer: {{ animal.passportNumber }}</p>
-                        <p>Kleur: {{ animal.colour }}</p>
-                        <p>Geboortedatum: {{ animal.dayOfBirth|date('d/m/Y') }}</p>
-                        <p>Leeftijd: {{ animal.age }} Jaar</p>
-                        <p>Geslacht: {{ outputGender(animal.gender) }}</p>
-                        <p>Gesteriliseerd / Gecastereerd : {{ outputBool(animal.sterilized) }}</p>
-                        <p>Zindelijk: {{ outputBool(animal.toiletTrained) }}</p>
-                        <p>Buiten dier: {{ animal.outsideAnimal }}</p>
-                        <p><i>Omschrijving:</i> {{ animal.description|raw }}</p>
-                        <p><i>Karakter eigenschappen:</i> {{ animal.characteristics|raw }}</p>
-                        <p><i>Medische problemen:</i> {{ animal.medicalproblems|raw }}</p>
-                        <p><i>Bekend met agressie:</i> {{ animal.knownAggression|raw }}</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        {% if animal.getClassName == 'Cat' %}
-                            Kat
-                        {% elseif animal.getClassName == 'Dog' %}
-                            Hond
+    <div class="ui tab segment active">
+        <div class="ui sixteen column grid container">
+            <div class="sixteen wide column">
+                <div>
+                    {% for picture in animal.pictures|slice(0,1) %}
+                        <img class="ui avatar image small" src="{{ picture.getpublicurl }}">
+                    {% endfor %}
+                    <h2 class="ui left aligned header">{{ activestate.getclassname|trans }}
+                        {% if activestate.getclassname == 'Onsite' %}
+                            ({{ activestate.registertype|trans }})
                         {% endif %}
+                    </h2>
+                </div>
+
+                <div class="ui horizontal divider"></div>
+
+                <div class="ui three column very relaxed grid">
+                    <div class="column">
+                        <h3 class="ui header">Algemeen</h3>
+                        <table class="ui table compact">
+                            <tbody>
+                                <tr>
+                                    <td><p class="text-alert">Zichtbaar voor publiek</p></td>
+                                    <td>{{ outputBool(animal.visiblePublic) }}</td>
+                                </tr>
+                                <tr>
+                                    <td><p class="text-alert">Staat op facebook</p></td>
+                                    <td>{{ outputBool(animal.facebookId) }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Naam</td>
+                                    <td>{{ animal.name }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Ras</td>
+                                    <td>{{ animal.race }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Locatie overdag</td>
+                                    <td>{{ animal.dayLocation }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Locatie 's nachts</td>
+                                    <td>{{ animal.nightLocation }}</td>
+                                </tr>
+                                <tr>
+                                    <td>In asiel sinds</td>
+                                    <td>{{ animal.admissionDate|date('d-m-Y') }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Chipnummer</td>
+                                    <td>{{ animal.chipnumber }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Gechipped bij binnenkomst</td>
+                                    <td>{{ outputBool(animal.notChipped) }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Paspoortnummer</td>
+                                    <td>{{ animal.passportNumber }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Kleur</td>
+                                    <td>{{ animal.colour }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Geboortedatum</td>
+                                    <td>{{ animal.dayOfBirth|date('d-m-Y') }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Leeftijd</td>
+                                    <td>{{ animal.age }} Jaar</td>
+                                </tr>
+                                <tr>
+                                    <td>Geslacht</td>
+                                    <td>{{ outputGender(animal.gender) }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Gesteriliseerd / Gecastereerd</td>
+                                    <td>{{ outputBool(animal.sterilized) }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Zindelijk</td>
+                                    <td>{{ outputBool(animal.toiletTrained) }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Buiten dier</td>
+                                    <td>{{ animal.outsideAnimal }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Omschrijving</td>
+                                    <td>{{ animal.description|raw }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Karakter eigenschappen</td>
+                                    <td>{{ animal.characteristics|raw }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Medische problemen</td>
+                                    <td>{{ animal.medicalproblems|raw }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Bekend met agressie</td>
+                                    <td>{{ animal.knownAggression|raw }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <div class="panel-body">
+                    <div class="column">
                         {% if animal.getClassName == 'Cat' %}
-                            <table class="table">
+                            <h3 class="ui header">Kat</h3>
+                        {% elseif animal.getClassName == 'Dog' %}
+                            <h3 class="ui header">Hond</h3>
+                        {% endif %}
+                        {% if animal.getClassName == 'Cat' %}
+                            <table class="ui table compact">
                                 <tbody>
-                                    <tr>
-                                        <td><i>Kan het dier met kleine honden overweg ?</i></td>
-                                    </tr>
-                                    <tr>
-                                        <td>{{ animal.compatibleSmallDog|raw }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td><i>Kan het dier met grote honden overweg ?</i></td>
-                                    </tr>
-                                    <tr>
-                                        <td>{{ animal.compatibleLargeDog|raw }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td><i>Kan samen met andere katten ?</i></td>
-                                    </tr>
-                                    <tr>
-                                        <td>{{ animal.compatibleCat|raw }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td><i>Kan het met andere dieren overweg ?</i></td>
-                                    </tr>
-                                    <tr>
-                                        <td>{{ animal.compatibleOtherAnimals|raw }}</td>
-                                    </tr>
+                                <tr>
+                                    <td><i>Kan het dier met kleine honden overweg ?</i></td>
+                                </tr>
+                                <tr>
+                                    <td>{{ animal.compatibleSmallDog|raw }}</td>
+                                </tr>
+                                <tr>
+                                    <td><i>Kan het dier met grote honden overweg ?</i></td>
+                                </tr>
+                                <tr>
+                                    <td>{{ animal.compatibleLargeDog|raw }}</td>
+                                </tr>
+                                <tr>
+                                    <td><i>Kan samen met andere katten ?</i></td>
+                                </tr>
+                                <tr>
+                                    <td>{{ animal.compatibleCat|raw }}</td>
+                                </tr>
+                                <tr>
+                                    <td><i>Kan het met andere dieren overweg ?</i></td>
+                                </tr>
+                                <tr>
+                                    <td>{{ animal.compatibleOtherAnimals|raw }}</td>
+                                </tr>
                                 </tbody>
                             </table>
                         {% endif %}
                         {% if animal.getClassName == 'Dog' %}
                             <p>Type vacht: {{ animal.furType }}</p>
                             <p>Heeft beweging nodig: {{ outputBool(animal.needsExercise) }}</p>
-                            <table class="table">
+                            <table class="ui table compact">
                                 <tbody>
-                                    <tr>
-                                        <td><i>Kan het dier met kleine honden overweg ?</i></td>
-                                    </tr>
-                                    <tr>
-                                        <td>{{ animal.compatibleSmallDog|raw }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td><i>Kan het dier met grote honden overweg ?</i></td>
-                                    </tr>
-                                    <tr>
-                                        <td>{{ animal.compatibleLargeDog|raw }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td><i>Kan samen met katten ?</i></td>
-                                    </tr>
-                                    <tr>
-                                        <td>{{ animal.compatibleCat|raw }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td><i>Kan het met andere dieren overweg ?</i></td>
-                                    </tr>
-                                    <tr>
-                                        <td>{{ animal.compatibleOtherAnimals|raw }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td><i>Bekende commando's</i></td>
-                                    </tr>
-                                    <tr>
-                                        {{ animal.knownCommands|raw }}
-                                    </tr>
+                                <tr>
+                                    <td><i>Kan het dier met kleine honden overweg ?</i></td>
+                                </tr>
+                                <tr>
+                                    <td>{{ animal.compatibleSmallDog|raw }}</td>
+                                </tr>
+                                <tr>
+                                    <td><i>Kan het dier met grote honden overweg ?</i></td>
+                                </tr>
+                                <tr>
+                                    <td>{{ animal.compatibleLargeDog|raw }}</td>
+                                </tr>
+                                <tr>
+                                    <td><i>Kan samen met katten ?</i></td>
+                                </tr>
+                                <tr>
+                                    <td>{{ animal.compatibleCat|raw }}</td>
+                                </tr>
+                                <tr>
+                                    <td><i>Kan het met andere dieren overweg ?</i></td>
+                                </tr>
+                                <tr>
+                                    <td>{{ animal.compatibleOtherAnimals|raw }}</td>
+                                </tr>
+                                <tr>
+                                    <td><i>Bekende commando's</i></td>
+                                </tr>
+                                <tr>
+                                    {{ animal.knownCommands|raw }}
+                                </tr>
                                 </tbody>
                             </table>
                         {% endif %}
                     </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">Klant</div>
-                    <div class="panel-body">
+                    <div class="column">
+                        <h3 class="ui header">Klant</h3>
                         {% if activestate.getclassname == 'Adopted' %}
                             <p>Datum: {{ activestate.date|date('d/m/Y') }}</p>
                             <p>Adoptieprijs: {{ activestate.price }}</p>
                             <p><i>Geadopteerd door:</i></p>
-                            <table class="table">
+                            <table class="ui table compact">
                                 <tbody>
-                                    <tr>
-                                        <td>Naam</td>
-                                        <td>{{ activestate.customer.firstname }} {{ activestate.customer.lastname }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Geboortedatum</td>
-                                        <td>{{ activestate.customer.dayofbirth|date('d/m/Y') }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Adres</td>
-                                        <td>{{ activestate.customer.address }} {{ activestate.customer.housenumber }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Postcode</td>
-                                        <td>{{ activestate.customer.zipcode }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Plaats</td>
-                                        <td>{{ activestate.customer.city }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Land</td>
-                                        <td>{{ activestate.customer.country }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Telefoonnummer</td>
-                                        <td>{{ activestate.customer.phone }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>BSN</td>
-                                        <td>{{ activestate.customer.CitizenServiceNumber }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Email</td>
-                                        <td>{{ activestate.customer.email }}</td>
-                                    </tr>
+                                <tr>
+                                    <td>Naam</td>
+                                    <td>{{ activestate.customer.firstname }} {{ activestate.customer.lastname }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Geboortedatum</td>
+                                    <td>{{ activestate.customer.dayofbirth|date('d/m/Y') }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Adres</td>
+                                    <td>{{ activestate.customer.address }} {{ activestate.customer.housenumber }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Postcode</td>
+                                    <td>{{ activestate.customer.zipcode }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Plaats</td>
+                                    <td>{{ activestate.customer.city }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Land</td>
+                                    <td>{{ activestate.customer.country }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Telefoonnummer</td>
+                                    <td>{{ activestate.customer.phone }}</td>
+                                </tr>
+                                <tr>
+                                    <td>BSN</td>
+                                    <td>{{ activestate.customer.CitizenServiceNumber }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Email</td>
+                                    <td>{{ activestate.customer.email }}</td>
+                                </tr>
                                 </tbody>
                             </table>
                         {% elseif activestate.getclassname == 'Abandoned' %}
@@ -223,7 +281,7 @@
                                 <p><i>Locatie:</i> {{ activestate.foundatlocation|raw }}</p>
                                 <p><i>Staat van het dier:</i> {{ activestate.animalstate|raw }}</p>
                                 <p><i>Gevonden door: </i></p>
-                                <table class="table">
+                                <table class="ui table">
                                     <tbody>
                                     <tr>
                                         <td>Naam</td>

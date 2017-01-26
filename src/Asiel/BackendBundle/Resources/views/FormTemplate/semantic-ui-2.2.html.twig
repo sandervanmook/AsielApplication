@@ -1,4 +1,4 @@
-{% use "@Frontend/FormTemplate/form_div_layout.html.twig" %}
+{% use '@Backend/FormTemplate/form_div_layout.html.twig' %}
 
 {# Widgets #}
 
@@ -43,7 +43,7 @@
     {% if widget == 'single_text' %}
         {{- block('form_widget_simple') -}}
     {% else -%}
-        {% set attr = attr|merge({class: (attr.class|default('') ~ ' form-inline')|trim}) -%}
+        {% set attr = attr|merge({class: (attr.class|default('') ~ ' inline field')|trim}) -%}
         <div {{ block('widget_container_attributes') }}>
             {{- form_errors(form.date) -}}
             {{- form_errors(form.time) -}}
@@ -57,7 +57,7 @@
     {% if widget == 'single_text' %}
         {{- block('form_widget_simple') -}}
     {% else -%}
-        {% set attr = attr|merge({class: (attr.class|default('') ~ ' form-inline')|trim}) -%}
+        {% set attr = attr|merge({class: (attr.class|default('') ~ ' inline field')|trim}) -%}
         {% if datetime is not defined or not datetime -%}
             <div {{ block('widget_container_attributes') -}}>
         {%- endif %}
@@ -76,7 +76,7 @@
     {% if widget == 'single_text' %}
         {{- block('form_widget_simple') -}}
     {% else -%}
-        {% set attr = attr|merge({class: (attr.class|default('') ~ ' form-inline')|trim}) -%}
+        {% set attr = attr|merge({class: (attr.class|default('') ~ ' inline field')|trim}) -%}
         {% if datetime is not defined or false == datetime -%}
             <div {{ block('widget_container_attributes') -}}>
         {%- endif -%}
@@ -91,7 +91,7 @@
     {%- if widget == 'single_text' -%}
         {{- block('form_widget_simple') -}}
     {%- else -%}
-        {%- set attr = attr|merge({class: (attr.class|default('') ~ ' form-inline')|trim}) -%}
+        {%- set attr = attr|merge({class: (attr.class|default('') ~ ' inline field')|trim}) -%}
         <div {{ block('widget_container_attributes') }}>
             {{- form_errors(form) -}}
             {%- if with_years %}{{ form_widget(form.years) }}{% endif -%}
@@ -147,7 +147,7 @@
     {% if 'radio-inline' in parent_label_class %}
         {{- form_label(form, null, { widget: parent() }) -}}
     {% else -%}
-        <div class="radio">
+        <div class="radio checkbox">
             {{- form_label(form, null, { widget: parent() }) -}}
         </div>
     {%- endif %}
@@ -175,7 +175,7 @@
 {%- endblock radio_label %}
 
 {% block checkbox_radio_label %}
-    {# Do not display the label if widget is not defined in order to prevent double label rendering #}
+     {#Do not display the label if widget is not defined in order to prevent double label rendering#}
     {% if widget is defined %}
         {% if required %}
             {% set label_attr = label_attr|merge({class: (label_attr.class|default('') ~ ' required')|trim}) %}
@@ -210,7 +210,7 @@
 {%- endblock form_row %}
 
 {% block button_row -%}
-    <div class="form-group">
+    <div class="field">
         {{- form_widget(form) -}}
     </div>
 {%- endblock button_row %}
@@ -236,14 +236,14 @@
 {%- endblock datetime_row %}
 
 {% block checkbox_row -%}
-    <div class="form-group{% if not valid %} has-error{% endif %}">
+    <div class="field{% if not valid %} has-error{% endif %}">
         {{- form_widget(form) -}}
         {{- form_errors(form) -}}
     </div>
 {%- endblock checkbox_row %}
 
 {% block radio_row -%}
-    <div class="form-group{% if not valid %} has-error{% endif %}">
+    <div class="field{% if not valid %} has-error{% endif %}">
         {{- form_widget(form) -}}
         {{- form_errors(form) -}}
     </div>

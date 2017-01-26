@@ -102,16 +102,17 @@ class BackendStatusController extends Controller
     }
 
     /**
-     * @param int $id
      * @param int $statusid
      * @return Response
+     * @internal param int $id
      */
-    public function deleteAction(int $id, int $statusid)
+    public function deleteAction(int $statusid)
     {
         $formHandler = $this->get('asiel.animalbundle.statusformhandler');
 
         $selectedStatus = $formHandler->find($statusid);
-        $allStates = $formHandler->getAnimalRepository()->find($id)->getStatus();
+        $animalId = $selectedStatus->getAnimal()->getId();
+        $allStates = $formHandler->getAnimalRepository()->find($animalId)->getStatus();
         $amount = count($allStates);
 
         // If its an archived status just delete it.

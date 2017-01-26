@@ -1,7 +1,9 @@
-<div class="pull-right">
-    <input id="userId" type="hidden" value="{{ user.id }}">
+<input id="userId" type="hidden" value="{{ user.id }}">
+<a class="item right aligned">
     {{ user.firstname }} {{ user.lastname }}
+</a>
+<a class="item">
     {% if user.picture %}
-        <img src="{{ user.picture.publicurl }}" height="40" alt="user_picture">
+        <img class="ui avatar image mini" src="{{ user.picture.publicurl }}" alt="user_picture">
     {% endif %}
-</div>
+</a>

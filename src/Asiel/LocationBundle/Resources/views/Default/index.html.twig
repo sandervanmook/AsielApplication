@@ -1,37 +1,61 @@
 {% extends '@Backend/Base/Base.html.twig' %}
 {% block pagetitle %}Locaties{% endblock %}
 {% block body %}
-    <br />
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4">
-                <table class="table">
-                    <thead>
+    <div class="ui twelve column grid container">
+        <div class="six wide column">
+            <table class="ui table compact collapsing striped">
+                <thead>
+                <tr>
+                    <th>Naam</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for location in alllocations %}
                     <tr>
-                        <td>Naam</td>
+                        <td>{{ location.name }}</td>
+                        <td>
+                            <div id="{{ location.id }}" class="ui mini negative labeled icon button delete">
+                                <i class="remove icon"></i> Verwijderen
+                            </div>
+                        </td>
                     </tr>
-                    </thead>
-                    <tbody>
-                    {% for location in alllocations %}
-                        <tr>
-                            <td>{{ location.name }}</td>
-                            <td><span id="{{ location.id }}" class="glyphicon glyphicon-trash delete" aria-hidden="true"></span></td>
-                        </tr>
-                    {% endfor %}
+                {% endfor %}
+                </tbody>
+                <tfoot>
                     <tr>
-                        <td><a href="{{ path('backend_location_create') }}"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a></td>
-                        <td></td>
+                        <th>
+                            <a href="{{ path('backend_location_create') }}">
+                                <div class="ui mini positive labeled icon button">
+                                    <i class="add square icon"></i> Locatie toevoegen
+                                </div>
+                            </a>
+                        </th>
+                        <th></th>
                     </tr>
-                    </tbody>
-                </table>
+                </tfoot>
+            </table>
+            <div class="ui basic modal">
+                <div class="ui icon header">
+                    <i class="archive icon"></i>
+                    Locatie verwijderen
+                </div>
+                <div class="content">
+                    <p>Weet u zeker dat u de locatie wil verwijderen?</p>
+                </div>
+                <div class="actions">
+                    <div class="ui red basic cancel inverted button">
+                        <i class="remove icon"></i>
+                    </div>
+                    <div id="approve" class="ui green ok inverted button">
+                        <i class="checkmark icon"></i>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    <div id="dialog-confirm" title="Locatie verwijderen">
-        <p><span class="ui-icon ui-icon-alert"></span>Weet u zeker dat u de locatie wil verwijderen?</p>
     </div>
 {% endblock %}
 {% block javascripts %}
     {{ parent() }}
-    <script src="{{ asset('js/views/LocationBundle/Default/LocationConfirmDelete.js') }}"></script>
+    <script src="{{ asset('js/views/LocationBundle/Default/ConfirmDelete.js') }}"></script>
 {% endblock %}

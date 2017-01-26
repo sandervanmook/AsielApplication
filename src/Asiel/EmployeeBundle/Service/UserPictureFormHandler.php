@@ -43,14 +43,11 @@ class UserPictureFormHandler
         return $userPicture;
     }
 
+    /**
+     * @param UserPicture $userPicture
+     */
     public function create(UserPicture $userPicture)
     {
-        // Is there a picture already ? Delete it
-        $currentPicture = $this->getRepository()->findOneBy(['user' => $this->getRequestId()]);
-        if ($currentPicture) {
-            $this->delete($currentPicture);
-        }
-
         $userRepository = $this->getEm()->getRepository('EmployeeBundle:User');
         $user = $userRepository->find($this->getRequestId());
         $userPicture->setUser($user);
@@ -59,6 +56,9 @@ class UserPictureFormHandler
         $this->getEventDispatcher()->dispatch('user_alert.message', new UserAlertEvent(UserAlertEvent::SUCCESS, 'De foto is toegevoegd aan de medewerker.'));
     }
 
+    /**
+     * @param UserPicture $userPicture
+     */
     public function delete(UserPicture $userPicture)
     {
         $this->em->remove($userPicture);

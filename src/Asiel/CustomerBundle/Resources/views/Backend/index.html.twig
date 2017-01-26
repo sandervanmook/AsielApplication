@@ -1,78 +1,88 @@
 {% extends '@Backend/Base/Base.html.twig' %}
 {% block pagetitle %}Klanten{% endblock %}
 {% block body %}
-    <div class="form-inline">
+<div class="ui sixteen column grid container">
+    <div class="sixteen wide column">
         <div id="search">
-            {{ form_start(searchform) }}
-            {{ form_row(searchform.query) }}
-            {{ form_row(searchform.searchon) }}
-            {{ form_end(searchform) }}
+            <div class="ui form">
+                <div class="fields inline">
+                    {{ form_start(searchform) }}
+                    {{ form_row(searchform.query) }}
+                    {{ form_row(searchform.searchon) }}
+                    {{ form_end(searchform) }}
+                </div>
+            </div>
         </div>
-    </div>
-    <table class="table table-hover">
-        <thead>
-        <tr>
-            <td>Voornaam</td>
-            <td>Achternaam</td>
-            <td>Geboortedatum</td>
-            <td>Email</td>
-            <td>Telefoonnummer</td>
-            <td>Op zwarte lijst?</td>
-            <td>Geadopteerd</td>
-            <td>Eigenaar van</td>
-            <td>Afgestaan</td>
-            <td>Gevonden</td>
-        </tr>
-        </thead>
-        <tbody>
-        {% for customer in allcustomers|slice(0,10) %}
-            <tr
-                {% if customer.blacklisted %}
-                    class="alert-danger"
-                {% endif %}
-            >
-                <td>{{ customer.firstname }}</td>
-                <td><a href="{{ path('backend_customer_edit', {'id' : customer.id }) }}">{{ customer.lastname }}</a></td>
-                <td>{{ customer.dayOfBirth|date('d-m-Y') }}</td>
-                <td>{{ customer.email }}</td>
-                <td>{{ customer.phone }}</td>
-                <td>{{ outputBool(customer.blacklisted) }}</td>
-                <td>
-                    {% for animal in customer.adoptedPets %}
-                        <li><a href="{{ path('backend_animal_show', {'id' : animal.animal.id}) }}">{{ animal.animal.name }}</a></li>
-                    {% endfor %}
-                </td>
-                <td>
-                    {% for animal in customer.ownsanimals %}
-                        <li><a href="{{ path('backend_animal_show', {'id' : animal.animal.id}) }}">{{ animal.animal.name }}</a></li>
-                    {% endfor %}
-                </td>
-                <td>
-                    {% for animal in customer.abandonedanimals %}
-                        <li><a href="{{ path('backend_animal_show', {'id' : animal.animal.id}) }}">{{ animal.animal.name }}</a></li>
-                    {% endfor %}
-                </td>
-                <td>
-                    {% for animal in customer.foundanimals %}
-                        <li><a href="{{ path('backend_animal_show', {'id' : animal.animal.id}) }}">{{ animal.animal.name }}</a></li>
-                    {% endfor %}
-                </td>
+        <table class="ui table compact collapsing striped">
+            <thead>
+            <tr>
+                <th>Voornaam</th>
+                <th>Achternaam</th>
+                <th>Email</th>
+                <th>Telefoonnummer</th>
+                <th>Op zwarte lijst?</th>
+                <th>Geadopteerd</th>
+                <th>Eigenaar van</th>
+                <th>Afgestaan</th>
+                <th>Gevonden</th>
             </tr>
-        {% endfor %}
-        <tr>
-            <td><a href="{{ path('backend_customer_create') }}"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        </tbody>
-    </table>
-    <p>Maximaal 10 zichtbaar.</p>
+            </thead>
+            <tbody>
+            {% for customer in allcustomers|slice(0,10) %}
+                <tr
+                        {% if customer.blacklisted %}
+                            class="negative"
+                        {% endif %}
+                >
+                    <td>{{ customer.firstname }}</td>
+                    <td><a href="{{ path('backend_customer_edit', {'id' : customer.id }) }}">{{ customer.lastname }}</a></td>
+                    <td>{{ customer.email }}</td>
+                    <td>{{ customer.phone }}</td>
+                    <td>{{ outputBool(customer.blacklisted) }}</td>
+                    <td>
+                        {% for animal in customer.adoptedPets %}
+                            <li><a href="{{ path('backend_animal_show', {'id' : animal.animal.id}) }}">{{ animal.animal.name }}</a></li>
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {% for animal in customer.ownsanimals %}
+                            <li><a href="{{ path('backend_animal_show', {'id' : animal.animal.id}) }}">{{ animal.animal.name }}</a></li>
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {% for animal in customer.abandonedanimals %}
+                            <li><a href="{{ path('backend_animal_show', {'id' : animal.animal.id}) }}">{{ animal.animal.name }}</a></li>
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {% for animal in customer.foundanimals %}
+                            <li><a href="{{ path('backend_animal_show', {'id' : animal.animal.id}) }}">{{ animal.animal.name }}</a></li>
+                        {% endfor %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th class="collapsing">{{ allcustomers|length }} Klant(en)</th>
+                    <th class="collapsing">
+                        <a href="{{ path('backend_customer_create') }}">
+                            <div class="ui tiny positive labeled icon button">
+                                <i class="add square icon"></i> Klant toevoegen
+                            </div>
+                        </a>
+                    </th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
 {% endblock %}
 

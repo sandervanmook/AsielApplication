@@ -1,9 +1,9 @@
 {% extends '@Backend/Base/Base.html.twig' %}
-{% block pagetitle %}Status aanmaken: Terug naar eigenaar{% endblock %}
+{% block pagesubtitle %}Status aanmaken: Terug naar eigenaar{% endblock %}
 {% block body %}
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
+    <div class="ui tab segment active">
+        <div class="ui twelve column grid container">
+            <div class="six wide column">
                 {{ form_start(form) }}
                 {{ form_row(form.date) }}
                 {{ form_row(form.search) }}

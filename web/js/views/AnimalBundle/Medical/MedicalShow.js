@@ -8,4 +8,4 @@ $('.view').click(function () {
         .done(function( json ) {
             $("#result").html( json ).hide().show('slide', {duration : 600});
         })
-}).css('cursor','pointer');
+})

@@ -91,7 +91,7 @@ backend_animal_status_show:
            expose: true
 
 backend_animal_status_delete:
-    path:     /{id}/status/delete/{statusid}
+    path:     /status/delete/{statusid}
     defaults: { _controller: AnimalBundle:BackendStatus:delete }
     options:
            expose: true
