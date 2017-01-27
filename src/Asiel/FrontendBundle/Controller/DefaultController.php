@@ -24,8 +24,6 @@ class DefaultController extends Controller
      */
     public function searchAnimalsAction()
     {
-        $formHandler = $this->get('asiel.frontendbundle.defaultformhandler');
-
         return $this->render('@Frontend/Default/searchAnimal.html.twig');
     }
 
@@ -43,8 +41,11 @@ class DefaultController extends Controller
         $searchArray['gender'] = $request->get('gender');
         $searchArray['agestart'] = $request->get('agestart');
         $searchArray['ageend'] = $request->get('ageend');
+        $searchArray['status']  = $request->get('status');
+        $searchArray['sterilized']  = $request->get('sterilized');
 
         $filterAnimal = new FilterAnimal($allPublicAnimals, $searchArray);
+        $filterAnimal->filter();
 
         $endResult = $filterAnimal->getFilterResult();
 
@@ -89,10 +90,10 @@ class DefaultController extends Controller
     public function facebookLinkAction(int $id)
     {
         $formHandler = $this->get('asiel.frontendbundle.defaultformhandler');
-        $result = $formHandler->findAnimal($id);
+        $result = $formHandler->getAnimalRepository()->findOneBy(['id' => $id]);
 
-        return $this->render('@Frontend/Default/searchAnimalResult.html.twig', [
-            'result' => $result,
+        return $this->render('@Frontend/Default/facebooklink.html.twig', [
+            'animal' => $result,
         ]);
     }
 

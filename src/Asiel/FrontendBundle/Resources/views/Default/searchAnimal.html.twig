@@ -3,9 +3,10 @@
 {% block body %}
     <div class="ui divider horizontal"></div>
     <div class="ui segment">
-        <div class="ui form">
+        <h3 class="ui header">Filters</h3>
+        <div class="ui form tiny">
             <div class="fields">
-                <h4 class="ui header">Type dier</h4>
+                <h5 class="ui header">Type dier</h5>
                 <div class="field inline">
                     <div class="ui toggle checkbox">
                         <input id="cat" type="checkbox">
@@ -20,7 +21,7 @@
                 </div>
             </div>
             <div class="fields">
-                <h4 class="ui header">Geslacht</h4>
+                <h5 class="ui header">Geslacht</h5>
                 <div class="field inline">
                     <div class="ui toggle checkbox">
                         <input id="male" type="checkbox">
@@ -33,9 +34,15 @@
                         <label for="female">{{ outputGender('Female') }}</label>
                     </div>
                 </div>
+                <div class="field inline">
+                    <div class="ui toggle checkbox">
+                        <input id="unknown" type="checkbox">
+                        <label for="unknown">{{ outputGender('Unknown') }}</label>
+                    </div>
+                </div>
             </div>
             <div class="fields">
-                <h4 class="ui header">Leeftijd</h4>
+                <h5 class="ui header">Leeftijd</h5>
                 <div class="field inline">
                     <select id="agestart">
                         <!-- don't go below 1 -->
@@ -80,9 +87,39 @@
                         <option value="15">15</option>
                         <option value="16">16</option>
                         <option value="17">17</option>
-                        <option value="18">18</option>
+                        <option value="18" selected>18</option>
                     </select>
                     <label for="ageend">Tot</label>
+                </div>
+            </div>
+            <div class="fields">
+                <h45 class="ui header">Status</h45>
+                <div class="field inline">
+                    <div class="ui toggle checkbox">
+                        <input id="abandoned" type="checkbox">
+                        <label for="abandoned">Afgestaan</label>
+                    </div>
+                </div>
+                <div class="field inline">
+                    <div class="ui toggle checkbox">
+                        <input id="found" type="checkbox">
+                        <label for="found">Gevonden</label>
+                    </div>
+                </div>
+                <div class="field inline">
+                    <div class="ui toggle checkbox">
+                        <input id="seized" type="checkbox">
+                        <label for="seized">In beslag genomen</label>
+                    </div>
+                </div>
+            </div>
+            <div class="fields">
+                <h5 class="ui header">Gesteriliseerd / Gecastereerd</h5>
+                <div class="field inline">
+                    <div class="ui toggle checkbox">
+                        <input id="sterilized" type="checkbox">
+                        <label for="sterilized"></label>
+                    </div>
                 </div>
             </div>
         </div>
@@ -90,12 +127,28 @@
 
     <div class="ui divider horizontal"></div>
     <div id="searchresult"></div>
+    <div class="ui divider horizontal"></div>
+    <div class="ui divider horizontal"></div>
+
+    <div id="showmodal" class="ui modal">
+        <div class="content">
+            <div id="result"></div>
+        </div>
+        <div class="actions">
+            <div class="ui red basic cancel inverted button">
+                <i class="remove icon"></i>
+            </div>
+            <div id="approve" class="ui green ok inverted button">
+                <i class="checkmark icon"></i>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
     <script src="{{ asset('js/views/FrontendBundle/Default/SearchAnimals.js') }}"></script>
-    <script src="{{ asset('js/views/FrontendBundle/Cat/PublicShowCat.js') }}"></script>
-    <script src="{{ asset('js/views/FrontendBundle/Dog/PublicShowDog.js') }}"></script>
+    <script src="{{ asset('js/views/FrontendBundle/Cat/ShowCat.js') }}"></script>
+    <script src="{{ asset('js/views/FrontendBundle/Dog/ShowDog.js') }}"></script>
 {% endblock %}

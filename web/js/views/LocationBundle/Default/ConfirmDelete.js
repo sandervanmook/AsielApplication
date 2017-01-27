@@ -2,7 +2,7 @@ var remove = $('.delete');
 var id = '';
 $(remove).click(function() {
     id = $(this).attr('id');
-    $('.ui.basic.modal')
+    $('#confirmmodal')
         .modal('show');
 });
 $('#approve').click(function() {

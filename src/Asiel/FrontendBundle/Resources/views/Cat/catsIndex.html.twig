@@ -66,11 +66,23 @@
             </table>
         </div>
     </div>
-    <!-- Output the animal information when you click on one -->
-    <div id="result"></div>
+
+    <div id="showmodal" class="ui modal">
+        <div class="content">
+            <div id="result"></div>
+        </div>
+        <div class="actions">
+            <div class="ui red basic cancel inverted button">
+                <i class="remove icon"></i>
+            </div>
+            <div id="approve" class="ui green ok inverted button">
+                <i class="checkmark icon"></i>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}
 {% block javascripts %}
     {{ parent() }}
-    <script src="{{ asset('js/views/FrontendBundle/Cat/PublicShowCat.js') }}"></script>
+    <script src="{{ asset('js/views/FrontendBundle/Cat/ShowCat.js') }}"></script>
 {% endblock %}
