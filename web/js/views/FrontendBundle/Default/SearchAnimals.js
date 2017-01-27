@@ -26,6 +26,7 @@ $(document).ready(function () {
     var genderArray = [];
     var maleCheckbox = $('#male');
     var femaleCheckbox = $('#female');
+    var unknownCheckbox = $('#unknown');
     maleCheckbox.click(function () {
         var maleValue = maleCheckbox.is(':checked');
         if (maleValue) {
@@ -44,10 +45,19 @@ $(document).ready(function () {
         }
         refreshData();
     });
+    unknownCheckbox.click(function () {
+        var unknownValue = unknownCheckbox.is(':checked');
+        if (unknownValue) {
+            genderArray[2] = 'Unknown';
+        } else {
+            genderArray[2] = '';
+        }
+        refreshData();
+    });
 
     // Age filter
     var ageStart = 1;
-    var ageEnd = 1;
+    var ageEnd = 18;
     var startSelect = $('#agestart');
     var endSelect = $('#ageend');
     startSelect.change(function () {
@@ -59,6 +69,51 @@ $(document).ready(function () {
         refreshData();
     });
 
+    // Status filter
+    var statusArray = [];
+    var abandonedCheckbox = $('#abandoned');
+    var foundCheckbox = $('#found');
+    var seizedCheckbox = $('#seized');
+    abandonedCheckbox.click(function () {
+        var abandonedValue = abandonedCheckbox.is(':checked');
+        if (abandonedValue) {
+            statusArray[0] = 'Abandoned';
+        } else {
+            statusArray[0] = '';
+        }
+        refreshData();
+    });
+    foundCheckbox.click(function () {
+        var foundValue = foundCheckbox.is(':checked');
+        if (foundValue) {
+            statusArray[1] = 'Found';
+        } else {
+            statusArray[1] = '';
+        }
+        refreshData();
+    });
+    seizedCheckbox.click(function () {
+        var seizedValue = seizedCheckbox.is(':checked');
+        if (seizedValue) {
+            statusArray[2] = 'Seized';
+        } else {
+            statusArray[2] = '';
+        }
+        refreshData();
+    });
+
+    // Sterilized filter
+    var sterilized = '';
+    var sterilizedCheckbox = $('#sterilized');
+
+    sterilizedCheckbox.click(function () {
+        if (sterilizedCheckbox.is(':checked')) {
+            sterilized = true;
+        } else {
+            sterilized = false;
+        }
+        refreshData();
+    });
 
     function refreshData() {
         $.ajax({
@@ -67,15 +122,15 @@ $(document).ready(function () {
                 type: typeArray,
                 gender: genderArray,
                 agestart: ageStart,
-                ageend: ageEnd
+                ageend: ageEnd,
+                status: statusArray,
+                sterilized: sterilized
             },
             type: "GET",
-            dataType: "html",
+            dataType: "html"
         })
             .done(function (html) {
                 $("#searchresult").html(html);
-                console.log('start'+ageStart);
-                console.log('end'+ageEnd);
             })
     }
 });

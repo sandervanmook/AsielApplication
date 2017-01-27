@@ -21,10 +21,10 @@ class GenderExtension extends \Twig_Extension
                 $output = '<span class="fa fa-venus" aria-hidden="true"></span>';
                 break;
             case 'Unknown':
-                $output = '<span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>';
+                $output = '<i class="help icon"></i>';
                 break;
             default:
-                $output = '<span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>';
+                $output = '<i class="help icon"></i>';
                 break;
         }
 

@@ -14,9 +14,6 @@ class FilterAnimal
     {
         $this->allAnimals = $allAnimals;
         $this->searchArray = $searchArray;
-        $this->filterType();
-        $this->filterGender();
-        $this->filterAge();
     }
 
     public function getFilterResult()
@@ -24,6 +21,14 @@ class FilterAnimal
         return $this->filterResult;
     }
 
+    public function filter()
+    {
+        $this->filterType();
+        $this->filterGender();
+        $this->filterAge();
+        $this->filterStatus();
+        $this->filterSterilized();
+    }
 
     /**
      * First filter, use allAnimals
@@ -50,7 +55,6 @@ class FilterAnimal
         if ((!empty($this->searchArray['gender'])) && (!empty($this->filterResult))) {
             foreach ($this->filterResult as $animal) {
                 if (in_array($animal->getGender(), $this->searchArray['gender'])) {
-
                     $result[] = $animal;
                 }
             }
@@ -67,8 +71,7 @@ class FilterAnimal
         if ((!empty($this->searchArray['agestart'])) &&
             (!empty($this->searchArray['ageend'])) &&
             (!empty($this->filterResult))
-        )
-        {
+        ) {
             $ageRange = range($this->searchArray['agestart'], $this->searchArray['ageend']);
             foreach ($this->filterResult as $animal) {
                 if (in_array($animal->getAge(), $ageRange)) {
@@ -79,6 +82,48 @@ class FilterAnimal
         }
     }
 
+    /**
+     * Use filterResult
+     */
+    private function filterStatus()
+    {
+        $result = [];
+        if ((!empty($this->searchArray['status'])) && (!empty($this->filterResult))) {
+            foreach ($this->filterResult as $animal) {
+                if (in_array($animal->getActiveState(), $this->searchArray['status'])) {
+                    $result[] = $animal;
+                }
+            }
+            $this->filterResult = $result;
+        }
+    }
+
+    /**
+     * Use filterResult
+     */
+    private function filterSterilized()
+    {
+        $result = [];
+        if (($this->searchArray['sterilized'] == 'true') && (!empty($this->filterResult))) {
+            foreach ($this->filterResult as $animal) {
+                if ($animal->getSterilized()) {
+                    $result[] = $animal;
+                }
+            }
+
+            $this->filterResult = $result;
+        }
+
+        if (($this->searchArray['sterilized'] == 'false') && (!empty($this->filterResult))) {
+            foreach ($this->filterResult as $animal) {
+                if (!$animal->getSterilized()) {
+                    $result[] = $animal;
+                }
+            }
+
+            $this->filterResult = $result;
+        }
+    }
 
 
 }

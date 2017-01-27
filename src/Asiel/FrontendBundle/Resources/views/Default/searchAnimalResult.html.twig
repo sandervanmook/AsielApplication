@@ -6,6 +6,7 @@
         <th>Soort</th>
         <th>Geslacht</th>
         <th>Leeftijd</th>
+        <th>Status</th>
     </tr>
     </thead>
     <tbody>
@@ -20,12 +21,19 @@
             <td>{{ animal.getclassname|trans }}</td>
             <td>{{ outputGender(animal.gender) }}</td>
             <td>{{ animal.age }}</td>
+            {% for state in animal.status %}
+                {% if state.archived == false %}
+                <td>{{ state.getclassname|trans }}</td>
+                {% endif %}
+            {% endfor %}
+
         </tr>
     {% endfor %}
     </tbody>
     <tfoot>
         <tr>
             <th>Totaal: {{ result|length }}</th>
+            <th></th>
             <th></th>
             <th></th>
             <th></th>
