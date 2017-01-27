@@ -8,10 +8,9 @@ Site and Site-content provide sticky footer.
 }
 
 .pusher > .footer {
-    flex: 2;
+    flex: 1;
 }
 
-.page {
-    margin-bottom: 20%;
-}
-
+/*.page {*/
+    /*margin-bottom: 20%;*/
+/*}*/
