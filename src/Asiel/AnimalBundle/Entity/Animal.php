@@ -2,6 +2,8 @@
 
 namespace Asiel\AnimalBundle\Entity;
 
+use Asiel\AnimalBundle\AnimalStateMachine\AnimalStateMachine;
+use Asiel\AnimalBundle\Entity\StatusType\NoState;
 use Asiel\CalendarBundle\Entity\Task;
 use Asiel\CustomerBundle\Entity\Customer;
 use DateTime;
@@ -1004,13 +1006,12 @@ class Animal
     }
 
     /**
-     * Returns the active state
-     * @return null|Status
+     * @return NoState|mixed
      */
     public function getActiveState()
     {
         if ($this->getStatus()->isEmpty()) {
-            return null;
+            return new NoState(new AnimalStateMachine());
         }
 
         foreach ($this->getStatus() as $state) {
@@ -1018,8 +1019,6 @@ class Animal
                 return $state;
             }
         }
-
-        return null;
     }
 
     /**

@@ -5,3 +5,12 @@
 #leftsidebar {
     font-size: 1.2em;
 }
+
+.qtip-bootstrap {
+    width: 200px;
+    height: 200px;
+}
+
+#searchexternally ul {
+    list-style: none;
+}

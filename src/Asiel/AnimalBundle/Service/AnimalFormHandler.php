@@ -71,18 +71,6 @@ class AnimalFormHandler
     }
 
     /**
-     * @param array $result
-     */
-    public function checkNoStatus(array $result)
-    {
-        if ($this->em->getRepository('AnimalBundle:Animal')->checkNoStatus($result)) {
-            $data['amount'] = $this->em->getRepository('AnimalBundle:Animal')->checkNoStatus($result);
-            $this->eventDispatcher->dispatch('user_alert.message',
-                new UserAlertEvent(UserAlertEvent::NOSTATE, null, $data));
-        }
-    }
-
-    /**
      * @param integer $id
      * @return Status
      */

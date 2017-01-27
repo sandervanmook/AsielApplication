@@ -74,6 +74,12 @@ $(document).ready(function () {
     var abandonedCheckbox = $('#abandoned');
     var foundCheckbox = $('#found');
     var seizedCheckbox = $('#seized');
+    var adoptedCheckbox = $('#adopted');
+    var deceasedCheckbox = $('#deceased');
+    var lostCheckbox = $('#lost');
+    var returnedownerCheckbox = $('#returnedowner');
+    var nostateCheckbox = $('#nostate');
+
     abandonedCheckbox.click(function () {
         var abandonedValue = abandonedCheckbox.is(':checked');
         if (abandonedValue) {
@@ -101,6 +107,52 @@ $(document).ready(function () {
         }
         refreshData();
     });
+    adoptedCheckbox.click(function () {
+        var adoptedValue = adoptedCheckbox.is(':checked');
+        if (adoptedValue) {
+            statusArray[3] = 'Adopted';
+        } else {
+            statusArray[3] = '';
+        }
+        refreshData();
+    });
+    deceasedCheckbox.click(function () {
+        var deceasedValue = deceasedCheckbox.is(':checked');
+        if (deceasedValue) {
+            statusArray[4] = 'Deceased';
+        } else {
+            statusArray[4] = '';
+        }
+        refreshData();
+    });
+    lostCheckbox.click(function () {
+        var lostValue = lostCheckbox.is(':checked');
+        if (lostValue) {
+            statusArray[5] = 'Lost';
+        } else {
+            statusArray[5] = '';
+        }
+        refreshData();
+    });
+    returnedownerCheckbox.click(function () {
+        var returnedownerValue = returnedownerCheckbox.is(':checked');
+        if (returnedownerValue) {
+            statusArray[6] = 'ReturnedOwner';
+        } else {
+            statusArray[6] = '';
+        }
+        refreshData();
+    });
+    nostateCheckbox.click(function () {
+        var nostateValue = nostateCheckbox.is(':checked');
+        if (nostateValue) {
+            statusArray[7] = 'None';
+        } else {
+            statusArray[7] = '';
+        }
+        refreshData();
+    });
+
 
     // Sterilized filter
     var sterilized = '';
@@ -117,7 +169,7 @@ $(document).ready(function () {
 
     function refreshData() {
         $.ajax({
-            url: Routing.generate('frontend_animal_search_data', {}, true),
+            url: Routing.generate('backend_animal_search_data', {}, true),
             data: {
                 type: typeArray,
                 gender: genderArray,

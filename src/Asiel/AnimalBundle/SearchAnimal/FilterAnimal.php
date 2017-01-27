@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Asiel\FrontendBundle\SearchAnimal;
+namespace Asiel\AnimalBundle\SearchAnimal;
 
 
 class FilterAnimal
@@ -77,8 +77,8 @@ class FilterAnimal
                 if (in_array($animal->getAge(), $ageRange)) {
                     $result[] = $animal;
                 }
-                $this->filterResult = $result;
             }
+            $this->filterResult = $result;
         }
     }
 
@@ -90,10 +90,15 @@ class FilterAnimal
         $result = [];
         if ((!empty($this->searchArray['status'])) && (!empty($this->filterResult))) {
             foreach ($this->filterResult as $animal) {
-                if (in_array($animal->getActiveState(), $this->searchArray['status'])) {
+                // No status exception
+                if ((in_array('None', $this->searchArray['status'])) && $animal->getStatus()->isEmpty()) {
+                    $result[] = $animal;
+                    // Normal case
+                } elseif (in_array($animal->getActiveState(), $this->searchArray['status'])) {
                     $result[] = $animal;
                 }
             }
+
             $this->filterResult = $result;
         }
     }

@@ -3,6 +3,12 @@ backend_animal_index:
     path:     /
     defaults: { _controller: AnimalBundle:Backend:index }
 
+backend_animal_search_data:
+    path:     /searchdata
+    defaults: { _controller: AnimalBundle:Backend:searchAnimalsData }
+    options:
+           expose: true
+
 backend_animal_create:
     path:     /create
     defaults: { _controller: AnimalBundle:Backend:create }
