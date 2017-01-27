@@ -4,6 +4,7 @@ namespace Asiel\AnimalBundle\Controller;
 
 use Asiel\AnimalBundle\AnimalFactory\AnimalFactory;
 use Asiel\AnimalBundle\AnimalFactory\AnimalType;
+use Asiel\AnimalBundle\SearchAnimal\FilterAnimal;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -17,13 +18,7 @@ class BackendController extends Controller
      */
     public function indexAction()
     {
-        $formHandler = $this->get('asiel.animalbundle.animalformhandler');
-        $result = $this->getDoctrine()->getRepository('AnimalBundle:Animal')->findAll();
-        $formHandler->checkNoStatus($result);
-
-        return $this->render('@Animal/Backend/Animal/index.html.twig', [
-            'result' => $result,
-        ]);
+        return $this->render('@Animal/Backend/Animal/index.html.twig');
     }
 
     /**
@@ -101,6 +96,33 @@ class BackendController extends Controller
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @return Response
+     */
+    public function searchAnimalsDataAction(Request $request)
+    {
+        $formHandler = $this->get('asiel.animalbundle.animalformhandler');
+
+        $allAnimals = $formHandler->getRepository()->findAll();
+
+        $searchArray['type'] = $request->get('type');
+        $searchArray['gender'] = $request->get('gender');
+        $searchArray['agestart'] = $request->get('agestart');
+        $searchArray['ageend'] = $request->get('ageend');
+        $searchArray['status']  = $request->get('status');
+        $searchArray['sterilized']  = $request->get('sterilized');
+
+        $filterAnimal = new FilterAnimal($allAnimals, $searchArray);
+        $filterAnimal->filter();
+    //var_dump($request->get('status')); exit;
+
+        $endResult = $filterAnimal->getFilterResult();
+
+        return $this->render('@Animal/Backend/Animal/searchResult.html.twig', [
+            'result' => $endResult,
+        ]);
+    }
 
     /**
      * Ajax Call

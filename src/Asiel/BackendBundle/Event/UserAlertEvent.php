@@ -14,7 +14,6 @@ class UserAlertEvent extends Event
     const INFO      = 'info';
     const WARNING   = 'warning';
     const DANGER    = 'danger';
-    const NOSTATE   = 'nostate';
 
     public function __construct(
         string $type,
@@ -62,7 +61,6 @@ class UserAlertEvent extends Event
             self::INFO,
             self::WARNING,
             self::DANGER,
-            self::NOSTATE,
         ])
         )
         {

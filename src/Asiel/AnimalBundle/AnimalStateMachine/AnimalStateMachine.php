@@ -36,11 +36,7 @@ class AnimalStateMachine
         $this->animal = $animal;
 
         // Set current state
-        if (is_null($animal->getActiveState())) {
-            $this->currentState = new NoState($this);
-        } else {
-            $this->currentState = $animal->getActiveState();
-        }
+        $this->currentState = $animal->getActiveState();
     }
 
     /**
