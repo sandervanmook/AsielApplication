@@ -3,6 +3,7 @@
 namespace Asiel\FrontendBundle\Controller;
 
 use Asiel\FrontendBundle\Form\ContactType;
+use Asiel\FrontendBundle\Form\SearchAnimalType;
 use Asiel\FrontendBundle\SearchAnimal\FilterAnimal;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -24,7 +25,11 @@ class DefaultController extends Controller
      */
     public function searchAnimalsAction()
     {
-        return $this->render('@Frontend/Default/searchAnimal.html.twig');
+        $form = $this->createForm(SearchAnimalType::class);
+
+        return $this->render('@Frontend/Default/searchAnimal.html.twig', [
+            'form'  => $form->createView(),
+        ]);
     }
 
     /**
@@ -82,19 +87,4 @@ class DefaultController extends Controller
             'form' => $form->createView()
         ]);
     }
-
-    /**
-     * @param integer $id
-     * @return Response
-     */
-    public function facebookLinkAction(int $id)
-    {
-        $formHandler = $this->get('asiel.frontendbundle.defaultformhandler');
-        $result = $formHandler->getAnimalRepository()->findOneBy(['id' => $id]);
-
-        return $this->render('@Frontend/Default/facebooklink.html.twig', [
-            'animal' => $result,
-        ]);
-    }
-
 }

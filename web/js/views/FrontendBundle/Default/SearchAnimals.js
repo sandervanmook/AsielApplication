@@ -1,8 +1,8 @@
 $(document).ready(function () {
     // Type filter
     var typeArray = [];
-    var catCheckbox = $('#cat');
-    var dogCheckbox = $('#dog');
+    var catCheckbox = $('.cat');
+    var dogCheckbox = $('.dog');
     catCheckbox.click(function () {
         var catValue = catCheckbox.is(':checked');
         if (catValue) {
@@ -24,9 +24,9 @@ $(document).ready(function () {
 
     // Gender filter
     var genderArray = [];
-    var maleCheckbox = $('#male');
-    var femaleCheckbox = $('#female');
-    var unknownCheckbox = $('#unknown');
+    var maleCheckbox = $('.male');
+    var femaleCheckbox = $('.female');
+    var unknownCheckbox = $('.unknown');
     maleCheckbox.click(function () {
         var maleValue = maleCheckbox.is(':checked');
         if (maleValue) {
@@ -58,8 +58,8 @@ $(document).ready(function () {
     // Age filter
     var ageStart = 1;
     var ageEnd = 18;
-    var startSelect = $('#agestart');
-    var endSelect = $('#ageend');
+    var startSelect = $('#frontendbundle_search_animal_agestart');
+    var endSelect = $('#frontendbundle_search_animal_ageend');
     startSelect.change(function () {
         ageStart = startSelect.val();
         refreshData();
@@ -71,9 +71,9 @@ $(document).ready(function () {
 
     // Status filter
     var statusArray = [];
-    var abandonedCheckbox = $('#abandoned');
-    var foundCheckbox = $('#found');
-    var seizedCheckbox = $('#seized');
+    var abandonedCheckbox = $('.abandoned');
+    var foundCheckbox = $('.found');
+    var seizedCheckbox = $('.seized');
     abandonedCheckbox.click(function () {
         var abandonedValue = abandonedCheckbox.is(':checked');
         if (abandonedValue) {
@@ -104,7 +104,7 @@ $(document).ready(function () {
 
     // Sterilized filter
     var sterilized = '';
-    var sterilizedCheckbox = $('#sterilized');
+    var sterilizedCheckbox = $('.sterilized');
 
     sterilizedCheckbox.click(function () {
         if (sterilizedCheckbox.is(':checked')) {

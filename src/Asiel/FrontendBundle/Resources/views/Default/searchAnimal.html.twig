@@ -4,151 +4,34 @@
     <div class="ui divider horizontal"></div>
     <div class="ui segment">
         <h3 class="ui header">Filters</h3>
-        <div class="ui form tiny">
-            <div class="fields">
-                <h5 class="ui header">Type dier</h5>
-                <div class="field inline">
-                    <div class="ui toggle checkbox">
-                        <input id="cat" type="checkbox">
-                        <label for="cat">Kat</label>
-                    </div>
-                </div>
-                <div class="field inline">
-                    <div class="ui toggle checkbox">
-                        <input id="dog" type="checkbox">
-                        <label for="dog">Hond</label>
-                    </div>
-                </div>
+        <div>
+            {{ form_start(form) }}
+            <div class="form-inline">
+                {{ form_row(form.type) }}
             </div>
-            <div class="fields">
-                <h5 class="ui header">Geslacht</h5>
-                <div class="field inline">
-                    <div class="ui toggle checkbox">
-                        <input id="male" type="checkbox">
-                        <label for="male">{{ outputGender('Male') }}</label>
-                    </div>
-                </div>
-                <div class="field inline">
-                    <div class="ui toggle checkbox">
-                        <input id="female" type="checkbox">
-                        <label for="female">{{ outputGender('Female') }}</label>
-                    </div>
-                </div>
-                <div class="field inline">
-                    <div class="ui toggle checkbox">
-                        <input id="unknown" type="checkbox">
-                        <label for="unknown">{{ outputGender('Unknown') }}</label>
-                    </div>
-                </div>
+            <div class="form-inline">
+                {{ form_row(form.gender) }}
             </div>
-            <div class="fields">
-                <h5 class="ui header">Leeftijd</h5>
-                <div class="field inline">
-                    <select id="agestart">
-                        <!-- don't go below 1 -->
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                        <option value="11">11</option>
-                        <option value="12">12</option>
-                        <option value="13">13</option>
-                        <option value="14">14</option>
-                        <option value="15">15</option>
-                        <option value="16">16</option>
-                        <option value="17">17</option>
-                        <option value="18">18</option>
-                    </select>
-                    <label for="agestart">Van</label>
-                </div>
-                <div class="field inline">
-                    <select id="ageend">
-                        <!-- don't go below 1 -->
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                        <option value="11">11</option>
-                        <option value="12">12</option>
-                        <option value="13">13</option>
-                        <option value="14">14</option>
-                        <option value="15">15</option>
-                        <option value="16">16</option>
-                        <option value="17">17</option>
-                        <option value="18" selected>18</option>
-                    </select>
-                    <label for="ageend">Tot</label>
-                </div>
+            <div class="form-inline">
+                {{ form_row(form.agestart) }}
+                {{ form_row(form.ageend) }}
             </div>
-            <div class="fields">
-                <h5 class="ui header">Status</h5>
-                <div class="field inline">
-                    <div class="ui toggle checkbox">
-                        <input id="abandoned" type="checkbox">
-                        <label for="abandoned">Afgestaan</label>
-                    </div>
-                </div>
-                <div class="field inline">
-                    <div class="ui toggle checkbox">
-                        <input id="found" type="checkbox">
-                        <label for="found">Gevonden</label>
-                    </div>
-                </div>
-                <div class="field inline">
-                    <div class="ui toggle checkbox">
-                        <input id="seized" type="checkbox">
-                        <label for="seized">In beslag genomen</label>
-                    </div>
-                </div>
+            <div class="form-inline">
+                {{ form_row(form.status) }}
             </div>
-            <div class="fields">
-                <h5 class="ui header">Gesteriliseerd / Gecastereerd</h5>
-                <div class="field inline">
-                    <div class="ui toggle checkbox">
-                        <input id="sterilized" type="checkbox">
-                        <label for="sterilized"></label>
-                    </div>
-                </div>
+            <div class="form-inline">
+                {{ form_row(form.sterilized) }}
             </div>
+            {{ form_end(form) }}
         </div>
     </div>
-
     <div class="ui divider horizontal"></div>
     <div id="searchresult"></div>
     <div class="ui divider horizontal"></div>
     <div class="ui divider horizontal"></div>
-
-    <div id="showmodal" class="ui modal">
-        <div class="content">
-            <div id="result"></div>
-        </div>
-        <div class="actions">
-            <div class="ui red basic cancel inverted button">
-                <i class="remove icon"></i>
-            </div>
-            <div id="approve" class="ui green ok inverted button">
-                <i class="checkmark icon"></i>
-            </div>
-        </div>
-    </div>
-
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
     <script src="{{ asset('js/views/FrontendBundle/Default/SearchAnimals.js') }}"></script>
-    <script src="{{ asset('js/views/FrontendBundle/Cat/ShowCat.js') }}"></script>
-    <script src="{{ asset('js/views/FrontendBundle/Dog/ShowDog.js') }}"></script>
 {% endblock %}

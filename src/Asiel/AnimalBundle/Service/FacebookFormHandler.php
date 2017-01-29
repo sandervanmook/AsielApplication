@@ -158,7 +158,7 @@ class FacebookFormHandler
                 new UserAlertEvent(UserAlertEvent::DANGER, 'Geen bericht ingevoerd.'));
         }
 
-        $messageWithLink = sprintf('%s %s', $message, $this->publicLinkToAnimal($animal->getId()));
+        $messageWithLink = sprintf('%s %s', $message, $this->publicLinkToAnimal($animal->getClassName(),$animal->getId()));
 
         $this->postPhoto($messageWithLink, $pictureId, $animal);
     }
@@ -167,9 +167,9 @@ class FacebookFormHandler
      * @param integer $animalId
      * @return string
      */
-    public function publicLinkToAnimal($animalId)
+    public function publicLinkToAnimal($type, $animalId)
     {
-        return $this->router->generate('frontend_facebook_link', ['id' => $animalId],
+        return $this->router->generate('frontend_'.lcfirst($type).'_show', ['id' => $animalId],
             UrlGeneratorInterface::ABSOLUTE_URL);
     }
 

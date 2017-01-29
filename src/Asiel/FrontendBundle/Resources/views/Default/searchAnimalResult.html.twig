@@ -11,13 +11,18 @@
     </thead>
     <tbody>
     {% for animal in result %}
-        <tr id="{{ animal.id }}" class="{{ animal.getclassname }}">
+        <tr>
             <td>
                 {% for picture in animal.pictures|slice(0,1) %}
                     <img src="{{ picture.publicurl }}" height="20">
                 {% endfor %}
             </td>
-            <td>{{ animal.name }}</td>
+            <td>{% if animal.getclassname == 'Cat' %}
+                <a href="{{ path('frontend_cat_show', {'id' : animal.id}) }}">{{ animal.name }}</a>
+                {% elseif animal.getclassname == 'Dog' %}
+                <a href="{{ path('frontend_dog_show', {'id' : animal.id}) }}">{{ animal.name }}</a>
+                {% endif %}
+            </td>
             <td>{{ animal.getclassname|trans }}</td>
             <td>{{ outputGender(animal.gender) }}</td>
             <td>{{ animal.age }}</td>

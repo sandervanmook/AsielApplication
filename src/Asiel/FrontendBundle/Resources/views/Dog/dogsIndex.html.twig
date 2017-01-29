@@ -1,8 +1,4 @@
 {% extends 'FrontendBundle:Base:Base.html.twig' %}
-{% block stylesheets %}
-    {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('css/showCatPublic.css') }}" />
-{% endblock %}
 {% block pagetitle %}Honden{% endblock %}
 {% block body %}
     <div class="ui top attached tabular menu">
@@ -41,7 +37,7 @@
                 </thead>
                 <tbody>
                 {% for dog in dogs %}
-                    <tr id="{{ dog.id }}" class="Dog">
+                    <tr>
                         <td>
                             {% for picture in dog.pictures|slice(0,1) %}
                                 <img src="{{ picture.getpublicurl }}" height="30">
@@ -50,7 +46,7 @@
                                 <img src="{{ asset('img/no_picture.jpg') }}" height="20">
                             {% endif %}
                         </td>
-                        <td>{{ dog.name }}</td>
+                        <td><a href="{{ path('frontend_dog_show', {'id' : dog.id}) }}">{{ dog.name }}</a></td>
                         <td>{{ dog.race }}</td>
                         <td>{{ outputGender(dog.gender) }}</td>
                         <td>{{ dog.age }}</td>
@@ -66,23 +62,4 @@
             </table>
         </div>
     </div>
-
-    <div id="showmodal" class="ui modal">
-        <div class="content">
-            <div id="result"></div>
-        </div>
-        <div class="actions">
-            <div class="ui red basic cancel inverted button">
-                <i class="remove icon"></i>
-            </div>
-            <div id="approve" class="ui green ok inverted button">
-                <i class="checkmark icon"></i>
-            </div>
-        </div>
-    </div>
-
-{% endblock %}
-{% block javascripts %}
-    {{ parent() }}
-    <script src="{{ asset('js/views/FrontendBundle/Dog/ShowDog.js') }}"></script>
 {% endblock %}

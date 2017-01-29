@@ -30,10 +30,6 @@ frontend_about:
     path:     /aboutus
     defaults: { _controller: FrontendBundle:Default:about }
 
-frontend_facebook_link:
-    path:     /facebook/{id}
-    defaults: { _controller: FrontendBundle:Default:facebookLink }
-
 # End Frontend Default
 # Frontend Dog
 frontend_dog_index:
