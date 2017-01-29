@@ -1,131 +1,138 @@
-<div class="ui items">
-    <div class="item">
-        <div class="image">
-            {% for picture in dog.pictures|slice(0,6) %}
-                <img id="{{ picture.id }}" class="pictureShow" src="{{ picture.getpublicurl }}" alt="{{ picture.picturename }}" height="130">
-                <br />
-            {% endfor %}
-            {% if dog.pictures is empty %}
-                <img class="center-block" src="{{ asset('img/no_picture.jpg') }}" height="130">
-            {% endif %}
-        </div>
-        <div class="content">
-            <a class="header">{{ dog.name }}</a>
-            <div class="description">
-                <table class="ui single line table">
-                    <tbody>
-                    <tr>
-                        <td>Ras</td>
-                        <td>{{ dog.race }}</td>
-                    </tr>
-                    <tr>
-                        <td>Type vacht</td>
-                        <td>{{ dog.furType }}</td>
-                    <tr>
-                    <tr>
-                        <td>In asiel sinds</td>
-                        <td>{{ dog.admissionDate|date('d/m/Y') }}</td>
-                    </tr>
-                    <tr>
-                        <td>Kleur</td>
-                        <td>{{ dog.colour }}</td>
-                    </tr>
-                    <tr>
-                        <td>Geboortedatum</td>
-                        <td>{{ dog.dayOfBirth|date('d/m/Y') }}</td>
-                    </tr>
-                    <tr>
-                        <td>Leeftijd</td>
-                        <td>{{ dog.age }} Jaar</td>
-                    </tr>
-                    <tr>
-                        <td>Omschrijving</td>
-                        <td>{{ dog.description|raw }}</td>
-                    </tr>
-                    <tr>
-                        <td>Karakter eigenschappen</td>
-                        <td>{{ dog.characteristics|raw }}</td>
-                    </tr>
-                    <tr>
-                        <td>Medische problemen</td>
-                        <td>{{ dog.medicalproblems|raw }}</td>
-                    </tr>
-                    <tr>
-                        <td>Bekend met agressie</td>
-                        <td>{{ dog.knownAggression|raw }}</td>
-                    <tr>
-                        <td>Geslacht</td>
-                        <td>{{ outputGender(dog.gender) }}</td>
-                    </tr>
-                    <tr>
-                        <td>Kent commando's</td>
-                        <td>{{ dog.knownCommands|raw }}</td>
-                    <tr>
-                    <tr>
-                        <td>Kan het dier met kleine honden overweg</td>
-                        <td>{{ dog.compatibleSmallDog|raw }}</td>
-                    </tr>
-                    <tr>
-                        <td>Kan het dier met grote honden overweg</td>
-                        <td>{{ dog.compatibleLargeDog|raw }}</td>
-                    </tr>
-                    <tr>
-                        <td>Kan samen met katten</td>
-                        <td>{{ dog.compatiblecat|raw }}</td>
-                    </tr>
-                    <tr>
-                        <td>Kan het met andere dieren overweg</td>
-                        <td>{{ dog.compatibleOtheranimals|raw }}</td>
-                    </tr>
-                    </tbody>
-                </table>
+{% extends 'FrontendBundle:Base:Base.html.twig' %}
+{% block pagetitle %}{% endblock %}
+{% block body %}
+    <div class="ui items">
+        <div class="item">
+            <div class="image">
+                {% for picture in dog.pictures|slice(0,6) %}
+                    <img id="{{ picture.id }}" class="pictureShow" src="{{ picture.getpublicurl }}"
+                         alt="{{ picture.picturename }}" height="130">
+                    <br/>
+                {% endfor %}
+                {% if dog.pictures is empty %}
+                    <img class="center-block" src="{{ asset('img/no_picture.jpg') }}" height="130">
+                {% endif %}
             </div>
-            <div class="extra">
-                <table class="ui single line table">
-                    <tbody>
-                    <tr>
-                        <td>Heeft beweging nodig</td>
-                        <td>{{ outputBool(dog.needsExercise) }}</td>
-                    </tr>
-                    <tr>
-                        <td>Kan met kinderen onder de 10 jaar</td>
-                        <td>{{ outputBool(dog.compatibleChildrenBelow10y) }}</td>
-                    </tr>
-                    <tr>
-                        <td>Gesteriliseerd / Gecastereerd</td>
-                        <td>{{ outputBool(dog.sterilized) }}</td>
-                    </tr>
-                    <tr>
-                        <td>Zindelijk</td>
-                        <td>{{ outputBool(dog.toiletTrained) }}</td>
-                    </tr>
-                    <tr>
-                        <td>Kan met kinderen onder de 10 jaar</td>
-                        <td>{{ outputBool(dog.compatibleChildrenBelow10y) }}</td>
-                    </tr>
-                    <tr>
-                        <td>Kan met kinderen boven de 10 jaar</td>
-                        <td>{{ outputBool(dog.compatibleChildrenAbove10y) }}</td>
-                    </tr>
-                    <tr>
-                        <td>Kan met kinderen onder de 7 jaar</td>
-                        <td>{{ outputBool(dog.compatibleChildrenBelow7y) }}</td>
-                    </tr>
-                    <tr>
-                        <td>Kan met kinderen boven de 7 jaar</td>
-                        <td>{{ outputBool(dog.compatibleChildrenAbove7y) }}</td>
-                    </tr>
-                    <tr>
-                        <td>Ontsnapt vaak</td>
-                        <td>{{ outputBool(dog.escapesAlot) }}</td>
-                    </tr>
-                    <tr>
-                        <td>Geschikt voor oudere mensen</td>
-                        <td>{{ outputBool(dog.compatibleOldPeople) }}</td>
-                    </tr>
-                    </tbody>
-                </table>
+            <div class="content">
+                <a class="header">{{ dog.name }}</a>
+                <div class="description">
+                    <table class="ui single line table">
+                        <tbody>
+                        <tr>
+                            <td>Ras</td>
+                            <td>{{ dog.race }}</td>
+                        </tr>
+                        <tr>
+                            <td>Type vacht</td>
+                            <td>{{ dog.furType }}</td>
+                        <tr>
+                        <tr>
+                            <td>In asiel sinds</td>
+                            <td>{{ dog.admissionDate|date('d/m/Y') }}</td>
+                        </tr>
+                        <tr>
+                            <td>Kleur</td>
+                            <td>{{ dog.colour }}</td>
+                        </tr>
+                        <tr>
+                            <td>Geboortedatum</td>
+                            <td>{{ dog.dayOfBirth|date('d/m/Y') }}</td>
+                        </tr>
+                        <tr>
+                            <td>Leeftijd</td>
+                            <td>{{ dog.age }} Jaar</td>
+                        </tr>
+                        <tr>
+                            <td>Omschrijving</td>
+                            <td>{{ dog.description|raw }}</td>
+                        </tr>
+                        <tr>
+                            <td>Karakter eigenschappen</td>
+                            <td>{{ dog.characteristics|raw }}</td>
+                        </tr>
+                        <tr>
+                            <td>Medische problemen</td>
+                            <td>{{ dog.medicalproblems|raw }}</td>
+                        </tr>
+                        <tr>
+                            <td>Bekend met agressie</td>
+                            <td>{{ dog.knownAggression|raw }}</td>
+                        <tr>
+                            <td>Geslacht</td>
+                            <td>{{ outputGender(dog.gender) }}</td>
+                        </tr>
+                        <tr>
+                            <td>Kent commando's</td>
+                            <td>{{ dog.knownCommands|raw }}</td>
+                        <tr>
+                        <tr>
+                            <td>Kan het dier met kleine honden overweg</td>
+                            <td>{{ dog.compatibleSmallDog|raw }}</td>
+                        </tr>
+                        <tr>
+                            <td>Kan het dier met grote honden overweg</td>
+                            <td>{{ dog.compatibleLargeDog|raw }}</td>
+                        </tr>
+                        <tr>
+                            <td>Kan samen met katten</td>
+                            <td>{{ dog.compatiblecat|raw }}</td>
+                        </tr>
+                        <tr>
+                            <td>Kan het met andere dieren overweg</td>
+                            <td>{{ dog.compatibleOtheranimals|raw }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="extra">
+                    <table class="ui single line table">
+                        <tbody>
+                        <tr>
+                            <td>Heeft beweging nodig</td>
+                            <td>{{ outputBool(dog.needsExercise) }}</td>
+                        </tr>
+                        <tr>
+                            <td>Kan met kinderen onder de 10 jaar</td>
+                            <td>{{ outputBool(dog.compatibleChildrenBelow10y) }}</td>
+                        </tr>
+                        <tr>
+                            <td>Gesteriliseerd / Gecastereerd</td>
+                            <td>{{ outputBool(dog.sterilized) }}</td>
+                        </tr>
+                        <tr>
+                            <td>Zindelijk</td>
+                            <td>{{ outputBool(dog.toiletTrained) }}</td>
+                        </tr>
+                        <tr>
+                            <td>Kan met kinderen onder de 10 jaar</td>
+                            <td>{{ outputBool(dog.compatibleChildrenBelow10y) }}</td>
+                        </tr>
+                        <tr>
+                            <td>Kan met kinderen boven de 10 jaar</td>
+                            <td>{{ outputBool(dog.compatibleChildrenAbove10y) }}</td>
+                        </tr>
+                        <tr>
+                            <td>Kan met kinderen onder de 7 jaar</td>
+                            <td>{{ outputBool(dog.compatibleChildrenBelow7y) }}</td>
+                        </tr>
+                        <tr>
+                            <td>Kan met kinderen boven de 7 jaar</td>
+                            <td>{{ outputBool(dog.compatibleChildrenAbove7y) }}</td>
+                        </tr>
+                        <tr>
+                            <td>Ontsnapt vaak</td>
+                            <td>{{ outputBool(dog.escapesAlot) }}</td>
+                        </tr>
+                        <tr>
+                            <td>Geschikt voor oudere mensen</td>
+                            <td>{{ outputBool(dog.compatibleOldPeople) }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
-</div>
+    <div class="ui divider horizontal"></div>
+    <div class="ui divider horizontal"></div>
+{% endblock %}

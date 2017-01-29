@@ -44,8 +44,8 @@ twig:
     paths:
      - '%kernel.root_dir%/../src/Asiel/BackendBundle/Resources/views/FormTemplate'
     form_themes:
-      #- bootstrap_3_layout.html.twig
-      - "semantic-ui-2.2.html.twig"
+      - bootstrap_3_layout.html.twig
+      #- "semantic-ui-2.2.html.twig"
 
 # Doctrine Configuration
 doctrine:
