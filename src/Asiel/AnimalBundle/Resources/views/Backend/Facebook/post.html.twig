@@ -13,7 +13,7 @@
                     <p>Welke foto moet er worden gepost ?</p>
                     <div>
                         {% for picture in pictures %}
-                            <div class="ui radio checkbox">
+                            <div>
                                 <img id="{{ picture.id }}" class="ui image small Dog" src="{{ picture.getpublicurl }}">
                                 <br />
                                 <input value="{{ picture.id }}" type="radio" name="picture">
