@@ -14,7 +14,7 @@
         <tr>
             <td>
                 {% for picture in animal.pictures|slice(0,1) %}
-                    <img src="{{ picture.publicurl }}" height="20">
+                    <img class="ui centered mini image" src="{{ picture.publicurl }}">
                 {% endfor %}
             </td>
             <td>{% if animal.getclassname == 'Cat' %}
