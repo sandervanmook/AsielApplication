@@ -4,6 +4,7 @@ namespace Asiel\AnimalBundle\Controller;
 
 use Asiel\AnimalBundle\AnimalFactory\AnimalFactory;
 use Asiel\AnimalBundle\AnimalFactory\AnimalType;
+use Asiel\AnimalBundle\Form\SearchAnimalType;
 use Asiel\AnimalBundle\SearchAnimal\FilterAnimal;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -18,7 +19,11 @@ class BackendController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('@Animal/Backend/Animal/index.html.twig');
+        $form = $this->createForm(SearchAnimalType::class);
+
+        return $this->render('@Animal/Backend/Animal/index.html.twig', [
+            'form'  => $form->createView(),
+        ]);
     }
 
     /**
@@ -115,7 +120,6 @@ class BackendController extends Controller
 
         $filterAnimal = new FilterAnimal($allAnimals, $searchArray);
         $filterAnimal->filter();
-    //var_dump($request->get('status')); exit;
 
         $endResult = $filterAnimal->getFilterResult();
 

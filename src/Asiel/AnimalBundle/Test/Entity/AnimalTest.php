@@ -9,6 +9,7 @@ use Asiel\AnimalBundle\Entity\Animal;
 use Asiel\AnimalBundle\Entity\Incident;
 use Asiel\AnimalBundle\Entity\Medical;
 use Asiel\AnimalBundle\Entity\StatusType\Lost;
+use Asiel\AnimalBundle\Entity\StatusType\NoState;
 use Asiel\CalendarBundle\Entity\Task;
 use Doctrine\Common\Collections\ArrayCollection;
 
@@ -125,11 +126,12 @@ class AnimalTest extends \PHPUnit_Framework_TestCase
 
     public function test_get_active_state_without_active_state()
     {
+        $nostate = new NoState(new AnimalStateMachine());
         $animal = new Animal();
         $status = new Lost(new AnimalStateMachine());
         $status->isArchived(true);
         $animal->addStatus($status);
 
-        $this->assertNull($this->animal->getActiveState());
+        $this->assertEquals($this->animal->getActiveState(), $nostate);
     }
 }

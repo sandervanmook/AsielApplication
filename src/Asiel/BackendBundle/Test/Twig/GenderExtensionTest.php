@@ -43,7 +43,7 @@ class GenderExtensionTest extends \PHPUnit_Framework_TestCase
         $extension = new GenderExtension();
         $gender = 'Unknown';
         $extension->outputGender($gender);
-        $expection = '<span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>';
+        $expection = '<i class="help icon"></i>';
 
         $this->expectOutputString($expection);
     }
@@ -53,7 +53,7 @@ class GenderExtensionTest extends \PHPUnit_Framework_TestCase
         $extension = new GenderExtension();
         $gender = 'Yolo';
         $extension->outputGender($gender);
-        $expection = '<span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>';
+        $expection = '<i class="help icon"></i>';
 
         $this->expectOutputString($expection);
     }
