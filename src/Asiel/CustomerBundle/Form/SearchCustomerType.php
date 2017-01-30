@@ -19,13 +19,13 @@ class SearchCustomerType extends AbstractType
     {
         $builder
             ->add('lastname', TextType::class, [
-                'label' => 'Achternaam',
+                'label' => false,
             ])
             ->add('city', TextType::class, [
-                'label' => 'Stad',
+                'label' => false,
             ])
             ->add('citizenservicenumber', TextType::class, [
-                'label' => 'BSN/ Rijksnummer',
+                'label' => false,
             ])
         ;
     }

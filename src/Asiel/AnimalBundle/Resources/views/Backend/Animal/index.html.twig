@@ -3,32 +3,31 @@
 {% block body %}
     <div class="ui sixteen column grid container">
         <div class="sixteen wide column">
-            <div class="ui segment">
-                <h3 class="ui header">Filters</h3>
-                <div>
-                    {{ form_start(form) }}
-                    <div class="form-inline">
-                        {{ form_row(form.chipnumber) }}
-                    </div>
-                    <div class="form-inline">
-                        {{ form_row(form.type) }}
-                    </div>
-                    <div class="form-inline">
-                        {{ form_row(form.gender) }}
-                    </div>
-                    <div class="form-inline">
-                        {{ form_row(form.agestart) }}
+            <h3 class="ui header">Filters</h3>
+            <table class="ui table very basic">
+                <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Geslacht</th>
+                    <th class="two wide">Leeftijd</th>
+                    <th class="three wide">Status</th>
+                    <th class="collapsing">Gesteriliseerd / Gecastereerd</th>
+                    <th>Chipnummer</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>{{ form_row(form.type) }}</td>
+                    <td>{{ form_row(form.gender) }}</td>
+                    <td>{{ form_row(form.agestart) }}
                         {{ form_row(form.ageend) }}
-                    </div>
-                    <div class="form-inline">
-                        {{ form_row(form.status) }}
-                    </div>
-                    <div class="form-inline">
-                        {{ form_row(form.sterilized) }}
-                    </div>
-                    {{ form_end(form) }}
-                </div>
-            </div>
+                    </td>
+                    <td>{{ form_row(form.status) }}</td>
+                    <td>{{ form_row(form.sterilized) }}</td>
+                    <td>{{ form_row(form.chipnumber) }}</td>
+                </tr>
+                </tbody>
+            </table>
         </div>
         <div class="ui divider horizontal"></div>
         <div id="searchresult"></div>

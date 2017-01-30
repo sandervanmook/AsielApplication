@@ -21,7 +21,7 @@ class SearchAnimalType extends AbstractType
     {
         $builder
             ->add('type', ChoiceType::class, [
-                'label' => 'Type dier',
+                'label' => false,
                 'choices' => [
                     'Kat' => 'cat',
                     'Hond' => 'dog',
@@ -33,10 +33,10 @@ class SearchAnimalType extends AbstractType
                 'multiple' => true,
             ])
             ->add('chipnumber', TextType::class, [
-                'label' => 'Chipnumber'
+                'label' => false,
             ])
             ->add('gender', ChoiceType::class, [
-                'label' => 'Geslacht',
+                'label' => false,
                 'choices' => [
                     'Mannelijk' => 'male',
                     'Vrouwelijk' => 'female',
@@ -49,18 +49,18 @@ class SearchAnimalType extends AbstractType
                 'multiple' => true,
             ])
             ->add('agestart', ChoiceType::class, [
-                'label' => 'Van',
+                'label' => false,
                 'choices' => $this->generateAgeNumbers(),
                 'multiple' => false,
             ])
             ->add('ageend', ChoiceType::class, [
-                'label' => 'Tot',
+                'label' => false,
                 'choices' => $this->generateAgeNumbers(),
                 'multiple' => false,
                 'data'  => 18,
             ])
             ->add('status', ChoiceType::class, [
-                'label' => 'Status',
+                'label' => false,
                 'choices' => [
                     'Afgestaan' => 'abandoned',
                     'Gevonden' => 'found',
@@ -78,7 +78,7 @@ class SearchAnimalType extends AbstractType
                 'multiple' => true,
             ])
             ->add('sterilized', ChoiceType::class, [
-                'label' => 'Gesteriliseerd / Gecastereerd',
+                'label' => false,
                 'choices' => [
                     'Ja' => 'sterilized',
                 ],

@@ -1,22 +1,29 @@
 {% extends 'FrontendBundle:Base:Base.html.twig' %}
 {% block pagetitle %}{% endblock %}
 {% block body %}
-<div class="ui items">
-    <div class="item">
-        <div class="image">
-            {% for picture in cat.pictures|slice(0,6) %}
-                <img id="{{ picture.id }}" class="pictureShow" src="{{ picture.getpublicurl }}" alt="{{ picture.picturename }}" height="130">
-                <br />
-            {% endfor %}
-            {% if cat.pictures is empty %}
-                <img class="center-block" src="{{ asset('img/no_picture.jpg') }}" height="130">
-            {% endif %}
-        </div>
-        <div class="content">
-            <a class="header">{{ cat.name }}</a>
-            <div class="description">
-                <table class="ui single line table">
-                    <tbody>
+    <div class="ui sixteen column grid container">
+        <div class="sixteen wide column">
+            <table class="ui table very basic">
+                <tbody>
+                <tr>
+                    {% for picture in cat.pictures|slice(0,4) %}
+                        <td><img class="ui small image" src="{{ picture.getpublicurl }}"
+                                 alt="{{ picture.picturename }}"></td>
+                    {% endfor %}
+                    {% if cat.pictures is empty %}
+                        <td><img class="center-block" src="{{ asset('img/no_picture.jpg') }}"></td>
+                    {% endif %}
+                </tr>
+                </tbody>
+            </table>
+            <div class="ui divider horizontal"></div>
+            <h2 class="ui header">{{ cat.name }}</h2>
+            <div class="ui divider horizontal"></div>
+
+            <div class="ui two column very relaxed grid">
+                <div class="column">
+                    <table class="ui table striped">
+                        <tbody>
                         <tr>
                             <td>Ras</td>
                             <td>{{ cat.race }}</td>
@@ -72,12 +79,12 @@
                             <td>Kan het met andere dieren overweg</td>
                             <td>{{ cat.compatibleOtheranimals|raw }}</td>
                         </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="extra">
-                <table class="ui single line table">
-                    <tbody>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="column">
+                    <table class="ui table striped">
+                        <tbody>
                         <tr>
                             <td>Kan met kinderen onder de 10 jaar</td>
                             <td>{{ outputBool(cat.compatibleChildrenBelow10y) }}</td>
@@ -114,12 +121,12 @@
                             <td>Geschikt voor oudere mensen</td>
                             <td>{{ outputBool(cat.compatibleOldPeople) }}</td>
                         </tr>
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
-</div>
     <div class="ui divider horizontal"></div>
     <div class="ui divider horizontal"></div>
 {% endblock %}

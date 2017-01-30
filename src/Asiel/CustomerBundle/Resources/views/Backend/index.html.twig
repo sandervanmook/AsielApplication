@@ -2,30 +2,42 @@
 {% block pagetitle %}Klanten{% endblock %}
 {% block body %}
     <div class="ui sixteen column grid container">
-        <div class="sixteen wide column">
-            <div class="ui segment">
-                <h3 class="ui header">Filters</h3>
-                <div>
-                    {{ form_start(form) }}
-                    <div class="form-inline">
-                        {{ form_row(form.lastname) }}
-                    </div>
-                    <div class="form-inline">
-                        {{ form_row(form.citizenservicenumber) }}
-                    </div>
-                    <h3 class="ui header">Subfilters</h3>
-                    <div class="form-inline">
-                        {{ form_row(form.city) }}
-                    </div>
-
-                    {{ form_end(form) }}
-                </div>
-            </div>
+        <div class="four wide colomn">
+            <h3 class="ui header">Filters</h3>
+            <table class="ui table very basic">
+                <thead>
+                <tr>
+                    <th class="two wide">Achternaam</th>
+                    <th class="two wide">BSN/Rijksnummer</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>{{ form_row(form.lastname) }}</td>
+                    <td>{{ form_row(form.citizenservicenumber) }}</td>
+                </tr>
+                </tbody>
+            </table>
+            <h3 class="ui header">Subfilters</h3>
+            <table class="ui table very basic three wide">
+                <thead>
+                <tr>
+                    <th class="two wide">Stad</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>{{ form_row(form.city) }}</td>
+                </tr>
+                </tbody>
+            </table>
         </div>
-        <div class="ui divider horizontal"></div>
-        <div id="searchresult"></div>
-        <div class="ui divider horizontal"></div>
-        <div class="ui divider horizontal"></div>
+        <div class="sixteen wide column">
+            <div class="ui divider horizontal"></div>
+            <div id="searchresult"></div>
+            <div class="ui divider horizontal"></div>
+            <div class="ui divider horizontal"></div>
+        </div>
     </div>
 {% endblock %}
 {% block javascripts %}

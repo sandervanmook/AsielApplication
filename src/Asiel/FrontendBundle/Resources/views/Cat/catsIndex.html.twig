@@ -37,26 +37,26 @@
                 </thead>
                 <tbody>
                 {% for cat in cats %}
-                <tr>
-                    <td>
-                        {% for picture in cat.pictures|slice(0,1) %}
-                            <img src="{{ picture.getpublicurl }}" height="30">
+                    <tr>
+                        <td>
+                            {% for picture in cat.pictures|slice(0,1) %}
+                                <img class="ui centered mini image" src="{{ picture.getpublicurl }}">
+                            {% endfor %}
+                            {% if cat.pictures is empty %}
+                                <img class="ui centered mini image" src="{{ asset('img/no_picture.jpg') }}">
+                            {% endif %}
+                        </td>
+                        <td><a href="{{ path('frontend_cat_show', {'id' : cat.id}) }}">{{ cat.name }}</a></td>
+                        <td>{{ cat.race }}</td>
+                        <td>{{ outputGender(cat.gender) }}</td>
+                        <td>{{ cat.age }}</td>
+                        <td>{{ cat.colour }}</td>
+                        {% for state in cat.status %}
+                            {% if state.archived == false %}
+                                <td>{{ state.getclassname|trans }}</td>
+                            {% endif %}
                         {% endfor %}
-                        {% if cat.pictures is empty %}
-                            <img src="{{ asset('img/no_picture.jpg') }}" height="20">
-                        {% endif %}
-                    </td>
-                    <td><a href="{{ path('frontend_cat_show', {'id' : cat.id}) }}">{{ cat.name }}</a></td>
-                    <td>{{ cat.race }}</td>
-                    <td>{{ outputGender(cat.gender) }}</td>
-                    <td>{{ cat.age }}</td>
-                    <td>{{ cat.colour }}</td>
-                    {% for state in cat.status %}
-                        {% if state.archived == false %}
-                    <td>{{ state.getclassname|trans }}</td>
-                        {% endif %}
-                    {% endfor %}
-                </tr>
+                    </tr>
                 {% endfor %}
                 </tbody>
             </table>

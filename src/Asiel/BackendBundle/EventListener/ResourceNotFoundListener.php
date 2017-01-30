@@ -27,5 +27,6 @@ class ResourceNotFoundListener
         }
 
         echo $this->twig->render('BackendBundle:Errors:404.html.twig', ['message' => $message]);
+        exit;
     }
 }
