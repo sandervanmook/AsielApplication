@@ -18,31 +18,14 @@ class SearchCustomerType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('query', TextType::class, [
-                'label' => 'Zoek',
-                'attr'      => [
-                    'placeholder'   => 'Geef een zoekopdracht in'
-                ],
-                'required'  => true,
+            ->add('lastname', TextType::class, [
+                'label' => 'Achternaam',
             ])
-            ->add('searchon', ChoiceType::class, [
-                'label' => 'op',
-                'choices' => [
-                    'Achternaam' => 'lastname',
-                    'Adres'      => 'address'
-                ],
+            ->add('city', TextType::class, [
+                'label' => 'Stad',
             ])
-            ->add('submit', SubmitType::class, [
-                'label' => 'Zoeken',
-                'attr'  => [
-                    'class' => 'btn btn-success'
-                ]
-            ])
-            ->add('reset', ResetType::class, [
-                'label' => 'Reset',
-                'attr'  => [
-                    'class' => 'btn-reset-customer-index btn btn-danger'
-                ]
+            ->add('citizenservicenumber', TextType::class, [
+                'label' => 'BSN/ Rijksnummer',
             ])
         ;
     }
@@ -54,6 +37,7 @@ class SearchCustomerType extends AbstractType
     {
         $resolver->setDefaults(array(
             'required'  => false,
+            'mapped'    => false,
         ));
     }
 
@@ -62,7 +46,7 @@ class SearchCustomerType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'asielbundle_search';
+        return 'customerbundle_search_customer';
     }
 
 

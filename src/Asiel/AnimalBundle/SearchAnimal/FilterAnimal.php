@@ -24,6 +24,7 @@ class FilterAnimal
     public function filter()
     {
         $this->filterType();
+        $this->filterChipnumber();
         $this->filterGender();
         $this->filterAge();
         $this->filterStatus();
@@ -31,7 +32,7 @@ class FilterAnimal
     }
 
     /**
-     * First filter, use allAnimals
+     * Filters, use allAnimals
      */
     private function filterType()
     {
@@ -46,9 +47,24 @@ class FilterAnimal
         }
     }
 
+    private function filterChipnumber()
+    {
+        $result = [];
+        if ((!empty($this->searchArray['chipnumber'])) && (!empty($this->allAnimals))) {
+            foreach ($this->allAnimals as $animal) {
+                if ($animal->getChipnumber() == $this->searchArray['chipnumber']) {
+                    $result[] = $animal;
+                }
+                $this->filterResult = $result;
+            }
+        }
+    }
+
+
     /**
-     * Use filterResult
+     * Sub filters, use filteredResult
      */
+
     private function filterGender()
     {
         $result = [];
@@ -62,9 +78,6 @@ class FilterAnimal
         }
     }
 
-    /**
-     * Use filterResult
-     */
     private function filterAge()
     {
         $result = [];
@@ -82,9 +95,6 @@ class FilterAnimal
         }
     }
 
-    /**
-     * Use filterResult
-     */
     private function filterStatus()
     {
         $result = [];
@@ -130,6 +140,5 @@ class FilterAnimal
             $this->filterResult = $result;
         }
     }
-
 
 }

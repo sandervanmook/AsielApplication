@@ -5,6 +5,7 @@ namespace Asiel\CustomerBundle\Controller;
 use Asiel\CustomerBundle\Entity\Customer;
 use Asiel\CustomerBundle\Form\CustomerType;
 use Asiel\CustomerBundle\Form\SearchCustomerType;
+use Asiel\CustomerBundle\SearchCustomer\FilterCustomer;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,23 +19,35 @@ class BackendCustomerController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $formHandler = $this->get('asiel.customerbundle.customerformhandler');
-
-        $searchForm = $this->createForm(SearchCustomerType::class);
-        $searchForm->handleRequest($request);
-
-        if ($searchForm->isSubmitted() && $searchForm->isValid()) {
-            $result = $formHandler->getRepository()->findCustomers($formHandler->getSearchArray($searchForm));
-
-            return $this->render('@Customer/Backend/index.html.twig', [
-                'allcustomers'  => $result,
-                'searchform'    => $searchForm->createView(),
-            ]);
-        }
+        $form = $this->createForm(SearchCustomerType::class);
 
         return $this->render('@Customer/Backend/index.html.twig', [
-            'allcustomers' => $formHandler->getRepository()->findAll(),
-            'searchform'   => $searchForm->createView(),
+            'form'   => $form->createView(),
+        ]);
+    }
+
+    /**
+     * Ajax call
+     * @param Request $request
+     * @return Response
+     */
+    public function searchCustomersDataAction(Request $request)
+    {
+        $formHandler = $this->get('asiel.customerbundle.customerformhandler');
+
+        $allCustomers = $formHandler->getRepository()->findAll();
+
+        $searchArray['lastname'] = $request->get('lastname');
+        $searchArray['city'] = $request->get('city');
+        $searchArray['citizenservicenumber'] = $request->get('citizenservicenumber');
+
+        $filterCustomer = new FilterCustomer($allCustomers, $searchArray);
+        $filterCustomer->filter();
+
+        $endResult = $filterCustomer->getFilterResult();
+
+        return $this->render('@Customer/Backend/searchResult.html.twig', [
+            'result' => $endResult,
         ]);
     }
 
@@ -84,10 +97,7 @@ class BackendCustomerController extends Controller
     }
 
     /**
-     * Ajax Calls
-     */
-
-    /**
+     * Ajax call
      * @param string $searchon
      * @return Response
      */

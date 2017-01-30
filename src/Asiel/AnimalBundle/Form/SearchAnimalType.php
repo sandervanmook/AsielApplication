@@ -32,6 +32,9 @@ class SearchAnimalType extends AbstractType
                 'expanded' => true,
                 'multiple' => true,
             ])
+            ->add('chipnumber', TextType::class, [
+                'label' => 'Chipnumber'
+            ])
             ->add('gender', ChoiceType::class, [
                 'label' => 'Geslacht',
                 'choices' => [

@@ -64,17 +64,4 @@ class CustomerFormHandler
         return $this->em->getRepository('CustomerBundle:Customer');
     }
 
-    /**
-     * @param $searchForm
-     * @return array
-     */
-    public function getSearchArray($searchForm)
-    {
-        $search = [];
-        $search['searchon'] = $searchForm->get('searchon')->getData();
-        $search['query']    = $searchForm->get('query')->getData();
-
-        return $search;
-    }
-
 }
