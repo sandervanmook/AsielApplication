@@ -5,7 +5,7 @@ namespace Asiel\AnimalBundle\Test\Controller;
 
 use Asiel\Shared\Test\BaseFunctionalTest;
 
-class AnimalControllerTest extends BaseFunctionalTest
+class BackendControllerTest extends BaseFunctionalTest
 {
     public function test_index_action()
     {
@@ -28,7 +28,7 @@ class AnimalControllerTest extends BaseFunctionalTest
         $this->assertStatusCode(200, $this->client);
 
         $contents = $this->getContents($url);
-        $this->assertContains('<input type="text" id="chipnumbercheck" placeholder="Vul het 15 cijferige chipnummer van het dier in." maxlength="15" class="form-control">', $contents);
+        $this->assertContains('<input type="text" id="chipnumbercheck" placeholder="15 cijferige chipnummer" maxlength="15">', $contents);
     }
 
     public function test_register_action_cat()
