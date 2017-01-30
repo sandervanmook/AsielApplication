@@ -102,6 +102,7 @@ class BackendController extends Controller
     }
 
     /**
+     * Ajax call
      * @param Request $request
      * @return Response
      */
@@ -112,6 +113,8 @@ class BackendController extends Controller
         $allAnimals = $formHandler->getRepository()->findAll();
 
         $searchArray['type'] = $request->get('type');
+        $searchArray['chipnumber'] = $request->get('chipnumber');
+
         $searchArray['gender'] = $request->get('gender');
         $searchArray['agestart'] = $request->get('agestart');
         $searchArray['ageend'] = $request->get('ageend');

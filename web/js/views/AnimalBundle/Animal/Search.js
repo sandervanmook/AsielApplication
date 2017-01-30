@@ -1,4 +1,15 @@
 $(document).ready(function () {
+    // chipnumber filter
+    var chipnumber = '';
+    $('#frontendbundle_search_animal_chipnumber').keyup(function () {
+        // Get the typed value
+        chipnumber = $(this).val();
+        // Only refresh when full number is entered
+        if (chipnumber.length == 15) {
+            refreshData();
+        }
+    });
+
     // Type filter
     var typeArray = [];
     var catCheckbox = $('.cat');
@@ -175,7 +186,8 @@ $(document).ready(function () {
                 agestart: ageStart,
                 ageend: ageEnd,
                 status: statusArray,
-                sterilized: sterilized
+                sterilized: sterilized,
+                chipnumber: chipnumber
             },
             type: "GET",
             dataType: "html"
