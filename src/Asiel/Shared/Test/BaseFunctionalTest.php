@@ -24,6 +24,7 @@ class BaseFunctionalTest extends WebTestCase
             'Asiel\Shared\Test\DataFixtures\LoadAnimalData',
             'Asiel\Shared\Test\DataFixtures\LoadStatusData',
             'Asiel\Shared\Test\DataFixtures\LoadCustomerData',
+            'Asiel\Shared\Test\DataFixtures\LoadLocationData',
         ));
 
         $credentials = [
