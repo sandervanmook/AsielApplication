@@ -31,7 +31,7 @@ class FilterAnimal
     }
 
     /**
-     * First filter, use allAnimals
+     * Filter, use allAnimals
      */
     private function filterType()
     {
@@ -47,7 +47,7 @@ class FilterAnimal
     }
 
     /**
-     * Use filterResult
+     * Subfilter, use filterResult
      */
     private function filterGender()
     {
@@ -62,9 +62,6 @@ class FilterAnimal
         }
     }
 
-    /**
-     * Use filterResult
-     */
     private function filterAge()
     {
         $result = [];
@@ -82,9 +79,6 @@ class FilterAnimal
         }
     }
 
-    /**
-     * Use filterResult
-     */
     private function filterStatus()
     {
         $result = [];
@@ -105,7 +99,10 @@ class FilterAnimal
     private function filterSterilized()
     {
         $result = [];
-        if (($this->searchArray['sterilized'] == 'true') && (!empty($this->filterResult))) {
+        if ((isset($this->searchArray['sterilized'])) &&
+            ($this->searchArray['sterilized'] == 'true') &&
+            (!empty($this->filterResult))
+        ) {
             foreach ($this->filterResult as $animal) {
                 if ($animal->getSterilized()) {
                     $result[] = $animal;
@@ -115,7 +112,10 @@ class FilterAnimal
             $this->filterResult = $result;
         }
 
-        if (($this->searchArray['sterilized'] == 'false') && (!empty($this->filterResult))) {
+        if ((isset($this->searchArray['sterilized'])) &&
+            ($this->searchArray['sterilized'] == 'false') &&
+            (!empty($this->filterResult))
+        ) {
             foreach ($this->filterResult as $animal) {
                 if (!$animal->getSterilized()) {
                     $result[] = $animal;
@@ -125,6 +125,4 @@ class FilterAnimal
             $this->filterResult = $result;
         }
     }
-
-
 }

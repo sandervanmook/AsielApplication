@@ -64,4 +64,17 @@ class BackendControllerTest extends BaseFunctionalTest
             $content
         );
     }
+
+    public function test_search_animals_data_action()
+    {
+        $url = $this->getUrl('backend_animal_search_data', ['type' => ['Cat']]);
+        $this->client->request('GET', $url);
+        $this->assertStatusCode(200, $this->client);
+        $content = $this->client->getResponse()->getContent();
+
+        $this->assertContains(
+            'Sam',
+            $content
+        );
+    }
 }
