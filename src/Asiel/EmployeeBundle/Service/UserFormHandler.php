@@ -81,4 +81,12 @@ class UserFormHandler
         return $this->em->getRepository('EmployeeBundle:User');
     }
 
+    public function profileEditPassword(User $user, string $password)
+    {
+        $user->setPassword($password);
+        $this->em->flush();
+        $this->eventDispatcher->dispatch('user_alert.message',
+            new UserAlertEvent(UserAlertEvent::SUCCESS, 'Uw wachtwoord is gewijzigd.'));
+    }
+
 }
