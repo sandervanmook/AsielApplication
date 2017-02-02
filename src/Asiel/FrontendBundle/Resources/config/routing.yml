@@ -23,7 +23,7 @@ frontend_animal_search_data:
           expose : true
 
 frontend_contact:
-    path:     /contact
+    path:     /contactus
     defaults: { _controller: FrontendBundle:Default:contact }
 
 frontend_about:

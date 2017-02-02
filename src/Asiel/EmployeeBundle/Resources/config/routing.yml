@@ -18,6 +18,11 @@ backend_employee_edit:
 backend_employee_edit_password:
     path:     /{id}/edit/password
     defaults: { _controller: EmployeeBundle:Backend:editPassword }
+
+backend_employee_profile:
+    path:     /{id}/profile
+    defaults: { _controller: EmployeeBundle:Backend:profile }
+
 # End Backend User
 # Backend UserPicture
 backend_employee_user_picture_index:

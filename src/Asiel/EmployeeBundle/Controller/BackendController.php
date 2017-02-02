@@ -14,6 +14,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 class BackendController extends Controller
 {
+    /**
+     * @return Response
+     */
     public function indexAction()
     {
         $formHandler = $this->get('asiel.employeebundle.userformhandler');
@@ -82,6 +85,11 @@ class BackendController extends Controller
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @param int $id
+     * @return RedirectResponse|Response
+     */
     public function editPasswordAction(Request $request, int $id)
     {
         $formHandler = $this->get('asiel.employeebundle.userformhandler');
@@ -106,7 +114,7 @@ class BackendController extends Controller
      * @param integer $id
      * @return Response
      */
-    public function userInfoAction($id)
+    public function userInfoAction(int $id)
     {
         $repository = $this->getDoctrine()->getRepository('EmployeeBundle:User');
 
@@ -115,4 +123,36 @@ class BackendController extends Controller
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @param int $id
+     * @return RedirectResponse|Response
+     */
+    public function profileAction(Request $request, int $id)
+    {
+        // TODO replace this by voter
+        if ($this->getUser()->getId() != $id) {
+            return new RedirectResponse($this->generateUrl('backend_default_index'));
+        }
+
+        $repository = $this->getDoctrine()->getRepository('EmployeeBundle:User');
+        $user = $repository->find($id);
+        $formHandler = $this->get('asiel.employeebundle.userformhandler');
+
+        $form = $this->createForm(EditPasswordType::class, $user);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $password = $form->get('password')->getData();
+            $formHandler->profileEditPassword($user, $password);
+
+            return new RedirectResponse($this->generateUrl('backend_employee_profile', ['id' => $id]));
+        }
+
+        return $this->render('@Employee/Backend/profile.html.twig', [
+            'user' => $user,
+            'form'  => $form->createView(),
+        ]);
+    }
 }
