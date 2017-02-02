@@ -86,4 +86,12 @@ class BackendTaskController extends Controller
             'form'      => $form->createView(),
         ]);
     }
+
+    /**
+     * @return Response
+     */
+    public function infoAction()
+    {
+        return $this->render('@Animal/Backend/Task/taskInfo.html.twig');
+    }
 }

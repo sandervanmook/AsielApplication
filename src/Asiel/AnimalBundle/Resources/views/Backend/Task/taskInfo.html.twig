@@ -1,0 +1,57 @@
+{% extends '@Backend/Base/Base.html.twig' %}
+{% block pagetitle %}Taakinformatie{% endblock %}
+{% block body %}
+    <div class="ui twelve column grid container">
+        <div class="six wide column">
+            <p>Als een dier van status wisselt heeft u de mogelijkheid om een aantal taken aan te vinken. In dit
+                overzicht staan de verschillende taken en het tijdstip wanneer ze (automatisch) in de agenda komen.</p>
+            <div class="ui divider horizontal"></div>
+            <table class="ui very basic table">
+                <thead>
+                <tr>
+                    <th>Status</th>
+                    <th>Omschrijving</th>
+                    <th>Tijdsverschil</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Afstand</td>
+                    <td>Chippen</td>
+                    <td>Morgen</td>
+                </tr>
+                <tr>
+                    <td>Afstand</td>
+                    <td>Vaccinatie</td>
+                    <td>Morgen</td>
+                </tr>
+                <tr>
+                    <td>Afstand</td>
+                    <td>Sterilisatie</td>
+                    <td>Morgen</td>
+                </tr>
+                <tr>
+                    <td>Afstand</td>
+                    <td>Paspoort</td>
+                    <td>Morgen</td>
+                </tr>
+                <tr>
+                    <td>Gevonden</td>
+                    <td>Chippen</td>
+                    <td>Morgen</td>
+                </tr>
+                <tr>
+                    <td>Gevonden</td>
+                    <td>Checkup</td>
+                    <td>Over 3 dagen</td>
+                </tr>
+                <tr>
+                    <td>Gevonden</td>
+                    <td>Beschikbaar</td>
+                    <td>Over 15 dagen</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
