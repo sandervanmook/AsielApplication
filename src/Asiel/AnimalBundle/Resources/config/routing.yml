@@ -153,4 +153,8 @@ backend_animal_task_delete:
     defaults: { _controller: AnimalBundle:BackendTask:delete }
     options:
            expose: true
+
+backend_animal_taskinfo:
+    path:     /task/taskinfo
+    defaults: { _controller: AnimalBundle:BackendTask:info }
 # End Backend Task
