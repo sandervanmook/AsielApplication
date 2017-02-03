@@ -4,7 +4,7 @@
 namespace Asiel\AnimalBundle\Test\Controller;
 
 
-use Asiel\Shared\Test\BaseFunctionalTest;
+use Asiel\Shared\TestTools\BaseFunctionalTest;
 
 class BackendMedicalControllerTest extends BaseFunctionalTest
 {

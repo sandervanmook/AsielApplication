@@ -97,6 +97,13 @@ class Customer
     /**
      * @var string
      *
+     * @ORM\Column(name="municipality", type="string", length=255, nullable=false)
+     */
+    private $municipality;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="zipcode", type="string", length=15, nullable=false)
      * @Assert\NotBlank(message="Dit veld mag niet leeg zijn")
      */
@@ -617,5 +624,29 @@ class Customer
     public function setBlacklistedReason($blacklistedReason)
     {
         $this->blacklistedReason = $blacklistedReason;
+    }
+
+    /**
+     * Set municipality
+     *
+     * @param string $municipality
+     *
+     * @return Customer
+     */
+    public function setMunicipality($municipality)
+    {
+        $this->municipality = $municipality;
+
+        return $this;
+    }
+
+    /**
+     * Get municipality
+     *
+     * @return string
+     */
+    public function getMunicipality()
+    {
+        return $this->municipality;
     }
 }

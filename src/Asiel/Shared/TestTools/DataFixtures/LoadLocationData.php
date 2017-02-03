@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Asiel\Shared\Test\DataFixtures;
+namespace Asiel\Shared\TestTools\DataFixtures;
 
 
 use Asiel\LocationBundle\Entity\Location;

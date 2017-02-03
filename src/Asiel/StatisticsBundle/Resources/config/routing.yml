@@ -1,0 +1,7 @@
+backend_statistics_index:
+    path:     /stats
+    defaults: { _controller: StatisticsBundle:Backend:index }
+
+backend_statistics_animals:
+    path:     /stats/animals
+    defaults: { _controller: StatisticsBundle:Backend:animals }

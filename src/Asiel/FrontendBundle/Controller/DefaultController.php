@@ -5,6 +5,7 @@ namespace Asiel\FrontendBundle\Controller;
 use Asiel\FrontendBundle\Form\ContactType;
 use Asiel\FrontendBundle\Form\SearchAnimalType;
 use Asiel\FrontendBundle\SearchAnimal\FilterAnimal;
+use Asiel\Shared\Filter\Animal\AnimalFilter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -49,7 +50,7 @@ class DefaultController extends Controller
         $searchArray['status']  = $request->get('status');
         $searchArray['sterilized']  = $request->get('sterilized');
 
-        $filterAnimal = new FilterAnimal($allPublicAnimals, $searchArray);
+        $filterAnimal = new AnimalFilter($allPublicAnimals, $searchArray);
         $filterAnimal->filter();
 
         $endResult = $filterAnimal->getFilterResult();

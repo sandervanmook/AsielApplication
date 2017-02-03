@@ -1,6 +1,6 @@
 <?php
 
-namespace Asiel\Shared\Test\DataFixtures;
+namespace Asiel\Shared\TestTools\DataFixtures;
 
 use Asiel\EmployeeBundle\Entity\User;
 use DateTime;

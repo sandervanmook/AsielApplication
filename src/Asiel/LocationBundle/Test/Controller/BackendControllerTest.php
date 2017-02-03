@@ -3,7 +3,7 @@
 
 namespace Asiel\LocationBundle\Test\Controller;
 
-use Asiel\Shared\Test\BaseFunctionalTest;
+use Asiel\Shared\TestTools\BaseFunctionalTest;
 
 class BackendControllerTest extends BaseFunctionalTest
 {

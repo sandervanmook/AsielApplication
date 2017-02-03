@@ -1,4 +1,9 @@
-# Don't remove prefix, used by Security ACL
+# Don't remove backend prefix, used by Security ACL
+
+statistics:
+    resource: "@StatisticsBundle/Resources/config/routing.yml"
+    prefix:   /backend
+
 location:
     resource: "@LocationBundle/Resources/config/routing.yml"
     prefix: /backend/location
@@ -6,7 +11,6 @@ location:
 frontend:
     resource: "@FrontendBundle/Resources/config/routing.yml"
 
-# Don't remove prefix, used by Security ACL
 backend:
     resource: "@BackendBundle/Resources/config/routing.yml"
     prefix: /backend
@@ -14,20 +18,18 @@ backend:
 cms:
     resource: "@CMSBundle/Resources/config/routing.yml"
 
-# Don't remove prefix, used by Security ACL
 calendar:
     resource: "@CalendarBundle/Resources/config/routing.yml"
     prefix: /backend
 
-# Don't remove prefix, used by Security ACL
 employee:
     resource: "@EmployeeBundle/Resources/config/routing.yml"
     prefix: /backend/employee
 
 customer:
     resource: "@CustomerBundle/Resources/config/routing.yml"
+    prefix: /backend
 
-# Don't remove prefix, used by Security ACL
 animal:
     resource: "@AnimalBundle/Resources/config/routing.yml"
     prefix: /backend/animal

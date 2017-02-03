@@ -1,19 +1,19 @@
 <?php
 
 
-namespace Asiel\AnimalBundle\Test\SearchAnimal;
+namespace Asiel\Shared\Test\Filter\Animal;
 
 
 use Asiel\AnimalBundle\AnimalStateMachine\AnimalStateMachine;
 use Asiel\AnimalBundle\Entity\AnimalType\Cat;
 use Asiel\AnimalBundle\Entity\StatusType\Found;
-use Asiel\AnimalBundle\SearchAnimal\FilterAnimal;
+use Asiel\Shared\Filter\Animal\AnimalFilter;
 
-class FilterAnimalTest extends \PHPUnit_Framework_TestCase
+class AnimalFilterTest extends \PHPUnit_Framework_TestCase
 {
     public function test_it_instantiates()
     {
-        $filter = new FilterAnimal([], []);
+        $filter = new AnimalFilter([], []);
     }
 
     public function test_type_filter()
@@ -22,7 +22,7 @@ class FilterAnimalTest extends \PHPUnit_Framework_TestCase
         $allAnimals = [$cat];
         $searchArray['type'] = ['Cat'];
 
-        $filterAnimal = new FilterAnimal($allAnimals, $searchArray);
+        $filterAnimal = new AnimalFilter($allAnimals, $searchArray);
         $filterAnimal->filter();
         $result = $filterAnimal->getFilterResult();
 
@@ -36,7 +36,7 @@ class FilterAnimalTest extends \PHPUnit_Framework_TestCase
         $allAnimals = [$cat];
         $searchArray['chipnumber'] = 123456789012345;
 
-        $filterAnimal = new FilterAnimal($allAnimals, $searchArray);
+        $filterAnimal = new AnimalFilter($allAnimals, $searchArray);
         $filterAnimal->filter();
         $result = $filterAnimal->getFilterResult();
 
@@ -51,7 +51,7 @@ class FilterAnimalTest extends \PHPUnit_Framework_TestCase
         $searchArray['type'] = ['Cat'];
         $searchArray['gender'] = ['Male'];
 
-        $filterAnimal = new FilterAnimal($allAnimals, $searchArray);
+        $filterAnimal = new AnimalFilter($allAnimals, $searchArray);
         $filterAnimal->filter();
         $result = $filterAnimal->getFilterResult();
 
@@ -68,7 +68,7 @@ class FilterAnimalTest extends \PHPUnit_Framework_TestCase
         $searchArray['agestart'] = 1;
         $searchArray['ageend'] = 1;
 
-        $filterAnimal = new FilterAnimal($allAnimals, $searchArray);
+        $filterAnimal = new AnimalFilter($allAnimals, $searchArray);
         $filterAnimal->filter();
         $result = $filterAnimal->getFilterResult();
 
@@ -83,7 +83,7 @@ class FilterAnimalTest extends \PHPUnit_Framework_TestCase
         $searchArray['type'] = ['Cat'];
         $searchArray['status'] = ['Found'];
 
-        $filterAnimal = new FilterAnimal($allAnimals, $searchArray);
+        $filterAnimal = new AnimalFilter($allAnimals, $searchArray);
         $filterAnimal->filter();
         $result = $filterAnimal->getFilterResult();
 
@@ -97,7 +97,7 @@ class FilterAnimalTest extends \PHPUnit_Framework_TestCase
         $searchArray['type'] = ['Cat'];
         $searchArray['status'] = ['None'];
 
-        $filterAnimal = new FilterAnimal($allAnimals, $searchArray);
+        $filterAnimal = new AnimalFilter($allAnimals, $searchArray);
         $filterAnimal->filter();
         $result = $filterAnimal->getFilterResult();
 
@@ -112,7 +112,7 @@ class FilterAnimalTest extends \PHPUnit_Framework_TestCase
         $searchArray['type'] = ['Cat'];
         $searchArray['sterilized'] = 'true';
 
-        $filterAnimal = new FilterAnimal($allAnimals, $searchArray);
+        $filterAnimal = new AnimalFilter($allAnimals, $searchArray);
         $filterAnimal->filter();
         $result = $filterAnimal->getFilterResult();
 
@@ -127,7 +127,7 @@ class FilterAnimalTest extends \PHPUnit_Framework_TestCase
         $searchArray['type'] = ['Cat'];
         $searchArray['sterilized'] = 'false';
 
-        $filterAnimal = new FilterAnimal($allAnimals, $searchArray);
+        $filterAnimal = new AnimalFilter($allAnimals, $searchArray);
         $filterAnimal->filter();
         $result = $filterAnimal->getFilterResult();
 

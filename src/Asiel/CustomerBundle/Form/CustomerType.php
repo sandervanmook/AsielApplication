@@ -2,6 +2,7 @@
 
 namespace Asiel\CustomerBundle\Form;
 
+use Asiel\AnimalBundle\Form\MunicipalityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -88,6 +89,9 @@ class CustomerType extends AbstractType
                     'placeholder'   => 'Vul een stad in'
                 ],
                 'required'  => true,
+            ])
+            ->add('municipality', MunicipalityType::class, [
+                'label'     => 'Gemeente',
             ])
             ->add('country', ChoiceType::class, [
                 'label'     => 'Land',

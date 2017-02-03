@@ -1,0 +1,10 @@
+{% extends '@Backend/Base/Base.html.twig' %}
+{% block pagetitle %}Statistieken{% endblock %}
+{% block body %}
+    <p>Maak een keuze:</p>
+    <ul>
+        <li><a href="{{ path('backend_statistics_animals') }}">Dieren</a></li>
+        <li>Klanten</li>
+        <li>Boekhouding</li>
+    </ul>
+{% endblock %}

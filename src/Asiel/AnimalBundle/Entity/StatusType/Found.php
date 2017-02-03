@@ -47,7 +47,7 @@ class Found extends Status implements AnimalState
     /**
      * @var string
      *
-     * @ORM\Column(name="found_type", type="string", length=2255, nullable=true)
+     * @ORM\Column(name="found_type", type="string", length=255, nullable=true)
      */
     private $foundType;
 
@@ -57,6 +57,13 @@ class Found extends Status implements AnimalState
      * @ORM\Column(name="needs_chipping", type="boolean", nullable=true)
      */
     private $needsChipping;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="found_municipality", type="string", length=255, nullable=false)
+     */
+    private $foundMunicipality;
 
     private $stateMachine;
 
@@ -241,5 +248,39 @@ class Found extends Status implements AnimalState
     public function setNeedsChipping(bool $needsChipping)
     {
         $this->needsChipping = $needsChipping;
+    }
+
+    /**
+     * Get needsChipping
+     *
+     * @return boolean
+     */
+    public function getNeedsChipping()
+    {
+        return $this->needsChipping;
+    }
+
+    /**
+     * Set foundMunicipality
+     *
+     * @param string $foundMunicipality
+     *
+     * @return Found
+     */
+    public function setFoundMunicipality($foundMunicipality)
+    {
+        $this->foundMunicipality = $foundMunicipality;
+
+        return $this;
+    }
+
+    /**
+     * Get foundMunicipality
+     *
+     * @return string
+     */
+    public function getFoundMunicipality()
+    {
+        return $this->foundMunicipality;
     }
 }

@@ -6,6 +6,7 @@ use Asiel\AnimalBundle\AnimalFactory\AnimalFactory;
 use Asiel\AnimalBundle\AnimalFactory\AnimalType;
 use Asiel\AnimalBundle\Form\SearchAnimalType;
 use Asiel\AnimalBundle\SearchAnimal\FilterAnimal;
+use Asiel\Shared\Filter\Animal\AnimalFilter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -121,7 +122,7 @@ class BackendController extends Controller
         $searchArray['status']  = $request->get('status');
         $searchArray['sterilized']  = $request->get('sterilized');
 
-        $filterAnimal = new FilterAnimal($allAnimals, $searchArray);
+        $filterAnimal = new AnimalFilter($allAnimals, $searchArray);
         $filterAnimal->filter();
 
         $endResult = $filterAnimal->getFilterResult();
