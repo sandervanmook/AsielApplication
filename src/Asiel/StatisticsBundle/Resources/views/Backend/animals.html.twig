@@ -1,0 +1,48 @@
+{% extends '@Backend/Base/Base.html.twig' %}
+{% block pagetitle %}Statistieken - Dieren{% endblock %}
+{% block body %}
+    <div class="ui sixteen column grid container">
+        <div class="sixteen wide column">
+            <h3 class="ui header">Filters</h3>
+            {{ form_start(form) }}
+            <table class="ui table very basic collapsing">
+                <tbody>
+                <tr>
+                    <td>Type</td>
+                </tr>
+                <tr>
+                    <td>{{ form_row(form.type) }}</td>
+                </tr>
+                <tr>
+                    <td>Via</td>
+                </tr>
+                <tr>
+                    <td>{{ form_row(form.via) }}</td>
+                </tr>
+                <tr>
+                    <td>Van</td>
+                </tr>
+                <tr>
+                    <td>{{ form_row(form.datestart) }}</td>
+                </tr>
+                <tr>
+                    <td>Tot</td>
+                </tr>
+                <tr>
+                    <td>{{ form_row(form.dateend) }}</td>
+                </tr>
+                <tr>
+                    <td>Gemeente</td>
+                </tr>
+                <tr>
+                    <td>{{ form_row(form.municipality) }}</td>
+                </tr>
+                <tr>
+                    <td>{{ outputFormButton('Zoeken') }}</td>
+                </tr>
+                </tbody>
+            </table>
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

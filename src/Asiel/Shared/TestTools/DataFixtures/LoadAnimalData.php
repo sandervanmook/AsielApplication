@@ -1,6 +1,6 @@
 <?php
 
-namespace Asiel\Shared\Test\DataFixtures;
+namespace Asiel\Shared\TestTools\DataFixtures;
 
 use Asiel\AnimalBundle\Entity\AnimalType\Cat;
 use Asiel\AnimalBundle\Entity\Incident;

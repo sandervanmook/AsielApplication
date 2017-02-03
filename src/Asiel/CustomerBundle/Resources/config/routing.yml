@@ -1,24 +1,24 @@
 # Backend Customer
 backend_customer_search_on_lastname:
-    path:     /backend/customer/searchonlastname/lastname
+    path:     /customer/searchonlastname/lastname
     defaults: { _controller: CustomerBundle:BackendCustomer:searchOnLastName }
     options:
            expose: true
 
 backend_customer_edit:
-    path:     /backend/customer/edit/{id}
+    path:     /customer/edit/{id}
     defaults: { _controller: CustomerBundle:BackendCustomer:edit }
 
 backend_customer_index:
-    path:     /backend/customer
+    path:     /customer
     defaults: { _controller: CustomerBundle:BackendCustomer:index }
 
 backend_customer_create:
-    path:     /backend/customer/create
+    path:     /customer/create
     defaults: { _controller: CustomerBundle:BackendCustomer:create }
 
 backend_customer_search_data:
-    path:     /backend/customer/searchdata
+    path:     /customer/searchdata
     defaults: { _controller: CustomerBundle:BackendCustomer:searchCustomersData }
     options:
            expose: true

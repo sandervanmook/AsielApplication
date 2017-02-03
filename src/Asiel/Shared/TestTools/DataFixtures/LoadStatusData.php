@@ -1,6 +1,6 @@
 <?php
 
-namespace Asiel\Shared\Test\DataFixtures;
+namespace Asiel\Shared\TestTools\DataFixtures;
 
 use Asiel\AnimalBundle\AnimalStateMachine\AnimalStateMachine;
 use Asiel\AnimalBundle\Entity\StatusType\Found;
@@ -15,6 +15,7 @@ class LoadStatusData implements FixtureInterface
         $status = new Found(new AnimalStateMachine());
         $status->setArchived(false);
         $status->setDate(new DateTime('now'));
+        $status->setFoundMunicipality('Roosendaal');
 
         $manager->persist($status);
         $manager->flush();

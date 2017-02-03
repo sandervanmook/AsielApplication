@@ -1,6 +1,6 @@
 <?php
 
-namespace Asiel\Shared\Test\DataFixtures;
+namespace Asiel\Shared\TestTools\DataFixtures;
 
 use Asiel\CustomerBundle\Entity\Customer;
 use Doctrine\Common\DataFixtures\FixtureInterface;
@@ -22,8 +22,10 @@ class LoadCustomerData implements FixtureInterface
         $customer->setHouseNumber(1);
         $customer->setZipcode('4700AA');
         $customer->setCity('Roosendaal');
+        $customer->setMunicipality('Roosendaal');
         $customer->setCountry('Netherlands');
         $customer->setBlacklisted(false);
+
 
         $manager->persist($customer);
         $manager->flush();

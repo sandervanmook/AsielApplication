@@ -6,6 +6,7 @@ use Asiel\CustomerBundle\Entity\Customer;
 use Asiel\CustomerBundle\Form\CustomerType;
 use Asiel\CustomerBundle\Form\SearchCustomerType;
 use Asiel\CustomerBundle\SearchCustomer\FilterCustomer;
+use Asiel\Shared\Filter\Customer\CustomerFilter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -40,7 +41,7 @@ class BackendCustomerController extends Controller
         $searchArray['city'] = $request->get('city');
         $searchArray['citizenservicenumber'] = $request->get('citizenservicenumber');
 
-        $filterCustomer = new FilterCustomer($allCustomers, $searchArray);
+        $filterCustomer = new CustomerFilter($allCustomers, $searchArray);
         $filterCustomer->filter();
 
         $endResult = $filterCustomer->getFilterResult();

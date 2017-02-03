@@ -1,10 +1,10 @@
 <?php
 
 
-namespace Asiel\AnimalBundle\SearchAnimal;
+namespace Asiel\Shared\Filter\Animal;
 
 
-class FilterAnimal
+class AnimalFilter
 {
     private $allAnimals;
     private $searchArray;

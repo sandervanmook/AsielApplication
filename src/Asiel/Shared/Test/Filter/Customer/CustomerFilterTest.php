@@ -1,17 +1,17 @@
 <?php
 
 
-namespace Asiel\CustomerBundle\Test\SearchCustomer;
+namespace Asiel\Shared\Test\Filter\Customer;
 
 
 use Asiel\CustomerBundle\Entity\Customer;
-use Asiel\CustomerBundle\SearchCustomer\FilterCustomer;
+use Asiel\Shared\Filter\Customer\CustomerFilter;
 
 class FilterCustomerTest extends \PHPUnit_Framework_TestCase
 {
     public function test_it_instantiates()
     {
-        new FilterCustomer([], []);
+        new CustomerFilter([], []);
     }
 
     public function test_lastname_filter()
@@ -21,7 +21,7 @@ class FilterCustomerTest extends \PHPUnit_Framework_TestCase
         $allCustomers = [$customer];
         $searchArray['lastname'] = 'Mo';
 
-        $filterCustomer = new FilterCustomer($allCustomers, $searchArray);
+        $filterCustomer = new CustomerFilter($allCustomers, $searchArray);
         $filterCustomer->filter();
 
         $result = $filterCustomer->getFilterResult();
@@ -36,7 +36,7 @@ class FilterCustomerTest extends \PHPUnit_Framework_TestCase
         $allCustomers = [$customer];
         $searchArray['citizenservicenumber'] = 123456;
 
-        $filterCustomer = new FilterCustomer($allCustomers, $searchArray);
+        $filterCustomer = new CustomerFilter($allCustomers, $searchArray);
         $filterCustomer->filter();
 
         $result = $filterCustomer->getFilterResult();
@@ -51,7 +51,7 @@ class FilterCustomerTest extends \PHPUnit_Framework_TestCase
         $allCustomers = [$customer];
         $searchArray['citizenservicenumber'] = '233gfasf63';
 
-        $filterCustomer = new FilterCustomer($allCustomers, $searchArray);
+        $filterCustomer = new CustomerFilter($allCustomers, $searchArray);
         $filterCustomer->filter();
 
         $result = $filterCustomer->getFilterResult();
@@ -68,7 +68,7 @@ class FilterCustomerTest extends \PHPUnit_Framework_TestCase
         $searchArray['lastname'] = 'Mo';
         $searchArray['city'] = 'Ro';
 
-        $filterCustomer = new FilterCustomer($allCustomers, $searchArray);
+        $filterCustomer = new CustomerFilter($allCustomers, $searchArray);
         $filterCustomer->filter();
 
         $result = $filterCustomer->getFilterResult();

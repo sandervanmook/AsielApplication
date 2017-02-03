@@ -2,6 +2,7 @@
 
 namespace Asiel\AnimalBundle\Form\StatusType;
 
+use Asiel\AnimalBundle\Form\MunicipalityType;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -20,41 +21,43 @@ class FoundType extends StatusType
         parent::buildForm($builder, $options);
         $builder
             ->add('foundType', ChoiceType::class, [
-                'label'     => 'Hoe is het dier binnengekomen',
-                'choices'   => [
+                'label' => 'Hoe is het dier binnengekomen',
+                'choices' => [
                     'Door ons gevangen' => 'Door ons gevangen',
-                    'Vondeling'         => 'Vondeling',
-                    'Politie'           => 'Politie',
-                    'Zwerfproject'      => 'Zwerfproject',
+                    'Vondeling' => 'Vondeling',
+                    'Politie' => 'Politie',
+                    'Zwerfproject' => 'Zwerfproject',
                 ]
             ])
             ->add('foundBy', HiddenType::class, [
-                'mapped'     => false,
+                'mapped' => false,
+            ])
+            ->add('foundMunicipality', MunicipalityType::class, [
+                'label' => false,
             ])
             ->add('search', TextType::class, [
-                'label'         => 'Gevonden door',
-                'mapped'        => false,
-                'attr'          => [
-                    'placeholder'  => 'Voer een achternaam in',
+                'label' => 'Gevonden door',
+                'mapped' => false,
+                'attr' => [
+                    'placeholder' => 'Voer een achternaam in',
                 ],
-                'label_attr'    => [
-                    'id'    => 'search',
+                'label_attr' => [
+                    'id' => 'search',
                 ],
-                'required'  => false,
+                'required' => false,
             ])
             ->add('foundAtLocation', CKEditorType::class, [
-                'label'     => 'Waar is het dier gevonden'
+                'label' => 'Waar is het dier gevonden'
             ])
             ->add('animalState', CKEditorType::class, [
-                'label'     => 'De staat waarin het dier verkeerde'
+                'label' => 'De staat waarin het dier verkeerde'
             ])
             ->add('needsChipping', CheckboxType::class, [
-                'label'     => 'Moet door ons gechipt worden',
-                'required'  => false,
-            ])
-        ;
+                'label' => 'Moet door ons gechipt worden',
+                'required' => false,
+            ]);
     }
-    
+
     /**
      * {@inheritdoc}
      */

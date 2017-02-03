@@ -1,6 +1,6 @@
 <?php
 
-namespace Asiel\Shared\Test;
+namespace Asiel\Shared\TestTools;
 
 
 use Liip\FunctionalTestBundle\Test\WebTestCase;
@@ -20,11 +20,11 @@ class BaseFunctionalTest extends WebTestCase
     public function setUp()
     {
         $this->loadFixtures(array(
-            'Asiel\Shared\Test\DataFixtures\LoadUserData',
-            'Asiel\Shared\Test\DataFixtures\LoadAnimalData',
-            'Asiel\Shared\Test\DataFixtures\LoadStatusData',
-            'Asiel\Shared\Test\DataFixtures\LoadCustomerData',
-            'Asiel\Shared\Test\DataFixtures\LoadLocationData',
+            'Asiel\Shared\TestTools\DataFixtures\LoadUserData',
+            'Asiel\Shared\TestTools\DataFixtures\LoadAnimalData',
+            'Asiel\Shared\TestTools\DataFixtures\LoadStatusData',
+            'Asiel\Shared\TestTools\DataFixtures\LoadCustomerData',
+            'Asiel\Shared\TestTools\DataFixtures\LoadLocationData',
         ));
 
         $credentials = [

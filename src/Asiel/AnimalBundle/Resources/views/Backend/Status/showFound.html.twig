@@ -3,6 +3,7 @@
     <p>Datum: {{ status.date|date('d-m-Y') }}</p>
     <p>Type status:  {{ status.getclassname|trans }}</p>
     <p>Type vondst: {{ status.foundType }}</p>
+    <p>Gevonden in: {{ status.foundMunicipality }}</p>
     <p>Moet door ons gechipped worden: {{ outputBool(status.needsChipping) }}</p>
     {% if status.foundby is not empty %}
         <p>Gevonden door: <a href="{{ path('backend_customer_edit', { 'id' : status.foundby.id}) }}">{{ status.foundby.firstname }} {{ status.foundby.lastname }}</a></p>

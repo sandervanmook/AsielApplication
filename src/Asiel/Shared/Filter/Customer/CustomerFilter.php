@@ -1,10 +1,10 @@
 <?php
 
 
-namespace Asiel\CustomerBundle\SearchCustomer;
+namespace Asiel\Shared\Filter\Customer;
 
 
-class FilterCustomer
+class CustomerFilter
 {
     private $allCustomers;
     private $searchArray;
