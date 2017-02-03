@@ -2,10 +2,13 @@
 
 namespace Asiel\Shared\TestTools\DataFixtures;
 
+use Asiel\AnimalBundle\AnimalStateMachine\AnimalStateMachine;
 use Asiel\AnimalBundle\Entity\AnimalType\Cat;
 use Asiel\AnimalBundle\Entity\Incident;
 use Asiel\AnimalBundle\Entity\Medical;
 use Asiel\AnimalBundle\Entity\Picture;
+use Asiel\AnimalBundle\Entity\StatusType\Found;
+use DateTime;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
@@ -35,7 +38,17 @@ class LoadAnimalData implements FixtureInterface
         $animal->setChipnumber(123456789012345);
         $animal->setSterilized(false);
         $animal->setToiletTrained(true);
-        $manager->persist($animal);
+        // Picture for animal
+        $picture = new Picture();
+        $picture->setAnimal($animal);
+        $picture->setUpdatedAt(new DateTime('now'));
+        $picture->setPictureName('yolo');
+        // Status for animal
+        $status = new Found(new AnimalStateMachine());
+        $status->setAnimal($animal);
+        $status->setDate(new DateTime('now'));
+        $status->setArchived(false);
+        $status->setFoundMunicipality('Kinrooi');
 
         // Animal 2
         $animal2  = new Cat();
@@ -72,11 +85,12 @@ class LoadAnimalData implements FixtureInterface
         $medical->setType('yolo');
         $medical->setDescription('description');
 
+        $manager->persist($picture);
+        $manager->persist($status);
+        $manager->persist($animal);
         $manager->persist($incident);
         $manager->persist($medical);
-
         $manager->persist($animal2);
-
 
         $manager->flush();
     }
