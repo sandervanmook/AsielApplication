@@ -7,7 +7,7 @@ namespace Asiel\Shared\Test\Filter\Customer;
 use Asiel\CustomerBundle\Entity\Customer;
 use Asiel\Shared\Filter\Customer\CustomerFilter;
 
-class FilterCustomerTest extends \PHPUnit_Framework_TestCase
+class CustomerFilterTest extends \PHPUnit_Framework_TestCase
 {
     public function test_it_instantiates()
     {

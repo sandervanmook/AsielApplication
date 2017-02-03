@@ -15,6 +15,7 @@
     <testsuites>
         <testsuite name="Asiel Project Test Ssuite">
             <directory>src/Asiel/*Bundle/Test</directory>
+            <directory>src/Asiel/Shared/Test</directory>
             <exclude>./src/Asiel/Shared/Test/BaseFunctionalTest.php</exclude>
         </testsuite>
     </testsuites>
@@ -26,7 +27,7 @@
                 <directory>src/Asiel/*Bundle/Resources</directory>
                 <directory>src/Asiel/*/*Bundle/Resources</directory>
                 <directory>src/Asiel/*/Bundle/*Bundle/Resources</directory>
-                <directory>src/Asiel/Shared/*</directory>
+                <directory>src/Asiel/Shared/TestTools</directory>
             </exclude>
         </whitelist>
     </filter>
