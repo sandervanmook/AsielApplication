@@ -24,7 +24,7 @@ class FilterAnimals extends AbstractType
                 'expanded'  => false,
                 'choices'   => [
                     'Beide'   => 'Both',
-                    'Gevangen'    => 'Found_Catched',
+                    'Gevangen'    => 'Found_Caught',
                     'Afgestaan'    => 'Abandoned',
                 ]
             ])
@@ -38,6 +38,9 @@ class FilterAnimals extends AbstractType
             ->add('municipality', MunicipalityType::class, [
                 'label' => false,
                 'multiple' => true,
+                'attr' => [
+                    'size'=>'20'
+                ]
             ])
         ;
     }

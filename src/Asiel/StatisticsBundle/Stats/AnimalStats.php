@@ -23,9 +23,6 @@ class AnimalStats
 
     public function filter()
     {
-
-        // filter dan op gemeente en maak een sub array per gemeente
-
         $this->filterDate();
         $this->filterVia();
         $this->filterMunicipality();
@@ -78,7 +75,7 @@ class AnimalStats
                     $this->filterResult = $result;
                 }
                 break;
-            case 'Found_Catched':
+            case 'Found_Caught':
                 if (!empty($this->filterResult)) {
                     foreach ($this->filterResult as $animal) {
                         $states = $animal->getStatus();

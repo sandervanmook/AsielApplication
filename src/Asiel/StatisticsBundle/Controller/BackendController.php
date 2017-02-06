@@ -71,6 +71,10 @@ class BackendController extends Controller
         ]);
     }
 
+    /**
+     * @param int $id
+     * @return Response
+     */
     public function customerActionsShowAction(int $id)
     {
         $formHandler = $this->get('asiel.statisticsbundle.backendformhandler');
