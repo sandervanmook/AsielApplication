@@ -647,20 +647,6 @@ class Animal
     }
 
     /**
-     * Set foundBy
-     *
-     * @param Customer $foundBy
-     *
-     * @return Animal
-     */
-    public function setFoundBy(Customer $foundBy = null)
-    {
-        $this->foundBy = $foundBy;
-
-        return $this;
-    }
-
-    /**
      * Add status
      *
      * @param Status $status
