@@ -14,7 +14,7 @@ class BackendController extends Controller
         return $this->render('StatisticsBundle:Backend:index.html.twig');
     }
 
-    public function animalsAction(Request $request)
+    public function animalIncomingAction(Request $request)
     {
         $formHandler = $this->get('asiel.statisticsbundle.backendformhandler');
 
@@ -33,7 +33,7 @@ class BackendController extends Controller
             $stats->filter();
             $result = $stats->getFilterResult();
 
-            return $this->render('StatisticsBundle:Backend:animals.html.twig', [
+            return $this->render('StatisticsBundle:Backend:animalIncoming.html.twig', [
                 'form' => $form->createView(),
                 'result' => $result,
                 'datestart' => $searchArray['datestart']->format('d-m-Y'),
@@ -44,7 +44,7 @@ class BackendController extends Controller
 
         }
 
-        return $this->render('StatisticsBundle:Backend:animals.html.twig', [
+        return $this->render('StatisticsBundle:Backend:animalIncoming.html.twig', [
             'form' => $form->createView(),
         ]);
     }

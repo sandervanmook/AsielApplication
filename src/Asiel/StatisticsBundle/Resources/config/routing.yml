@@ -2,6 +2,6 @@ backend_statistics_index:
     path:     /stats
     defaults: { _controller: StatisticsBundle:Backend:index }
 
-backend_statistics_animals:
+backend_statistics_animal_incoming:
     path:     /stats/animals
-    defaults: { _controller: StatisticsBundle:Backend:animals }
+    defaults: { _controller: StatisticsBundle:Backend:animalIncoming }
