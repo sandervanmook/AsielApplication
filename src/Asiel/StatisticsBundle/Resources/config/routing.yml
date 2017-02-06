@@ -2,6 +2,24 @@ backend_statistics_index:
     path:     /stats
     defaults: { _controller: StatisticsBundle:Backend:index }
 
+# Animal Section
 backend_statistics_animal_incoming:
-    path:     /stats/animals
+    path:     /stats/animal/incoming
     defaults: { _controller: StatisticsBundle:Backend:animalIncoming }
+
+# End Animal Section
+# Customer Section
+backend_statistics_customer_actions:
+    path:     /stats/customer/actions
+    defaults: { _controller: StatisticsBundle:Backend:customerActions }
+
+backend_statistics_customer_actions_show:
+    path:     /stats/customer/actions/show/{id}
+    defaults: { _controller: StatisticsBundle:Backend:customerActionsShow }
+
+backend_statistics_customer_search_data:
+    path:     /stats/customer/searchdata
+    defaults: { _controller: StatisticsBundle:Backend:searchCustomersData }
+    options:
+           expose: true
+# End Customer Section

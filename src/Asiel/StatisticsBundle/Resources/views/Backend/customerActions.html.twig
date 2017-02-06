@@ -1,0 +1,46 @@
+{% extends '@Backend/Base/Base.html.twig' %}
+{% block pagetitle %}Statistieken - Klanten - Handelingen{% endblock %}
+{% block body %}
+    <div class="ui sixteen column grid container">
+        <div class="eight wide column">
+            <h3 class="ui header">Zoek een klant</h3>
+            <table class="ui table very basic">
+                <thead>
+                <tr>
+                    <th class="four wide">Achternaam</th>
+                    <th class="four wide">BSN/Rijksnummer</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>{{ form_row(form.lastname) }}</td>
+                    <td>{{ form_row(form.citizenservicenumber) }}</td>
+                </tr>
+                </tbody>
+            </table>
+            <h3 class="ui header">Subfilters</h3>
+            <table class="ui table very basic three wide">
+                <thead>
+                <tr>
+                    <th class="four wide">Stad</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>{{ form_row(form.city) }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="sixteen wide column">
+            <div class="ui divider horizontal"></div>
+            <div id="searchresult"></div>
+            <div class="ui divider horizontal"></div>
+            <div class="ui divider horizontal"></div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/views/StatisticsBundle/Backend/SearchCustomer.js') }}"></script>
+{% endblock %}

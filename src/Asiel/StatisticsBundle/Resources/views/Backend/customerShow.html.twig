@@ -1,0 +1,100 @@
+{% extends '@Backend/Base/Base.html.twig' %}
+{% block pagetitle %}Statistieken - Klanten - Handelingen{% endblock %}
+{% block body %}
+    <div class="ui sixteen column grid container">
+        <div class="row">
+            <div class="six wide column">
+                <table class="ui table very basic">
+                    <tr>
+                        <td>Naam</td>
+                        <td>{{ customer.firstname }} {{ customer.lastname }}</td>
+                    </tr>
+                    <tr>
+                        <td>Geboortedatum</td>
+                        <td>{{ customer.dayofbirth|date('d-m-Y') }}</td>
+                    </tr>
+                    <tr>
+                        <td>BSN/Rijksnummer</td>
+                        <td>{{ customer.citizenservicenumber }}</td>
+                    </tr>
+                    <tr>
+                        <td>Emailadres</td>
+                        <td>{{ customer.email }}</td>
+                    </tr>
+                    <tr>
+                        <td>Adres</td>
+                        <td>{{ customer.address }} {{ customer.housenumber }}</td>
+                    </tr>
+                    <tr>
+                        <td>Postcode</td>
+                        <td>{{ customer.zipcode }}</td>
+                    </tr>
+                    <tr>
+                        <td>Plaats</td>
+                        <td>{{ customer.city }} ({{ customer.municipality }})</td>
+                    </tr>
+                    <tr>
+                        <td>Land</td>
+                        <td>{{ customer.country }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="ui divider horizontal"></div>
+        <h2 class="ui header">Handelingen</h2>
+        <div class="ui divider horizontal"></div>
+
+        <div class="row">
+            <div class="twelve wide column">
+                <table class="ui table very basic">
+                    <thead>
+                    <tr>
+                        <th>Datum</th>
+                        <th>Actie</th>
+                        <th>Dier</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for resultadopted in adopted %}
+                        <tr>
+                            <td>{{ resultadopted.date|date('d-m-Y') }}</td>
+                            <td>{{ resultadopted.getclassname|trans }}</td>
+                            <td>
+                                <a href="{{ path('backend_animal_show', {'id' : resultadopted.animal.id}) }}">{{ resultadopted.animal.name }}</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    {% for resultabandoned in abandoned %}
+                        <tr>
+                            <td>{{ resultabandoned.date|date('d-m-Y') }}</td>
+                            <td>{{ resultabandoned.getclassname|trans }}</td>
+                            <td>
+                                <a href="{{ path('backend_animal_show', {'id' : resultabandoned.animal.id}) }}">{{ resultabandoned.animal.name }}</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    {% for resultfound in found %}
+                        <tr>
+                            <td>{{ resultfound.date|date('d-m-Y') }}</td>
+                            <td>{{ resultfound.getclassname|trans }}</td>
+                            <td>
+                                <a href="{{ path('backend_animal_show', {'id' : resultfound.animal.id}) }}">{{ resultfound.animal.name }}</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    {% for resultreturnedowner in returnedowner %}
+                        <tr>
+                            <td>{{ resultreturnedowner.date|date('d-m-Y') }}</td>
+                            <td>{{ resultreturnedowner.getclassname|trans }}</td>
+                            <td>
+                                <a href="{{ path('backend_animal_show', {'id' : resultreturnedowner.animal.id}) }}">{{ resultreturnedowner.animal.name }}</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
