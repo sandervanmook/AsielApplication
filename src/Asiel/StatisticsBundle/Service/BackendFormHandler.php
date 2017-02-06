@@ -4,6 +4,7 @@
 namespace Asiel\StatisticsBundle\Service;
 
 
+use Asiel\AnimalBundle\Repository\AnimalRepository;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -24,6 +25,9 @@ class BackendFormHandler
         $this->requestStack = $requestStack;
     }
 
-
+    public function getAnimalRepository() : AnimalRepository
+    {
+        return $this->em->getRepository('AnimalBundle:Animal');
+    }
 
 }
