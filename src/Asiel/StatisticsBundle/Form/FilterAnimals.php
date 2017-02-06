@@ -18,23 +18,14 @@ class FilterAnimals extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('type', ChoiceType::class, [
-                'label' => false,
-                'multiple' => true,
-                'expanded'  => true,
-                'choices'   => [
-                    'Katten'   => 'Cat',
-                    'Honden'    => 'Dog',
-                ]
-            ])
             ->add('via', ChoiceType::class, [
                 'label' => false,
-                'multiple' => true,
-                'expanded'  => true,
+                'multiple' => false,
+                'expanded'  => false,
                 'choices'   => [
                     'Beide'   => 'Both',
                     'Gevangen'    => 'Found_Catched',
-                    'Afstand'    => 'Abandoned',
+                    'Afgestaan'    => 'Abandoned',
                 ]
             ])
             ->add('datestart', DateType::class, [
@@ -42,6 +33,7 @@ class FilterAnimals extends AbstractType
             ])
             ->add('dateend', DateType::class, [
                 'label' => false,
+                'data'  => new \DateTime('today'),
             ])
             ->add('municipality', MunicipalityType::class, [
                 'label' => false,
@@ -56,8 +48,8 @@ class FilterAnimals extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'required'  => false,
             'mapped'    => false,
+            'required'  => true,
         ));
     }
 

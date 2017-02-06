@@ -2,47 +2,79 @@
 {% block pagetitle %}Statistieken - Dieren{% endblock %}
 {% block body %}
     <div class="ui sixteen column grid container">
-        <div class="sixteen wide column">
-            <h3 class="ui header">Filters</h3>
-            {{ form_start(form) }}
-            <table class="ui table very basic collapsing">
-                <tbody>
-                <tr>
-                    <td>Type</td>
-                </tr>
-                <tr>
-                    <td>{{ form_row(form.type) }}</td>
-                </tr>
-                <tr>
-                    <td>Via</td>
-                </tr>
-                <tr>
-                    <td>{{ form_row(form.via) }}</td>
-                </tr>
-                <tr>
-                    <td>Van</td>
-                </tr>
-                <tr>
-                    <td>{{ form_row(form.datestart) }}</td>
-                </tr>
-                <tr>
-                    <td>Tot</td>
-                </tr>
-                <tr>
-                    <td>{{ form_row(form.dateend) }}</td>
-                </tr>
-                <tr>
-                    <td>Gemeente</td>
-                </tr>
-                <tr>
-                    <td>{{ form_row(form.municipality) }}</td>
-                </tr>
-                <tr>
-                    <td>{{ outputFormButton('Zoeken') }}</td>
-                </tr>
-                </tbody>
-            </table>
-            {{ form_end(form) }}
-        </div>
+    <div class="four wide column">
+        <h3 class="ui header">Filters</h3>
+        {{ form_start(form) }}
+        <table class="ui table very basic collapsing">
+            <tbody>
+            <tr>
+                <td>Via</td>
+            </tr>
+            <tr>
+                <td>{{ form_row(form.via) }}</td>
+            </tr>
+            <tr>
+                <td>Van</td>
+            </tr>
+            <tr>
+                <td>{{ form_row(form.datestart) }}</td>
+            </tr>
+            <tr>
+                <td>Tot</td>
+            </tr>
+            <tr>
+                <td>{{ form_row(form.dateend) }}</td>
+            </tr>
+            <tr>
+                <td>Gemeente</td>
+            </tr>
+            <tr>
+                <td>{{ form_row(form.municipality) }}</td>
+            </tr>
+            <tr>
+                <td>{{ outputFormButton('Zoeken') }}</td>
+            </tr>
+            </tbody>
+        </table>
+        {{ form_end(form) }}
+        <p>Bij zoeken via gevangen zal de gemeente gevonden worden via de gemeente die is opgegeven bij de status
+            (Gevonden). Als u zoekt naar afgestaan zal de woonplaats van de persoon die het dier heeft afgestaan
+            gebruikt worden.</p>
+    </div>
+    <div class="twelve wide column">
+        {% if result is defined %}
+            <p>Periode: {{ datestart }} t/m {{ dateend }}</p>
+            <p>Via: {{ via|trans }}</p>
+            <p>Gemeentes: {{ municipalities }}</p>
+        {% endif %}
+        <table class="ui table very basic">
+            <thead>
+            <tr>
+                <th>Gemeente</th>
+                <th>Katten</th>
+                <th>Honden</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% if result is defined %}
+                {% for municipalityname,municipalityarray in result %}
+                    <tr>
+                        <td>{{ municipalityname }}</td>
+                        {% if municipalityarray.Cat is defined and municipalityarray.Cat is not empty %}
+                            <td>{{ municipalityarray.Cat|length }}</td>
+                        {% else %}
+                            <td>0</td>
+                        {% endif %}
+                        {% if municipalityarray.Dog is defined and municipalityarray.Dog is not empty %}
+
+                            <td>{{ municipalityarray.Dog|length }}</td>
+                        {% else %}
+                            <td>0</td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+            {% endif %}
+            </tbody>
+        </table>
     </div>
 {% endblock %}

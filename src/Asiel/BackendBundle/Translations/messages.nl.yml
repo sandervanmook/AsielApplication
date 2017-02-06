@@ -42,3 +42,7 @@ ROLE_NURSE_ILL: Verzorger ziekenboeg
 ROLE_NURSE_QUAR: Verzorger quarantaine
 ROLE_CATCH_DOG: Hondenvanger
 ROLE_SUPERVISOR: Algemeen opzichter
+
+#Filter / Stats
+Both: Beide
+Found_Catched: Gevangen
