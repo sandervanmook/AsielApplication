@@ -27,8 +27,31 @@ class BackendStatusControllerTest extends BaseFunctionalTest
         $this->client->request('GET', $url);
 
         $this->assertStatusCode(200, $this->client);
-        $this->markTestIncomplete('de rest nog testen');
     }
 
-    // TODO show action naar inhoud kijken
+    public function test_create_type_action()
+    {
+        $url = $this->getUrl('backend_animal_status_create_type', ['id' => 1, 'type' => 'Found']);
+        $this->client->request('GET', $url);
+
+        $this->assertStatusCode(200, $this->client);
+    }
+
+    public function test_show_action()
+    {
+        $url = $this->getUrl('backend_animal_status_show', ['statusid' => 1]);
+        $this->client->request('GET', $url);
+
+        $contents = $this->getContents($url);
+
+        $this->assertContains('<h3 class="ui header">Status 1</h3>', $contents);
+        $this->assertContains('<p>Type status:  Gevonden</p>', $contents);
+    }
+
+    public function test_delete_action()
+    {
+        $url = $this->getUrl('backend_animal_status_delete', ['statusid' => 1]);
+        $this->client->request('GET', $url);
+        $this->assertStatusCode(200, $this->client);
+    }
 }
