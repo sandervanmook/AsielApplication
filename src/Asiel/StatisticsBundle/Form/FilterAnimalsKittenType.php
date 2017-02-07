@@ -10,7 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class FilterAnimals extends AbstractType
+class FilterAnimalsKittenType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -18,29 +18,12 @@ class FilterAnimals extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('via', ChoiceType::class, [
-                'label' => false,
-                'multiple' => false,
-                'expanded'  => false,
-                'choices'   => [
-                    'Beide'   => 'Both',
-                    'Gevangen'    => 'Found_Caught',
-                    'Afgestaan'    => 'Abandoned',
-                ]
-            ])
             ->add('datestart', DateType::class, [
                 'label' => false,
             ])
             ->add('dateend', DateType::class, [
                 'label' => false,
                 'data'  => new \DateTime('today'),
-            ])
-            ->add('municipality', MunicipalityType::class, [
-                'label' => false,
-                'multiple' => true,
-                'attr' => [
-                    'size'=>'20'
-                ]
             ])
         ;
     }

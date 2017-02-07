@@ -42,8 +42,8 @@ class AnimalFilter
                 if (in_array($animal->getClassName(), $this->searchArray['type'])) {
                     $result[] = $animal;
                 }
-                $this->filterResult = $result;
             }
+            $this->filterResult = $result;
         }
     }
 
@@ -55,8 +55,8 @@ class AnimalFilter
                 if ($animal->getChipnumber() == $this->searchArray['chipnumber']) {
                     $result[] = $animal;
                 }
-                $this->filterResult = $result;
             }
+            $this->filterResult = $result;
         }
     }
 
@@ -108,7 +108,6 @@ class AnimalFilter
                     $result[] = $animal;
                 }
             }
-
             $this->filterResult = $result;
         }
     }

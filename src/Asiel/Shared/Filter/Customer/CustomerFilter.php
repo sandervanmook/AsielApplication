@@ -40,8 +40,8 @@ class CustomerFilter
                 if (is_int(stripos($customer->getLastName(), $this->searchArray['lastname']))) {
                     $result[] = $customer;
                 }
-                $this->filterResult = $result;
             }
+            $this->filterResult = $result;
         }
     }
 
@@ -53,8 +53,8 @@ class CustomerFilter
                 if ($customer->getCitizenServiceNumber() == $this->searchArray['citizenservicenumber']) {
                     $result[] = $customer;
                 }
-                $this->filterResult = $result;
             }
+            $this->filterResult = $result;
         }
     }
 
@@ -70,8 +70,8 @@ class CustomerFilter
                 if (is_int(stripos($customer->getCity(), $this->searchArray['city']))) {
                     $result[] = $customer;
                 }
-                $this->filterResult = $result;
             }
+            $this->filterResult = $result;
         }
     }
 }

@@ -46,8 +46,8 @@ class AnimalStats
                         $result[] = $animal;
                     }
                 }
-                $this->filterResult = $result;
             }
+            $this->filterResult = $result;
         }
     }
 

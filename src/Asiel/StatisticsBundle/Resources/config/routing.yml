@@ -7,6 +7,10 @@ backend_statistics_animal_incoming:
     path:     /stats/animal/incoming
     defaults: { _controller: StatisticsBundle:Backend:animalIncoming }
 
+backend_statistics_animal_incoming_kitten:
+    path:     /stats/animal/incomingkitten
+    defaults: { _controller: StatisticsBundle:Backend:animalIncomingKitten }
+
 # End Animal Section
 # Customer Section
 backend_statistics_customer_actions:
