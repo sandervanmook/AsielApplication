@@ -1,0 +1,65 @@
+{% extends '@Backend/Base/Base.html.twig' %}
+{% block pagetitle %}Statistieken - Dieren - Binnengekomen kittens{% endblock %}
+{% block body %}
+    <div class="ui sixteen column grid container">
+        <div class="four wide column">
+            <h3 class="ui header">Filters</h3>
+            {{ form_start(form) }}
+            <table class="ui table very basic collapsing">
+                <tbody>
+                <tr>
+                    <td>Van</td>
+                </tr>
+                <tr>
+                    <td>{{ form_row(form.datestart) }}</td>
+                </tr>
+                <tr>
+                    <td>Tot</td>
+                </tr>
+                <tr>
+                    <td>{{ form_row(form.dateend) }}</td>
+                </tr>
+                <tr>
+                    <td>{{ outputFormButton('Zoeken') }}</td>
+                </tr>
+                </tbody>
+            </table>
+            {{ form_end(form) }}
+            <p>Data zal worden opgehaald d.m.v. de registratie datum te vergelijken met de geboortedatum. De verdeling
+                is gebaseerd op de active status van het dier.</p>
+        </div>
+        <div class="twelve wide column">
+            {% if result is defined %}
+                <p>Periode: {{ datestart }} t/m {{ dateend }}</p>
+            {% endif %}
+            <table class="ui table very basic">
+                <thead>
+                <tr>
+                    <th>Afgestaan</th>
+                    <th>Gevonden</th>
+                    <th>In beslag genomen</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    {% if result.Abandoned is defined and result.Abandoned is not empty %}
+                        <td>{{ result.Abandoned|length }}</td>
+                    {% else %}
+                        <td>0</td>
+                    {% endif %}
+                    {% if result.Found is defined and result.Found is not empty %}
+                        <td>{{ result.Found|length }}</td>
+                    {% else %}
+                        <td>0</td>
+                    {% endif %}
+                    {% if result.Seized is defined and result.Seized is not empty %}
+                        <td>{{ result.Seized|length }}</td>
+                    {% else %}
+                        <td>0</td>
+                    {% endif %}
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

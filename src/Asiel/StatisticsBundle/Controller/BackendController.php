@@ -4,8 +4,10 @@ namespace Asiel\StatisticsBundle\Controller;
 
 use Asiel\CustomerBundle\Form\SearchCustomerType;
 use Asiel\Shared\Filter\Customer\CustomerFilter;
-use Asiel\StatisticsBundle\Form\FilterAnimals;
+use Asiel\StatisticsBundle\Form\FilterAnimalsKittenType;
+use Asiel\StatisticsBundle\Form\FilterAnimalsType;
 use Asiel\StatisticsBundle\Stats\AnimalStats;
+use Asiel\StatisticsBundle\Stats\AnimalStatsKitten;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,7 +30,7 @@ class BackendController extends Controller
     {
         $formHandler = $this->get('asiel.statisticsbundle.backendformhandler');
 
-        $form = $this->createForm(FilterAnimals::class);
+        $form = $this->createForm(FilterAnimalsType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -58,6 +60,41 @@ class BackendController extends Controller
             'form' => $form->createView(),
         ]);
     }
+
+    /**
+     * @param Request $request
+     * @return Response
+     */
+    public function animalIncomingKittenAction(Request $request)
+    {
+        $formHandler = $this->get('asiel.statisticsbundle.backendformhandler');
+
+        $form = $this->createForm(FilterAnimalsKittenType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $searchArray['datestart'] = $form->get('datestart')->getData();
+            $searchArray['dateend'] = $form->get('dateend')->getData();
+
+            $allCats = $formHandler->getCatRepository()->findAll();
+
+            $stats = new AnimalStatsKitten($allCats, $searchArray);
+            $stats->filter();
+            $result = $stats->getFilterResult();
+
+            return $this->render('@Statistics/Backend/animalIncomingKitten.html.twig', [
+                'form' => $form->createView(),
+                'datestart' => $searchArray['datestart']->format('d-m-Y'),
+                'dateend' => $searchArray['dateend']->format('d-m-Y'),
+                'result' => $result,
+            ]);
+        }
+
+        return $this->render('@Statistics/Backend/animalIncomingKitten.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
 
     /**
      * @return Response

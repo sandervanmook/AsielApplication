@@ -1,17 +1,26 @@
 {% extends '@Backend/Base/Base.html.twig' %}
 {% block pagetitle %}Statistieken{% endblock %}
 {% block body %}
-    <p>Maak een keuze:</p>
-    <ul>
-        <li>Dieren</li>
-        <ul>
-            <li><a href="{{ path('backend_statistics_animal_incoming') }}">Binnengekomen</a></li>
-        </ul>
-
-        <li>Klanten</li>
-        <ul>
-            <li><a href="{{ path('backend_statistics_customer_actions') }}">Handeling per klant</a></li>
-        </ul>
-        <li>Boekhouding</li>
-    </ul>
+    <div class="ui sixteen column grid container">
+        <div class="six wide column">
+            <p>Maak een keuze:</p>
+            <div class="ui celled list">
+                <div class="item">Dieren
+                    <div class="list">
+                        <div class="item"><a href="{{ path('backend_statistics_animal_incoming') }}">Binnengekomen
+                                (gevangen/afgestaan)</a></div>
+                        <div class="item"><a href="{{ path('backend_statistics_animal_incoming_kitten') }}">Binnengekomen
+                                kittens</a></div>
+                    </div>
+                </div>
+                <div class="item">Klanten
+                    <div class="list">
+                        <div class="item"><a href="{{ path('backend_statistics_customer_actions') }}">Handeling per klant</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">Boekhouding</div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

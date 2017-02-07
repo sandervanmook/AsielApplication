@@ -5,6 +5,7 @@ namespace Asiel\StatisticsBundle\Service;
 
 
 use Asiel\AnimalBundle\Repository\AnimalRepository;
+use Asiel\AnimalBundle\Repository\AnimalType\CatRepository;
 use Asiel\AnimalBundle\Repository\StatusRepository;
 use Asiel\AnimalBundle\Repository\StatusType\AbandonedRepository;
 use Asiel\AnimalBundle\Repository\StatusType\AdoptedRepository;
@@ -64,5 +65,10 @@ class BackendFormHandler
     public function getReturnedOwnerStatusRepository() : ReturnedOwnerRepository
     {
         return $this->em->getRepository('AnimalBundle:StatusType\ReturnedOwner');
+    }
+
+    public function getCatRepository() : CatRepository
+    {
+        return $this->em->getRepository('AnimalBundle:AnimalType\Cat');
     }
 }
