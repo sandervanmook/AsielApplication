@@ -4,7 +4,7 @@
 namespace Asiel\StatisticsBundle\Stats;
 
 
-class AnimalStatsKitten
+class AnimalKittenStats
 {
     private $allCats;
     private $searchArray;

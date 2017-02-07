@@ -65,10 +65,10 @@ class SearchAnimalType extends AbstractType
                     'Afgestaan' => 'abandoned',
                     'Gevonden' => 'found',
                     'In beslag genomen' => 'seized',
-                    'Adoptie'   => 'adoption',
+                    'Adoptie'   => 'adopted',
                     'Overleden' => 'deceased',
                     'Kwijt' => 'lost',
-                    'Terug naar eigenaar'   => 'returnedOwner',
+                    'Terug naar eigenaar'   => 'returnedowner',
                     'Geen'  => 'nostate',
                 ],
                 'choice_attr' => function ($val, $key, $index) {

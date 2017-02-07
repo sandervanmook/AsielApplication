@@ -107,8 +107,8 @@ class AnimalFilter
                 } elseif (in_array($animal->getActiveState(), $this->searchArray['status'])) {
                     $result[] = $animal;
                 }
+                $this->filterResult = $result;
             }
-            $this->filterResult = $result;
         }
     }
 
