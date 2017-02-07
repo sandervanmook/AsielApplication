@@ -5,9 +5,11 @@ namespace Asiel\StatisticsBundle\Controller;
 use Asiel\CustomerBundle\Form\SearchCustomerType;
 use Asiel\Shared\Filter\Customer\CustomerFilter;
 use Asiel\StatisticsBundle\Form\FilterAnimalsKittenType;
+use Asiel\StatisticsBundle\Form\FilterAnimalsLeavingType;
 use Asiel\StatisticsBundle\Form\FilterAnimalsType;
+use Asiel\StatisticsBundle\Stats\AnimalKittenStats;
+use Asiel\StatisticsBundle\Stats\AnimalLeavingStats;
 use Asiel\StatisticsBundle\Stats\AnimalStats;
-use Asiel\StatisticsBundle\Stats\AnimalStatsKitten;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -78,7 +80,7 @@ class BackendController extends Controller
 
             $allCats = $formHandler->getCatRepository()->findAll();
 
-            $stats = new AnimalStatsKitten($allCats, $searchArray);
+            $stats = new AnimalKittenStats($allCats, $searchArray);
             $stats->filter();
             $result = $stats->getFilterResult();
 
@@ -95,6 +97,36 @@ class BackendController extends Controller
         ]);
     }
 
+
+    public function animalLeavingAction(Request $request)
+    {
+        $formHandler = $this->get('asiel.statisticsbundle.backendformhandler');
+
+        $form = $this->createForm(FilterAnimalsLeavingType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $searchArray['datestart'] = $form->get('datestart')->getData();
+            $searchArray['dateend'] = $form->get('dateend')->getData();
+
+            $allAnimals = $formHandler->getAnimalRepository()->findAll();
+
+            $stats = new AnimalLeavingStats($allAnimals, $searchArray);
+            $stats->filter();
+            $result = $stats->getFilterResult();
+
+            return $this->render('@Statistics/Backend/animalLeaving.html.twig', [
+                'form' => $form->createView(),
+                'datestart' => $searchArray['datestart']->format('d-m-Y'),
+                'dateend' => $searchArray['dateend']->format('d-m-Y'),
+                'result' => $result,
+            ]);
+        }
+
+        return $this->render('@Statistics/Backend/animalLeaving.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
 
     /**
      * @return Response
