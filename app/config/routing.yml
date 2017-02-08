@@ -1,4 +1,7 @@
 # Don't remove backend prefix, used by Security ACL
+bookkeeping:
+    resource: "@BookkeepingBundle/Resources/config/routing.yml"
+    prefix:   /backend/bookkeeping
 
 statistics:
     resource: "@StatisticsBundle/Resources/config/routing.yml"
