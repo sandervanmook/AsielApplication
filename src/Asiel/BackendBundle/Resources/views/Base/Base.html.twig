@@ -59,13 +59,6 @@
         </div>
     </div>
     <div class="item">
-        <div class="header">Agenda</div>
-        <div class="menu">
-            <a class="item" href="{{ path('backend_calendar') }}">Agenda bekijken</a>
-            <a class="item" href="{{ path('backend_calendaritem_create') }}">Agendapunt aanmaken</a>
-        </div>
-    </div>
-    <div class="item">
         <div class="header">Statistieken</div>
         <div class="menu">
             <a class="item" href="{{ path('backend_statistics_index') }}">Selecteer categorie</a>
@@ -84,6 +77,19 @@
         <a class="item"><i class="sidebar icon"></i>Menu</a>
     </div>
     <a class="item" href="{{ path('backend_default_index') }}"><i class="home icon"></i></a>
+    <div id="calendarmenu" class="ui dropdown item">
+        <i class="calendar icon"></i><i class="dropdown icon"></i>
+        <div class="menu">
+            <a class="item" href="{{ path('backend_calendar') }}">Agenda bekijken</a>
+            <a class="item" href="{{ path('backend_calendaritem_create') }}">Agendapunt aanmaken</a>
+        </div>
+    </div>
+    <div id="systemmenu" class="ui dropdown item">
+        <i class="configure icon"></i><i class="dropdown icon"></i>
+        <div class="menu">
+            <a class="item" href="{{ path('backend_settings_bookkeeping') }}">Boekhouding instellingen</a>
+        </div>
+    </div>
     <a class="item right" href=""><i class="info icon"></i>Hulp</a>
     <div id="profile" class="ui dropdown item">
         <i class="user icon"></i>{{ app.user.username }}<i class="dropdown icon"></i>
@@ -195,7 +201,17 @@
             $('.ui.dropdown')
                 .dropdown()
             ;
-        })
+        });
+        $('#calendarmenu').click(function () {
+            $('.ui.dropdown')
+                .dropdown()
+            ;
+        });
+        $('#systemmenu').click(function () {
+            $('.ui.dropdown')
+                .dropdown()
+            ;
+        });
     </script>
 {% endblock %}
 </body>

@@ -1,12 +1,11 @@
 {% extends '@Backend/Base/Base.html.twig' %}
-{% block pagesubtitle %}Status aanmaken: Gedaopteerd{% endblock %}
+{% block pagesubtitle %}Status aanmaken: Adoptie{% endblock %}
 {% block body %}
     <div class="ui tab segment active">
         <div class="ui twelve column grid container">
             <div class="six wide column">
                 {{ form_start(form) }}
                 {{ form_row(form.date) }}
-                {{ form_row(form.price) }}
                 {{ form_row(form.search) }}
                 <div id="result"></div>
                 {{ form_row(form.customer) }}
