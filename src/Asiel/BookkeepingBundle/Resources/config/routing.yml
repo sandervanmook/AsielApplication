@@ -1,0 +1,3 @@
+backend_bookkeeping_index:
+    path:     /
+    defaults: { _controller: BookkeepingBundle:Backend:index }
