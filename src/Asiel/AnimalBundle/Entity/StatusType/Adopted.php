@@ -31,14 +31,6 @@ class Adopted extends Status implements AnimalState
      */
     private $customer;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="price", type="string", length=10, nullable=true)
-     * @Assert\Type(type="int", message="Veld moet een getal zijn")
-     */
-    private $price;
-
     private $stateMachine;
 
     public function __construct(AnimalStateMachine $animalStateMachine)
@@ -96,30 +88,6 @@ class Adopted extends Status implements AnimalState
     public function getClassName()
     {
         return 'Adopted';
-    }
-
-    /**
-     * Set price
-     *
-     * @param string $price
-     *
-     * @return Adopted
-     */
-    public function setPrice($price)
-    {
-        $this->price = $price;
-
-        return $this;
-    }
-
-    /**
-     * Get price
-     *
-     * @return string
-     */
-    public function getPrice()
-    {
-        return $this->price;
     }
 
     /**

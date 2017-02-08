@@ -1,0 +1,45 @@
+{% extends '@Backend/Base/Base.html.twig' %}
+{% block pagetitle %}Actie aanmaken - Zoek dier{% endblock %}
+{% block body %}
+    <div class="ui sixteen column grid container">
+        <div class="sixteen wide column">
+            <h3 class="ui header">Filters</h3>
+            <table class="ui table very basic">
+                <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Geslacht</th>
+                    <th class="two wide">Leeftijd</th>
+                    <th class="three wide">Status</th>
+                    <th class="collapsing">Gesteriliseerd / Gecastereerd</th>
+                    <th>Chipnummer</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>{{ form_row(form.type) }}</td>
+                    <td>{{ form_row(form.gender) }}</td>
+                    <td>{{ form_row(form.agestart) }}
+                        {{ form_row(form.ageend) }}
+                    </td>
+                    <td>{{ form_row(form.status) }}</td>
+                    <td>{{ form_row(form.sterilized) }}</td>
+                    <td>{{ form_row(form.chipnumber) }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row">
+            <div class="ui divider horizontal"></div>
+            <p>Staat het dier er niet bij? Meld het dan eerst <a href="{{ path('backend_animal_create') }}">aan</a></p>
+            <div class="ui divider horizontal"></div>
+        </div>
+        <div id="searchresult"></div>
+        <div class="ui divider horizontal"></div>
+        <div class="ui divider horizontal"></div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/views/BookkeepingBundle/Backend/SearchAnimal.js') }}"></script>
+{% endblock %}

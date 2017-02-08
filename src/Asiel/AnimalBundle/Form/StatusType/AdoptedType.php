@@ -17,13 +17,6 @@ class AdoptedType extends StatusType
     {
         parent::buildForm($builder, $options);
         $builder
-            ->add('price', IntegerType::class, [
-                'label'         => 'Hoeveel is er betaald voor het dier',
-                'attr'          => [
-                    'placeholder'   => 'Vul het bedrag in wat er voor het dier is betaald'
-                ]
-
-            ])
             ->add('search', TextType::class, [
                 'label'         => 'Geadopteerd door',
                 'mapped'        => false,

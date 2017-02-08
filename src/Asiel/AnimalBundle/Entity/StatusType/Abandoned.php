@@ -32,13 +32,6 @@ class Abandoned extends Status implements AnimalState
     private $reason;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="price", type="string", length=10, nullable=true)
-     */
-    private $price;
-
-    /**
      * @ORM\ManyToOne(targetEntity="Asiel\CustomerBundle\Entity\Customer", inversedBy="abandonedAnimals")
      */
     private $abandonedBy;
@@ -170,30 +163,6 @@ class Abandoned extends Status implements AnimalState
     public function getReason()
     {
         return $this->reason;
-    }
-
-    /**
-     * Set price
-     *
-     * @param string $price
-     *
-     * @return Abandoned
-     */
-    public function setPrice($price)
-    {
-        $this->price = $price;
-
-        return $this;
-    }
-
-    /**
-     * Get price
-     *
-     * @return string
-     */
-    public function getPrice()
-    {
-        return $this->price;
     }
 
     /**

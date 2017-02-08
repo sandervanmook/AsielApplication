@@ -56,6 +56,10 @@ class LoadAnimalData implements FixtureInterface
         $animal2->setChipnumber(123456789012344);
         $animal2->setSterilized(false);
         $animal2->setToiletTrained(true);
+        $animal2->setNeedsExercise(true);
+        $animal2->setFurType('zacht');
+
+
         $manager->persist($animal2);
 
         $manager->flush();

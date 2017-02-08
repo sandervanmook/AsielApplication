@@ -22,15 +22,8 @@ class AbandonedType extends StatusType
             ->add('reason', CKEditorType::class, [
                 'label'     => 'Reden van afstand doen'
             ])
-            ->add('price', MoneyType::class, [
-                'label'     => 'Prijs die betaald is',
-                'attr'      => [
-                    'size' => "20",
-                ]
-            ])
             ->add('abandonedBy', HiddenType::class, [
                 'mapped'     => false,
-
             ])
             ->add('search', TextType::class, [
                 'label'         => 'Afgestaan door',

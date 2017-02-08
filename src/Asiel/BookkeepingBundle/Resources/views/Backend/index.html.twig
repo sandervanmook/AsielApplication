@@ -1,0 +1,18 @@
+{% extends '@Backend/Base/Base.html.twig' %}
+{% block pagetitle %}Boekhouding{% endblock %}
+{% block body %}
+    <div class="ui sixteen column grid container">
+        <div class="six wide column">
+            <div class="ui relaxed divided list">
+                <div class="item">
+                    <div class="content">
+                        <a class="header" href="{{ path('backend_bookkeeping_action_searchanimal') }}">Status
+                            aanpassen</a>
+                        <div class="description">Een dier verandert van status en er moeten kosten berekend worden.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
