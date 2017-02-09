@@ -157,11 +157,6 @@ class StatusFormHandler
         }
         // End found status
 
-        // If someone adopted the animal set the right customer. (Adopted status)
-        if ($form->has('customer') && (!is_null($form->get('customer')->getData()))) {
-            $status->setCustomer($this->getCustomerRepository()->find($form->get('customer')->getData()));
-        }
-
         $this->em->persist($status);
         $this->em->flush();
         $this->eventDispatcher->dispatch('user_alert.message', new UserAlertEvent(UserAlertEvent::SUCCESS, 'De status is aangemaakt.'));
