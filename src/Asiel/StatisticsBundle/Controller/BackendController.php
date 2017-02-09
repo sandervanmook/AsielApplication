@@ -97,7 +97,10 @@ class BackendController extends Controller
         ]);
     }
 
-
+    /**
+     * @param Request $request
+     * @return Response
+     */
     public function animalLeavingAction(Request $request)
     {
         $formHandler = $this->get('asiel.statisticsbundle.backendformhandler');
@@ -168,28 +171,4 @@ class BackendController extends Controller
         ]);
     }
 
-    /**
-     * Ajax call
-     * @param Request $request
-     * @return Response
-     */
-    public function searchCustomersDataAction(Request $request)
-    {
-        $formHandler = $this->get('asiel.customerbundle.customerformhandler');
-
-        $allCustomers = $formHandler->getRepository()->findAll();
-
-        $searchArray['lastname'] = $request->get('lastname');
-        $searchArray['city'] = $request->get('city');
-        $searchArray['citizenservicenumber'] = $request->get('citizenservicenumber');
-
-        $filterCustomer = new CustomerFilter($allCustomers, $searchArray);
-        $filterCustomer->filter();
-
-        $endResult = $filterCustomer->getFilterResult();
-
-        return $this->render('@Statistics/Backend/customerSearchResult.html.twig', [
-            'result' => $endResult,
-        ]);
-    }
 }

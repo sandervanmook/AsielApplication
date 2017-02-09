@@ -18,7 +18,7 @@ backend_customer_create:
     defaults: { _controller: CustomerBundle:BackendCustomer:create }
 
 backend_customer_search_data:
-    path:     /customer/searchdata
+    path:     /customer/searchdata/{requestby}
     defaults: { _controller: CustomerBundle:BackendCustomer:searchCustomersData }
     options:
            expose: true

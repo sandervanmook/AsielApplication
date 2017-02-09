@@ -4,7 +4,7 @@ backend_animal_index:
     defaults: { _controller: AnimalBundle:Backend:index }
 
 backend_animal_search_data:
-    path:     /searchdata
+    path:     /searchdata/{requestby}
     defaults: { _controller: AnimalBundle:Backend:searchAnimalsData }
     options:
            expose: true

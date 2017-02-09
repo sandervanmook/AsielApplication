@@ -24,10 +24,4 @@ backend_statistics_customer_actions:
 backend_statistics_customer_actions_show:
     path:     /stats/customer/actions/show/{id}
     defaults: { _controller: StatisticsBundle:Backend:customerActionsShow }
-
-backend_statistics_customer_search_data:
-    path:     /stats/customer/searchdata
-    defaults: { _controller: StatisticsBundle:Backend:searchCustomersData }
-    options:
-           expose: true
 # End Customer Section
