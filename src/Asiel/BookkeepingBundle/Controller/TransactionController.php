@@ -53,15 +53,6 @@ class TransactionController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            if ($form->get('type')->getData()  == 'Deposit') {
-                $transaction->setDeposit(true);
-                $transaction->setInFull(false);
-            }
-            if ($form->get('type')->getData()  == 'inFull') {
-                $transaction->setInFull(true);
-                $transaction->setDeposit(false);
-            }
-
             $formHandler->create($action, $customer, $transaction);
 
             return new RedirectResponse($this->generateUrl('backend_bookkeeping_action_index'));

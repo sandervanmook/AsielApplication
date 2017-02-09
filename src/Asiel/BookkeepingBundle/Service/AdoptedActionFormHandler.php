@@ -6,12 +6,15 @@ namespace Asiel\BookkeepingBundle\Service;
 
 use Asiel\AnimalBundle\AnimalStateMachine\AnimalStateMachine;
 use Asiel\AnimalBundle\Entity\Animal;
+use Asiel\AnimalBundle\Entity\StatusType\Adopted;
 use Asiel\AnimalBundle\Repository\AnimalRepository;
+use Asiel\AnimalBundle\Repository\StatusRepository;
 use Asiel\BackendBundle\Event\ResourceNotFoundEvent;
 use Asiel\BackendBundle\Event\UserAlertEvent;
 use Asiel\BackendBundle\Repository\BookkeepingSettingsRepository;
 use Asiel\BookkeepingBundle\Entity\Action;
 use Asiel\CustomerBundle\Entity\Customer;
+use DateTime;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -119,6 +122,7 @@ class AdoptedActionFormHandler
         $action->setTotalCosts($totalCosts);
         $action->setAnimal($animal);
         $action->setFullyPaid(false);
+        $action->setCompleted(false);
         $action->setCustomer($customer);
 
         $this->em->persist($action);
@@ -128,6 +132,58 @@ class AdoptedActionFormHandler
             "Actie is aangemaakt."));
 
         return $action;
+    }
+
+    public function findAction(int $actionId) : Action
+    {
+        $action = $this->em->getRepository('BookkeepingBundle:Action')->find($actionId);
+
+        if (!$action) {
+            $this->eventDispatcher->dispatch('resourcenotfound', new ResourceNotFoundEvent('Actie', $actionId));
+        }
+
+        return $action;
+    }
+
+    public function verifyFinish(Action $action)
+    {
+        if ($action->isFullyPaid()) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function setNewStatus(Action $action)
+    {
+        $currentAnimal = $action->getAnimal();
+        $status = new Adopted(new AnimalStateMachine());
+
+        // Set mandatory fields
+        $status->setDate(new DateTime('now'));
+
+        // Archive all states so the new one will be the new active state
+        $this->getStatusRepository()->setStatesArchived($currentAnimal->getStatus());
+
+        // Bind the animal to this status
+        $status->setAnimal($currentAnimal);
+        // The new status should be active
+        $status->setArchived(false);
+
+        // Set the customer to the status
+        $status->setCustomer($action->getCustomer());
+
+        // Mark action complete
+        $action->setCompleted(true);
+
+        $this->em->persist($status);
+        $this->em->flush();
+        $this->eventDispatcher->dispatch('user_alert.message', new UserAlertEvent(UserAlertEvent::SUCCESS, 'De adoptie status is aangemaakt.'));
+    }
+
+    private function getStatusRepository() : StatusRepository
+    {
+        return $this->em->getRepository('AnimalBundle:Status');
     }
 
 }

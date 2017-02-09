@@ -69,6 +69,13 @@ class Action
     private $customer;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="completed", type="boolean")
+     */
+    private $completed;
+
+    /**
      * Get id
      *
      * @return int
@@ -262,5 +269,15 @@ class Action
             }
             return $this->totalCosts - $paid;
         }
+    }
+
+    public function setCompleted(Bool $bool)
+    {
+        $this->completed = $bool;
+    }
+
+    public function isCompleted()
+    {
+        return $this->completed;
     }
 }
