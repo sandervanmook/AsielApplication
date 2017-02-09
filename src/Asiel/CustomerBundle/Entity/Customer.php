@@ -6,6 +6,8 @@ use Asiel\AnimalBundle\Entity\StatusType\Abandoned;
 use Asiel\AnimalBundle\Entity\StatusType\Adopted;
 use Asiel\AnimalBundle\Entity\StatusType\Found;
 use Asiel\AnimalBundle\Entity\StatusType\ReturnedOwner;
+use Asiel\BookkeepingBundle\Entity\Action;
+use Asiel\BookkeepingBundle\Entity\Transaction;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -158,6 +160,16 @@ class Customer
      * @ORM\OneToMany(targetEntity="Asiel\AnimalBundle\Entity\StatusType\Abandoned", mappedBy="abandonedBy")
      */
     private $abandonedAnimals;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Asiel\BookkeepingBundle\Entity\Transaction", inversedBy="customer")
+     */
+    private $transactions;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Asiel\BookkeepingBundle\Entity\Action", mappedBy="customer")
+     */
+    private $actions;
 
     /**
      * Constructor
@@ -648,5 +660,63 @@ class Customer
     public function getMunicipality()
     {
         return $this->municipality;
+    }
+
+    /**
+     * Set transactions
+     *
+     * @param Transaction $transactions
+     *
+     * @return Customer
+     */
+    public function setTransactions(Transaction $transactions = null)
+    {
+        $this->transactions = $transactions;
+
+        return $this;
+    }
+
+    /**
+     * Get transactions
+     *
+     * @return Transaction
+     */
+    public function getTransactions()
+    {
+        return $this->transactions;
+    }
+
+    /**
+     * Add action
+     *
+     * @param Action $action
+     *
+     * @return Customer
+     */
+    public function addAction(Action $action)
+    {
+        $this->actions[] = $action;
+
+        return $this;
+    }
+
+    /**
+     * Remove action
+     *
+     * @param Action $action
+     */
+    public function removeAction(Action $action)
+    {
+        $this->actions->removeElement($action);
+    }
+
+    /**
+     * Get actions
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getActions()
+    {
+        return $this->actions;
     }
 }

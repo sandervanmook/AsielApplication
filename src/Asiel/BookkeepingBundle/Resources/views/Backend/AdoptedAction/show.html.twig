@@ -1,0 +1,67 @@
+{% extends '@Backend/Base/Base.html.twig' %}
+{% block pagetitle %}Bekijk actie{% endblock %}
+{% block body %}
+<div class="ui four column very relaxed grid">
+    <div class="four wide column">
+        <h3 class="ui header">Actie</h3>
+        <table class="ui table very basic">
+            <tbody>
+            <tr>
+                <td>Id</td>
+                <td>{{ action.id }}</td>
+            </tr>
+            <tr>
+                <td>Datum</td>
+                <td>{{ action.date|date('d-m-Y') }}</td>
+            </tr>
+            <tr>
+                <td>Type</td>
+                <td>{{ action.type|trans }}</td>
+            </tr>
+            <tr>
+                <td>Totale kosten</td>
+                <td><i class="euro icon"></i>{{ action.totalCosts }}</td>
+            </tr>
+            <tr>
+                <td>Voor klant</td>
+                <td>
+                    <a href="{{ path('backend_customer_edit', {'id' : action.customer.id}) }}">{{ action.customer.firstname }} {{ action.customer.lastname }}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>Nog te voldoen</td>
+                <td><i class="euro icon"></i>{{ action.sumRemaining }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="four wide column">
+        <h3 class="ui header">Eerdere transacties</h3>
+        <table class="ui table very basic">
+            <tbody>
+            {% for transaction in action.transaction %}
+                <tr>
+                    <td>Id : {{ transaction.id }}</td>
+                    <td>{{ transaction.paymenttype|trans }}</td>
+                    <td>Bedrag: <i class="euro icon"></i>{{ transaction.paidamount }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="four wide column">
+        <h3 class="ui header">Betreft dier</h3>
+        <table class="ui table very basic">
+            <tbody>
+            <tr>
+                <td>Naam</td>
+                <td><a href="{{ path('backend_animal_show', {'id' : action.animal.id}) }}">{{ action.animal.name }}</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<hr />
+
+
+{% endblock %}

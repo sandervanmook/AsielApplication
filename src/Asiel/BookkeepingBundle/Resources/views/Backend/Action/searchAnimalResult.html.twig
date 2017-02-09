@@ -8,6 +8,7 @@
         <th>Geslacht</th>
         <th>Leeftijd</th>
         <th>Chipnummer</th>
+        <th>Open actie(s)</th>
     </tr>
     </thead>
     <tbody>
@@ -22,7 +23,7 @@
                     <img src="{{ asset('img/no_picture.jpg') }}" height="20" alt="no_animal_picture">
                 {% endif %}
             </td>
-            <td><a href="{{ path('backend_bookkeeping_action_select', {'id' : animal.id}) }}">{{ animal.name }}</a></td>
+            <td><a href="{{ path('backend_bookkeeping_action_searchcustomer', {'animalid' : animal.id}) }}">{{ animal.name }}</a></td>
             <td>{{ animal.getclassname|trans }}</td>
 
             {% if animal.status is empty %}
@@ -37,12 +38,14 @@
             <td>{{ outputGender(animal.gender) }}</td>
             <td>{{ animal.age }}</td>
             <td>{{ animal.chipnumber }}</td>
+            <td>{{ outputBool(animal.hasopenactions) }}</td>
         </tr>
     {% endfor %}
     </tbody>
     <tfoot>
     <tr>
         <th>Totaal: {{ result|length }}</th>
+        <th></th>
         <th></th>
         <th></th>
         <th></th>

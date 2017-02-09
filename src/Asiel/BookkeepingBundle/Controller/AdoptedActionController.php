@@ -1,0 +1,63 @@
+<?php
+
+
+namespace Asiel\BookkeepingBundle\Controller;
+
+
+use Asiel\BookkeepingBundle\Entity\Action;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
+
+class AdoptedActionController extends Controller
+{
+    public function startAdoptedActionAction(Request $request)
+    {
+        $formHandler = $this->get('asiel.bookkeepingbundle.adoptedactionformhandler');
+        $animalId = $this->get('session')->get('bookkeeping_selected_animal_id');
+        $customerId = $this->get('session')->get('bookkeeping_selected_customer_id');
+        $currentAnimal = $formHandler->findAnimal($animalId);
+        $currentCustomer = $formHandler->findCustomer($customerId);
+
+        // Check if animals active state allows to be changed to adopted
+        if (!$formHandler->stateChangeAllowed($currentAnimal)) {
+            return new RedirectResponse($this->generateUrl('backend_bookkeeping_action_select',
+                ['animalid' => $animalId]));
+        }
+
+        // Get total costs from backend bundle
+        $actionTotalCosts = $formHandler->getTotalActionCosts($currentAnimal);
+
+        // Get type of animal the costs are based upon
+        $animalType = $formHandler->getAnimalType($currentAnimal);
+
+        $form = $this->createFormBuilder()
+            ->add('submit', SubmitType::class, [
+                'label' => 'Aanmaken',
+                'attr' => [
+                    'class' => 'ui button positive'
+                ]
+            ])
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()) {
+            $action = $formHandler->createAction($currentAnimal, $currentCustomer, $actionTotalCosts);
+            $actionId = $action->getId();
+
+            return new RedirectResponse($this->generateUrl('backend_bookkeeping_action_index',
+                ['actionid' => $actionId]));
+        }
+
+        return $this->render('@Bookkeeping/Backend/AdoptedAction/start.html.twig', [
+            'actiontotalcosts' => $actionTotalCosts,
+            'animaltype' => $animalType,
+            'animal' => $currentAnimal,
+            'customer' => $currentCustomer,
+            'form' => $form->createView(),
+        ]);
+    }
+
+}

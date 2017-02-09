@@ -4,6 +4,7 @@ namespace Asiel\AnimalBundle\Entity;
 
 use Asiel\AnimalBundle\AnimalStateMachine\AnimalStateMachine;
 use Asiel\AnimalBundle\Entity\StatusType\NoState;
+use Asiel\BookkeepingBundle\Entity\Action;
 use Asiel\CalendarBundle\Entity\Task;
 use Asiel\CustomerBundle\Entity\Customer;
 use DateTime;
@@ -243,6 +244,11 @@ class Animal
      * @ORM\OneToMany(targetEntity="Asiel\CalendarBundle\Entity\Task", mappedBy="animal")
      */
     private $tasks;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Asiel\BookkeepingBundle\Entity\Action", mappedBy="animal")
+     */
+    private $actions;
 
     /**
      * Constructor
@@ -1039,4 +1045,50 @@ class Animal
         $this->nightLocation = $nightLocation;
     }
 
+    /**
+     * Add action
+     *
+     * @param Action $action
+     *
+     * @return Animal
+     */
+    public function addAction(Action $action)
+    {
+        $this->actions[] = $action;
+
+        return $this;
+    }
+
+    /**
+     * Remove action
+     *
+     * @param Action $action
+     */
+    public function removeAction(Action $action)
+    {
+        $this->actions->removeElement($action);
+    }
+
+    /**
+     * Get actions
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getActions()
+    {
+        return $this->actions;
+    }
+
+    public function hasOpenActions()
+    {
+        if (!$this->getActions()->isEmpty()) {
+            foreach ($this->getActions() as $action) {
+                if (!$action->isFullyPaid()) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
 }

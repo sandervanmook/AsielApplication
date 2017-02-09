@@ -129,7 +129,11 @@ class BackendController extends Controller
 
         switch ($requestby) {
             case 'bookkeepingbundle' :
-                return $this->render('@Bookkeeping/Backend/searchAnimalResult.html.twig', [
+                return $this->render('@Bookkeeping/Backend/Action/searchAnimalResult.html.twig', [
+                    'result' => $endResult,
+                ]);
+            case 'animalbundle' :
+                return $this->render('@Animal/Backend/Animal/searchResult.html.twig', [
                     'result' => $endResult,
                 ]);
             default:
