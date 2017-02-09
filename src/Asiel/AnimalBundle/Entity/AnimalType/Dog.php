@@ -353,4 +353,34 @@ class Dog extends Animal implements TypeInterface
     {
         return $this->toiletTrained;
     }
+
+    public function isCurrentlyAPuppy() : bool
+    {
+        if ($this->getAge() <= 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function isCurrentlyADog() : bool
+    {
+        if ($this->getAge() >= 2) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function getCurrentDogType() : string
+    {
+        if ($this->isCurrentlyADog()) {
+            return 'Dog';
+        }
+        if ($this->isCurrentlyAPuppy()) {
+            return 'Puppy';
+        }
+
+        return 'Unknown';
+    }
 }

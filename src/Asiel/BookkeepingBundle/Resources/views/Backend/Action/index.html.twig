@@ -1,0 +1,46 @@
+{% extends '@Backend/Base/Base.html.twig' %}
+{% block pagetitle %}Actie overzicht{% endblock %}
+{% block body %}
+    <div class="ui sixteen column grid container">
+        <div class="sixteen wide column">
+            <table class="ui table very basic">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>ID</th>
+                    <th>Datum</th>
+                    <th>Type</th>
+                    <th>Kosten</th>
+                    <th>Nog te voldoen</th>
+                    <th>Klant</th>
+                    <th>Dier</th>
+                    <th>Afgerond</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for action in actions %}
+                    <tr {% if action.fullyPaid %} class="positive"{% endif %}>
+                        <td>
+                            <a href="{{ path('backend_bookkeeping_action_show', {'actionid' : action.id}) }}"><button class="ui tiny button primary"><i class="eye icon"></i></button></a>
+                        </td>
+                        <td>{{ action.id }}</td>
+                        <td>{{ action.date|date('d-m-Y') }}</td>
+                        <td>{{ action.type|trans }}</td>
+                        <td><i class="euro icon"></i>{{ action.totalCosts }}</td>
+                        <td><i class="euro icon"></i>{{ action.sumRemaining }}</td>
+                        <td><a href="{{ path('backend_customer_edit', {'id' : action.customer.id}) }}">{{ action.customer.firstname }} {{ action.customer.lastname }}</a></td>
+                        <td><a href="{{ path('backend_animal_show', {'id' : action.animal.id}) }}">{{ action.animal.name }}</a></td>
+                        <td>{{ outputBool(action.isfullypaid) }}</td>
+                        <td>
+                            {% if action.fullyPaid == false %}
+                            <a href="{{ path('backend_bookkeeping_transaction_searchcustomer', {'actionid' : action.id}) }}"><button class="ui tiny button positive"><i class="plus icon"></i>Transactie</button></a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

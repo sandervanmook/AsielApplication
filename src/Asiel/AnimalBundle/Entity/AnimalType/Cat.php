@@ -289,4 +289,35 @@ class Cat extends Animal implements TypeInterface
     {
         return $this->animal;
     }
+
+    public function isCurrentlyAKitten() : bool
+    {
+        if ($this->getAge() <= 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function isCurrentlyACat() : bool
+    {
+        if ($this->getAge() >= 2) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function getCurrentCatType() : string
+    {
+        if ($this->isCurrentlyACat()) {
+            return 'Cat';
+        }
+        if ($this->isCurrentlyAKitten()) {
+            return 'Kitten';
+        }
+
+        return 'Unknown';
+    }
+
 }

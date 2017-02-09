@@ -36,7 +36,7 @@ class AnimalFormHandler
         $animal = $this->em->getRepository('AnimalBundle:Animal')->find($animalId);
 
         if (!$animal) {
-            $this->eventDispatcher->dispatch('resourcenotfound', new ResourceNotFoundEvent('Locatie', $animalId));
+            $this->eventDispatcher->dispatch('resourcenotfound', new ResourceNotFoundEvent('Dier', $animalId));
         }
 
         return $animal;

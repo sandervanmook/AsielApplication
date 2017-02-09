@@ -46,3 +46,7 @@ ROLE_SUPERVISOR: Algemeen opzichter
 #Filter / Stats
 Both: Beide
 Found_Caught: Gevangen
+
+#Bookkeeping
+Cash: Contant
+Invoice: Factuur

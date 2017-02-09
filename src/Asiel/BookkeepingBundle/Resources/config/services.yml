@@ -1,4 +1,21 @@
 services:
-#    bookkeeping.example:
-#        class: Asiel\BookkeepingBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
+    asiel.bookkeepingbundle.adoptedactionformhandler:
+      class: Asiel\BookkeepingBundle\Service\AdoptedActionFormHandler
+      arguments:
+        - '@doctrine.orm.entity_manager'
+        - '@event_dispatcher'
+        - '@request_stack'
+
+    asiel.bookkeepingbundle.actionformhandler:
+      class: Asiel\BookkeepingBundle\Service\ActionFormHandler
+      arguments:
+        - '@doctrine.orm.entity_manager'
+        - '@event_dispatcher'
+        - '@request_stack'
+
+    asiel.bookkeepingbundle.transactionformhandler:
+      class: Asiel\BookkeepingBundle\Service\TransactionFormHandler
+      arguments:
+        - '@doctrine.orm.entity_manager'
+        - '@event_dispatcher'
+        - '@request_stack'
