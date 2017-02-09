@@ -51,7 +51,9 @@ class ActionController extends Controller
         $animalId = $this->get('session')->get('bookkeeping_selected_animal_id');
 
         // Save selected customer in session
-        $this->get('session')->set('bookkeeping_selected_customer_id', $request->get('customerid'));
+        if (!is_null($request->get('customerid'))) {
+            $this->get('session')->set('bookkeeping_selected_customer_id', $request->get('customerid'));
+        }
 
         $currentAnimal = $formHandler->findAnimal($animalId);
 
@@ -77,6 +79,10 @@ class ActionController extends Controller
         ]);
     }
 
+    /**
+     * @param int $actionid
+     * @return Response
+     */
     public function showAction(int $actionid)
     {
         $formHandler = $this->get('asiel.bookkeepingbundle.actionformhandler');
