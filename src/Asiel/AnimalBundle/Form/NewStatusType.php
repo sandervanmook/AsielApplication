@@ -20,7 +20,6 @@ class NewStatusType extends AbstractType
                 'mapped'    => false,
                 'choices'       => [
                     'Terug naar eigenaar'   => 'ReturnedOwner',
-                    'Adoptie'               => 'Adopted',
                     'Overleden'             => 'Deceased',
                     'Kwijt'                 => 'Lost',
                     'Afgestaan'             => 'Abandoned',
