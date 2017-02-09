@@ -31,7 +31,7 @@ class BackendCustomerController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function searchCustomersDataAction(Request $request)
+    public function searchCustomersDataAction(Request $request, string $requestby)
     {
         $formHandler = $this->get('asiel.customerbundle.customerformhandler');
 
@@ -46,9 +46,16 @@ class BackendCustomerController extends Controller
 
         $endResult = $filterCustomer->getFilterResult();
 
-        return $this->render('@Customer/Backend/searchResult.html.twig', [
-            'result' => $endResult,
-        ]);
+        switch ($requestby) {
+            case 'statisticsbundle' :
+                return $this->render('@Statistics/Backend/customerSearchResult.html.twig', [
+                    'result' => $endResult,
+                ]);
+            default:
+                return $this->render('@Customer/Backend/searchResult.html.twig', [
+                    'result' => $endResult,
+                ]);
+        }
     }
 
     /**

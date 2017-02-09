@@ -107,7 +107,7 @@ class BackendController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function searchAnimalsDataAction(Request $request)
+    public function searchAnimalsDataAction(Request $request, string $requestby)
     {
         $formHandler = $this->get('asiel.animalbundle.animalformhandler');
 
@@ -127,9 +127,16 @@ class BackendController extends Controller
 
         $endResult = $filterAnimal->getFilterResult();
 
-        return $this->render('@Animal/Backend/Animal/searchResult.html.twig', [
-            'result' => $endResult,
-        ]);
+        switch ($requestby) {
+            case 'bookkeepingbundle' :
+                return $this->render('@Bookkeeping/Backend/searchAnimalResult.html.twig', [
+                    'result' => $endResult,
+                ]);
+            default:
+                return $this->render('@Animal/Backend/Animal/searchResult.html.twig', [
+                    'result' => $endResult,
+                ]);
+        }
     }
 
     /**

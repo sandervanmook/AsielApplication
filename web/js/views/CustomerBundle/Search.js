@@ -26,8 +26,11 @@ $(document).ready(function () {
 
 
     function refreshData() {
+        if (typeof requestby == 'undefined') {
+            requestby = 'customerbundle';
+        }
         $.ajax({
-            url: Routing.generate('backend_customer_search_data', {}, true),
+            url: Routing.generate('backend_customer_search_data', {'requestby' : requestby}, true),
             data: {
                 lastname: lastname,
                 city: city,

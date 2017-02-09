@@ -42,5 +42,6 @@
 {% endblock %}
 {% block javascripts %}
     {{ parent() }}
-    <script src="{{ asset('js/views/StatisticsBundle/Backend/SearchCustomer.js') }}"></script>
+    <script>var requestby = 'statisticsbundle';</script>
+    <script src="{{ asset('js/views/CustomerBundle/Search.js') }}"></script>
 {% endblock %}

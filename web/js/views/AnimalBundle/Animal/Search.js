@@ -178,8 +178,11 @@ $(document).ready(function () {
     });
 
     function refreshData() {
+        if (typeof requestby == 'undefined') {
+            requestby = 'animalbundle';
+        }
         $.ajax({
-            url: Routing.generate('backend_animal_search_data', {}, true),
+            url: Routing.generate('backend_animal_search_data', { 'requestby' : requestby }, true),
             data: {
                 type: typeArray,
                 gender: genderArray,

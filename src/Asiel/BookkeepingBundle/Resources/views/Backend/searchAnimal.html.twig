@@ -41,5 +41,6 @@
 {% endblock %}
 {% block javascripts %}
     {{ parent() }}
-    <script src="{{ asset('js/views/BookkeepingBundle/Backend/SearchAnimal.js') }}"></script>
+    <script>var requestby = 'bookkeepingbundle'</script>
+    <script src="{{ asset('js/views/AnimalBundle/Animal/Search.js') }}"></script>
 {% endblock %}
