@@ -4,15 +4,19 @@
 namespace Asiel\BookkeepingBundle\Controller;
 
 
-use Asiel\BookkeepingBundle\Entity\Action;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class AdoptedActionController extends Controller
 {
-    public function startAdoptedActionAction(Request $request)
+    /**
+     * @param Request $request
+     * @return RedirectResponse|Response
+     */
+    public function startAction(Request $request)
     {
         $formHandler = $this->get('asiel.bookkeepingbundle.adoptedactionformhandler');
         $animalId = $this->get('session')->get('bookkeeping_selected_animal_id');
@@ -60,4 +64,21 @@ class AdoptedActionController extends Controller
         ]);
     }
 
+    /**
+     * @param int $actionid
+     * @return RedirectResponse
+     */
+    public function finishAction(int $actionid)
+    {
+        $formHandler = $this->get('asiel.bookkeepingbundle.adoptedactionformhandler');
+        $action = $formHandler->findAction($actionid);
+
+        // Verify action is finished
+        $formHandler->verifyFinish($action);
+
+        // Set the right active status on the animal
+        $formHandler->setNewStatus($action);
+
+        return new RedirectResponse($this->generateUrl('backend_bookkeeping_action_show', ['actionid' => $actionid]));
+    }
 }

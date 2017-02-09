@@ -72,6 +72,15 @@ class TransactionFormHandler
             $action->setFullyPaid(true);
         }
 
+        // Is transaction a deposit or in full
+        if ($action->getTotalCosts() == $transaction->getPaidAmount()) {
+            $transaction->setDeposit(false);
+            $transaction->setInFull(true);
+        } else {
+            $transaction->setDeposit(true);
+            $transaction->setInFull(false);
+        }
+
         $transaction->setCustomer($customer);
         $transaction->setAction($action);
 
