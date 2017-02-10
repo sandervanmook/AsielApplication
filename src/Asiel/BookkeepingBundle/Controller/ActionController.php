@@ -83,8 +83,7 @@ class ActionController extends Controller
             $searchArray['datestart'] = $form->get('datestart')->getData();
             $searchArray['dateend'] = $form->get('dateend')->getData();
             $searchArray['type'] = $form->get('type')->getData();
-            $searchArray['completed'] = $form->get('completed')->getData();
-            $searchArray['fullypaid'] = $form->get('fullypaid')->getData();
+            $searchArray['status'] = $form->get('status')->getData();
             $searchArray['showall'] = $form->get('showall')->getData();
 
             $allActions = $repository->findAll();

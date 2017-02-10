@@ -36,13 +36,16 @@ class ActionSearchType extends AbstractType
                 'multiple'  => true,
                 'data' => ['Alle'  => 'All'],
             ])
-            ->add('completed', CheckboxType::class, [
-                'label' => 'Afgerond',
-                'required' => false,
-            ])
-            ->add('fullypaid', CheckboxType::class, [
-                'label' => 'Volledig betaald',
-                'required' => false,
+            ->add('status', ChoiceType::class, [
+                'label' => false,
+                'choices' => [
+                    'Betaald & Afgerond' => 'Completed',
+                    'Volledig betaald' => 'Fullypaid',
+                    'Bedrag open' => 'Sumremaining'
+                ],
+                'multiple'  => false,
+                'required' => true,
+                'data' => 'Sumremaining',
             ])
             ->add('showall', CheckboxType::class, [
                 'label' => 'Laat alles zien',
