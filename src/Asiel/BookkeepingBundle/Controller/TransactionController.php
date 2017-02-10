@@ -53,9 +53,13 @@ class TransactionController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $formHandler->create($action, $customer, $transaction);
+            if ($form->get('paidAmount')->getData() > $action->sumRemaining()) {
+                $formHandler->sumLargerThanRemainingMessage();
+            } else {
+                $formHandler->create($action, $customer, $transaction);
 
-            return new RedirectResponse($this->generateUrl('backend_bookkeeping_action_show', ['actionid' => $actionId]));
+                return new RedirectResponse($this->generateUrl('backend_bookkeeping_action_show', ['actionid' => $actionId]));
+            }
         }
 
         return $this->render('@Bookkeeping/Backend/Transaction/create.html.twig', [

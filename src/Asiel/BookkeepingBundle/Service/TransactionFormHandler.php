@@ -64,4 +64,11 @@ class TransactionFormHandler
                 "Transactie aangemaakt."));
 
     }
+
+    public function sumLargerThanRemainingMessage()
+    {
+        $this->baseFormHandler->getEventDispatcher()->dispatch('user_alert.message',
+            new UserAlertEvent(UserAlertEvent::DANGER,
+                "Het betaalde bedrag kan niet hoger zijn dan het resterende bedrag."));
+    }
 }
