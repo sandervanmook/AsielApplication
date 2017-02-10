@@ -4,38 +4,28 @@
 namespace Asiel\FrontendBundle\Service;
 
 
+use Asiel\AnimalBundle\Entity\AnimalType\Dog;
 use Asiel\AnimalBundle\Repository\AnimalType\DogRepository;
 use Asiel\BackendBundle\Event\ResourceNotFoundEvent;
-use Doctrine\ORM\EntityManager;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
+use Asiel\Shared\Service\BaseFormHandler;
+
 
 class DogFormHandler
 {
-    protected $em;
-    protected $eventDispatcher;
-    protected $requestStack;
+    protected $baseFormHandler;
 
-    public function __construct(
-        EntityManager $em,
-        EventDispatcherInterface $eventDispatcher,
-        RequestStack $requestStack
-    ) {
-        $this->em = $em;
-        $this->eventDispatcher = $eventDispatcher;
-        $this->requestStack = $requestStack;
+    public function __construct(BaseFormHandler $baseFormHandler)
+    {
+        $this->baseFormHandler = $baseFormHandler;
     }
 
-    /**
-     * @param $option string
-     * @return array
-     */
-    public function dogsOption($option)
+    public function dogsOption(string $option)
     {
         $possibleOptions = ['dog', 'puppy', 'both'];
 
         if (!in_array($option, $possibleOptions)) {
-            $this->eventDispatcher->dispatch('resourcenotfound', new ResourceNotFoundEvent('Option', null));
+            $this->baseFormHandler->getEventDispatcher()->dispatch('resourcenotfound',
+                new ResourceNotFoundEvent('Option', null));
         }
 
         switch ($option) {
@@ -51,24 +41,14 @@ class DogFormHandler
         }
     }
 
-    /**
-     * @param $id integer
-     * @return Dog
-     */
-    public function findDog(int $id)
+    public function findDog(int $dogId) : Dog
     {
-        $dog = $this->getDogRepository()->find($id);
-
-        if (!$dog) {
-            $this->eventDispatcher->dispatch('resourcenotfound', new ResourceNotFoundEvent('Hond', $id));
-        }
-
-        return $dog;
+        return $this->baseFormHandler->findDog($dogId);
     }
 
     public function getDogRepository(): DogRepository
     {
-        return $this->em->getRepository('AnimalBundle:AnimalType\Dog');
+        return $this->baseFormHandler->getDogRepository();
     }
 
 }

@@ -2,20 +2,14 @@ services:
     asiel.bookkeepingbundle.adoptedactionformhandler:
       class: Asiel\BookkeepingBundle\Service\AdoptedActionFormHandler
       arguments:
-        - '@doctrine.orm.entity_manager'
-        - '@event_dispatcher'
-        - '@request_stack'
+        - '@asiel.backendbundle.baseformhandler'
 
     asiel.bookkeepingbundle.actionformhandler:
       class: Asiel\BookkeepingBundle\Service\ActionFormHandler
       arguments:
-        - '@doctrine.orm.entity_manager'
-        - '@event_dispatcher'
-        - '@request_stack'
+        - '@asiel.backendbundle.baseformhandler'
 
     asiel.bookkeepingbundle.transactionformhandler:
       class: Asiel\BookkeepingBundle\Service\TransactionFormHandler
       arguments:
-        - '@doctrine.orm.entity_manager'
-        - '@event_dispatcher'
-        - '@request_stack'
+        - '@asiel.backendbundle.baseformhandler'

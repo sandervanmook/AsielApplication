@@ -8,37 +8,21 @@ use Asiel\AnimalBundle\AnimalStateMachine\AnimalStateMachine;
 use Asiel\AnimalBundle\Entity\Animal;
 use Asiel\AnimalBundle\Entity\StatusType\Adopted;
 use Asiel\AnimalBundle\Repository\AnimalRepository;
-use Asiel\AnimalBundle\Repository\StatusRepository;
-use Asiel\BackendBundle\Event\ResourceNotFoundEvent;
 use Asiel\BackendBundle\Event\UserAlertEvent;
-use Asiel\BackendBundle\Repository\BookkeepingSettingsRepository;
 use Asiel\BookkeepingBundle\Entity\Action;
 use Asiel\CustomerBundle\Entity\Customer;
+use Asiel\Shared\Service\BaseFormHandler;
 use DateTime;
-use Doctrine\ORM\EntityManager;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
 
 class AdoptedActionFormHandler
 {
-    protected $em;
-    protected $eventDispatcher;
-    protected $requestStack;
+    protected $baseFormHandler;
 
-    public function __construct(
-        EntityManager $em,
-        EventDispatcherInterface $eventDispatcher,
-        RequestStack $requestStack
-    ) {
-        $this->em = $em;
-        $this->eventDispatcher = $eventDispatcher;
-        $this->requestStack = $requestStack;
+    public function __construct(BaseFormHandler $baseFormHandler)
+    {
+        $this->baseFormHandler = $baseFormHandler;
     }
 
-    /**
-     * @param Animal $animal
-     * @return bool
-     */
     public function stateChangeAllowed(Animal $animal)
     {
         $stateMachine = new AnimalStateMachine();
@@ -48,8 +32,9 @@ class AdoptedActionFormHandler
 
         //TODO translate current state
         if (!$decision) {
-            $this->eventDispatcher->dispatch('user_alert.message', new UserAlertEvent(UserAlertEvent::DANGER,
-                "Vanwege de huidige status van dit dier ({$animal->getActiveState()}) is adoptie momenteel niet mogelijk."));
+            $this->baseFormHandler->getEventDispatcher()->dispatch('user_alert.message',
+                new UserAlertEvent(UserAlertEvent::DANGER,
+                    "Vanwege de huidige status van dit dier ({$animal->getActiveState()}) is adoptie momenteel niet mogelijk."));
             return false;
         }
 
@@ -58,39 +43,27 @@ class AdoptedActionFormHandler
 
     public function findAnimal(int $animalId)
     {
-        $animal = $this->em->getRepository('AnimalBundle:Animal')->find($animalId);
-
-        if (!$animal) {
-            $this->eventDispatcher->dispatch('resourcenotfound', new ResourceNotFoundEvent('Dier', $animalId));
-        }
-
-        return $animal;
+        return $this->baseFormHandler->findAnimal($animalId);
     }
 
     public function findCustomer(int $customerId)
     {
-        $customer = $this->em->getRepository('CustomerBundle:Customer')->find($customerId);
-
-        if (!$customer) {
-            $this->eventDispatcher->dispatch('resourcenotfound', new ResourceNotFoundEvent('Klant', $customerId));
-        }
-
-        return $customer;
+        return $this->baseFormHandler->findCustomer($customerId);
     }
 
-    public function getTotalActionCosts(Animal $animal)
+    public function getTotalActionCosts(Animal $animal): int
     {
         if (($animal->getClassName() == 'Cat') && ($animal->isCurrentlyAKitten())) {
-            return $this->getBookkeepingSettginsRepository()->getSettings()->getPriceAdoptedKitten();
+            return $this->baseFormHandler->getBookkeepingSettingsRepository()->getSettings()->getPriceAdoptedKitten();
         }
         if (($animal->getClassName() == 'Cat') && ($animal->isCurrentlyACat())) {
-            return $this->getBookkeepingSettginsRepository()->getSettings()->getPriceAdoptedCat();
+            return $this->baseFormHandler->getBookkeepingSettingsRepository()->getSettings()->getPriceAdoptedCat();
         }
         if (($animal->getClassName() == 'Dog') && ($animal->isCurrentlyADog())) {
-            return $this->getBookkeepingSettginsRepository()->getSettings()->getPriceAdoptedDog();
+            return $this->baseFormHandler->getBookkeepingSettingsRepository()->getSettings()->getPriceAdoptedDog();
         }
         if (($animal->getClassName() == 'Dog') && ($animal->isCurrentlyAPuppy())) {
-            return $this->getBookkeepingSettginsRepository()->getSettings()->getPriceAdoptedPuppy();
+            return $this->baseFormHandler->getBookkeepingSettingsRepository()->getSettings()->getPriceAdoptedPuppy();
         }
     }
 
@@ -104,17 +77,12 @@ class AdoptedActionFormHandler
         }
     }
 
-    public function getAnimalRepository() : AnimalRepository
+    public function getAnimalRepository(): AnimalRepository
     {
-        return $this->em->getRepository('AnimalBundle:Animal');
+        return $this->baseFormHandler->getAnimalRepository();
     }
 
-    public function getBookkeepingSettginsRepository() : BookkeepingSettingsRepository
-    {
-        return $this->em->getRepository('BackendBundle:BookkeepingSettings');
-    }
-
-    public function createAction(Animal $animal, Customer $customer, int $totalCosts) : Action
+    public function createAction(Animal $animal, Customer $customer, int $totalCosts): Action
     {
         $action = new Action();
         $action->setDate(new \DateTime('now'));
@@ -125,24 +93,19 @@ class AdoptedActionFormHandler
         $action->setCompleted(false);
         $action->setCustomer($customer);
 
-        $this->em->persist($action);
-        $this->em->flush();
+        $this->baseFormHandler->getEm()->persist($action);
+        $this->baseFormHandler->getEm()->flush();
 
-        $this->eventDispatcher->dispatch('user_alert.message', new UserAlertEvent(UserAlertEvent::SUCCESS,
-            "Actie is aangemaakt."));
+        $this->baseFormHandler->getEventDispatcher()->dispatch('user_alert.message',
+            new UserAlertEvent(UserAlertEvent::SUCCESS,
+                "Actie is aangemaakt."));
 
         return $action;
     }
 
-    public function findAction(int $actionId) : Action
+    public function findAction(int $actionId): Action
     {
-        $action = $this->em->getRepository('BookkeepingBundle:Action')->find($actionId);
-
-        if (!$action) {
-            $this->eventDispatcher->dispatch('resourcenotfound', new ResourceNotFoundEvent('Actie', $actionId));
-        }
-
-        return $action;
+        return $this->baseFormHandler->findAction($actionId);
     }
 
     public function verifyFinish(Action $action)
@@ -163,7 +126,7 @@ class AdoptedActionFormHandler
         $status->setDate(new DateTime('now'));
 
         // Archive all states so the new one will be the new active state
-        $this->getStatusRepository()->setStatesArchived($currentAnimal->getStatus());
+        $this->baseFormHandler->getStatusRepository()->setStatesArchived($currentAnimal->getStatus());
 
         // Bind the animal to this status
         $status->setAnimal($currentAnimal);
@@ -176,14 +139,9 @@ class AdoptedActionFormHandler
         // Mark action complete
         $action->setCompleted(true);
 
-        $this->em->persist($status);
-        $this->em->flush();
-        $this->eventDispatcher->dispatch('user_alert.message', new UserAlertEvent(UserAlertEvent::SUCCESS, 'De adoptie status is aangemaakt.'));
+        $this->baseFormHandler->getEm()->persist($status);
+        $this->baseFormHandler->getEm()->flush();
+        $this->baseFormHandler->getEventDispatcher()->dispatch('user_alert.message',
+            new UserAlertEvent(UserAlertEvent::SUCCESS, 'De adoptie status is aangemaakt.'));
     }
-
-    private function getStatusRepository() : StatusRepository
-    {
-        return $this->em->getRepository('AnimalBundle:Status');
-    }
-
 }

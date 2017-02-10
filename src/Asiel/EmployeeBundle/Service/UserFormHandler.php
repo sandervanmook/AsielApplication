@@ -3,34 +3,20 @@
 
 namespace Asiel\EmployeeBundle\Service;
 
-
-use Asiel\BackendBundle\Event\ResourceNotFoundEvent;
 use Asiel\BackendBundle\Event\UserAlertEvent;
 use Asiel\EmployeeBundle\Entity\User;
 use Asiel\EmployeeBundle\Repository\UserRepository;
-use Doctrine\ORM\EntityManager;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
+use Asiel\Shared\Service\BaseFormHandler;
 
 class UserFormHandler
 {
-    protected $em;
-    protected $eventDispatcher;
-    protected $requestStack;
+    protected $baseFormHandler;
 
-    public function __construct(
-        EntityManager $em,
-        EventDispatcherInterface $eventDispatcher,
-        RequestStack $requestStack
-    ) {
-        $this->em = $em;
-        $this->eventDispatcher = $eventDispatcher;
-        $this->requestStack = $requestStack;
+    public function __construct(BaseFormHandler $baseFormHandler)
+    {
+        $this->baseFormHandler = $baseFormHandler;
     }
 
-    /**
-     * @param User $user
-     */
     public function create(User $user)
     {
         // User should always get ROLE_USER
@@ -38,15 +24,12 @@ class UserFormHandler
         array_push($roles, 'ROLE_USER');
         $user->setRoles($roles);
 
-        $this->em->persist($user);
-        $this->em->flush();
-        $this->eventDispatcher->dispatch('user_alert.message',
+        $this->baseFormHandler->getEm()->persist($user);
+        $this->baseFormHandler->getEm()->flush();
+        $this->baseFormHandler->getEventDispatcher()->dispatch('user_alert.message',
             new UserAlertEvent(UserAlertEvent::SUCCESS, 'Gebruiker is aangemaakt.'));
     }
 
-    /**
-     * @param User $user
-     */
     public function edit(User $user)
     {
         // User should always get ROLE_USER
@@ -56,36 +39,26 @@ class UserFormHandler
             $user->setRoles($roles);
         }
 
-        $this->em->flush();
-        $this->eventDispatcher->dispatch('user_alert.message',
+        $this->baseFormHandler->getEm()->flush();
+        $this->baseFormHandler->getEventDispatcher()->dispatch('user_alert.message',
             new UserAlertEvent(UserAlertEvent::SUCCESS, 'De wijziging is opgeslagen.'));
     }
 
-    /**
-     * @param int $userId
-     * @return null|User
-     */
-    public function find(int $userId)
+    public function find(int $userId): User
     {
-        $user = $this->getRepository()->find($userId);
-
-        if (!$user) {
-            $this->eventDispatcher->dispatch('resourcenotfound', new ResourceNotFoundEvent('Gebruiker', $userId));
-        }
-
-        return $user;
+        return $this->baseFormHandler->findUser($userId);
     }
 
     public function getRepository(): UserRepository
     {
-        return $this->em->getRepository('EmployeeBundle:User');
+        return $this->baseFormHandler->getUserRepository();
     }
 
     public function profileEditPassword(User $user, string $password)
     {
         $user->setPassword($password);
-        $this->em->flush();
-        $this->eventDispatcher->dispatch('user_alert.message',
+        $this->baseFormHandler->getEm()->flush();
+        $this->baseFormHandler->getEventDispatcher()->dispatch('user_alert.message',
             new UserAlertEvent(UserAlertEvent::SUCCESS, 'Uw wachtwoord is gewijzigd.'));
     }
 
