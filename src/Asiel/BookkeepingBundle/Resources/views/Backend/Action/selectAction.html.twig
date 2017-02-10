@@ -12,7 +12,7 @@
                 </div>
                 <div class="item">
                     <div class="content">
-                        <a class="header">Afstaan</a>
+                        <a class="header" href="{{ path('backend_bookkeeping_action_abandoned_start', {'animalid' : app.request.get('animalid')}) }}">Afstaan</a>
                         <div class="description">Als iemand een dier wil afstaan</div>
                     </div>
                 </div>
@@ -28,6 +28,8 @@
                         <div class="description">Als een dier gevonden is en het moet terug naar de eigenaar of afgestaan worden.</div>
                     </div>
                 </div>
+                <br />
+                <a href="{{ path('backend_bookkeeping_index') }}"><button class="ui button negative">Terug</button></a>
             </div>
         </div>
     </div>

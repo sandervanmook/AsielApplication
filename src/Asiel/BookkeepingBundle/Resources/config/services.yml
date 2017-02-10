@@ -13,3 +13,8 @@ services:
       class: Asiel\BookkeepingBundle\Service\TransactionFormHandler
       arguments:
         - '@asiel.backendbundle.baseformhandler'
+
+    asiel.bookkeepingbundle.abandonedactionformhandler:
+      class: Asiel\BookkeepingBundle\Service\AbandonedActionFormHandler
+      arguments:
+        - '@asiel.backendbundle.baseformhandler'

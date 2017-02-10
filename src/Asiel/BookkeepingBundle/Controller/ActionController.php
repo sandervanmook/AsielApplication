@@ -92,6 +92,9 @@ class ActionController extends Controller
             case 'Adopted' :
                 $template = '@Bookkeeping/Backend/AdoptedAction/show.html.twig';
                 break;
+            case 'Abandoned' :
+                $template = '@Bookkeeping/Backend/AbandonedAction/show.html.twig';
+                break;
             default:
                 throw new \InvalidArgumentException('Unknown type');
         }

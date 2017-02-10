@@ -1,0 +1,71 @@
+{% extends '@Backend/Base/Base.html.twig' %}
+{% block pagetitle %}Actie starten - Afstaan{% endblock %}
+{% block body %}
+    <div class="ui sixteen column grid container">
+        <div class="row">
+            <div class="six wide column">
+                <h3 class="ui header">Dier</h3>
+                <table class="ui table very basic">
+                    <tbody>
+                    <tr>
+                        <td>Naam</td>
+                        <td>{{ animal.name }}</td>
+                    </tr>
+                    <tr>
+                        <td>Chipnummer</td>
+                        <td>{{ animal.chipnumber }}</td>
+                    </tr>
+                    <tr>
+                        <td>Ras</td>
+                        <td>{{ animal.race }}</td>
+                    </tr>
+                    <tr>
+                        <td>Geboortedatum</td>
+                        <td>{{ animal.dayOfBirth|date('d-m-Y') }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <p><a href="{{ path('backend_animal_show', {'id' : animal.id}) }}" target="_blank">Meer informatie
+                        (nieuw venster)</a></p>
+            </div>
+            <div class="two wide column"></div>
+            <div class="six wide column">
+                <h3 class="ui header">Klant</h3>
+                <table class="ui table very basic">
+                    <tbody>
+                    <tr>
+                        <td>Naam</td>
+                        <td>{{ customer.firstname }} {{ customer.lastname }}</td>
+                    </tr>
+                    <tr>
+                        <td>BSN/Rijksnummer</td>
+                        <td>{{ customer.citizenServiceNumber }}</td>
+                    </tr>
+                    <tr>
+                        <td>Geboortedatum</td>
+                        <td>{{ customer.dayOfBirth|date('d-m-Y') }}</td>
+                    </tr>
+                    <tr>
+                        <td>Adres</td>
+                        <td>{{ customer.address }} {{ customer.houseNumber }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <p><a href="{{ path('backend_customer_edit', {'id' : customer.id}) }}" target="_blank">Meer informatie
+                        (nieuw venster)</a></p>
+            </div>
+        </div>
+        <br/><br/>
+        <div class="six wide column">
+            <hr />
+            <p>De totale kosten om af te staan voor deze {{ animaltype|trans }} zijn<i
+                        class="euro icon"></i>{{ actiontotalcosts }},-</p>
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <hr />
+            <p>Als deze gegevens kloppen kunt u nu de actie aanmaken in het systeem.</p>
+            {{ outputFormButton('Aanmaken') }}
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

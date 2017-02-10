@@ -55,7 +55,7 @@ class TransactionController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $formHandler->create($action, $customer, $transaction);
 
-            return new RedirectResponse($this->generateUrl('backend_bookkeeping_action_index'));
+            return new RedirectResponse($this->generateUrl('backend_bookkeeping_action_show', ['actionid' => $actionId]));
         }
 
         return $this->render('@Bookkeeping/Backend/Transaction/create.html.twig', [

@@ -4,6 +4,7 @@
 namespace Asiel\CalendarBundle\Test\EventListener;
 
 
+use Asiel\AnimalBundle\Entity\Animal;
 use Asiel\CalendarBundle\Event\TaskEvent;
 use Asiel\CalendarBundle\EventListener\TaskListener;
 use Asiel\CalendarBundle\Service\TaskFormHandler;
@@ -27,7 +28,7 @@ class TaskListenerTest extends \PHPUnit_Framework_TestCase
 
         $listener = new TaskListener($taskManager);
 
-        $event = new TaskEvent('P1D', []);
+        $event = new TaskEvent(new Animal(),'P1D', []);
         $listener->onCreateTaskEvent($event);
     }
 

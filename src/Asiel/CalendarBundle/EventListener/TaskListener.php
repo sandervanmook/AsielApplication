@@ -20,9 +20,10 @@ class TaskListener
      */
     public function onCreateTaskEvent(TaskEvent $event)
     {
+        $animal = $event->getAnimal();
         $dateDue = $event->getDateDue();
         $origin  = $event->getOrigin();
 
-        $this->taskFormHandler->createByEvent($dateDue, $origin);
+        $this->taskFormHandler->createByEvent($animal, $dateDue, $origin);
     }
 }
