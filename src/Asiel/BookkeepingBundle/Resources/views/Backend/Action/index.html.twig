@@ -2,16 +2,57 @@
 {% block pagetitle %}Actie overzicht{% endblock %}
 {% block body %}
     <div class="ui sixteen column grid container">
-        <div class="sixteen wide column">
+        <div class="four wide column">
+            <h3 class="ui header">Filters</h3>
+            {{ form_start(form) }}
+            <table class="ui table very basic collapsing">
+                <tbody>
+                <tr>
+                    <td>Van</td>
+                </tr>
+                <tr>
+                    <td>{{ form_row(form.datestart) }}</td>
+                </tr>
+                <tr>
+                    <td>Tot</td>
+                </tr>
+                <tr>
+                    <td>{{ form_row(form.dateend) }}</td>
+                </tr>
+                <tr>
+                    <td>Type</td>
+                </tr>
+                <tr>
+                    <td>{{ form_row(form.type) }}</td>
+                </tr>
+                <tr>
+                    <td>{{ form_row(form.completed) }}</td>
+                </tr>
+                <tr>
+                    <td>{{ form_row(form.fullypaid) }}</td>
+                </tr>
+                <tr>
+                    <td>{{ form_row(form.showall) }}</td>
+                </tr>
+                </tbody>
+            </table>
+            {{ form_end(form) }}
+            <a href="{{ path('backend_bookkeeping_index') }}">
+                <button class="ui button primary">Terug naar boekhouding</button>
+            </a>
+        </div>
+        <div class="twelve wide column">
+            {% if result is defined %}
+                <p>Periode: {{ datestart }} t/m {{ dateend }}</p>
+            {% endif %}
             <table class="ui table very basic">
                 <thead>
                 <tr>
                     <th></th>
-                    <th>ID</th>
                     <th>Datum</th>
                     <th>Type</th>
                     <th>Kosten</th>
-                    <th>Nog te voldoen</th>
+                    <th class="collapsing">Te voldoen</th>
                     <th>Klant</th>
                     <th>Dier</th>
                     <th>Afgerond</th>
@@ -19,26 +60,27 @@
                 </tr>
                 </thead>
                 <tbody>
-                {% for action in actions %}
+                {% if result is defined %}
+                {% for action in result %}
                     <tr>
                         <td>
                             <a href="{{ path('backend_bookkeeping_action_show', {'actionid' : action.id}) }}"><button class="ui tiny button primary"><i class="eye icon"></i></button></a>
                         </td>
-                        <td>{{ action.id }}</td>
-                        <td>{{ action.date|date('d-m-Y') }}</td>
+                        <td class="collapsing">{{ action.date|date('d-m-Y') }}</td>
                         <td>{{ action.type|trans }}</td>
                         <td><i class="euro icon"></i>{{ action.totalCosts }}</td>
                         <td {% if action.fullyPaid %} class="text-success" {% endif %}><i class="euro icon"></i>{{ action.sumRemaining }}</td>
-                        <td><a href="{{ path('backend_customer_edit', {'id' : action.customer.id}) }}">{{ action.customer.firstname }} {{ action.customer.lastname }}</a></td>
+                        <td class="collapsing"><a href="{{ path('backend_customer_edit', {'id' : action.customer.id}) }}">{{ action.customer.firstname }} {{ action.customer.lastname }}</a></td>
                         <td><a href="{{ path('backend_animal_show', {'id' : action.animal.id}) }}">{{ action.animal.name }}</a></td>
                         <td {% if action.completed == false %} class="text-danger" {% endif %}>{{ outputBool(action.completed) }}</td>
-                        <td>
+                        <td class="collapsing">
                             {% if action.fullyPaid == false %}
-                            <a href="{{ path('backend_bookkeeping_transaction_searchcustomer', {'actionid' : action.id}) }}"><button class="ui tiny button positive"><i class="plus icon"></i>Transactie</button></a>
+                                <a href="{{ path('backend_bookkeeping_transaction_searchcustomer', {'actionid' : action.id}) }}"><button class="ui tiny button positive"><i class="plus icon"></i>Transactie</button></a>
                             {% endif %}
                         </td>
                     </tr>
                 {% endfor %}
+                {% endif %}
                 </tbody>
             </table>
         </div>

@@ -5,6 +5,8 @@ namespace Asiel\BookkeepingBundle\Controller;
 
 
 use Asiel\AnimalBundle\Form\SearchAnimalType;
+use Asiel\BookkeepingBundle\Filter\ActionFilter;
+use Asiel\BookkeepingBundle\Form\ActionSearchType;
 use Asiel\CustomerBundle\Form\SearchCustomerType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -67,15 +69,45 @@ class ActionController extends Controller
     }
 
     /**
+     * @param Request $request
      * @return Response
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $repository = $this->getDoctrine()->getRepository('BookkeepingBundle:Action');
-        $allActions = $repository->findAll();
+
+        $form = $this->createForm(ActionSearchType::class);
+        $form->handleRequest($request);
+
+        if ($form->isValid() && $form->isSubmitted()) {
+            $searchArray['datestart'] = $form->get('datestart')->getData();
+            $searchArray['dateend'] = $form->get('dateend')->getData();
+            $searchArray['type'] = $form->get('type')->getData();
+            $searchArray['completed'] = $form->get('completed')->getData();
+            $searchArray['fullypaid'] = $form->get('fullypaid')->getData();
+            $searchArray['showall'] = $form->get('showall')->getData();
+
+            $allActions = $repository->findAll();
+
+            $filter = new ActionFilter($allActions, $searchArray);
+            $filter->filter();
+
+            if ($searchArray['showall']) {
+                $result = $allActions;
+            } else {
+                $result = $filter->getFilterResult();
+            }
+
+            return $this->render('@Bookkeeping/Backend/Action/index.html.twig', [
+                'form' => $form->createView(),
+                'result' => $result,
+                'datestart' => $searchArray['datestart']->format('d-m-Y'),
+                'dateend' => $searchArray['dateend']->format('d-m-Y'),
+            ]);
+        }
 
         return $this->render('@Bookkeeping/Backend/Action/index.html.twig', [
-            'actions' => $allActions,
+            'form' => $form->createView(),
         ]);
     }
 

@@ -34,7 +34,8 @@ class TransactionType extends AbstractType
                 ],
             ])
             ->add('paidAmount', MoneyType::class, [
-                'label' => 'Bedrag'
+                'label' => 'Bedrag',
+                'scale' => 0,
             ])
         ;
     }
