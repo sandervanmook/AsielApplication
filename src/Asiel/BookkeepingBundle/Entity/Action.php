@@ -3,6 +3,7 @@
 namespace Asiel\BookkeepingBundle\Entity;
 
 use Asiel\AnimalBundle\Entity\Animal;
+use Asiel\AnimalBundle\Entity\Status;
 use Asiel\BookkeepingBundle\Entity\Transaction;
 use Asiel\CustomerBundle\Entity\Customer;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -74,6 +75,11 @@ class Action
      * @ORM\Column(name="completed", type="boolean")
      */
     private $completed;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Asiel\AnimalBundle\Entity\Status", inversedBy="action")
+     */
+    private $status;
 
     /**
      * Get id
@@ -279,5 +285,49 @@ class Action
     public function isCompleted()
     {
         return $this->completed;
+    }
+
+    /**
+     * Get fullyPaid
+     *
+     * @return boolean
+     */
+    public function getFullyPaid()
+    {
+        return $this->fullyPaid;
+    }
+
+    /**
+     * Get completed
+     *
+     * @return boolean
+     */
+    public function getCompleted()
+    {
+        return $this->completed;
+    }
+
+    /**
+     * Set status
+     *
+     * @param Status $status
+     *
+     * @return Action
+     */
+    public function setStatus(Status $status = null)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return Status
+     */
+    public function getStatus()
+    {
+        return $this->status;
     }
 }

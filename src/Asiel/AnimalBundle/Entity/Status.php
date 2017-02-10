@@ -3,6 +3,7 @@
 namespace Asiel\AnimalBundle\Entity;
 
 use Asiel\AnimalBundle\Entity\Animal;
+use Asiel\BookkeepingBundle\Entity\Action;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -66,6 +67,11 @@ class Status
      * @ORM\Column(name="onsite_location", type="boolean")
      */
     private $onsiteLocation;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Asiel\BookkeepingBundle\Entity\Action", mappedBy="status")
+     */
+    private $action;
 
     /**
      * @return string
@@ -201,4 +207,59 @@ class Status
         $this->onsiteLocation = $onsiteLocation;
     }
 
+
+    /**
+     * Get archived
+     *
+     * @return boolean
+     */
+    public function getArchived()
+    {
+        return $this->archived;
+    }
+
+    /**
+     * Get offsiteLocation
+     *
+     * @return boolean
+     */
+    public function getOffsiteLocation()
+    {
+        return $this->offsiteLocation;
+    }
+
+    /**
+     * Get onsiteLocation
+     *
+     * @return boolean
+     */
+    public function getOnsiteLocation()
+    {
+        return $this->onsiteLocation;
+    }
+
+
+    /**
+     * Set action
+     *
+     * @param Action $action
+     *
+     * @return Status
+     */
+    public function setAction(Action $action = null)
+    {
+        $this->action = $action;
+
+        return $this;
+    }
+
+    /**
+     * Get action
+     *
+     * @return Action
+     */
+    public function getAction()
+    {
+        return $this->action;
+    }
 }

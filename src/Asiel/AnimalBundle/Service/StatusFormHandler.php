@@ -105,22 +105,22 @@ class StatusFormHandler
             // If we need to chip the animal, create a task.
             if ($form->has('needsChipping') && (($form->get('needsChipping')->getData()))) {
                 $this->baseFormHandler->getEventDispatcher()->dispatch('createtask',
-                    new TaskEvent(Task::TOMORROW, Abandoned::ABANDON_CHIPPED));
+                    new TaskEvent($currentAnimal, Task::TOMORROW, Abandoned::ABANDON_CHIPPED));
             }
             // If we need to vaccine the animal, create a task.
             if ($form->has('needsVaccines') && (($form->get('needsVaccines')->getData()))) {
                 $this->baseFormHandler->getEventDispatcher()->dispatch('createtask',
-                    new TaskEvent(Task::TOMORROW, Abandoned::ABANDON_VACCINE));
+                    new TaskEvent($currentAnimal, Task::TOMORROW, Abandoned::ABANDON_VACCINE));
             }
             // If we need to sterilize the animal, create a task.
             if ($form->has('needsSterilization') && (($form->get('needsSterilization')->getData()))) {
                 $this->baseFormHandler->getEventDispatcher()->dispatch('createtask',
-                    new TaskEvent(Task::TOMORROW, Abandoned::ABANDON_STERILIZE));
+                    new TaskEvent($currentAnimal, Task::TOMORROW, Abandoned::ABANDON_STERILIZE));
             }
             // If the animal needs a passport, create a task.
             if ($form->has('needsPassport') && (($form->get('needsPassport')->getData()))) {
                 $this->baseFormHandler->getEventDispatcher()->dispatch('createtask',
-                    new TaskEvent(Task::TOMORROW, Abandoned::ABANDON_PASSPORT));
+                    new TaskEvent($currentAnimal, Task::TOMORROW, Abandoned::ABANDON_PASSPORT));
             }
         }
         // End abandon status
@@ -129,11 +129,11 @@ class StatusFormHandler
         if ($form->getName() == 'asielbundle_statustype_found') {
             // Create reminder checkup task
             $this->baseFormHandler->getEventDispatcher()->dispatch('createtask',
-                new TaskEvent(Task::THREEDAYS, Found::FOUND_CHECKUP));
+                new TaskEvent($currentAnimal, Task::THREEDAYS, Found::FOUND_CHECKUP));
 
             // Create available for adoption task.
             $this->baseFormHandler->getEventDispatcher()->dispatch('createtask',
-                new TaskEvent(Task::FIFTEENDAYS, Found::FOUND_AVAILABLE));
+                new TaskEvent($currentAnimal, Task::FIFTEENDAYS, Found::FOUND_AVAILABLE));
 
             // Set the customer who found the animal.
             if ($form->has('foundBy') && (!is_null($form->get('foundBy')->getData()))) {
@@ -142,7 +142,7 @@ class StatusFormHandler
             // If we need to chip the animal, create a task.
             if ($form->has('needsChipping') && (($form->get('needsChipping')->getData()))) {
                 $this->baseFormHandler->getEventDispatcher()->dispatch('createtask',
-                    new TaskEvent(Task::TOMORROW, Found::FOUND_CHIPPED));
+                    new TaskEvent($currentAnimal, Task::TOMORROW, Found::FOUND_CHIPPED));
             }
         }
         // End found status

@@ -2,7 +2,7 @@ backend_bookkeeping_index:
     path:     /
     defaults: { _controller: BookkeepingBundle:Backend:index }
 
-#Action section
+#Action
 backend_bookkeeping_action_searchanimal:
     path:     /action/searchanimal
     defaults: { _controller: BookkeepingBundle:Action:searchAnimal }
@@ -15,14 +15,6 @@ backend_bookkeeping_action_select:
     path:     /action/select
     defaults: { _controller: BookkeepingBundle:Action:selectAction }
 
-backend_bookkeeping_action_adopted_start:
-    path:     /action/adopted/start
-    defaults: { _controller: BookkeepingBundle:AdoptedAction:start }
-
-backend_bookkeeping_action_adopted_finish:
-    path:     /action/{actionid}/adopted/finish
-    defaults: { _controller: BookkeepingBundle:AdoptedAction:finish }
-
 backend_bookkeeping_action_index:
     path:     /action/
     defaults: { _controller: BookkeepingBundle:Action:index }
@@ -30,9 +22,27 @@ backend_bookkeeping_action_index:
 backend_bookkeeping_action_show:
     path:     /action/show/{actionid}
     defaults: { _controller: BookkeepingBundle:Action:show }
+#End Action
+#Action Adopted
+backend_bookkeeping_action_adopted_start:
+    path:     /action/adopted/start
+    defaults: { _controller: BookkeepingBundle:AdoptedAction:start }
 
-#End Action section
-#Transaction section
+backend_bookkeeping_action_adopted_finish:
+    path:     /action/{actionid}/adopted/finish
+    defaults: { _controller: BookkeepingBundle:AdoptedAction:finish }
+#End Action Adopted
+#Action Abandoned
+backend_bookkeeping_action_abandoned_start:
+    path:     /action/abandoned/start
+    defaults: { _controller: BookkeepingBundle:AbandonedAction:start }
+
+backend_bookkeeping_action_abandoned_finish:
+    path:     /action/{actionid}/abandoned/finish
+    defaults: { _controller: BookkeepingBundle:AbandonedAction:finish }
+#End Action Abandoned
+
+#Transaction
 backend_bookkeeping_transaction_searchcustomer:
     path:     /transaction/searchcustomer
     defaults: { _controller: BookkeepingBundle:Transaction:searchCustomer }
@@ -40,5 +50,4 @@ backend_bookkeeping_transaction_searchcustomer:
 backend_bookkeeping_transaction_create:
     path:     /transaction/create/action
     defaults: { _controller: BookkeepingBundle:Transaction:create }
-
-#End transaction section
+#End transaction

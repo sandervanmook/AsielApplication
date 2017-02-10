@@ -22,19 +22,6 @@ class AbandonedType extends StatusType
             ->add('reason', CKEditorType::class, [
                 'label'     => 'Reden van afstand doen'
             ])
-            ->add('abandonedBy', HiddenType::class, [
-                'mapped'     => false,
-            ])
-            ->add('search', TextType::class, [
-                'label'         => 'Afgestaan door',
-                'mapped'        => false,
-                'attr'          => [
-                    'placeholder'  => 'Voer een achternaam in',
-                ],
-                'label_attr'    => [
-                    'id'    => 'search',
-                ]
-            ])
             ->add('needsChipping', CheckboxType::class, [
                 'label'     => 'Moet door ons gechipt worden',
                 'required'  => false,

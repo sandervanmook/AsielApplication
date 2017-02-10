@@ -3,6 +3,7 @@
 
 namespace Asiel\CalendarBundle\Service;
 
+use Asiel\AnimalBundle\Entity\Animal;
 use Asiel\BackendBundle\Event\UserAlertEvent;
 use Asiel\CalendarBundle\Entity\Task;
 use Asiel\Shared\Service\BaseFormHandler;
@@ -18,14 +19,9 @@ class TaskFormHandler
         $this->baseFormHandler = $baseFormHandler;
     }
 
-    /**
-     * @param string $dateDue
-     * @param string $origin
-     */
-    public function createByEvent($dateDue, $origin)
+    public function createByEvent(Animal $animal, $dateDue, $origin)
     {
         $task = new Task();
-        $animal = $this->baseFormHandler->findAnimal($this->baseFormHandler->getRequestId());
 
         $date = new DateTime();
         $eventDateDue = $date->add(new DateInterval($dateDue));

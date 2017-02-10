@@ -69,7 +69,7 @@
             <div class="ui ordered steps">
                 <div class="completed step">
                     <div class="content">
-                        <div class="title">Adoptie actie aanmaken</div>
+                        <div class="title">Afstaan actie aanmaken</div>
                         <div class="description">Selecteer het dier wat geadopteerd gaat worden <br/> en koppel er een
                             klant aan
                         </div>
@@ -93,16 +93,16 @@
                     </div>
                 </div>
                 <div class="
-        {% if action.animal.activestate.getclassname == 'Adopted' %} completed
+        {% if action.animal.activestate.getclassname == 'Abandoned' %} completed
         {% elseif action.isfullypaid %} active
         {% elseif action.isfullypaid == false %} disabled {% endif %}
         step">
                     <div class="content">
                         <div class="title">Voltooi de actie</div>
                         <div class="description">Wijzig de status van het dier.
-                            {% if action.animal.activestate.getclassname != 'Adopted' and action.isfullypaid %}
+                            {% if action.animal.activestate.getclassname != 'Abandoned' and action.isfullypaid %}
                                 <br/><br/> <a
-                                    href="{{ path('backend_bookkeeping_action_adopted_finish', {'actionid' : action.id}) }}">
+                                    href="{{ path('backend_bookkeeping_action_abandoned_finish', {'actionid' : action.id}) }}">
                                 <button class="ui tiny button positive"><i class="flag checkered icon"></i>Afronden
                                 </button>
                             </a>
@@ -111,7 +111,9 @@
                     </div>
                 </div>
             </div>
-            <a href="{{ path('backend_bookkeeping_action_index') }}"><button class="ui button primary">Terug naar overzicht</button></a>
+            <a href="{{ path('backend_bookkeeping_action_index') }}">
+                <button class="ui button primary">Terug naar overzicht</button>
+            </a>
         </div>
     </div>
 {% endblock %}
