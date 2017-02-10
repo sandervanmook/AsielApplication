@@ -1083,7 +1083,7 @@ class Animal
     {
         if (!$this->getActions()->isEmpty()) {
             foreach ($this->getActions() as $action) {
-                if (!$action->isFullyPaid()) {
+                if (!$action->isCompleted()) {
                     return true;
                 }
             }
