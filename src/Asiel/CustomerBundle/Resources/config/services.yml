@@ -2,6 +2,4 @@ services:
     asiel.customerbundle.customerformhandler:
       class: Asiel\CustomerBundle\Service\CustomerFormHandler
       arguments:
-        - '@doctrine.orm.entity_manager'
-        - '@event_dispatcher'
-        - '@request_stack'
+        - '@asiel.backendbundle.baseformhandler'

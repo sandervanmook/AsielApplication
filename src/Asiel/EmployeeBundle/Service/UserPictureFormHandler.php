@@ -4,89 +4,47 @@
 namespace Asiel\EmployeeBundle\Service;
 
 
-use Asiel\BackendBundle\Event\ResourceNotFoundEvent;
 use Asiel\BackendBundle\Event\UserAlertEvent;
 use Asiel\EmployeeBundle\Entity\UserPicture;
 use Asiel\EmployeeBundle\Repository\UserPictureRepository;
-use Doctrine\ORM\EntityManager;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
+use Asiel\Shared\Service\BaseFormHandler;
+
 
 class UserPictureFormHandler
 {
-    protected $em;
-    protected $eventDispatcher;
-    protected $requestStack;
+    protected $baseFormHandler;
 
-    public function __construct(
-        EntityManager $em,
-        EventDispatcherInterface $eventDispatcher,
-        RequestStack $requestStack
-    ) {
-        $this->em = $em;
-        $this->eventDispatcher = $eventDispatcher;
-        $this->requestStack = $requestStack;
-    }
-
-    /**
-     * @param int $id
-     * @return null|UserPicture
-     */
-    public function find(int $id)
+    public function __construct(BaseFormHandler $baseFormHandler)
     {
-        $userPicture = $this->getRepository()->find($id);
-
-        if (!$userPicture) {
-            $this->eventDispatcher->dispatch('resourcenotfound', new ResourceNotFoundEvent('Gebruikersfoto', $id));
-        }
-
-        return $userPicture;
+        $this->baseFormHandler = $baseFormHandler;
     }
 
-    /**
-     * @param UserPicture $userPicture
-     */
+    public function find(int $userPictureId): UserPicture
+    {
+        return $this->baseFormHandler->findUserPicture($userPictureId);
+    }
+
     public function create(UserPicture $userPicture)
     {
-        $userRepository = $this->getEm()->getRepository('EmployeeBundle:User');
-        $user = $userRepository->find($this->getRequestId());
+        $user = $this->baseFormHandler->findCustomer($this->baseFormHandler->getRequestId());
         $userPicture->setUser($user);
-        $this->getEm()->persist($userPicture);
-        $this->getEm()->flush();
-        $this->getEventDispatcher()->dispatch('user_alert.message', new UserAlertEvent(UserAlertEvent::SUCCESS, 'De foto is toegevoegd aan de medewerker.'));
+        $this->baseFormHandler->getEm()->persist($userPicture);
+        $this->baseFormHandler->getEm()->flush();
+        $this->baseFormHandler->getEventDispatcher()->dispatch('user_alert.message',
+            new UserAlertEvent(UserAlertEvent::SUCCESS, 'De foto is toegevoegd aan de medewerker.'));
     }
 
-    /**
-     * @param UserPicture $userPicture
-     */
     public function delete(UserPicture $userPicture)
     {
-        $this->em->remove($userPicture);
-        $this->em->flush();
-        $this->eventDispatcher->dispatch('user_alert.message', new UserAlertEvent(UserAlertEvent::SUCCESS, 'De foto is verwijderd.'));
+        $this->baseFormHandler->getEm()->remove($userPicture);
+        $this->baseFormHandler->getEm()->flush();
+        $this->baseFormHandler->getEventDispatcher()->dispatch('user_alert.message',
+            new UserAlertEvent(UserAlertEvent::SUCCESS, 'De foto is verwijderd.'));
     }
 
-    public function getRepository() : UserPictureRepository
+    public function getRepository(): UserPictureRepository
     {
-        return $this->em->getRepository('EmployeeBundle:UserPicture');
-    }
-
-    /**
-     * @return int
-     */
-    public function getRequestId()
-    {
-        return (int)$this->requestStack->getCurrentRequest()->get('id');
-    }
-
-    public function getEm()
-    {
-        return $this->em;
-    }
-
-    public function getEventDispatcher()
-    {
-        return $this->eventDispatcher;
+        return $this->baseFormHandler->getUserPictureRepository();
     }
 
 }

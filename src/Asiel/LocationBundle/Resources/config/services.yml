@@ -3,6 +3,4 @@ services:
     asiel.locationbundle.formhandler:
       class: Asiel\LocationBundle\Service\FormHandler
       arguments:
-        - '@doctrine.orm.entity_manager'
-        - '@event_dispatcher'
-        - '@request_stack'
+        - '@asiel.backendbundle.baseformhandler'

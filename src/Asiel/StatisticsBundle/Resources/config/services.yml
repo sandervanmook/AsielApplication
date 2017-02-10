@@ -2,6 +2,4 @@ services:
     asiel.statisticsbundle.backendformhandler:
       class: Asiel\StatisticsBundle\Service\BackendFormHandler
       arguments:
-        - '@doctrine.orm.entity_manager'
-        - '@event_dispatcher'
-        - '@request_stack'
+        - '@asiel.backendbundle.baseformhandler'

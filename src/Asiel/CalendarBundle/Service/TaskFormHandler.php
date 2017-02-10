@@ -3,32 +3,20 @@
 
 namespace Asiel\CalendarBundle\Service;
 
-
-use Asiel\AnimalBundle\Repository\AnimalRepository;
 use Asiel\BackendBundle\Event\UserAlertEvent;
 use Asiel\CalendarBundle\Entity\Task;
+use Asiel\Shared\Service\BaseFormHandler;
 use DateInterval;
 use DateTime;
-use Doctrine\ORM\EntityManager;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
 
 class TaskFormHandler
 {
-    protected $em;
-    protected $eventDispatcher;
-    protected $requestStack;
+    protected $baseFormHandler;
 
-    public function __construct(
-        EntityManager $em,
-        EventDispatcherInterface $eventDispatcher,
-        RequestStack $requestStack
-    ) {
-        $this->em = $em;
-        $this->eventDispatcher = $eventDispatcher;
-        $this->requestStack = $requestStack;
+    public function __construct(BaseFormHandler $baseFormHandler)
+    {
+        $this->baseFormHandler = $baseFormHandler;
     }
-
 
     /**
      * @param string $dateDue
@@ -37,7 +25,7 @@ class TaskFormHandler
     public function createByEvent($dateDue, $origin)
     {
         $task = new Task();
-        $animal = $this->getAnimalRepository()->find($this->getRequestId());
+        $animal = $this->baseFormHandler->findAnimal($this->baseFormHandler->getRequestId());
 
         $date = new DateTime();
         $eventDateDue = $date->add(new DateInterval($dateDue));
@@ -55,20 +43,11 @@ class TaskFormHandler
         $task->setCreatedBy('Systeem');
 
         // Save in DB
-        $this->em->persist($task);
-        $this->em->flush();
+        $this->baseFormHandler->getEm()->persist($task);
+        $this->baseFormHandler->getEm()->flush();
 
         // Send alert
-        $this->eventDispatcher->dispatch('user_alert.message', new UserAlertEvent(UserAlertEvent::INFO, "Taak {$title} is aangemaakt door het systeem."));
-    }
-
-    public function getAnimalRepository() : AnimalRepository
-    {
-        return $this->em->getRepository('AnimalBundle:Animal');
-    }
-
-    public function getRequestId() : int
-    {
-        return (int)$this->requestStack->getCurrentRequest()->get('id');
+        $this->baseFormHandler->getEventDispatcher()->dispatch('user_alert.message',
+            new UserAlertEvent(UserAlertEvent::INFO, "Taak {$title} is aangemaakt door het systeem."));
     }
 }

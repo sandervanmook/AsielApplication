@@ -1,11 +1,16 @@
 services:
     # Services
+    asiel.backendbundle.baseformhandler:
+         class: Asiel\Shared\Service\BaseFormHandler
+         arguments:
+          - '@doctrine.orm.entity_manager'
+          - '@event_dispatcher'
+          - '@request_stack'
+
     asiel.backendbundle.settingsformhandler:
      class: Asiel\BackendBundle\Service\SettingsFormHandler
      arguments:
-      - '@doctrine.orm.entity_manager'
-      - '@event_dispatcher'
-      - '@request_stack'
+      - '@asiel.backendbundle.baseformhandler'
 
     # Twig extensions
     asiel.backendbundle.boolean.twig_extension:

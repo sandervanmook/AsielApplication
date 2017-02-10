@@ -2,20 +2,14 @@ services:
       asiel.employeebundle.userformhandler:
         class: Asiel\EmployeeBundle\Service\UserFormHandler
         arguments:
-          - '@doctrine.orm.entity_manager'
-          - '@event_dispatcher'
-          - '@request_stack'
+          - '@asiel.backendbundle.baseformhandler'
 
       asiel.employeebundle.userpictureformhandler:
         class: Asiel\EmployeeBundle\Service\UserPictureFormHandler
         arguments:
-          - '@doctrine.orm.entity_manager'
-          - '@event_dispatcher'
-          - '@request_stack'
+          - '@asiel.backendbundle.baseformhandler'
 
       asiel.employeebundle.workscheduleformhandler:
         class: Asiel\EmployeeBundle\Service\WorkScheduleFormHandler
         arguments:
-          - '@doctrine.orm.entity_manager'
-          - '@event_dispatcher'
-          - '@request_stack'
+          - '@asiel.backendbundle.baseformhandler'

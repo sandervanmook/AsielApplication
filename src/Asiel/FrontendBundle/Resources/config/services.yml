@@ -14,13 +14,9 @@ services:
     asiel.frontendbundle.catformhandler:
       class: Asiel\FrontendBundle\Service\CatFormHandler
       arguments:
-        - '@doctrine.orm.entity_manager'
-        - '@event_dispatcher'
-        - '@request_stack'
+        - '@asiel.backendbundle.baseformhandler'
 
     asiel.frontendbundle.dogformhandler:
       class: Asiel\FrontendBundle\Service\DogFormHandler
       arguments:
-        - '@doctrine.orm.entity_manager'
-        - '@event_dispatcher'
-        - '@request_stack'
+        - '@asiel.backendbundle.baseformhandler'

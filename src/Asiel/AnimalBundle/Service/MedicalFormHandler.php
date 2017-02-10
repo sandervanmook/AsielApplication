@@ -2,72 +2,49 @@
 
 namespace Asiel\AnimalBundle\Service;
 
-use Asiel\AnimalBundle\Entity\Incident;
 use Asiel\AnimalBundle\Entity\Medical;
 use Asiel\AnimalBundle\Repository\AnimalRepository;
 use Asiel\AnimalBundle\Repository\MedicalRepository;
-use Asiel\BackendBundle\Event\ResourceNotFoundEvent;
 use Asiel\BackendBundle\Event\UserAlertEvent;
-use Doctrine\ORM\EntityManager;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
+use Asiel\Shared\Service\BaseFormHandler;
 
 class MedicalFormHandler
 {
-    protected $em;
-    protected $eventDispatcher;
-    protected $requestStack;
+    protected $baseFormHandler;
 
-    public function __construct(
-        EntityManager $em,
-        EventDispatcherInterface $eventDispatcher,
-        RequestStack $requestStack
-    ) {
-        $this->em = $em;
-        $this->eventDispatcher = $eventDispatcher;
-        $this->requestStack = $requestStack;
+    public function __construct(BaseFormHandler $baseFormHandler)
+    {
+        $this->baseFormHandler = $baseFormHandler;
     }
 
-    /**
-     * @param int $incidentId
-     * @return Incident|null
-     */
-    public function find(int $incidentId)
+    public function find(int $medicalId)
     {
-        $incident = $this->em->getRepository('AnimalBundle:Medical')->find($incidentId);
-
-        if (!$incident) {
-            $this->eventDispatcher->dispatch('resourcenotfound', new ResourceNotFoundEvent('Medisch dossier', $incidentId));
-        }
-
-        return $incident;
+        return $this->baseFormHandler->findMedical($medicalId);
     }
 
     public function create(Medical $medical, int $animalId)
     {
-        $animal = $this->em->getRepository('AnimalBundle:Animal')->find($animalId);
+        $animal = $this->baseFormHandler->getAnimalRepository()->find($animalId);
         $medical->setAnimal($animal);
-        $this->em->persist($medical);
-        $this->em->flush();
-        $this->eventDispatcher->dispatch('user_alert.message', new UserAlertEvent(UserAlertEvent::SUCCESS, 'Medisch dossier aangemaakt.'));
+        $this->baseFormHandler->getEm()->persist($medical);
+        $this->baseFormHandler->getEm()->flush();
+        $this->baseFormHandler->getEventDispatcher()->dispatch('user_alert.message', new UserAlertEvent(UserAlertEvent::SUCCESS, 'Medisch dossier aangemaakt.'));
     }
 
     public function delete(Medical $medical)
     {
-        $this->em->remove($medical);
-        $this->em->flush();
-        $this->eventDispatcher->dispatch('user_alert.message', new UserAlertEvent(UserAlertEvent::SUCCESS, 'Medisch dossier verwijderd.'));
+        $this->baseFormHandler->getEm()->remove($medical);
+        $this->baseFormHandler->getEm()->flush();
+        $this->baseFormHandler->getEventDispatcher()->dispatch('user_alert.message', new UserAlertEvent(UserAlertEvent::SUCCESS, 'Medisch dossier verwijderd.'));
     }
 
     public function getRepository() : MedicalRepository
     {
-        return $this->em->getRepository('AnimalBundle:Medical');
+        return $this->baseFormHandler->getMedicalRepository();
     }
 
     public function getAnimalRepository() : AnimalRepository
     {
-        return $this->em->getRepository('AnimalBundle:Animal');
+        return $this->baseFormHandler->getAnimalRepository();
     }
-
-
 }
