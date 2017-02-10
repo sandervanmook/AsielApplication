@@ -10,6 +10,7 @@ use Asiel\AnimalBundle\Entity\Incident;
 use Asiel\AnimalBundle\Entity\Medical;
 use Asiel\AnimalBundle\Entity\StatusType\Lost;
 use Asiel\AnimalBundle\Entity\StatusType\NoState;
+use Asiel\BookkeepingBundle\Entity\Action;
 use Asiel\CalendarBundle\Entity\Task;
 use Doctrine\Common\Collections\ArrayCollection;
 
