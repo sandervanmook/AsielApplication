@@ -25,8 +25,7 @@ class ActionFilter
     {
         $this->filterDate();
         $this->filterType();
-        $this->filterCompleted();
-        $this->filterFullyPaid();
+        $this->filterStatus();
     }
 
     /**
@@ -75,36 +74,33 @@ class ActionFilter
         }
     }
 
-    private function filterCompleted()
+    private function filterStatus()
     {
         $result = [];
-        $completed = (bool)$this->searchArray['completed'];
+        $type = $this->searchArray['status'];
 
         if (!empty($this->filterResult)) {
             foreach ($this->filterResult as $action) {
-                if (($completed && $action->isCompleted()) ||
-                    (!$completed && !$action->isCompleted())) {
-                    $result[] = $action;
+                if ($type == 'Completed') {
+                    if ($action->isCompleted()) {
+                        $result[] = $action;
+                    }
+                    continue;
+                }
+                if ($type == 'Fullypaid') {
+                    if ($action->isFullyPaid()) {
+                        $result[] = $action;
+                    }
+                    continue;
+                }
+                if ($type == 'Sumremaining') {
+                    if (!$action->isFullyPaid()) {
+                        $result[] = $action;
+                    }
+                    continue;
                 }
             }
             $this->filterResult = $result;
         }
     }
-
-    private function filterFullyPaid()
-    {
-        $result = [];
-        $fullyPaid = (bool)$this->searchArray['fullypaid'];
-
-        if (!empty($this->filterResult)) {
-            foreach ($this->filterResult as $action) {
-                if (($fullyPaid && $action->getFullyPaid()) ||
-                    (!$fullyPaid && !$action->getFullyPaid())) {
-                    $result[] = $action;
-                }
-            }
-            $this->filterResult = $result;
-        }
-    }
-
 }
