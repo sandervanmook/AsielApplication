@@ -48,6 +48,10 @@ backend_bookkeeping_transaction_searchcustomer:
 backend_bookkeeping_transaction_create:
     path:     /transaction/create/action
     defaults: { _controller: BookkeepingBundle:Transaction:create }
+
+backend_bookkeeping_transaction_show:
+    path:     /transaction/show/{transactionid}
+    defaults: { _controller: BookkeepingBundle:Transaction:show }
 #End transaction
 # Seized action
 backend_bookkeeping_action_seized_start:
@@ -58,3 +62,8 @@ backend_bookkeeping_action_seized_finish:
     path:     /action/{actionid}/seized/finish
     defaults: { _controller: BookkeepingBundle:SeizedAction:finish }
 #End seized action
+# Cash ledger
+backend_bookkeeping_cashledger_index:
+    path:     /cashledger
+    defaults: { _controller: BookkeepingBundle:CashLedger:index }
+#end Cash ledger
