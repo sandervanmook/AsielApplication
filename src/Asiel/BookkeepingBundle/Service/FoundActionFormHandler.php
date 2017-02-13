@@ -101,7 +101,7 @@ class FoundActionFormHandler extends BaseActionFormHandler
             new TaskEvent($currentAnimal, Task::FIFTEENDAYS, Found::FOUND_AVAILABLE));
 
         // Set the customer who found the animal.
-        if (!is_null($action->getCustomer()->getId())) {
+        if (!is_null($action->getCustomer())) {
             $status->setFoundBy($action->getCustomer());
         }
 
