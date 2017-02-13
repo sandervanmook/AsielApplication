@@ -36,6 +36,10 @@ class TransactionController extends Controller
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @return RedirectResponse|Response
+     */
     public function createAction(Request $request)
     {
         // The customer linked to the action entity can be different than the one chosen for this transation!
@@ -66,6 +70,20 @@ class TransactionController extends Controller
             'action' => $action,
             'customer' => $customer,
             'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @param int $transactionid
+     * @return Response
+     */
+    public function showAction(int $transactionid)
+    {
+        $formHandler = $this->get('asiel.bookkeepingbundle.transactionformhandler');
+        $transaction = $formHandler->findTransaction($transactionid);
+
+        return $this->render('@Bookkeeping/Backend/Transaction/show.html.twig', [
+            'transaction' => $transaction,
         ]);
     }
 }

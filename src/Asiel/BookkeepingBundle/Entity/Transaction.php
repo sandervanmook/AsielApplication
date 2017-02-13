@@ -3,6 +3,7 @@
 namespace Asiel\BookkeepingBundle\Entity;
 
 use Asiel\BookkeepingBundle\Entity\Action;
+use Asiel\CustomerBundle\Entity\Customer;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -23,7 +24,7 @@ class Transaction
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="Asiel\CustomerBundle\Entity\Customer", mappedBy="transactions")
+     * @ORM\ManyToOne(targetEntity="Asiel\CustomerBundle\Entity\Customer", inversedBy="transactions")
      */
     private $customer;
 
@@ -231,30 +232,6 @@ class Transaction
     }
 
     /**
-     * Set customer
-     *
-     * @param \Asiel\CustomerBundle\Entity\Customer $customer
-     *
-     * @return Transaction
-     */
-    public function setCustomer(\Asiel\CustomerBundle\Entity\Customer $customer = null)
-    {
-        $this->customer = $customer;
-
-        return $this;
-    }
-
-    /**
-     * Get customer
-     *
-     * @return \Asiel\CustomerBundle\Entity\Customer
-     */
-    public function getCustomer()
-    {
-        return $this->customer;
-    }
-
-    /**
      * Set action
      *
      * @param Action $action
@@ -276,5 +253,29 @@ class Transaction
     public function getAction()
     {
         return $this->action;
+    }
+
+    /**
+     * Set customer
+     *
+     * @param \Asiel\CustomerBundle\Entity\Customer $customer
+     *
+     * @return Transaction
+     */
+    public function setCustomer(\Asiel\CustomerBundle\Entity\Customer $customer = null)
+    {
+        $this->customer = $customer;
+
+        return $this;
+    }
+
+    /**
+     * Get customer
+     *
+     * @return \Asiel\CustomerBundle\Entity\Customer
+     */
+    public function getCustomer()
+    {
+        return $this->customer;
     }
 }

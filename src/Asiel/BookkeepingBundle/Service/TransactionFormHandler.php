@@ -35,6 +35,11 @@ class TransactionFormHandler
         return $this->baseFormHandler->findCustomer($customerId);
     }
 
+    public function findTransaction(int $transactionId) : Transaction
+    {
+        return $this->baseFormHandler->findTransaction($transactionId);
+    }
+
     public function create(Action $action, Customer $customer, Transaction $transaction)
     {
         // Is action fully paid ?

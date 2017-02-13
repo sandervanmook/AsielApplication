@@ -21,6 +21,7 @@ use Asiel\AnimalBundle\Repository\StatusRepository;
 use Asiel\BackendBundle\Event\ResourceNotFoundEvent;
 use Asiel\BackendBundle\Repository\BookkeepingSettingsRepository;
 use Asiel\BookkeepingBundle\Entity\Action;
+use Asiel\BookkeepingBundle\Entity\Transaction;
 use Asiel\CalendarBundle\Entity\CalendarItem;
 use Asiel\CalendarBundle\Entity\Task;
 use Asiel\CustomerBundle\Entity\Customer;
@@ -226,6 +227,17 @@ class BaseFormHandler
         }
 
         return $location;
+    }
+
+    public function findTransaction(int $transactionId) : Transaction
+    {
+        $transaction = $this->em->getRepository('BookkeepingBundle:Transaction')->find($transactionId);
+
+        if (!$transaction) {
+            $this->eventDispatcher->dispatch('resourcenotfound', new ResourceNotFoundEvent('Transactie', $transactionId));
+        }
+
+        return $transaction;
     }
 
     public function getAnimalRepository(): AnimalRepository

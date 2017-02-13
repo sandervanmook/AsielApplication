@@ -10,7 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ActionSearchType extends AbstractType
+class CashLedgerSearchType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -24,28 +24,6 @@ class ActionSearchType extends AbstractType
             ->add('dateend', DateType::class, [
                 'label' => false,
                 'data' => new \DateTime('now'),
-            ])
-            ->add('type', ChoiceType::class, [
-                'label' => false,
-                'choices' => [
-                    'Adoptie' => 'Adopted',
-                    'Afgestaan' => 'Abandoned',
-                    'In beslag genomen' => 'Seized',
-                    'Alle'  => 'All',
-                ],
-                'multiple'  => true,
-                'data' => ['Alle'  => 'All'],
-            ])
-            ->add('status', ChoiceType::class, [
-                'label' => false,
-                'choices' => [
-                    'Betaald & Afgerond' => 'Completed',
-                    'Volledig betaald' => 'Fullypaid',
-                    'Bedrag open' => 'Sumremaining'
-                ],
-                'multiple'  => false,
-                'required' => true,
-                'data' => 'Sumremaining',
             ])
             ->add('showall', CheckboxType::class, [
                 'label' => 'Laat alles zien',
@@ -76,7 +54,7 @@ class ActionSearchType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'bookkeepingbundle_search_action';
+        return 'bookkeepingbundle_search_cashledger';
     }
 
 

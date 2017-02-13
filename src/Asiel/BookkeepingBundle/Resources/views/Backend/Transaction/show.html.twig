@@ -1,0 +1,52 @@
+{% extends '@Backend/Base/Base.html.twig' %}
+{% block pagetitle %}Bekijk transactie{% endblock %}
+{% block body %}
+    <div class="ui sixteen column grid container">
+        <div class="ui four wide column">
+            <table class="ui very basic table">
+                <tbody>
+                <tr>
+                    <td>ID</td>
+                    <td>{{ transaction.id }}</td>
+                </tr>
+                <tr>
+                    <td>Datum</td>
+                    <td>{{ transaction.date|date('d-m-Y') }}</a></td>
+                </tr>
+                <tr>
+                    <td>Betalen voor</td>
+                    <td>{{ transaction.duedate|date('d-m-Y') }}</a></td>
+                </tr>
+                <tr>
+                    <td>Door klant</td>
+                    <td>
+                        <a href="{{ path('backend_customer_edit', {'id' : transaction.customer.id}) }}">{{ transaction.customer.lastname }}</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Bedrag</td>
+                    <td><i class="euro icon"></i>{{ transaction.paidAmount }}</a></td>
+                </tr>
+                <tr>
+                    <td>Betaald via</td>
+                    <td>{{ transaction.paymentType|trans }}</a></td>
+                </tr>
+                <tr>
+                    <td>Hoort bij actie</td>
+                    <td>
+                        <a href="{{ path('backend_bookkeeping_action_show', {'actionid' : transaction.action.id}) }}">{{ transaction.action.id }}</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Type betaling</td>
+                    {% if transaction.deposit %}
+                        <td>Aanbetaling</td>
+                    {% elseif transaction.inFull %}
+                        <td>Volledig</td>
+                    {% endif %}
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

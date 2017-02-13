@@ -162,7 +162,7 @@ class Customer
     private $abandonedAnimals;
 
     /**
-     * @ORM\OneToOne(targetEntity="Asiel\BookkeepingBundle\Entity\Transaction", inversedBy="customer")
+     * @ORM\OneToMany(targetEntity="Asiel\BookkeepingBundle\Entity\Transaction", mappedBy="customer")
      */
     private $transactions;
 
@@ -171,12 +171,14 @@ class Customer
      */
     private $actions;
 
-    /**
-     * Constructor
-     */
     public function __construct()
     {
         $this->adoptedPets = new ArrayCollection();
+        $this->foundAnimals = new ArrayCollection;
+        $this->ownsAnimals = new ArrayCollection;
+        $this->abandonedAnimals = new ArrayCollection;
+        $this->transactions = new ArrayCollection;
+        $this->actions = new ArrayCollection;
     }
 
     /**
@@ -663,30 +665,6 @@ class Customer
     }
 
     /**
-     * Set transactions
-     *
-     * @param Transaction $transactions
-     *
-     * @return Customer
-     */
-    public function setTransactions(Transaction $transactions = null)
-    {
-        $this->transactions = $transactions;
-
-        return $this;
-    }
-
-    /**
-     * Get transactions
-     *
-     * @return Transaction
-     */
-    public function getTransactions()
-    {
-        return $this->transactions;
-    }
-
-    /**
      * Add action
      *
      * @param Action $action
@@ -719,4 +697,39 @@ class Customer
     {
         return $this->actions;
     }
+
+    /**
+     * Add transaction
+     *
+     * @param \Asiel\BookkeepingBundle\Entity\Transaction $transaction
+     *
+     * @return Customer
+     */
+    public function addTransaction(\Asiel\BookkeepingBundle\Entity\Transaction $transaction)
+    {
+        $this->transactions[] = $transaction;
+
+        return $this;
+    }
+
+    /**
+     * Remove transaction
+     *
+     * @param \Asiel\BookkeepingBundle\Entity\Transaction $transaction
+     */
+    public function removeTransaction(\Asiel\BookkeepingBundle\Entity\Transaction $transaction)
+    {
+        $this->transactions->removeElement($transaction);
+    }
+
+    /**
+     * Get transactions
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTransactions()
+    {
+        return $this->transactions;
+    }
+
 }
