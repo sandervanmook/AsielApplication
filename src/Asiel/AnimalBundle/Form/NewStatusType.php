@@ -23,7 +23,6 @@ class NewStatusType extends AbstractType
                     'Overleden'             => 'Deceased',
                     'Kwijt'                 => 'Lost',
                     'Gevonden'              => 'Found',
-                    'In beslag genomen'     => 'Seized',
                 ],
                 'expanded'  => true,
                 'multiple'  => false,

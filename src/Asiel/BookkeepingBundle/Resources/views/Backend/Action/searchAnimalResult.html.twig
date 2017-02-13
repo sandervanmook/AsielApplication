@@ -27,7 +27,7 @@
             <td>{{ animal.getclassname|trans }}</td>
 
             {% if animal.status is empty %}
-                <td><a id="missingstatelink" href="{{ path('backend_animal_status_create', {'id' : animal.id}) }}">Aanmaken</a></td>
+                <td>Geen</td>
             {% else %}
                 {% for state in animal.status %}
                     {% if state.archived == false %}
