@@ -7,6 +7,7 @@ use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -29,22 +30,8 @@ class FoundType extends StatusType
                     'Zwerfproject' => 'Zwerfproject',
                 ]
             ])
-            ->add('foundBy', HiddenType::class, [
-                'mapped' => false,
-            ])
             ->add('foundMunicipality', MunicipalityType::class, [
-                'label' => false,
-            ])
-            ->add('search', TextType::class, [
-                'label' => 'Gevonden door',
-                'mapped' => false,
-                'attr' => [
-                    'placeholder' => 'Voer een achternaam in',
-                ],
-                'label_attr' => [
-                    'id' => 'search',
-                ],
-                'required' => false,
+                'label' => 'Gevonden in gemeente',
             ])
             ->add('foundAtLocation', CKEditorType::class, [
                 'label' => 'Waar is het dier gevonden'
@@ -55,7 +42,13 @@ class FoundType extends StatusType
             ->add('needsChipping', CheckboxType::class, [
                 'label' => 'Moet door ons gechipt worden',
                 'required' => false,
-            ]);
+            ])
+            ->add('totalcosts', MoneyType::class, [
+                'label' => 'De totale kosten voor deze vondst',
+                'scale' => 0,
+                'mapped' => false,
+            ])
+        ;
     }
 
     /**
@@ -73,7 +66,7 @@ class FoundType extends StatusType
      */
     public function getBlockPrefix()
     {
-        return 'asielbundle_statustype_found';
+        return 'animalbundle_statustype_found';
     }
 
 

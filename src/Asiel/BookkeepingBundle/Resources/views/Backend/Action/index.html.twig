@@ -61,25 +61,37 @@
                 </thead>
                 <tbody>
                 {% if result is defined %}
-                {% for action in result %}
-                    <tr>
-                        <td>
-                            <a href="{{ path('backend_bookkeeping_action_show', {'actionid' : action.id}) }}"><button class="ui tiny button primary"><i class="eye icon"></i></button></a>
-                        </td>
-                        <td class="collapsing">{{ action.date|date('d-m-Y') }}</td>
-                        <td>{{ action.type|trans }}</td>
-                        <td><i class="euro icon"></i>{{ action.totalCosts }}</td>
-                        <td {% if action.fullyPaid %} class="text-success" {% endif %}><i class="euro icon"></i>{{ action.sumRemaining }}</td>
-                        <td class="collapsing"><a href="{{ path('backend_customer_edit', {'id' : action.customer.id}) }}">{{ action.customer.firstname }} {{ action.customer.lastname }}</a></td>
-                        <td class="collapsing"><a href="{{ path('backend_animal_show', {'id' : action.animal.id}) }}">{{ action.animal.name }}</a></td>
-                        <td {% if action.completed == false %} class="text-danger" {% endif %}>{{ outputBool(action.completed) }}</td>
-                        <td class="collapsing">
-                            {% if action.fullyPaid == false %}
-                                <a href="{{ path('backend_bookkeeping_transaction_searchcustomer', {'actionid' : action.id}) }}"><button class="ui tiny button positive"><i class="plus icon"></i>Transactie</button></a>
+                    {% for action in result %}
+                        <tr>
+                            <td>
+                                <a href="{{ path('backend_bookkeeping_action_show', {'actionid' : action.id}) }}">
+                                    <button class="ui tiny button primary"><i class="eye icon"></i></button>
+                                </a>
+                            </td>
+                            <td class="collapsing">{{ action.date|date('d-m-Y') }}</td>
+                            <td>{{ action.type|trans }}</td>
+                            <td><i class="euro icon"></i>{{ action.totalCosts }}</td>
+                            <td {% if action.fullyPaid %} class="text-success" {% endif %}><i
+                                        class="euro icon"></i>{{ action.sumRemaining }}</td>
+                            {% if customer is defined %}
+                                <td class="collapsing"><a
+                                            href="{{ path('backend_customer_edit', {'id' : action.customer.id}) }}">{{ action.customer.firstname }} {{ action.customer.lastname }}</a>
+                                </td>
                             {% endif %}
-                        </td>
-                    </tr>
-                {% endfor %}
+                            <td class="collapsing"><a
+                                        href="{{ path('backend_animal_show', {'id' : action.animal.id}) }}">{{ action.animal.name }}</a>
+                            </td>
+                            <td {% if action.completed == false %} class="text-danger" {% endif %}>{{ outputBool(action.completed) }}</td>
+                            <td class="collapsing">
+                                {% if action.fullyPaid == false and action.totalCosts != 0 %}
+                                    <a href="{{ path('backend_bookkeeping_transaction_searchcustomer', {'actionid' : action.id}) }}">
+                                        <button class="ui tiny button positive"><i class="plus icon"></i>Transactie
+                                        </button>
+                                    </a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
                 {% endif %}
                 </tbody>
             </table>

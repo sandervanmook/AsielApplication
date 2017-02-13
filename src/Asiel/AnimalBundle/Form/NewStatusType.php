@@ -22,7 +22,6 @@ class NewStatusType extends AbstractType
                     'Terug naar eigenaar'   => 'ReturnedOwner',
                     'Overleden'             => 'Deceased',
                     'Kwijt'                 => 'Lost',
-                    'Gevonden'              => 'Found',
                 ],
                 'expanded'  => true,
                 'multiple'  => false,

@@ -31,10 +31,11 @@ class ActionSearchType extends AbstractType
                     'Adoptie' => 'Adopted',
                     'Afgestaan' => 'Abandoned',
                     'In beslag genomen' => 'Seized',
+                    'Gevonden' => 'Found',
                     'Alle'  => 'All',
                 ],
                 'multiple'  => true,
-                'data' => ['Alle'  => 'All'],
+                'data' => ['Adoptie' => 'Adopted'],
             ])
             ->add('status', ChoiceType::class, [
                 'label' => false,
