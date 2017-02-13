@@ -7,28 +7,33 @@ namespace Asiel\BookkeepingBundle\Service;
 use Asiel\AnimalBundle\AnimalStateMachine\AnimalStateMachine;
 use Asiel\AnimalBundle\Entity\Animal;
 use Asiel\AnimalBundle\Entity\Status;
-use Asiel\AnimalBundle\Entity\StatusType\Abandoned;
 use Asiel\BackendBundle\Event\UserAlertEvent;
 use Asiel\BookkeepingBundle\Entity\Action;
-use Asiel\CalendarBundle\Entity\Task;
-use Asiel\CalendarBundle\Event\TaskEvent;
 use Asiel\CustomerBundle\Entity\Customer;
 use Asiel\Shared\Service\BaseFormHandler;
 
-class AbandonedActionFormHandler extends BaseActionFormHandler
+class SeizedActionFormHandler extends BaseActionFormHandler
 {
-    protected $baseFormHandler;
-
     public function __construct(BaseFormHandler $baseFormHandler)
     {
         parent::__construct($baseFormHandler);
+    }
+
+    public function findAnimal(int $animalId): Animal
+    {
+        return $this->baseFormHandler->findAnimal($animalId);
+    }
+
+    public function findCustomer(int $customerId): Customer
+    {
+        return $this->baseFormHandler->findCustomer($customerId);
     }
 
     public function stateChangeAllowed(Animal $animal)
     {
         $stateMachine = new AnimalStateMachine();
         $stateMachine->setAnimal($animal);
-        $changeToState = 'changeTo' . 'Abandoned';
+        $changeToState = 'changeTo' . 'Seized';
         $decision = call_user_func([$stateMachine, $changeToState]);
 
         //TODO translate current state
@@ -44,18 +49,7 @@ class AbandonedActionFormHandler extends BaseActionFormHandler
 
     public function getTotalActionCosts(Animal $animal): int
     {
-        if (($animal->getClassName() == 'Cat') && ($animal->isCurrentlyAKitten())) {
-            return $this->baseFormHandler->getBookkeepingSettingsRepository()->getSettings()->getPriceAbandonedKitten();
-        }
-        if (($animal->getClassName() == 'Cat') && ($animal->isCurrentlyACat())) {
-            return $this->baseFormHandler->getBookkeepingSettingsRepository()->getSettings()->getPriceAbandonedCat();
-        }
-        if (($animal->getClassName() == 'Dog') && ($animal->isCurrentlyADog())) {
-            return $this->baseFormHandler->getBookkeepingSettingsRepository()->getSettings()->getPriceAbandonedDog();
-        }
-        if (($animal->getClassName() == 'Dog') && ($animal->isCurrentlyAPuppy())) {
-            return $this->baseFormHandler->getBookkeepingSettingsRepository()->getSettings()->getPriceAbandonedPuppy();
-        }
+        // Not used for this action type
     }
 
     public function createAction(Animal $animal, Customer $customer, int $totalCosts, Status $status): Action
@@ -63,7 +57,7 @@ class AbandonedActionFormHandler extends BaseActionFormHandler
         // Create the action
         $action = new Action();
         $action->setDate(new \DateTime('now'));
-        $action->setType('Abandoned');
+        $action->setType('Seized');
         $action->setTotalCosts($totalCosts);
         $action->setAnimal($animal);
         $action->setFullyPaid(false);
@@ -91,7 +85,6 @@ class AbandonedActionFormHandler extends BaseActionFormHandler
     {
         $currentAnimal = $action->getAnimal();
         $status = $action->getStatus();
-        $currentCustomer = $action->getCustomer();
 
         // Bind the animal to this status
         $status->setAnimal($currentAnimal);
@@ -102,36 +95,11 @@ class AbandonedActionFormHandler extends BaseActionFormHandler
         // The new status should be active
         $status->setArchived(false);
 
-        // Set the customer to the status
-        $status->setAbandonedBy($currentCustomer);
-
         // Mark action complete
         $action->setCompleted(true);
 
-        // Handle task creation
-        // If we need to chip the animal, create a task.
-        if ($status->isNeedsChipping()) {
-            $this->baseFormHandler->getEventDispatcher()->dispatch('createtask',
-                new TaskEvent($currentAnimal, Task::TOMORROW, Abandoned::ABANDON_CHIPPED));
-        }
-        // If we need to vaccine the animal, create a task.
-        if ($status->isNeedsVaccines()) {
-            $this->baseFormHandler->getEventDispatcher()->dispatch('createtask',
-                new TaskEvent($currentAnimal, Task::TOMORROW, Abandoned::ABANDON_VACCINE));
-        }
-        // If we need to sterilize the animal, create a task.
-        if ($status->isNeedsSterilization()) {
-            $this->baseFormHandler->getEventDispatcher()->dispatch('createtask',
-                new TaskEvent($currentAnimal, Task::TOMORROW, Abandoned::ABANDON_STERILIZE));
-        }
-        // If the animal needs a passport, create a task.
-        if ($status->isNeedsPassport()) {
-            $this->baseFormHandler->getEventDispatcher()->dispatch('createtask',
-                new TaskEvent($currentAnimal, Task::TOMORROW, Abandoned::ABANDON_PASSPORT));
-        }
-
         $this->baseFormHandler->getEm()->flush();
         $this->baseFormHandler->getEventDispatcher()->dispatch('user_alert.message',
-            new UserAlertEvent(UserAlertEvent::SUCCESS, 'De afstand status is aangemaakt.'));
+            new UserAlertEvent(UserAlertEvent::SUCCESS, 'De in beslag genomen status is aangemaakt.'));
     }
 }

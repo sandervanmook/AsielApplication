@@ -1,7 +1,6 @@
 backend_bookkeeping_index:
     path:     /
     defaults: { _controller: BookkeepingBundle:Backend:index }
-
 #Action
 backend_bookkeeping_action_searchanimal:
     path:     /action/searchanimal
@@ -41,7 +40,6 @@ backend_bookkeeping_action_abandoned_finish:
     path:     /action/{actionid}/abandoned/finish
     defaults: { _controller: BookkeepingBundle:AbandonedAction:finish }
 #End Action Abandoned
-
 #Transaction
 backend_bookkeeping_transaction_searchcustomer:
     path:     /transaction/searchcustomer
@@ -51,3 +49,12 @@ backend_bookkeeping_transaction_create:
     path:     /transaction/create/action
     defaults: { _controller: BookkeepingBundle:Transaction:create }
 #End transaction
+# Seized action
+backend_bookkeeping_action_seized_start:
+    path:     /action/seized/start
+    defaults: { _controller: BookkeepingBundle:SeizedAction:start }
+
+backend_bookkeeping_action_seized_finish:
+    path:     /action/{actionid}/seized/finish
+    defaults: { _controller: BookkeepingBundle:SeizedAction:finish }
+#End seized action
