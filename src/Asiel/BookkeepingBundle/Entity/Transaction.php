@@ -4,6 +4,7 @@ namespace Asiel\BookkeepingBundle\Entity;
 
 use Asiel\BookkeepingBundle\Entity\Action;
 use Asiel\CustomerBundle\Entity\Customer;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -258,11 +259,11 @@ class Transaction
     /**
      * Set customer
      *
-     * @param \Asiel\CustomerBundle\Entity\Customer $customer
+     * @param Customer $customer
      *
      * @return Transaction
      */
-    public function setCustomer(\Asiel\CustomerBundle\Entity\Customer $customer = null)
+    public function setCustomer(Customer $customer = null)
     {
         $this->customer = $customer;
 
@@ -272,10 +273,22 @@ class Transaction
     /**
      * Get customer
      *
-     * @return \Asiel\CustomerBundle\Entity\Customer
+     * @return Customer
      */
     public function getCustomer()
     {
         return $this->customer;
+    }
+
+    public function isOverDue() : bool
+    {
+        $now = new DateTime('today');
+        $date = $this->getDueDate();
+
+        if ($date->getTimestamp() < $now->getTimestamp()) {
+            return true;
+        }
+
+        return false;
     }
 }
