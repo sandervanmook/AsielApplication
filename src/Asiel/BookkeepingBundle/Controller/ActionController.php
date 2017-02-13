@@ -134,6 +134,9 @@ class ActionController extends Controller
             case 'Seized' :
                 $template = '@Bookkeeping/Backend/SeizedAction/show.html.twig';
                 break;
+            case 'Found' :
+                $template = '@Bookkeeping/Backend/FoundAction/show.html.twig';
+                break;
             default:
                 throw new \InvalidArgumentException('Unknown type');
         }

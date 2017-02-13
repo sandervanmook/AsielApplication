@@ -93,7 +93,7 @@ class Found extends Status implements AnimalState
      */
     public function toAbandoned() : bool
     {
-        return false;
+        return true;
     }
     public function toAdopted() : bool
     {
