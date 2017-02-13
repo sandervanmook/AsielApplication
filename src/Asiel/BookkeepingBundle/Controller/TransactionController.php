@@ -30,9 +30,15 @@ class TransactionController extends Controller
         $action = $formHandler->findAction($request->get('actionid'));
         $actionCustomer = $action->getCustomer();
 
+        if (!is_null($actionCustomer)) {
+            $actionCustomerId = $action->getCustomer()->getId();
+        } else {
+            $actionCustomerId = 0;
+        }
+
         return $this->render('@Bookkeeping/Backend/Transaction/searchCustomer.html.twig', [
             'form' => $form->createView(),
-            'actioncustomerid' => $actionCustomer->getId(),
+            'actioncustomerid' => $actionCustomerId,
         ]);
     }
 

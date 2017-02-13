@@ -33,10 +33,11 @@
             </table>
         </div>
         <div class="sixteen wide column">
-            <div class="ui compact segment">
+            {% if actioncustomerid != 0 %}<div class="ui compact segment">
                 <p>Of <a href="{{ path('backend_bookkeeping_transaction_create', {'customerid' : actioncustomerid}) }}">gebruik</a>
                     de klant die aan de actie verbonden zit.</p>
             </div>
+            {% endif %}
             <div class="ui divider horizontal"></div>
             <div id="searchresult"></div>
             <div class="ui divider horizontal"></div>

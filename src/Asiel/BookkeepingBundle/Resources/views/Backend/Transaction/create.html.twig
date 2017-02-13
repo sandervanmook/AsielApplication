@@ -22,12 +22,14 @@
                     <td>Totale kosten</td>
                     <td><i class="euro icon"></i>{{ action.totalCosts }}</td>
                 </tr>
+                {% if action.customer is not null %}
                 <tr>
                     <td>Voor klant</td>
                     <td>
                         <a href="{{ path('backend_customer_edit', {'id' : action.customer.id}) }}">{{ action.customer.firstname }} {{ action.customer.lastname }}</a>
                     </td>
                 </tr>
+                {% endif %}
                 <tr>
                     <td>Nog te voldoen</td>
                     <td><i class="euro icon"></i>{{ action.sumRemaining }}</td>
