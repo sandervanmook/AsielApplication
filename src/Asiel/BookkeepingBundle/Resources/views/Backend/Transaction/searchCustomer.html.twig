@@ -32,13 +32,16 @@
                 </tbody>
             </table>
         </div>
+        <div class="ui segment">
+            <p>Of <a href="{{ path('backend_bookkeeping_transaction_create', {'customerid' : actioncustomerid}) }}">gebruik</a>
+                de klant die aan de actie verbonden zit.</p>
+        </div>
         <div class="sixteen wide column">
             <div class="ui divider horizontal"></div>
             <div id="searchresult"></div>
             <div class="ui divider horizontal"></div>
             <div class="ui divider horizontal"></div>
         </div>
-        <p>Of <a href="{{ path('backend_bookkeeping_transaction_create', {'customerid' : actioncustomerid}) }}">gebruik</a> de klant die aan de actie verbonden zit.</p>
     </div>
     {% set animalid = app.request.get('animalid') %}
 {% endblock %}

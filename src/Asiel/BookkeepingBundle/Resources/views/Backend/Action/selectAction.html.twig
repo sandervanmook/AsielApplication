@@ -6,13 +6,13 @@
             <div class="ui relaxed divided list">
                 <div class="item">
                     <div class="content">
-                        <a class="header" href="{{ path('backend_bookkeeping_action_adopted_start', {'animalid' : app.request.get('animalid')}) }}">Adoptie</a>
+                        <a class="header" href="{{ path('backend_bookkeeping_action_adopted_start') }}">Adoptie</a>
                         <div class="description">Als u een dier wil laten adopteren</div>
                     </div>
                 </div>
                 <div class="item">
                     <div class="content">
-                        <a class="header" href="{{ path('backend_bookkeeping_action_abandoned_start', {'animalid' : app.request.get('animalid')}) }}">Afstaan</a>
+                        <a class="header" href="{{ path('backend_bookkeeping_action_abandoned_start') }}">Afstaan</a>
                         <div class="description">Als iemand een dier wil afstaan</div>
                     </div>
                 </div>
@@ -24,7 +24,7 @@
                 </div>
                 <div class="item">
                     <div class="content">
-                        <a class="header">Gevonden</a>
+                        <a class="header" href="{{ path('backend_bookkeeping_action_found_start', {'animalid' : app.request.get('animalid')}) }}">Gevonden</a>
                         <div class="description">Als een dier gevonden is en het moet terug naar de eigenaar of afgestaan worden.</div>
                     </div>
                 </div>

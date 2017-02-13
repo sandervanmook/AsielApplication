@@ -25,6 +25,7 @@ class LoadCustomerData implements FixtureInterface
         $customer->setMunicipality('As');
         $customer->setCountry('Netherlands');
         $customer->setBlacklisted(false);
+        $customer->setMunicipality('Roosendaal');
 
         $manager->persist($customer);
         $manager->flush();

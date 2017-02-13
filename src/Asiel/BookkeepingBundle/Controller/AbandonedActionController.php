@@ -21,12 +21,19 @@ class AbandonedActionController extends Controller
     public function startAction(Request $request)
     {
         $formHandler = $this->get('asiel.bookkeepingbundle.abandonedactionformhandler');
+
+        // If the user didn't select a customer, we cannot continue
+        if ($this->get('session')->get('bookkeeping_selected_customer_id') == 'unknown') {
+            $formHandler->needCustomerToProceedMessage();
+            return new RedirectResponse($this->generateUrl('backend_bookkeeping_index'));
+        }
+
         $animalId = $this->get('session')->get('bookkeeping_selected_animal_id');
         $customerId = $this->get('session')->get('bookkeeping_selected_customer_id');
         $currentAnimal = $formHandler->findAnimal($animalId);
         $currentCustomer = $formHandler->findCustomer($customerId);
 
-        // Check if animals active state allows to be changed to adopted
+        // Check if animals active state allows to be changed to abandoned
         if (!$formHandler->stateChangeAllowed($currentAnimal)) {
             return new RedirectResponse($this->generateUrl('backend_bookkeeping_action_select',
                 ['animalid' => $animalId]));

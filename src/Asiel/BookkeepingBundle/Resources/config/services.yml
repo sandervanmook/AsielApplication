@@ -23,3 +23,8 @@ services:
       class: Asiel\BookkeepingBundle\Service\SeizedActionFormHandler
       arguments:
         - '@asiel.backendbundle.baseformhandler'
+
+    asiel.bookkeepingbundle.foundactionformhandler:
+      class: Asiel\BookkeepingBundle\Service\FoundActionFormHandler
+      arguments:
+        - '@asiel.backendbundle.baseformhandler'
