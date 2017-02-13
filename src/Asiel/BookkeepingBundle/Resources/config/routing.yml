@@ -40,6 +40,15 @@ backend_bookkeeping_action_abandoned_finish:
     path:     /action/{actionid}/abandoned/finish
     defaults: { _controller: BookkeepingBundle:AbandonedAction:finish }
 #End Action Abandoned
+#Action found
+backend_bookkeeping_action_found_start:
+    path:     /action/found/start
+    defaults: { _controller: BookkeepingBundle:FoundAction:start }
+
+backend_bookkeeping_action_found_finish:
+    path:     /action/{actionid}/found/finish
+    defaults: { _controller: BookkeepingBundle:FoundAction:finish }
+#End action found
 #Transaction
 backend_bookkeeping_transaction_searchcustomer:
     path:     /transaction/searchcustomer

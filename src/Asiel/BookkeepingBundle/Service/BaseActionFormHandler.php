@@ -6,6 +6,7 @@ namespace Asiel\BookkeepingBundle\Service;
 
 use Asiel\AnimalBundle\Entity\Animal;
 use Asiel\AnimalBundle\Entity\Status;
+use Asiel\BackendBundle\Event\UserAlertEvent;
 use Asiel\BookkeepingBundle\Entity\Action;
 use Asiel\CustomerBundle\Entity\Customer;
 use Asiel\Shared\Service\BaseFormHandler;
@@ -59,6 +60,12 @@ abstract class BaseActionFormHandler
         }
 
         return false;
+    }
+
+    public function needCustomerToProceedMessage()
+    {
+        return $this->baseFormHandler->getEventDispatcher()->dispatch('user_alert.message',
+            new UserAlertEvent(UserAlertEvent::DANGER, 'U moet een klant kiezen om door te gaan.'));
     }
 
 }

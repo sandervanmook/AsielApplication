@@ -53,6 +53,11 @@ class ActionController extends Controller
         $animalId = $this->get('session')->get('bookkeeping_selected_animal_id');
 
         // Save selected customer in session
+        // If user selects unknown, save that
+        if ($request->get('customerid') == 'unknown') {
+            $this->get('session')->set('bookkeeping_selected_customer_id', 'unknown');
+        }
+        // If user selects a customer save his id
         if (!is_null($request->get('customerid'))) {
             $this->get('session')->set('bookkeeping_selected_customer_id', $request->get('customerid'));
         }

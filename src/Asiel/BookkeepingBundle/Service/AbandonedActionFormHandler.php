@@ -17,8 +17,6 @@ use Asiel\Shared\Service\BaseFormHandler;
 
 class AbandonedActionFormHandler extends BaseActionFormHandler
 {
-    protected $baseFormHandler;
-
     public function __construct(BaseFormHandler $baseFormHandler)
     {
         parent::__construct($baseFormHandler);
