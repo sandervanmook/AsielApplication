@@ -67,3 +67,8 @@ backend_bookkeeping_cashledger_index:
     path:     /cashledger
     defaults: { _controller: BookkeepingBundle:CashLedger:index }
 #end Cash ledger
+#Bank ledger
+backend_bookkeeping_bankledger_index:
+    path:     /bankledger
+    defaults: { _controller: BookkeepingBundle:BankLedger:index }
+# end Bank Ledger
