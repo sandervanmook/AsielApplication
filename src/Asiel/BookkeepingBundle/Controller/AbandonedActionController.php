@@ -47,7 +47,7 @@ class AbandonedActionController extends Controller
             $action = $formHandler->createAction($currentAnimal, $currentCustomer, $actionTotalCosts ,$status);
             $actionId = $action->getId();
 
-            return new RedirectResponse($this->generateUrl('backend_bookkeeping_action_index',
+            return new RedirectResponse($this->generateUrl('backend_bookkeeping_action_show',
                 ['actionid' => $actionId]));
         }
 
@@ -72,6 +72,5 @@ class AbandonedActionController extends Controller
         $formHandler->setNewStatus($action);
 
         return new RedirectResponse($this->generateUrl('backend_bookkeeping_action_show', ['actionid' => $actionid]));
-
     }
 }

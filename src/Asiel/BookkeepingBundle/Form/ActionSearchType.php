@@ -31,6 +31,7 @@ class ActionSearchType extends AbstractType
                 'choices' => [
                     'Adoptie' => 'Adopted',
                     'Afgestaan' => 'Abandoned',
+                    'In beslag genomen' => 'Seized',
                     'Alle'  => 'All',
                 ],
                 'multiple'  => true,

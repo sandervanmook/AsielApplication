@@ -30,6 +30,11 @@ class NoState implements AnimalState
         $this->stateMachine = $animalStateMachine;
     }
 
+    public function __toString()
+{
+    return 'Geen';
+}
+
     /**
      * Statemachine methods
      */

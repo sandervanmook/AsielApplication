@@ -6,6 +6,7 @@ namespace Asiel\BookkeepingBundle\Service;
 
 use Asiel\AnimalBundle\AnimalStateMachine\AnimalStateMachine;
 use Asiel\AnimalBundle\Entity\Animal;
+use Asiel\AnimalBundle\Entity\Status;
 use Asiel\AnimalBundle\Entity\StatusType\Adopted;
 use Asiel\AnimalBundle\Repository\AnimalRepository;
 use Asiel\BackendBundle\Event\UserAlertEvent;
@@ -14,13 +15,13 @@ use Asiel\CustomerBundle\Entity\Customer;
 use Asiel\Shared\Service\BaseFormHandler;
 use DateTime;
 
-class AdoptedActionFormHandler
+class AdoptedActionFormHandler extends BaseActionFormHandler
 {
     protected $baseFormHandler;
 
     public function __construct(BaseFormHandler $baseFormHandler)
     {
-        $this->baseFormHandler = $baseFormHandler;
+        parent::__construct($baseFormHandler);
     }
 
     public function stateChangeAllowed(Animal $animal)
@@ -41,16 +42,6 @@ class AdoptedActionFormHandler
         return true;
     }
 
-    public function findAnimal(int $animalId)
-    {
-        return $this->baseFormHandler->findAnimal($animalId);
-    }
-
-    public function findCustomer(int $customerId)
-    {
-        return $this->baseFormHandler->findCustomer($customerId);
-    }
-
     public function getTotalActionCosts(Animal $animal): int
     {
         if (($animal->getClassName() == 'Cat') && ($animal->isCurrentlyAKitten())) {
@@ -67,22 +58,12 @@ class AdoptedActionFormHandler
         }
     }
 
-    public function getAnimalType(Animal $animal)
-    {
-        if ($animal->getClassName() == 'Cat') {
-            return $animal->getCurrentCatType();
-        }
-        if ($animal->getClassName() == 'Dog') {
-            return $animal->getCurrentDogType();
-        }
-    }
-
     public function getAnimalRepository(): AnimalRepository
     {
         return $this->baseFormHandler->getAnimalRepository();
     }
 
-    public function createAction(Animal $animal, Customer $customer, int $totalCosts): Action
+    public function createAction(Animal $animal, Customer $customer, int $totalCosts, Status $status): Action
     {
         $action = new Action();
         $action->setDate(new \DateTime('now'));
@@ -101,20 +82,6 @@ class AdoptedActionFormHandler
                 "Actie is aangemaakt."));
 
         return $action;
-    }
-
-    public function findAction(int $actionId): Action
-    {
-        return $this->baseFormHandler->findAction($actionId);
-    }
-
-    public function verifyFinish(Action $action)
-    {
-        if ($action->isFullyPaid()) {
-            return true;
-        }
-
-        return false;
     }
 
     public function setNewStatus(Action $action)

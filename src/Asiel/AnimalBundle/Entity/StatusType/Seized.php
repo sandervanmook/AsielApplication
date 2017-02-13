@@ -24,6 +24,34 @@ class Seized extends Status implements AnimalState
      */
     private $id;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="municipality", type="string", length=255, nullable=false)
+     */
+    private $municipality;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="amount_people", type="integer", nullable=false)
+     */
+    private $amountPeople;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="time_spend", type="integer", nullable=false)
+     */
+    private $timeSpend;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="medical_actions", type="text", nullable=true)
+     */
+    private $medicalActions;
+
     private $stateMachine;
 
     public function __construct(AnimalStateMachine $animalStateMachine)
@@ -82,5 +110,100 @@ class Seized extends Status implements AnimalState
     {
         return 'Seized';
     }
-}
 
+    /**
+     * Set municipality
+     *
+     * @param string $municipality
+     *
+     * @return Seized
+     */
+    public function setMunicipality($municipality)
+    {
+        $this->municipality = $municipality;
+
+        return $this;
+    }
+
+    /**
+     * Get municipality
+     *
+     * @return string
+     */
+    public function getMunicipality()
+    {
+        return $this->municipality;
+    }
+
+    /**
+     * Set amountPeople
+     *
+     * @param integer $amountPeople
+     *
+     * @return Seized
+     */
+    public function setAmountPeople($amountPeople)
+    {
+        $this->amountPeople = $amountPeople;
+
+        return $this;
+    }
+
+    /**
+     * Get amountPeople
+     *
+     * @return integer
+     */
+    public function getAmountPeople()
+    {
+        return $this->amountPeople;
+    }
+
+    /**
+     * Set timeSpend
+     *
+     * @param integer $timeSpend
+     *
+     * @return Seized
+     */
+    public function setTimeSpend($timeSpend)
+    {
+        $this->timeSpend = $timeSpend;
+
+        return $this;
+    }
+
+    /**
+     * Get timeSpend
+     *
+     * @return integer
+     */
+    public function getTimeSpend()
+    {
+        return $this->timeSpend;
+    }
+
+    /**
+     * Set medicalActions
+     *
+     * @param string $medicalActions
+     *
+     * @return Seized
+     */
+    public function setMedicalActions($medicalActions)
+    {
+        $this->medicalActions = $medicalActions;
+
+        return $this;
+    }
+
+    /**
+     * Get medicalActions
+     *
+     * @return string
+     */
+    public function getMedicalActions()
+    {
+        return $this->medicalActions;
+    }
+}

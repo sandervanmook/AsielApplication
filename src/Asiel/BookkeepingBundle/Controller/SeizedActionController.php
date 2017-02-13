@@ -5,14 +5,14 @@ namespace Asiel\BookkeepingBundle\Controller;
 
 
 use Asiel\AnimalBundle\AnimalStateMachine\AnimalStateMachine;
-use Asiel\AnimalBundle\Entity\StatusType\Adopted;
+use Asiel\AnimalBundle\Entity\StatusType\Seized;
+use Asiel\AnimalBundle\Form\StatusType\SeizedType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class AdoptedActionController extends Controller
+class SeizedActionController extends Controller
 {
     /**
      * @param Request $request
@@ -20,7 +20,7 @@ class AdoptedActionController extends Controller
      */
     public function startAction(Request $request)
     {
-        $formHandler = $this->get('asiel.bookkeepingbundle.adoptedactionformhandler');
+        $formHandler = $this->get('asiel.bookkeepingbundle.seizedactionformhandler');
         $animalId = $this->get('session')->get('bookkeeping_selected_animal_id');
         $customerId = $this->get('session')->get('bookkeeping_selected_customer_id');
         $currentAnimal = $formHandler->findAnimal($animalId);
@@ -32,33 +32,24 @@ class AdoptedActionController extends Controller
                 ['animalid' => $animalId]));
         }
 
-        // Get total costs from backend bundle
-        $actionTotalCosts = $formHandler->getTotalActionCosts($currentAnimal);
-
         // Get type of animal the costs are based upon
         $animalType = $formHandler->getAnimalType($currentAnimal);
 
-        $form = $this->createFormBuilder()
-            ->add('submit', SubmitType::class, [
-                'label' => 'Aanmaken',
-                'attr' => [
-                    'class' => 'ui button positive'
-                ]
-            ])
-            ->getForm();
+        $status = new Seized(new AnimalStateMachine());
+        $form = $this->createForm(SeizedType::class, $status);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
-            $action = $formHandler->createAction($currentAnimal, $currentCustomer, $actionTotalCosts, new Adopted(new AnimalStateMachine()));
+            $actionTotalCosts = $form->get('totalcosts')->getData();
+            $action = $formHandler->createAction($currentAnimal, $currentCustomer, $actionTotalCosts ,$status);
             $actionId = $action->getId();
 
             return new RedirectResponse($this->generateUrl('backend_bookkeeping_action_show',
                 ['actionid' => $actionId]));
         }
 
-        return $this->render('@Bookkeeping/Backend/AdoptedAction/start.html.twig', [
-            'actiontotalcosts' => $actionTotalCosts,
+        return $this->render('@Bookkeeping/Backend/SeizedAction/start.html.twig', [
             'animaltype' => $animalType,
             'animal' => $currentAnimal,
             'customer' => $currentCustomer,
@@ -72,7 +63,7 @@ class AdoptedActionController extends Controller
      */
     public function finishAction(int $actionid)
     {
-        $formHandler = $this->get('asiel.bookkeepingbundle.adoptedactionformhandler');
+        $formHandler = $this->get('asiel.bookkeepingbundle.seizedactionformhandler');
         $action = $formHandler->findAction($actionid);
 
         // Verify action is finished
@@ -83,4 +74,5 @@ class AdoptedActionController extends Controller
 
         return new RedirectResponse($this->generateUrl('backend_bookkeeping_action_show', ['actionid' => $actionid]));
     }
+
 }
