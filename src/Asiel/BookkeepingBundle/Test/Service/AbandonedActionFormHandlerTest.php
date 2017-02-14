@@ -8,16 +8,43 @@ use Asiel\AnimalBundle\AnimalStateMachine\AnimalStateMachine;
 use Asiel\AnimalBundle\Entity\Animal;
 use Asiel\AnimalBundle\Entity\AnimalType\Cat;
 use Asiel\AnimalBundle\Entity\AnimalType\Dog;
+use Asiel\AnimalBundle\Entity\Status;
 use Asiel\AnimalBundle\Entity\StatusType\Abandoned;
 use Asiel\BackendBundle\Entity\BookkeepingSettings;
 use Asiel\BackendBundle\Repository\BookkeepingSettingsRepository;
+use Asiel\BookkeepingBundle\Entity\Action;
 use Asiel\BookkeepingBundle\Service\AbandonedActionFormHandler;
 use Asiel\BookkeepingBundle\Service\BaseActionFormHandler;
+use Asiel\CustomerBundle\Entity\Customer;
 use Asiel\Shared\Service\BaseFormHandler;
 use DateTime;
 
 class AbandonedActionFormHandlerTest extends \PHPUnit_Framework_TestCase
 {
+    public $baseActionFormHandler;
+    public $bookkeepingSettingsRepository;
+    public $bookkeepingSetting;
+    public $baseFormHandler;
+
+    public function setUp()
+    {
+        $this->baseActionFormHandler = $this->getMockBuilder(BaseActionFormHandler::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->bookkeepingSettingsRepository = $this->getMockBuilder(BookkeepingSettingsRepository::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->bookkeepingSetting = $this->getMockBuilder(BookkeepingSettings::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->baseFormHandler = $this->getMockBuilder(BaseFormHandler::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+    }
+
     public function test_state_change_is_not_allowed()
     {
         $baseActionFormHandler = $this->getMockBuilder(BaseActionFormHandler::class)->disableOriginalConstructor()->getMock();
@@ -45,39 +72,23 @@ class AbandonedActionFormHandlerTest extends \PHPUnit_Framework_TestCase
             ->setMethods(['getBaseActionFormHandler'])
             ->getMock();
 
-        $baseActionFormHandler = $this->getMockBuilder(BaseActionFormHandler::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $bookkeepingSettingsRepository = $this->getMockBuilder(BookkeepingSettingsRepository::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $bookkeepingSetting = $this->getMockBuilder(BookkeepingSettings::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $baseFormHandler = $this->getMockBuilder(BaseFormHandler::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
         $handler->expects($this->once())
             ->method('getBaseActionFormHandler')
-            ->willReturn($baseActionFormHandler);
+            ->willReturn($this->baseActionFormHandler);
 
-        $baseActionFormHandler->expects($this->once())
+        $this->baseActionFormHandler->expects($this->once())
             ->method('getBaseFormHandler')
-            ->willReturn($baseFormHandler);
+            ->willReturn($this->baseFormHandler);
 
-        $baseFormHandler->expects($this->once())
+        $this->baseFormHandler->expects($this->once())
             ->method('getBookkeepingSettingsRepository')
-            ->willReturn($bookkeepingSettingsRepository);
+            ->willReturn($this->bookkeepingSettingsRepository);
 
-        $bookkeepingSettingsRepository->expects($this->once())
+        $this->bookkeepingSettingsRepository->expects($this->once())
             ->method('getSettings')
-            ->willReturn($bookkeepingSetting);
+            ->willReturn($this->bookkeepingSetting);
 
-        $bookkeepingSetting->expects($this->once())
+        $this->bookkeepingSetting->expects($this->once())
             ->method('getPriceAbandonedKitten')
             ->willReturn(100);
 
@@ -94,39 +105,23 @@ class AbandonedActionFormHandlerTest extends \PHPUnit_Framework_TestCase
             ->setMethods(['getBaseActionFormHandler'])
             ->getMock();
 
-        $baseActionFormHandler = $this->getMockBuilder(BaseActionFormHandler::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $bookkeepingSettingsRepository = $this->getMockBuilder(BookkeepingSettingsRepository::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $bookkeepingSetting = $this->getMockBuilder(BookkeepingSettings::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $baseFormHandler = $this->getMockBuilder(BaseFormHandler::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
         $handler->expects($this->once())
             ->method('getBaseActionFormHandler')
-            ->willReturn($baseActionFormHandler);
+            ->willReturn($this->baseActionFormHandler);
 
-        $baseActionFormHandler->expects($this->once())
+        $this->baseActionFormHandler->expects($this->once())
             ->method('getBaseFormHandler')
-            ->willReturn($baseFormHandler);
+            ->willReturn($this->baseFormHandler);
 
-        $baseFormHandler->expects($this->once())
+        $this->baseFormHandler->expects($this->once())
             ->method('getBookkeepingSettingsRepository')
-            ->willReturn($bookkeepingSettingsRepository);
+            ->willReturn($this->bookkeepingSettingsRepository);
 
-        $bookkeepingSettingsRepository->expects($this->once())
+        $this->bookkeepingSettingsRepository->expects($this->once())
             ->method('getSettings')
-            ->willReturn($bookkeepingSetting);
+            ->willReturn($this->bookkeepingSetting);
 
-        $bookkeepingSetting->expects($this->once())
+        $this->bookkeepingSetting->expects($this->once())
             ->method('getPriceAbandonedCat')
             ->willReturn(100);
 
@@ -145,39 +140,23 @@ class AbandonedActionFormHandlerTest extends \PHPUnit_Framework_TestCase
             ->setMethods(['getBaseActionFormHandler'])
             ->getMock();
 
-        $baseActionFormHandler = $this->getMockBuilder(BaseActionFormHandler::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $bookkeepingSettingsRepository = $this->getMockBuilder(BookkeepingSettingsRepository::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $bookkeepingSetting = $this->getMockBuilder(BookkeepingSettings::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $baseFormHandler = $this->getMockBuilder(BaseFormHandler::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
         $handler->expects($this->once())
             ->method('getBaseActionFormHandler')
-            ->willReturn($baseActionFormHandler);
+            ->willReturn($this->baseActionFormHandler);
 
-        $baseActionFormHandler->expects($this->once())
+        $this->baseActionFormHandler->expects($this->once())
             ->method('getBaseFormHandler')
-            ->willReturn($baseFormHandler);
+            ->willReturn($this->baseFormHandler);
 
-        $baseFormHandler->expects($this->once())
+        $this->baseFormHandler->expects($this->once())
             ->method('getBookkeepingSettingsRepository')
-            ->willReturn($bookkeepingSettingsRepository);
+            ->willReturn($this->bookkeepingSettingsRepository);
 
-        $bookkeepingSettingsRepository->expects($this->once())
+        $this->bookkeepingSettingsRepository->expects($this->once())
             ->method('getSettings')
-            ->willReturn($bookkeepingSetting);
+            ->willReturn($this->bookkeepingSetting);
 
-        $bookkeepingSetting->expects($this->once())
+        $this->bookkeepingSetting->expects($this->once())
             ->method('getPriceAbandonedDog')
             ->willReturn(100);
 
@@ -196,39 +175,23 @@ class AbandonedActionFormHandlerTest extends \PHPUnit_Framework_TestCase
             ->setMethods(['getBaseActionFormHandler'])
             ->getMock();
 
-        $baseActionFormHandler = $this->getMockBuilder(BaseActionFormHandler::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $bookkeepingSettingsRepository = $this->getMockBuilder(BookkeepingSettingsRepository::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $bookkeepingSetting = $this->getMockBuilder(BookkeepingSettings::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $baseFormHandler = $this->getMockBuilder(BaseFormHandler::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
         $handler->expects($this->once())
             ->method('getBaseActionFormHandler')
-            ->willReturn($baseActionFormHandler);
+            ->willReturn($this->baseActionFormHandler);
 
-        $baseActionFormHandler->expects($this->once())
+        $this->baseActionFormHandler->expects($this->once())
             ->method('getBaseFormHandler')
-            ->willReturn($baseFormHandler);
+            ->willReturn($this->baseFormHandler);
 
-        $baseFormHandler->expects($this->once())
+        $this->baseFormHandler->expects($this->once())
             ->method('getBookkeepingSettingsRepository')
-            ->willReturn($bookkeepingSettingsRepository);
+            ->willReturn($this->bookkeepingSettingsRepository);
 
-        $bookkeepingSettingsRepository->expects($this->once())
+        $this->bookkeepingSettingsRepository->expects($this->once())
             ->method('getSettings')
-            ->willReturn($bookkeepingSetting);
+            ->willReturn($this->bookkeepingSetting);
 
-        $bookkeepingSetting->expects($this->once())
+        $this->bookkeepingSetting->expects($this->once())
             ->method('getPriceAbandonedPuppy')
             ->willReturn(100);
 
@@ -238,8 +201,53 @@ class AbandonedActionFormHandlerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($handler->getTotalActionCosts($animal), 100);
     }
 
-    public function test()
+    public function test_create_action()
     {
-        $this->markTestIncomplete('herhaling in de setup zetten');
+        $handler = $this->getMockBuilder(AbandonedActionFormHandler::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['getBaseActionFormHandler'])
+            ->getMock();
+
+        $animal = new Animal();
+        $customer = new Customer();
+        $totalCosts = 100;
+        $status = new Abandoned(new AnimalStateMachine());
+
+        $action = new Action();
+        $action->setDate(new \DateTime('now'));
+        $action->setType('Abandoned');
+        $action->setTotalCosts($totalCosts);
+        $action->setAnimal($animal);
+        $action->setFullyPaid(false);
+        $action->setCompleted(false);
+        $action->setCustomer($customer);
+        $action->setStatus($status);
+
+        $result = $handler->createAction($animal, $customer, $totalCosts, $status);
+        $this->assertInstanceOf(Action::class, $result);
+    }
+
+    public function test_set_net_status()
+    {
+        $handler = $this->getMockBuilder(AbandonedActionFormHandler::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['getBaseActionFormHandler'])
+            ->getMock();
+
+        $animal = new Animal();
+        $status = new Abandoned(new AnimalStateMachine());
+        $customer = new Customer();
+
+        $status->setNeedsChipping(true);
+        $status->setNeedsVaccines(true);
+        $status->setNeedsSterilization(true);
+        $status->setNeedsPassport(true);
+
+        $action = new Action();
+        $action->setAnimal($animal);
+        $action->setStatus($status);
+        $action->setCustomer($customer);
+
+        $handler->setNewStatus($action);
     }
 }

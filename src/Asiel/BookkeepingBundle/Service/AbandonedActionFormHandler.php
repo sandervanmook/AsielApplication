@@ -60,6 +60,8 @@ class AbandonedActionFormHandler
         if (($animal->getClassName() == 'Dog') && ($animal->isCurrentlyAPuppy())) {
             return $this->getBaseActionFormHandler()->getBaseFormHandler()->getBookkeepingSettingsRepository()->getSettings()->getPriceAbandonedPuppy();
         }
+
+        throw new \Exception('No setting available');
     }
 
     public function createAction(Animal $animal, Customer $customer, int $totalCosts, Status $status): Action
