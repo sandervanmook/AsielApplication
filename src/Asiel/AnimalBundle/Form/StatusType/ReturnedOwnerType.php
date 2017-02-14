@@ -3,6 +3,8 @@
 namespace Asiel\AnimalBundle\Form\StatusType;
 
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -16,19 +18,10 @@ class ReturnedOwnerType extends StatusType
     {
         parent::buildForm($builder, $options);
         $builder
-            ->add('owner', HiddenType::class, [
-                'mapped'     => false,
-
-            ])
-            ->add('search', TextType::class, [
-                'label'         => 'Wie is de eigenaar',
-                'mapped'        => false,
-                'attr'          => [
-                    'placeholder'  => 'Voer een achternaam in',
-                ],
-                'label_attr'    => [
-                    'id'    => 'search',
-                ]
+            ->add('totalcosts', MoneyType::class, [
+                'label' => 'Totale kosten',
+                'scale' => 0,
+                'mapped' => false,
             ])
         ;
     }
@@ -39,7 +32,7 @@ class ReturnedOwnerType extends StatusType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Asiel\AnimalBundle\Entity\StatusType\ReturnedOwner'
+
         ));
     }
 

@@ -71,15 +71,21 @@
                             <td class="collapsing">{{ action.date|date('d-m-Y') }}</td>
                             <td>{{ action.type|trans }}</td>
                             <td><i class="euro icon"></i>{{ action.totalCosts }}</td>
-                            <td {% if action.fullyPaid %} class="text-success" {% endif %}><i
-                                        class="euro icon"></i>{{ action.sumRemaining }}</td>
-                            {% if customer is defined %}
-                                <td class="collapsing"><a
-                                            href="{{ path('backend_customer_edit', {'id' : action.customer.id}) }}">{{ action.customer.firstname }} {{ action.customer.lastname }}</a>
+                            <td {% if action.fullyPaid %} class="text-success" {% endif %}>
+                                <i class="euro icon"></i>{{ action.sumRemaining }}
+                            </td>
+                            {% if action.customer  != null%}
+                                <td class="collapsing">
+                                    <a href="{{ path('backend_customer_edit', {'id' : action.customer.id}) }}">
+                                        {{ action.customer.firstname }} {{ action.customer.lastname }}
+                                    </a>
                                 </td>
+                            {% else %}
+                                <td>{{ outputBool(false) }}</td>
                             {% endif %}
-                            <td class="collapsing"><a
-                                        href="{{ path('backend_animal_show', {'id' : action.animal.id}) }}">{{ action.animal.name }}</a>
+                            <td class="collapsing">
+                                <a href="{{ path('backend_animal_show', {'id' : action.animal.id}) }}">{{ action.animal.name }}
+                                </a>
                             </td>
                             <td {% if action.completed == false %} class="text-danger" {% endif %}>{{ outputBool(action.completed) }}</td>
                             <td class="collapsing">

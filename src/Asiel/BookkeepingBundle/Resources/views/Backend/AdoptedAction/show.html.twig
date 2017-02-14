@@ -41,7 +41,7 @@
                 <tbody>
                 {% for transaction in action.transaction %}
                     <tr>
-                        <td>Id : {{ transaction.id }}</td>
+                        <td>Id : <a href="{{ path('backend_bookkeeping_transaction_show', {'transactionid' : transaction.id}) }}">{{ transaction.id }}</a></td>
                         <td>{{ transaction.paymenttype|trans }}</td>
                         <td>Bedrag: <i class="euro icon"></i>{{ transaction.paidamount }}</td>
                     </tr>

@@ -30,7 +30,7 @@
                 </div>
                 <div class="item">
                     <div class="content">
-                        <a class="header" href="#">Terug naar eigenaar</a>
+                        <a class="header" href="{{ path('backend_bookkeeping_action_returnedowner_start', {'animalid' : app.request.get('animalid')}) }}">Terug naar eigenaar</a>
                         <div class="description">Als een dier gevonden is en het moet terug naar de eigenaar.</div>
                     </div>
                 </div>

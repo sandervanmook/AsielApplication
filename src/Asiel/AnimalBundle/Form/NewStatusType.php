@@ -19,7 +19,6 @@ class NewStatusType extends AbstractType
                 'label'     => 'Wat is de nieuwe status',
                 'mapped'    => false,
                 'choices'       => [
-                    'Terug naar eigenaar'   => 'ReturnedOwner',
                     'Overleden'             => 'Deceased',
                     'Kwijt'                 => 'Lost',
                 ],
