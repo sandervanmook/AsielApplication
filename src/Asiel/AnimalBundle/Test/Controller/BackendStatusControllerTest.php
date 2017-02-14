@@ -31,7 +31,7 @@ class BackendStatusControllerTest extends BaseFunctionalTest
 
     public function test_create_type_action()
     {
-        $url = $this->getUrl('backend_animal_status_create_type', ['id' => 1, 'type' => 'Found']);
+        $url = $this->getUrl('backend_animal_status_create_type', ['id' => 3, 'type' => 'Lost']);
         $this->client->request('GET', $url);
 
         $this->assertStatusCode(200, $this->client);
@@ -45,7 +45,7 @@ class BackendStatusControllerTest extends BaseFunctionalTest
         $contents = $this->getContents($url);
 
         $this->assertContains('<h3 class="ui header">Status 1</h3>', $contents);
-        $this->assertContains('<p>Type status:  Gevonden</p>', $contents);
+        $this->assertContains('<p>Type status:  Kwijt</p>', $contents);
     }
 
     public function test_delete_action()
