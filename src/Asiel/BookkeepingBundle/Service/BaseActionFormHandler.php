@@ -28,6 +28,11 @@ abstract class BaseActionFormHandler
 
     abstract public function setNewStatus(Action $action);
 
+    public function getBaseFormHandler() : BaseFormHandler
+    {
+        return $this->baseFormHandler;
+    }
+
     public function findAnimal(int $animalId): Animal
     {
         return $this->baseFormHandler->findAnimal($animalId);

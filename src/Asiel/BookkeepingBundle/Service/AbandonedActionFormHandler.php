@@ -43,7 +43,7 @@ class AbandonedActionFormHandler extends BaseActionFormHandler
     public function getTotalActionCosts(Animal $animal): int
     {
         if (($animal->getClassName() == 'Cat') && ($animal->isCurrentlyAKitten())) {
-            return $this->baseFormHandler->getBookkeepingSettingsRepository()->getSettings()->getPriceAbandonedKitten();
+            return $this->getBaseFormHandler()->getBookkeepingSettingsRepository()->getSettings()->getPriceAbandonedKitten();
         }
         if (($animal->getClassName() == 'Cat') && ($animal->isCurrentlyACat())) {
             return $this->baseFormHandler->getBookkeepingSettingsRepository()->getSettings()->getPriceAbandonedCat();
