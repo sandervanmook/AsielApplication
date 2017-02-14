@@ -1,4 +1,9 @@
 services:
+    asiel.bookkeepingbundle.baseactionformhandler:
+      class: Asiel\BookkeepingBundle\Service\ActionFormHandler
+      arguments:
+       - '@asiel.backendbundle.baseformhandler'
+
     asiel.bookkeepingbundle.adoptedactionformhandler:
       class: Asiel\BookkeepingBundle\Service\AdoptedActionFormHandler
       arguments:
@@ -17,7 +22,7 @@ services:
     asiel.bookkeepingbundle.abandonedactionformhandler:
       class: Asiel\BookkeepingBundle\Service\AbandonedActionFormHandler
       arguments:
-        - '@asiel.backendbundle.baseformhandler'
+        - '@asiel.bookkeepingbundle.actionformhandler'
 
     asiel.bookkeepingbundle.seizedactionformhandler:
       class: Asiel\BookkeepingBundle\Service\SeizedActionFormHandler

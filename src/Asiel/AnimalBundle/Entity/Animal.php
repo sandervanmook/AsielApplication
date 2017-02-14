@@ -398,6 +398,7 @@ class Animal
     public function setDayOfBirth($dayOfBirth)
     {
         $this->dayOfBirth = $dayOfBirth;
+        $this->setAge();
 
         return $this;
     }
