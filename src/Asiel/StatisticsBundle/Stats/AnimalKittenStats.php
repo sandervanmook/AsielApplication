@@ -31,7 +31,7 @@ class AnimalKittenStats
      */
     private function filterDate()
     {
-        $result = [];
+        $result = 0;
         $dateStart = $this->searchArray['datestart']->getTimestamp();
         $dateEnd = $this->searchArray['dateend']->getTimestamp();
 
@@ -48,19 +48,7 @@ class AnimalKittenStats
                     ($registerDate <= $dateEnd) &&
                     ($ageAtRegistration <= 1)
                 ) {
-                    switch ($animal->getActiveState()->getClassName()) {
-                        case 'Abandoned':
-                            $result['Abandoned'][] = $animal;
-                            break;
-                        case 'Found':
-                            $result['Found'][] = $animal;
-                            break;
-                        case 'Seized':
-                            $result['Seized'][] = $animal;
-                            break;
-                        default:
-                            break;
-                    }
+                    $result ++;
                 }
             }
             $this->filterResult = $result;

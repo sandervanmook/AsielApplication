@@ -40,6 +40,7 @@ class BackendCustomerController extends Controller
         $searchArray['lastname'] = $request->get('lastname');
         $searchArray['city'] = $request->get('city');
         $searchArray['citizenservicenumber'] = $request->get('citizenservicenumber');
+        $searchArray['municipality'] = $request->get('municipality');
 
         $filterCustomer = new CustomerFilter($allCustomers, $searchArray);
         $filterCustomer->filter();

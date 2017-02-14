@@ -24,6 +24,13 @@ $(document).ready(function () {
         refreshData();
     });
 
+    // municipality filter
+    var municipality = '';
+    var municipalitySelect = $('#customerbundle_search_customer_municipality');
+    municipalitySelect.change(function () {
+        municipality = municipalitySelect.val();
+        refreshData();
+    });
 
     function refreshData() {
         if (typeof requestby == 'undefined') {
@@ -34,8 +41,8 @@ $(document).ready(function () {
             data: {
                 lastname: lastname,
                 city: city,
-                citizenservicenumber: citizenservicenumber
-
+                citizenservicenumber: citizenservicenumber,
+                municipality: municipality
             },
             type: "GET",
             dataType: "html"

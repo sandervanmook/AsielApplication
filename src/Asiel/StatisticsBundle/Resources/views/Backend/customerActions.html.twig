@@ -2,19 +2,21 @@
 {% block pagetitle %}Statistieken - Klanten - Handelingen{% endblock %}
 {% block body %}
     <div class="ui sixteen column grid container">
-        <div class="eight wide column">
+        <div class="twelve wide column">
             <h3 class="ui header">Zoek een klant</h3>
             <table class="ui table very basic">
                 <thead>
                 <tr>
                     <th class="four wide">Achternaam</th>
                     <th class="four wide">BSN/Rijksnummer</th>
+                    <th class="four wide">Gemeente</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr>
                     <td>{{ form_row(form.lastname) }}</td>
                     <td>{{ form_row(form.citizenservicenumber) }}</td>
+                    <td>{{ form_row(form.municipality) }}</td>
                 </tr>
                 </tbody>
             </table>

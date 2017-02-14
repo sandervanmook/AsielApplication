@@ -25,6 +25,7 @@ class CustomerFilter
     {
         $this->filterLastname();
         $this->filterCity();
+        $this->filterMunicipality();
         $this->filterCitizenServiceNumber();
     }
 
@@ -51,6 +52,19 @@ class CustomerFilter
         if ((!empty($this->searchArray['citizenservicenumber'])) && (!empty($this->allCustomers))) {
             foreach ($this->allCustomers as $customer) {
                 if ($customer->getCitizenServiceNumber() == $this->searchArray['citizenservicenumber']) {
+                    $result[] = $customer;
+                }
+            }
+            $this->filterResult = $result;
+        }
+    }
+
+    private function filterMunicipality()
+    {
+        $result = [];
+        if ((!empty($this->searchArray['municipality'])) && (!empty($this->allCustomers))) {
+            foreach ($this->allCustomers as $customer) {
+                if ($customer->getMunicipality() == $this->searchArray['municipality']) {
                     $result[] = $customer;
                 }
             }

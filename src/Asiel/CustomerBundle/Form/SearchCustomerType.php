@@ -2,6 +2,7 @@
 
 namespace Asiel\CustomerBundle\Form;
 
+use Asiel\AnimalBundle\Form\MunicipalityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -22,6 +23,9 @@ class SearchCustomerType extends AbstractType
                 'label' => false,
             ])
             ->add('citizenservicenumber', TextType::class, [
+                'label' => false,
+            ])
+            ->add('municipality', MunicipalityType::class, [
                 'label' => false,
             ])
         ;
