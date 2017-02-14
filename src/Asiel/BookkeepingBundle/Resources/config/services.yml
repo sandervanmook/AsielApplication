@@ -28,3 +28,8 @@ services:
       class: Asiel\BookkeepingBundle\Service\FoundActionFormHandler
       arguments:
         - '@asiel.backendbundle.baseformhandler'
+
+    asiel.bookkeepingbundle.returnedowneractionformhandler:
+      class: Asiel\BookkeepingBundle\Service\ReturnedOwnerActionFormHandler
+      arguments:
+        - '@asiel.backendbundle.baseformhandler'

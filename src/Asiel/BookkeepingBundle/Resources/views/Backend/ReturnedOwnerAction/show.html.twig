@@ -23,7 +23,7 @@
                     <td><i class="euro icon"></i>{{ action.totalCosts }}</td>
                 </tr>
                 <tr>
-                    <td>Voor klant</td>
+                    <td>Terug naar klant</td>
                     <td>
                         <a href="{{ path('backend_customer_edit', {'id' : action.customer.id}) }}">{{ action.customer.firstname }} {{ action.customer.lastname }}</a>
                     </td>
@@ -69,8 +69,8 @@
             <div class="ui ordered steps">
                 <div class="completed step">
                     <div class="content">
-                        <div class="title">In beslag nemen actie aanmaken</div>
-                        <div class="description">Selecteer het dier wat in beslag genomen gaat worden <br/> en koppel er een
+                        <div class="title">Terug naar eigenaar actie aanmaken</div>
+                        <div class="description">Selecteer het dier wat terug gaat naar de eigenaar <br/> en koppel er een
                             klant aan
                         </div>
                     </div>
@@ -102,7 +102,7 @@
                         <div class="description">Wijzig de status van het dier.
                             {% if action.completed == false and action.isfullypaid %}
                                 <br/><br/> <a
-                                    href="{{ path('backend_bookkeeping_action_seized_finish', {'actionid' : action.id}) }}">
+                                    href="{{ path('backend_bookkeeping_action_returnedowner_finish', {'actionid' : action.id}) }}">
                                 <button class="ui tiny button positive"><i class="flag checkered icon"></i>Afronden
                                 </button>
                             </a>

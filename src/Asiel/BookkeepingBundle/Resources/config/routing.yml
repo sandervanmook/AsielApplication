@@ -71,6 +71,15 @@ backend_bookkeeping_action_seized_finish:
     path:     /action/{actionid}/seized/finish
     defaults: { _controller: BookkeepingBundle:SeizedAction:finish }
 #End seized action
+# Returned owner action
+backend_bookkeeping_action_returnedowner_start:
+    path:     /action/returnedowner/start
+    defaults: { _controller: BookkeepingBundle:ReturnedOwner:start }
+
+backend_bookkeeping_action_returnedowner_finish:
+    path:     /action/{actionid}/returnedowner/finish
+    defaults: { _controller: BookkeepingBundle:ReturnedOwner:finish }
+#End Returned owner action
 # Cash ledger
 backend_bookkeeping_cashledger_index:
     path:     /cashledger
