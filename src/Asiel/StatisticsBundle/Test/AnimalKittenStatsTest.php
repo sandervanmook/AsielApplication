@@ -25,14 +25,6 @@ class AnimalKittenStatsTest extends \PHPUnit_Framework_TestCase
         $cat2 = new Cat();
         $dog1 = new Dog();
 
-        $abandoned = new Abandoned(new AnimalStateMachine());
-        $found = new Found(new AnimalStateMachine());
-        $seized = new Seized(new AnimalStateMachine());
-
-        $abandoned->setArchived(false);
-        $found->setArchived(false);
-        $seized->setArchived(false);
-
         $cat1->setDayOfBirth(new \DateTime('yesterday'));
         $cat2->setDayOfBirth(new \DateTime('yesterday'));
         $dog1->setDayOfBirth(new \DateTime('yesterday'));
@@ -40,10 +32,6 @@ class AnimalKittenStatsTest extends \PHPUnit_Framework_TestCase
         $cat1->setRegisterDate(new \DateTime('now'));
         $cat2->setRegisterDate(new \DateTime('now'));
         $dog1->setRegisterDate(new \DateTime('now'));
-
-        $cat1->addStatus($abandoned);
-        $cat2->addStatus($found);
-        $dog1->addStatus($seized);
 
         $allAnimals = [$cat1, $cat2, $dog1];
         $searchArray['datestart'] = new \DateTime('1-1-2012');
@@ -53,11 +41,7 @@ class AnimalKittenStatsTest extends \PHPUnit_Framework_TestCase
         $stats->filter();
 
         $result = $stats->getFilterResult();
-        $expected = [
-            'Abandoned' => [$cat1],
-            'Found' => [$cat2],
-            'Seized' => [$dog1],
-        ];
+        $expected = 3;
 
         $this->assertEquals($result, $expected);
     }

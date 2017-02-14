@@ -70,7 +70,7 @@ class FoundTest extends \PHPUnit_Framework_TestCase
 
     public function test_to_abandoned()
     {
-        $this->assertFalse($this->found->toAbandoned());
+        $this->assertTrue($this->found->toAbandoned());
     }
 
     public function test_to_adopted()

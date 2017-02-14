@@ -11,10 +11,10 @@ class StatusTest extends \PHPUnit_Framework_TestCase
 {
     public function test_get_full_class_name()
     {
-        $statusType = new StatusType('Found');
+        $statusType = new StatusType('Lost');
         $statusFactory = new StatusFactory();
-        $foundProduct = $statusFactory->startFactory($statusType);
+        $lostProduct = $statusFactory->startFactory($statusType);
 
-        $this->assertEquals($foundProduct->getFullClassName(), 'Asiel\AnimalBundle:StatusType\Found');
+        $this->assertEquals($lostProduct->getFullClassName(), 'Asiel\AnimalBundle:StatusType\Lost');
     }
 }

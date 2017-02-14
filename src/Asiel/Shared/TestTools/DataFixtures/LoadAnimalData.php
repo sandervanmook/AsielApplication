@@ -8,6 +8,7 @@ use Asiel\AnimalBundle\Entity\Incident;
 use Asiel\AnimalBundle\Entity\Medical;
 use Asiel\AnimalBundle\Entity\Picture;
 use Asiel\AnimalBundle\Entity\StatusType\Found;
+use Asiel\AnimalBundle\Entity\StatusType\Lost;
 use DateTime;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -85,12 +86,41 @@ class LoadAnimalData implements FixtureInterface
         $medical->setType('yolo');
         $medical->setDescription('description');
 
+        // Animal 3
+        $animal3  = new Cat();
+        $animal3->setName('Sam');
+        $animal3->setGender('Male');
+        $animal3->setRegisterDate(new \DateTime('now'));
+        $animal3->setAdmissionDate(new \DateTime('now'));
+        $animal3->setDayOfBirth(new \DateTime('yesterday'));
+        $animal3->setOutsideAnimal(true);
+        $animal3->setNotChipped(true);
+        $animal3->setColour('Rood');
+        $animal3->setCompatibleChildrenAbove7y(true);
+        $animal3->setCompatibleChildrenAbove10y(true);
+        $animal3->setCompatibleChildrenBelow7y(true);
+        $animal3->setCompatibleChildrenBelow10y(true);
+        $animal3->setCompatibleOldPeople(true);
+        $animal3->setVisiblePublic(false);
+        $animal3->setAge();
+        $animal3->setEscapesAlot(false);
+        $animal3->setChipnumber(123456789012345);
+        $animal3->setSterilized(false);
+        $animal3->setToiletTrained(true);
+        // Status for animal 3
+        $status2 = new Lost(new AnimalStateMachine());
+        $status2->setAnimal($animal3);
+        $status2->setDate(new DateTime('now'));
+        $status2->setArchived(false);
+
         $manager->persist($picture);
         $manager->persist($status);
         $manager->persist($animal);
         $manager->persist($incident);
         $manager->persist($medical);
         $manager->persist($animal2);
+        $manager->persist($status2);
+        $manager->persist($animal3);
 
         $manager->flush();
     }
