@@ -40,7 +40,8 @@ class FilterAnimalsType extends AbstractType
                 'multiple' => true,
                 'attr' => [
                     'size'=>'20'
-                ]
+                ],
+                'data' => MunicipalityType::CHOICES,
             ])
         ;
     }
