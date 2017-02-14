@@ -45,7 +45,7 @@ class Adopted extends Status implements AnimalState
      */
     public function toAbandoned() : bool
     {
-        return true;
+        return false;
     }
     public function toAdopted() : bool
     {
