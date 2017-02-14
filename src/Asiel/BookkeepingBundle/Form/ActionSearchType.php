@@ -32,6 +32,7 @@ class ActionSearchType extends AbstractType
                     'Afgestaan' => 'Abandoned',
                     'In beslag genomen' => 'Seized',
                     'Gevonden' => 'Found',
+                    'Terug naar eigenaar' => 'ReturnedOwner',
                     'Alle'  => 'All',
                 ],
                 'multiple'  => true,
