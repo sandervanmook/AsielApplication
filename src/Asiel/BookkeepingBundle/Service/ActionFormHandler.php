@@ -18,20 +18,25 @@ class ActionFormHandler
         $this->baseFormHandler = $baseFormHandler;
     }
 
+    public function getBaseFormHandler()
+    {
+        return $this->baseFormHandler;
+    }
+
     public function findAnimal(int $animalId): Animal
     {
-        return $this->baseFormHandler->findAnimal($animalId);
+        return $this->getBaseFormHandler()->findAnimal($animalId);
     }
 
     public function hasOpenActionsMessage()
     {
-        $this->baseFormHandler->getEventDispatcher()->dispatch('user_alert.message',
+        $this->getBaseFormHandler()->getEventDispatcher()->dispatch('user_alert.message',
             new UserAlertEvent(UserAlertEvent::DANGER,
                 "U kunt geen nieuwe actie starten voordat de vorige is afgerond."));
     }
 
     public function findAction(int $actionId): Action
     {
-        return $this->baseFormHandler->findAction($actionId);
+        return $this->getBaseFormHandler()->findAction($actionId);
     }
 }

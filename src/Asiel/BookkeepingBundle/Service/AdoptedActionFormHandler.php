@@ -12,14 +12,20 @@ use Asiel\AnimalBundle\Repository\AnimalRepository;
 use Asiel\BackendBundle\Event\UserAlertEvent;
 use Asiel\BookkeepingBundle\Entity\Action;
 use Asiel\CustomerBundle\Entity\Customer;
-use Asiel\Shared\Service\BaseFormHandler;
 use DateTime;
 
-class AdoptedActionFormHandler extends BaseActionFormHandler
+class AdoptedActionFormHandler
 {
-    public function __construct(BaseFormHandler $baseFormHandler)
+    private $baseActionFormHandler;
+
+    public function __construct(BaseActionFormHandler $baseActionFormHandler)
     {
-        parent::__construct($baseFormHandler);
+        $this->baseActionFormHandler = $baseActionFormHandler;
+    }
+
+    public function getBaseActionFormHandler() : BaseActionFormHandler
+    {
+        return $this->baseActionFormHandler;
     }
 
     public function stateChangeAllowed(Animal $animal)
@@ -31,7 +37,7 @@ class AdoptedActionFormHandler extends BaseActionFormHandler
 
         //TODO translate current state
         if (!$decision) {
-            $this->baseFormHandler->getEventDispatcher()->dispatch('user_alert.message',
+            $this->getBaseActionFormHandler()->getBaseFormHandler()->getEventDispatcher()->dispatch('user_alert.message',
                 new UserAlertEvent(UserAlertEvent::DANGER,
                     "Vanwege de huidige status van dit dier ({$animal->getActiveState()}) is adoptie momenteel niet mogelijk."));
             return false;
@@ -43,22 +49,22 @@ class AdoptedActionFormHandler extends BaseActionFormHandler
     public function getTotalActionCosts(Animal $animal): int
     {
         if (($animal->getClassName() == 'Cat') && ($animal->isCurrentlyAKitten())) {
-            return $this->baseFormHandler->getBookkeepingSettingsRepository()->getSettings()->getPriceAdoptedKitten();
+            return $this->getBaseActionFormHandler()->getBaseFormHandler()->getBookkeepingSettingsRepository()->getSettings()->getPriceAdoptedKitten();
         }
         if (($animal->getClassName() == 'Cat') && ($animal->isCurrentlyACat())) {
-            return $this->baseFormHandler->getBookkeepingSettingsRepository()->getSettings()->getPriceAdoptedCat();
+            return $this->getBaseActionFormHandler()->getBaseFormHandler()->getBookkeepingSettingsRepository()->getSettings()->getPriceAdoptedCat();
         }
         if (($animal->getClassName() == 'Dog') && ($animal->isCurrentlyADog())) {
-            return $this->baseFormHandler->getBookkeepingSettingsRepository()->getSettings()->getPriceAdoptedDog();
+            return $this->getBaseActionFormHandler()->getBaseFormHandler()->getBookkeepingSettingsRepository()->getSettings()->getPriceAdoptedDog();
         }
         if (($animal->getClassName() == 'Dog') && ($animal->isCurrentlyAPuppy())) {
-            return $this->baseFormHandler->getBookkeepingSettingsRepository()->getSettings()->getPriceAdoptedPuppy();
+            return $this->getBaseActionFormHandler()->getBaseFormHandler()->getBookkeepingSettingsRepository()->getSettings()->getPriceAdoptedPuppy();
         }
     }
 
     public function getAnimalRepository(): AnimalRepository
     {
-        return $this->baseFormHandler->getAnimalRepository();
+        return $this->getBaseActionFormHandler()->getBaseFormHandler()->getAnimalRepository();
     }
 
     public function createAction(Animal $animal, Customer $customer, int $totalCosts, Status $status): Action
@@ -72,10 +78,10 @@ class AdoptedActionFormHandler extends BaseActionFormHandler
         $action->setCompleted(false);
         $action->setCustomer($customer);
 
-        $this->baseFormHandler->getEm()->persist($action);
-        $this->baseFormHandler->getEm()->flush();
+        $this->getBaseActionFormHandler()->getBaseFormHandler()->getEm()->persist($action);
+        $this->getBaseActionFormHandler()->getBaseFormHandler()->getEm()->flush();
 
-        $this->baseFormHandler->getEventDispatcher()->dispatch('user_alert.message',
+        $this->getBaseActionFormHandler()->getBaseFormHandler()->getEventDispatcher()->dispatch('user_alert.message',
             new UserAlertEvent(UserAlertEvent::SUCCESS,
                 "Actie is aangemaakt."));
 
@@ -91,7 +97,7 @@ class AdoptedActionFormHandler extends BaseActionFormHandler
         $status->setDate(new DateTime('now'));
 
         // Archive all states so the new one will be the new active state
-        $this->baseFormHandler->getStatusRepository()->setStatesArchived($currentAnimal->getStatus());
+        $this->getBaseActionFormHandler()->getBaseFormHandler()->getStatusRepository()->setStatesArchived($currentAnimal->getStatus());
 
         // Bind the animal to this status
         $status->setAnimal($currentAnimal);
@@ -104,9 +110,9 @@ class AdoptedActionFormHandler extends BaseActionFormHandler
         // Mark action complete
         $action->setCompleted(true);
 
-        $this->baseFormHandler->getEm()->persist($status);
-        $this->baseFormHandler->getEm()->flush();
-        $this->baseFormHandler->getEventDispatcher()->dispatch('user_alert.message',
+        $this->getBaseActionFormHandler()->getBaseFormHandler()->getEm()->persist($status);
+        $this->getBaseActionFormHandler()->getBaseFormHandler()->getEm()->flush();
+        $this->getBaseActionFormHandler()->getBaseFormHandler()->getEventDispatcher()->dispatch('user_alert.message',
             new UserAlertEvent(UserAlertEvent::SUCCESS, 'De adoptie status is aangemaakt.'));
     }
 }
