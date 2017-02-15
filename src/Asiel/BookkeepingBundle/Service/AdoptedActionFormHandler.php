@@ -60,6 +60,8 @@ class AdoptedActionFormHandler
         if (($animal->getClassName() == 'Dog') && ($animal->isCurrentlyAPuppy())) {
             return $this->getBaseActionFormHandler()->getBaseFormHandler()->getBookkeepingSettingsRepository()->getSettings()->getPriceAdoptedPuppy();
         }
+
+        throw new \Exception('No setting available');
     }
 
     public function getAnimalRepository(): AnimalRepository
