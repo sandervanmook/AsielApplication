@@ -203,4 +203,33 @@ class AdoptedActionFormHandlerTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($handler->getTotalActionCosts($animal), 100);
     }
+
+    public function test_get_animal_repository()
+    {
+        $adoptedActionFormHandler = $this->getMockBuilder(AdoptedActionFormHandler::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['getBaseActionFormHandler'])
+            ->getMock();
+
+        $baseActionFormHandler = $this->getMockBuilder(BaseActionFormHandler::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $baseFormHandler = $this->getMockBuilder(BaseFormHandler::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $adoptedActionFormHandler->expects($this->once())
+            ->method('getBaseActionFormHandler')
+            ->willReturn($baseActionFormHandler);
+
+        $baseActionFormHandler->expects($this->once())
+            ->method('getBaseFormHandler')
+            ->willReturn($baseFormHandler);
+
+        $baseFormHandler->expects($this->once())
+            ->method('getAnimalRepository');
+
+        $adoptedActionFormHandler->getAnimalRepository(1);
+    }
 }
