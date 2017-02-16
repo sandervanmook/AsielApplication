@@ -10,7 +10,7 @@ use Asiel\BackendBundle\Repository\BookkeepingSettingsRepository;
 use DateTime;
 use Doctrine\ORM\EntityManager;
 
-class TotalCosts
+class TotalActionCosts
 {
     private $animal;
     private $actionType;
@@ -44,7 +44,7 @@ class TotalCosts
         return $this->totalCosts;
     }
 
-    private function calculate()
+    protected function calculate()
     {
         switch ($this->actionType) {
             case 'Adopted':
@@ -64,7 +64,7 @@ class TotalCosts
             case 'Abandoned' :
                 $dayOfBirth = $this->animal->getDayOfBirth();
                 $today = new DateTime('today');
-                $interval = $today->diff($dayOfBirth);
+                $interval = $dayOfBirth->diff($today);
                 $differenceInMonths = $interval->m;
                 $differenceInYears = $interval->y;
 
@@ -74,7 +74,7 @@ class TotalCosts
                     // Determine animal type first
                     // Dogs
                     if ($this->animal->getAnimalType() == 'Dog' || $this->animal->getAnimalType() == 'Puppy') {
-                        if ($this->animal->isPuppy() && $differenceInMonths <= 3) {
+                        if ($differenceInMonths <= 3) {
                             $this->totalCosts = $this->getBookkeepingSettingsRepository()->getSettings()->getPriceAbandonedDogUnaffiliatedPuppy();
                         }
                         if ($this->animal->isPuppy()) {
@@ -205,7 +205,7 @@ class TotalCosts
         return $this->em;
     }
 
-    private function getBookkeepingSettingsRepository(): BookkeepingSettingsRepository
+    protected function getBookkeepingSettingsRepository(): BookkeepingSettingsRepository
     {
         return $this->getEm()->getRepository('BackendBundle:BookkeepingSettings');
     }
