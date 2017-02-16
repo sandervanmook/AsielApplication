@@ -8,10 +8,6 @@
         <th>BSN</th>
         <th>Telefoonnummer</th>
         <th class="collapsing">Op zwarte lijst?</th>
-        <th>Geadopteerd</th>
-        <th class="collapsing">Eigenaar van</th>
-        <th>Afgestaan</th>
-        <th>Gevonden</th>
     </tr>
     </thead>
     <tbody>
@@ -28,36 +24,12 @@
             <td>{{ customer.citizenservicenumber }}</td>
             <td>{{ customer.phone }}</td>
             <td>{{ outputBool(customer.blacklisted) }}</td>
-            <td>
-                {% for animal in customer.adoptedPets %}
-                    <li><a href="{{ path('backend_animal_show', {'id' : animal.animal.id}) }}">{{ animal.animal.name }}</a></li>
-                {% endfor %}
-            </td>
-            <td>
-                {% for animal in customer.ownsanimals %}
-                    <li><a href="{{ path('backend_animal_show', {'id' : animal.animal.id}) }}">{{ animal.animal.name }}</a></li>
-                {% endfor %}
-            </td>
-            <td>
-                {% for animal in customer.abandonedanimals %}
-                    <li><a href="{{ path('backend_animal_show', {'id' : animal.animal.id}) }}">{{ animal.animal.name }}</a></li>
-                {% endfor %}
-            </td>
-            <td>
-                {% for animal in customer.foundanimals %}
-                    <li><a href="{{ path('backend_animal_show', {'id' : animal.animal.id}) }}">{{ animal.animal.name }}</a></li>
-                {% endfor %}
-            </td>
         </tr>
     {% endfor %}
     </tbody>
     <tfoot>
     <tr>
         <th class="collapsing">{{ result|length }} Klant(en)</th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
         <th></th>
         <th></th>
         <th></th>

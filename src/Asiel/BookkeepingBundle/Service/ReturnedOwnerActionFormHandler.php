@@ -113,4 +113,14 @@ class ReturnedOwnerActionFormHandler
         return false;
     }
 
+    public function findAnimal(int $animalId) : Animal
+    {
+        return $this->getBaseFormHandler()->findAnimal($animalId);
+    }
+
+    public function findCustomer(int $customerId) : Customer
+    {
+        return $this->getBaseFormHandler()->findCustomer($customerId);
+    }
+
 }
