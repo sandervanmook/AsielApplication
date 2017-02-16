@@ -21,6 +21,11 @@ class ReturnedOwnerActionFormHandler
         $this->baseFormHandler = $baseFormHandler;
     }
 
+    public function getBaseFormHandler()
+    {
+        return $this->baseFormHandler;
+    }
+
     public function stateChangeAllowed(Animal $animal)
     {
         $stateMachine = new AnimalStateMachine();
