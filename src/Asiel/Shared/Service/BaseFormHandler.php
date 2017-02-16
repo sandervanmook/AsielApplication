@@ -300,5 +300,14 @@ class BaseFormHandler
         return $this->em->getRepository('AnimalBundle:AnimalType\Dog');
     }
 
+    public function getAnimalType(Animal $animal) : string
+    {
+        if ($animal->getClassName() == 'Cat') {
+            return $animal->getCurrentCatType();
+        }
+        if ($animal->getClassName() == 'Dog') {
+            return $animal->getCurrentDogType();
+        }
+    }
 
 }

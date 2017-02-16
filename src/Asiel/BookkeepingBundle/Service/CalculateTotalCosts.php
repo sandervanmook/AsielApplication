@@ -5,18 +5,18 @@ namespace Asiel\BookkeepingBundle\Service;
 
 
 use Asiel\AnimalBundle\Entity\Animal;
+use Doctrine\ORM\EntityManager;
 
 class CalculateTotalCosts
 {
     private $animal;
     private $actionType;
     private $totalCosts;
+    private $em;
 
-    public function __construct(Animal $animal, string $actionType)
+    public function __construct(EntityManager $entityManager)
     {
-        $this->animal = $animal;
-        $this->actionType = $actionType;
-        $this->calculate();
+        $this->em = $entityManager;
     }
 
     private function calculate()

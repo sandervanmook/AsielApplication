@@ -12,11 +12,13 @@ use Asiel\BookkeepingBundle\Entity\Action;
 use Asiel\CustomerBundle\Entity\Customer;
 use Asiel\Shared\Service\BaseFormHandler;
 
-class SeizedActionFormHandler extends BaseActionFormHandler
+class SeizedActionFormHandler
 {
+    private $baseFormHandler;
+
     public function __construct(BaseFormHandler $baseFormHandler)
     {
-        parent::__construct($baseFormHandler);
+        $this->baseFormHandler = $baseFormHandler;
     }
 
     public function findAnimal(int $animalId): Animal

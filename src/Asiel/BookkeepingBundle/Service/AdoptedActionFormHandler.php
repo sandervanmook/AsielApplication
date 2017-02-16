@@ -12,20 +12,21 @@ use Asiel\AnimalBundle\Repository\AnimalRepository;
 use Asiel\BackendBundle\Event\UserAlertEvent;
 use Asiel\BookkeepingBundle\Entity\Action;
 use Asiel\CustomerBundle\Entity\Customer;
+use Asiel\Shared\Service\BaseFormHandler;
 use DateTime;
 
 class AdoptedActionFormHandler
 {
-    private $baseActionFormHandler;
+    private $baseFormHandler;
 
-    public function __construct(BaseActionFormHandler $baseActionFormHandler)
+    public function __construct(BaseFormHandler $baseFormHandler)
     {
-        $this->baseActionFormHandler = $baseActionFormHandler;
+        $this->baseFormHandler = $baseFormHandler;
     }
 
-    public function getBaseActionFormHandler() : BaseActionFormHandler
+    public function getBaseFormHandler() : BaseFormHandler
     {
-        return $this->baseActionFormHandler;
+        return $this->baseFormHandler;
     }
 
     public function stateChangeAllowed(Animal $animal)
@@ -37,7 +38,7 @@ class AdoptedActionFormHandler
 
         //TODO translate current state
         if (!$decision) {
-            $this->getBaseActionFormHandler()->getBaseFormHandler()->getEventDispatcher()->dispatch('user_alert.message',
+            $this->getBaseFormHandler()->getEventDispatcher()->dispatch('user_alert.message',
                 new UserAlertEvent(UserAlertEvent::DANGER,
                     "Vanwege de huidige status van dit dier ({$animal->getActiveState()}) is adoptie momenteel niet mogelijk."));
             return false;
@@ -49,16 +50,16 @@ class AdoptedActionFormHandler
     public function getTotalActionCosts(Animal $animal): int
     {
         if (($animal->getClassName() == 'Cat') && ($animal->isCurrentlyAKitten())) {
-            return $this->getBaseActionFormHandler()->getBaseFormHandler()->getBookkeepingSettingsRepository()->getSettings()->getPriceAdoptedKitten();
+            return $this->getBaseFormHandler()->getBookkeepingSettingsRepository()->getSettings()->getPriceAdoptedKitten();
         }
         if (($animal->getClassName() == 'Cat') && ($animal->isCurrentlyACat())) {
-            return $this->getBaseActionFormHandler()->getBaseFormHandler()->getBookkeepingSettingsRepository()->getSettings()->getPriceAdoptedCat();
+            return $this->getBaseFormHandler()->getBookkeepingSettingsRepository()->getSettings()->getPriceAdoptedCat();
         }
         if (($animal->getClassName() == 'Dog') && ($animal->isCurrentlyADog())) {
-            return $this->getBaseActionFormHandler()->getBaseFormHandler()->getBookkeepingSettingsRepository()->getSettings()->getPriceAdoptedDog();
+            return $this->getBaseFormHandler()->getBookkeepingSettingsRepository()->getSettings()->getPriceAdoptedDog();
         }
         if (($animal->getClassName() == 'Dog') && ($animal->isCurrentlyAPuppy())) {
-            return $this->getBaseActionFormHandler()->getBaseFormHandler()->getBookkeepingSettingsRepository()->getSettings()->getPriceAdoptedPuppy();
+            return $this->getBaseFormHandler()->getBookkeepingSettingsRepository()->getSettings()->getPriceAdoptedPuppy();
         }
 
         throw new \Exception('No setting available');
@@ -66,7 +67,7 @@ class AdoptedActionFormHandler
 
     public function getAnimalRepository(): AnimalRepository
     {
-        return $this->getBaseActionFormHandler()->getBaseFormHandler()->getAnimalRepository();
+        return $this->getBaseFormHandler()->getAnimalRepository();
     }
 
     public function createAction(Animal $animal, Customer $customer, Status $status): Action
@@ -81,10 +82,10 @@ class AdoptedActionFormHandler
         $action->setCompleted(false);
         $action->setCustomer($customer);
 
-        $this->getBaseActionFormHandler()->getBaseFormHandler()->getEm()->persist($action);
-        $this->getBaseActionFormHandler()->getBaseFormHandler()->getEm()->flush();
+        $this->getBaseFormHandler()->getEm()->persist($action);
+        $this->getBaseFormHandler()->getEm()->flush();
 
-        $this->getBaseActionFormHandler()->getBaseFormHandler()->getEventDispatcher()->dispatch('user_alert.message',
+        $this->getBaseFormHandler()->getEventDispatcher()->dispatch('user_alert.message',
             new UserAlertEvent(UserAlertEvent::SUCCESS,
                 "Actie is aangemaakt."));
 
@@ -100,7 +101,7 @@ class AdoptedActionFormHandler
         $status->setDate(new DateTime('now'));
 
         // Archive all states so the new one will be the new active state
-        $this->getBaseActionFormHandler()->getBaseFormHandler()->getStatusRepository()->setStatesArchived($currentAnimal->getStatus());
+        $this->getBaseFormHandler()->getStatusRepository()->setStatesArchived($currentAnimal->getStatus());
 
         // Bind the animal to this status
         $status->setAnimal($currentAnimal);
@@ -113,24 +114,24 @@ class AdoptedActionFormHandler
         // Mark action complete
         $action->setCompleted(true);
 
-        $this->getBaseActionFormHandler()->getBaseFormHandler()->getEm()->persist($status);
-        $this->getBaseActionFormHandler()->getBaseFormHandler()->getEm()->flush();
-        $this->getBaseActionFormHandler()->getBaseFormHandler()->getEventDispatcher()->dispatch('user_alert.message',
+        $this->getBaseFormHandler()->getEm()->persist($status);
+        $this->getBaseFormHandler()->getEm()->flush();
+        $this->getBaseFormHandler()->getEventDispatcher()->dispatch('user_alert.message',
             new UserAlertEvent(UserAlertEvent::SUCCESS, 'De adoptie status is aangemaakt.'));
     }
 
     public function findAnimal(int $animalId) : Animal
     {
-        return $this->getBaseActionFormHandler()->findAnimal($animalId);
+        return $this->getBaseFormHandler()->findAnimal($animalId);
     }
 
     public function findCustomer(int $customerId) : Customer
     {
-        return $this->getBaseActionFormHandler()->findCustomer($customerId);
+        return $this->getBaseFormHandler()->findCustomer($customerId);
     }
 
     public function getAnimalType(Animal $animal)
     {
-        return $this->getBaseActionFormHandler()->getAnimalType($animal);
+        return $this->getBaseFormHandler()->getAnimalType($animal);
     }
 }

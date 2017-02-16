@@ -11,7 +11,7 @@ use Asiel\BookkeepingBundle\Entity\Action;
 use Asiel\CustomerBundle\Entity\Customer;
 use Asiel\Shared\Service\BaseFormHandler;
 
-class BaseActionFormHandler
+class oldBaseActionFormHandler
 {
     protected $baseFormHandler;
 
@@ -40,15 +40,7 @@ class BaseActionFormHandler
         return $this->baseFormHandler->findAction($actionId);
     }
 
-    public function getAnimalType(Animal $animal) : string
-    {
-        if ($animal->getClassName() == 'Cat') {
-            return $animal->getCurrentCatType();
-        }
-        if ($animal->getClassName() == 'Dog') {
-            return $animal->getCurrentDogType();
-        }
-    }
+
 
     public function verifyFinish(Action $action) : bool
     {

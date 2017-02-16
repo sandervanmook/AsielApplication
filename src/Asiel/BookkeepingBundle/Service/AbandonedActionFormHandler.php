@@ -13,19 +13,20 @@ use Asiel\BookkeepingBundle\Entity\Action;
 use Asiel\CalendarBundle\Entity\Task;
 use Asiel\CalendarBundle\Event\TaskEvent;
 use Asiel\CustomerBundle\Entity\Customer;
+use Asiel\Shared\Service\BaseFormHandler;
 
 class AbandonedActionFormHandler
 {
-    private $baseActionFormHandler;
+    private $baseFormHandler;
 
-    public function __construct(BaseActionFormHandler $baseActionFormHandler)
+    public function __construct(BaseFormHandler $baseFormHandler)
     {
-        $this->baseActionFormHandler = $baseActionFormHandler;
+        $this->baseFormHandler = $baseFormHandler;
     }
 
-    public function getBaseActionFormHandler() : BaseActionFormHandler
+    public function getBaseFormHandler() : BaseFormHandler
     {
-        return $this->baseActionFormHandler;
+        return $this->baseFormHandler;
     }
 
     public function stateChangeAllowed(Animal $animal)
@@ -37,7 +38,7 @@ class AbandonedActionFormHandler
 
         //TODO translate current state
         if (!$decision) {
-            $this->getBaseActionFormHandler()->getBaseFormHandler()->getEventDispatcher()->dispatch('user_alert.message',
+            $this->getBaseFormHandler()->getEventDispatcher()->dispatch('user_alert.message',
                 new UserAlertEvent(UserAlertEvent::DANGER,
                     "Vanwege de huidige status van dit dier ({$animal->getActiveState()}) is afstaan momenteel niet mogelijk."));
             return false;
@@ -49,16 +50,16 @@ class AbandonedActionFormHandler
     public function getTotalActionCosts(Animal $animal): int
     {
         if (($animal->getClassName() == 'Cat') && ($animal->isCurrentlyAKitten())) {
-            return $this->getBaseActionFormHandler()->getBaseFormHandler()->getBookkeepingSettingsRepository()->getSettings()->getPriceAbandonedKitten();
+            return $this->getBaseFormHandler()->getBookkeepingSettingsRepository()->getSettings()->getPriceAbandonedKitten();
         }
         if (($animal->getClassName() == 'Cat') && ($animal->isCurrentlyACat())) {
-            return $this->getBaseActionFormHandler()->getBaseFormHandler()->getBookkeepingSettingsRepository()->getSettings()->getPriceAbandonedCat();
+            return $this->getBaseFormHandler()->getBookkeepingSettingsRepository()->getSettings()->getPriceAbandonedCat();
         }
         if (($animal->getClassName() == 'Dog') && ($animal->isCurrentlyADog())) {
-            return $this->getBaseActionFormHandler()->getBaseFormHandler()->getBookkeepingSettingsRepository()->getSettings()->getPriceAbandonedDog();
+            return $this->getBaseFormHandler()->getBookkeepingSettingsRepository()->getSettings()->getPriceAbandonedDog();
         }
         if (($animal->getClassName() == 'Dog') && ($animal->isCurrentlyAPuppy())) {
-            return $this->getBaseActionFormHandler()->getBaseFormHandler()->getBookkeepingSettingsRepository()->getSettings()->getPriceAbandonedPuppy();
+            return $this->getBaseFormHandler()->getBookkeepingSettingsRepository()->getSettings()->getPriceAbandonedPuppy();
         }
 
         throw new \Exception('No setting available');
@@ -81,12 +82,12 @@ class AbandonedActionFormHandler
         // we will do this when action is finished
         $status->setArchived(true);
 
-        $this->getBaseActionFormHandler()->getBaseFormHandler()->getEm()->persist($action);
-        $this->getBaseActionFormHandler()->getBaseFormHandler()->getEm()->persist($status);
+        $this->getBaseFormHandler()->getEm()->persist($action);
+        $this->getBaseFormHandler()->getEm()->persist($status);
 
-        $this->getBaseActionFormHandler()->getBaseFormHandler()->getEm()->flush();
+        $this->getBaseFormHandler()->getEm()->flush();
 
-        $this->getBaseActionFormHandler()->getBaseFormHandler()->getEventDispatcher()->dispatch('user_alert.message',
+        $this->getBaseFormHandler()->getEventDispatcher()->dispatch('user_alert.message',
             new UserAlertEvent(UserAlertEvent::SUCCESS,
                 "Actie is aangemaakt."));
 
@@ -103,7 +104,7 @@ class AbandonedActionFormHandler
         $status->setAnimal($currentAnimal);
 
         // Archive all states so the new one will be the new active state
-        $this->getBaseActionFormHandler()->getBaseFormHandler()->getStatusRepository()->setStatesArchived($currentAnimal->getStatus());
+        $this->getBaseFormHandler()->getStatusRepository()->setStatesArchived($currentAnimal->getStatus());
 
         // The new status should be active
         $status->setArchived(false);
@@ -117,27 +118,27 @@ class AbandonedActionFormHandler
         // Handle task creation
         // If we need to chip the animal, create a task.
         if ($status->isNeedsChipping()) {
-            $this->getBaseActionFormHandler()->getBaseFormHandler()->getEventDispatcher()->dispatch('createtask',
+            $this->getBaseFormHandler()->getEventDispatcher()->dispatch('createtask',
                 new TaskEvent($currentAnimal, Task::TOMORROW, Abandoned::ABANDON_CHIPPED));
         }
         // If we need to vaccine the animal, create a task.
         if ($status->isNeedsVaccines()) {
-            $this->getBaseActionFormHandler()->getBaseFormHandler()->getEventDispatcher()->dispatch('createtask',
+            $this->getBaseFormHandler()->getEventDispatcher()->dispatch('createtask',
                 new TaskEvent($currentAnimal, Task::TOMORROW, Abandoned::ABANDON_VACCINE));
         }
         // If we need to sterilize the animal, create a task.
         if ($status->isNeedsSterilization()) {
-            $this->getBaseActionFormHandler()->getBaseFormHandler()->getEventDispatcher()->dispatch('createtask',
+            $this->getBaseFormHandler()->getEventDispatcher()->dispatch('createtask',
                 new TaskEvent($currentAnimal, Task::TOMORROW, Abandoned::ABANDON_STERILIZE));
         }
         // If the animal needs a passport, create a task.
         if ($status->isNeedsPassport()) {
-            $this->getBaseActionFormHandler()->getBaseFormHandler()->getEventDispatcher()->dispatch('createtask',
+            $this->getBaseFormHandler()->getEventDispatcher()->dispatch('createtask',
                 new TaskEvent($currentAnimal, Task::TOMORROW, Abandoned::ABANDON_PASSPORT));
         }
 
-        $this->getBaseActionFormHandler()->getBaseFormHandler()->getEm()->flush();
-        $this->getBaseActionFormHandler()->getBaseFormHandler()->getEventDispatcher()->dispatch('user_alert.message',
+        $this->getBaseFormHandler()->getEm()->flush();
+        $this->getBaseFormHandler()->getEventDispatcher()->dispatch('user_alert.message',
             new UserAlertEvent(UserAlertEvent::SUCCESS, 'De afstand status is aangemaakt.'));
     }
 }
