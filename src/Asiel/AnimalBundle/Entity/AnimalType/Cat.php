@@ -307,17 +307,4 @@ class Cat extends Animal implements TypeInterface
             return false;
         }
     }
-
-    public function getCurrentCatType() : string
-    {
-        if ($this->isCurrentlyACat()) {
-            return 'Cat';
-        }
-        if ($this->isCurrentlyAKitten()) {
-            return 'Kitten';
-        }
-
-        return 'Unknown';
-    }
-
 }

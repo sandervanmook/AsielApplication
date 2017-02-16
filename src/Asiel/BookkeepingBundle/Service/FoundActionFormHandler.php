@@ -15,11 +15,18 @@ use Asiel\CalendarBundle\Event\TaskEvent;
 use Asiel\CustomerBundle\Entity\Customer;
 use Asiel\Shared\Service\BaseFormHandler;
 
-class FoundActionFormHandler extends BaseActionFormHandler
+class FoundActionFormHandler
 {
+    private $baseFormHandler;
+
     public function __construct(BaseFormHandler $baseFormHandler)
     {
-        parent::__construct($baseFormHandler);
+        $this->baseFormHandler = $baseFormHandler;
+    }
+
+    public function getBaseFormHandler()
+    {
+        return $this->baseFormHandler;
     }
 
     public function stateChangeAllowed(Animal $animal)
@@ -31,18 +38,13 @@ class FoundActionFormHandler extends BaseActionFormHandler
 
         //TODO translate current state
         if (!$decision) {
-            $this->baseFormHandler->getEventDispatcher()->dispatch('user_alert.message',
+            $this->getBaseFormHandler()->getEventDispatcher()->dispatch('user_alert.message',
                 new UserAlertEvent(UserAlertEvent::DANGER,
                     "Vanwege de huidige status van dit dier ({$animal->getActiveState()}) is een nieuwe gevonden status aanmaken momenteel niet mogelijk."));
             return false;
         }
 
         return true;
-    }
-
-    public function getTotalActionCosts(Animal $animal): int
-    {
-        // Not used in this action type
     }
 
     public function createAction(Animal $animal, Customer $customer, int $totalCosts, Status $status): Action
@@ -114,5 +116,14 @@ class FoundActionFormHandler extends BaseActionFormHandler
         $this->baseFormHandler->getEm()->flush();
         $this->baseFormHandler->getEventDispatcher()->dispatch('user_alert.message',
             new UserAlertEvent(UserAlertEvent::SUCCESS, 'De gevonden status is aangemaakt.'));
+    }
+
+    public function verifyFinish(Action $action) : bool
+    {
+        if ($action->isFullyPaid()) {
+            return true;
+        }
+
+        return false;
     }
 }

@@ -12,11 +12,13 @@ use Asiel\BookkeepingBundle\Entity\Action;
 use Asiel\CustomerBundle\Entity\Customer;
 use Asiel\Shared\Service\BaseFormHandler;
 
-class ReturnedOwnerActionFormHandler extends BaseActionFormHandler
+class ReturnedOwnerActionFormHandler
 {
+    private $baseFormHandler;
+
     public function __construct(BaseFormHandler $baseFormHandler)
     {
-        parent::__construct($baseFormHandler);
+        $this->baseFormHandler = $baseFormHandler;
     }
 
     public function stateChangeAllowed(Animal $animal)
@@ -94,6 +96,21 @@ class ReturnedOwnerActionFormHandler extends BaseActionFormHandler
         $this->baseFormHandler->getEm()->flush();
         $this->baseFormHandler->getEventDispatcher()->dispatch('user_alert.message',
             new UserAlertEvent(UserAlertEvent::SUCCESS, 'De in terug naar eigenaar status is aangemaakt.'));
+    }
+
+    public function needCustomerToProceedMessage()
+    {
+        return $this->baseFormHandler->getEventDispatcher()->dispatch('user_alert.message',
+            new UserAlertEvent(UserAlertEvent::DANGER, 'U moet een klant kiezen om door te gaan.'));
+    }
+
+    public function verifyFinish(Action $action) : bool
+    {
+        if ($action->isFullyPaid()) {
+            return true;
+        }
+
+        return false;
     }
 
 }

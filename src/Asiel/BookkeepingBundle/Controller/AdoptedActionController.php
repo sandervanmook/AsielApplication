@@ -6,6 +6,7 @@ namespace Asiel\BookkeepingBundle\Controller;
 
 use Asiel\AnimalBundle\AnimalStateMachine\AnimalStateMachine;
 use Asiel\AnimalBundle\Entity\StatusType\Adopted;
+use Asiel\BookkeepingBundle\Service\CalculateTotalCosts;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -39,9 +40,6 @@ class AdoptedActionController extends Controller
                 ['animalid' => $animalId]));
         }
 
-        // Get total costs from backend bundle
-        $actionTotalCosts = $formHandler->getTotalActionCosts($currentAnimal);
-
         // Get type of animal the costs are based upon
         $animalType = $formHandler->getAnimalType($currentAnimal);
 
@@ -57,7 +55,7 @@ class AdoptedActionController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
-            $action = $formHandler->createAction($currentAnimal, $currentCustomer, $actionTotalCosts, new Adopted(new AnimalStateMachine()));
+            $action = $formHandler->createAction($currentAnimal, $currentCustomer, new Adopted(new AnimalStateMachine()));
             $actionId = $action->getId();
 
             return new RedirectResponse($this->generateUrl('backend_bookkeeping_action_show',
@@ -65,7 +63,6 @@ class AdoptedActionController extends Controller
         }
 
         return $this->render('@Bookkeeping/Backend/AdoptedAction/start.html.twig', [
-            'actiontotalcosts' => $actionTotalCosts,
             'animaltype' => $animalType,
             'animal' => $currentAnimal,
             'customer' => $currentCustomer,

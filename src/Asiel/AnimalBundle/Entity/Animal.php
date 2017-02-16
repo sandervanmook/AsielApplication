@@ -3,6 +3,8 @@
 namespace Asiel\AnimalBundle\Entity;
 
 use Asiel\AnimalBundle\AnimalStateMachine\AnimalStateMachine;
+use Asiel\AnimalBundle\Entity\AnimalType\Cat;
+use Asiel\AnimalBundle\Entity\AnimalType\Dog;
 use Asiel\AnimalBundle\Entity\StatusType\NoState;
 use Asiel\BookkeepingBundle\Entity\Action;
 use Asiel\CalendarBundle\Entity\Task;
@@ -1088,6 +1090,60 @@ class Animal
                     return true;
                 }
             }
+        }
+
+        return false;
+    }
+
+    public function getAnimalType() : string
+    {
+        if ($this->isKitten()) {
+            return 'Kitten';
+        }
+        if ($this->isCat()) {
+            return 'Cat';
+        }
+        if ($this->isDog()) {
+            return 'Dog';
+        }
+        if ($this->isPuppy()) {
+            return 'Puppy';
+        }
+
+        return 'Unknown';
+    }
+
+    public function isKitten() : bool
+    {
+        if (($this instanceof Cat) && ($this->isCurrentlyAKitten())) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function isCat() : bool
+    {
+        if (($this instanceof Cat) && ($this->isCurrentlyACat())) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function isPuppy() : bool
+    {
+        if (($this instanceof Dog) && ($this->isCurrentlyAPuppy())) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function isDog() : bool
+    {
+        if (($this instanceof Dog) && ($this->isCurrentlyADog())) {
+            return true;
         }
 
         return false;

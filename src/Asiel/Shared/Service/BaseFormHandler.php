@@ -299,6 +299,4 @@ class BaseFormHandler
     {
         return $this->em->getRepository('AnimalBundle:AnimalType\Dog');
     }
-
-
 }

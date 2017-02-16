@@ -39,19 +39,13 @@ class AbandonedActionController extends Controller
                 ['animalid' => $animalId]));
         }
 
-        // Get total costs from backend bundle
-        $actionTotalCosts = $formHandler->getTotalActionCosts($currentAnimal);
-
-        // Get type of animal the costs are based upon
-        $animalType = $formHandler->getAnimalType($currentAnimal);
-
         $status = new Abandoned(new AnimalStateMachine());
         $form = $this->createForm(AbandonedType::class, $status);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
-            $action = $formHandler->createAction($currentAnimal, $currentCustomer, $actionTotalCosts ,$status);
+            $action = $formHandler->createAction($currentAnimal, $currentCustomer, $status);
             $actionId = $action->getId();
 
             return new RedirectResponse($this->generateUrl('backend_bookkeeping_action_show',
@@ -59,8 +53,6 @@ class AbandonedActionController extends Controller
         }
 
         return $this->render('@Bookkeeping/Backend/AbandonedAction/start.html.twig', [
-            'actiontotalcosts' => $actionTotalCosts,
-            'animaltype' => $animalType,
             'animal' => $currentAnimal,
             'customer' => $currentCustomer,
             'form' => $form->createView(),
