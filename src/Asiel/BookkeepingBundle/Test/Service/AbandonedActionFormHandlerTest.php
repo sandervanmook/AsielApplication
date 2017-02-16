@@ -15,9 +15,11 @@ use Asiel\BackendBundle\Repository\BookkeepingSettingsRepository;
 use Asiel\BookkeepingBundle\Entity\Action;
 use Asiel\BookkeepingBundle\Service\AbandonedActionFormHandler;
 use Asiel\BookkeepingBundle\Service\BaseActionFormHandler;
+use Asiel\BookkeepingBundle\Service\TotalActionCosts;
 use Asiel\CustomerBundle\Entity\Customer;
 use Asiel\Shared\Service\BaseFormHandler;
 use DateTime;
+use Doctrine\ORM\EntityManager;
 
 class AbandonedActionFormHandlerTest extends \PHPUnit_Framework_TestCase
 {
@@ -25,6 +27,8 @@ class AbandonedActionFormHandlerTest extends \PHPUnit_Framework_TestCase
     public $bookkeepingSettingsRepository;
     public $bookkeepingSetting;
     public $baseFormHandler;
+    public $em;
+    public $totalActionCosts;
 
     public function setUp()
     {
@@ -43,12 +47,18 @@ class AbandonedActionFormHandlerTest extends \PHPUnit_Framework_TestCase
         $this->baseFormHandler = $this->getMockBuilder(BaseFormHandler::class)
             ->disableOriginalConstructor()
             ->getMock();
+
+        $this->em = $this->getMockBuilder(EntityManager::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->totalActionCosts = new TotalActionCosts($this->em);
     }
 
     public function test_state_change_is_not_allowed()
     {
-        $baseActionFormHandler = $this->getMockBuilder(BaseActionFormHandler::class)->disableOriginalConstructor()->getMock();
-        $handler = new AbandonedActionFormHandler($baseActionFormHandler);
+        $baseFormHandler = $this->getMockBuilder(BaseFormHandler::class)->disableOriginalConstructor()->getMock();
+        $handler = new AbandonedActionFormHandler($baseFormHandler, $this->totalActionCosts);
         $animal = new Animal();
         $status = new Abandoned(new AnimalStateMachine());
         $animal->addStatus($status);
@@ -58,180 +68,18 @@ class AbandonedActionFormHandlerTest extends \PHPUnit_Framework_TestCase
 
     public function test_state_change_is_allowed()
     {
-        $baseActionFormHandler = $this->getMockBuilder(BaseActionFormHandler::class)->disableOriginalConstructor()->getMock();
-        $handler = new AbandonedActionFormHandler($baseActionFormHandler);
+        $baseFormHandler = $this->getMockBuilder(BaseFormHandler::class)->disableOriginalConstructor()->getMock();
+        $handler = new AbandonedActionFormHandler($baseFormHandler, $this->totalActionCosts);
         $animal = new Animal();
 
         $this->assertTrue($handler->stateChangeAllowed($animal));
     }
 
-    public function test_get_total_action_costs_kitten()
+    public function test_set_new_status()
     {
         $handler = $this->getMockBuilder(AbandonedActionFormHandler::class)
             ->disableOriginalConstructor()
-            ->setMethods(['getBaseActionFormHandler'])
-            ->getMock();
-
-        $handler->expects($this->once())
-            ->method('getBaseActionFormHandler')
-            ->willReturn($this->baseActionFormHandler);
-
-        $this->baseActionFormHandler->expects($this->once())
-            ->method('getBaseFormHandler')
-            ->willReturn($this->baseFormHandler);
-
-        $this->baseFormHandler->expects($this->once())
-            ->method('getBookkeepingSettingsRepository')
-            ->willReturn($this->bookkeepingSettingsRepository);
-
-        $this->bookkeepingSettingsRepository->expects($this->once())
-            ->method('getSettings')
-            ->willReturn($this->bookkeepingSetting);
-
-        $this->bookkeepingSetting->expects($this->once())
-            ->method('getPriceAbandonedKitten')
-            ->willReturn(100);
-
-        $animal = new Cat();
-        $animal->setDayOfBirth(new DateTime('yesterday'));
-
-        $this->assertEquals($handler->getTotalActionCosts($animal), 100);
-    }
-
-    public function test_get_total_action_costs_cat()
-    {
-        $handler = $this->getMockBuilder(AbandonedActionFormHandler::class)
-            ->disableOriginalConstructor()
-            ->setMethods(['getBaseActionFormHandler'])
-            ->getMock();
-
-        $handler->expects($this->once())
-            ->method('getBaseActionFormHandler')
-            ->willReturn($this->baseActionFormHandler);
-
-        $this->baseActionFormHandler->expects($this->once())
-            ->method('getBaseFormHandler')
-            ->willReturn($this->baseFormHandler);
-
-        $this->baseFormHandler->expects($this->once())
-            ->method('getBookkeepingSettingsRepository')
-            ->willReturn($this->bookkeepingSettingsRepository);
-
-        $this->bookkeepingSettingsRepository->expects($this->once())
-            ->method('getSettings')
-            ->willReturn($this->bookkeepingSetting);
-
-        $this->bookkeepingSetting->expects($this->once())
-            ->method('getPriceAbandonedCat')
-            ->willReturn(100);
-
-        $animal = new Cat();
-        $now = new \DateTime();
-        $twoYearsAgo = $now->modify('-3 year');
-        $animal->setDayOfBirth($twoYearsAgo);
-
-        $this->assertEquals($handler->getTotalActionCosts($animal), 100);
-    }
-
-    public function test_get_total_action_costs_dog()
-    {
-        $handler = $this->getMockBuilder(AbandonedActionFormHandler::class)
-            ->disableOriginalConstructor()
-            ->setMethods(['getBaseActionFormHandler'])
-            ->getMock();
-
-        $handler->expects($this->once())
-            ->method('getBaseActionFormHandler')
-            ->willReturn($this->baseActionFormHandler);
-
-        $this->baseActionFormHandler->expects($this->once())
-            ->method('getBaseFormHandler')
-            ->willReturn($this->baseFormHandler);
-
-        $this->baseFormHandler->expects($this->once())
-            ->method('getBookkeepingSettingsRepository')
-            ->willReturn($this->bookkeepingSettingsRepository);
-
-        $this->bookkeepingSettingsRepository->expects($this->once())
-            ->method('getSettings')
-            ->willReturn($this->bookkeepingSetting);
-
-        $this->bookkeepingSetting->expects($this->once())
-            ->method('getPriceAbandonedDog')
-            ->willReturn(100);
-
-        $animal = new Dog();
-        $now = new \DateTime();
-        $twoYearsAgo = $now->modify('-3 year');
-        $animal->setDayOfBirth($twoYearsAgo);
-
-        $this->assertEquals($handler->getTotalActionCosts($animal), 100);
-    }
-
-    public function test_get_total_action_costs_puppy()
-    {
-        $handler = $this->getMockBuilder(AbandonedActionFormHandler::class)
-            ->disableOriginalConstructor()
-            ->setMethods(['getBaseActionFormHandler'])
-            ->getMock();
-
-        $handler->expects($this->once())
-            ->method('getBaseActionFormHandler')
-            ->willReturn($this->baseActionFormHandler);
-
-        $this->baseActionFormHandler->expects($this->once())
-            ->method('getBaseFormHandler')
-            ->willReturn($this->baseFormHandler);
-
-        $this->baseFormHandler->expects($this->once())
-            ->method('getBookkeepingSettingsRepository')
-            ->willReturn($this->bookkeepingSettingsRepository);
-
-        $this->bookkeepingSettingsRepository->expects($this->once())
-            ->method('getSettings')
-            ->willReturn($this->bookkeepingSetting);
-
-        $this->bookkeepingSetting->expects($this->once())
-            ->method('getPriceAbandonedPuppy')
-            ->willReturn(100);
-
-        $animal = new Dog();
-        $animal->setDayOfBirth(new DateTime('yesterday'));
-
-        $this->assertEquals($handler->getTotalActionCosts($animal), 100);
-    }
-
-    public function test_create_action()
-    {
-        $handler = $this->getMockBuilder(AbandonedActionFormHandler::class)
-            ->disableOriginalConstructor()
-            ->setMethods(['getBaseActionFormHandler'])
-            ->getMock();
-
-        $animal = new Animal();
-        $customer = new Customer();
-        $totalCosts = 100;
-        $status = new Abandoned(new AnimalStateMachine());
-
-        $action = new Action();
-        $action->setDate(new \DateTime('now'));
-        $action->setType('Abandoned');
-        $action->setTotalCosts($totalCosts);
-        $action->setAnimal($animal);
-        $action->setFullyPaid(false);
-        $action->setCompleted(false);
-        $action->setCustomer($customer);
-        $action->setStatus($status);
-
-        $result = $handler->createAction($animal, $customer, $totalCosts, $status);
-        $this->assertInstanceOf(Action::class, $result);
-    }
-
-    public function test_set_net_status()
-    {
-        $handler = $this->getMockBuilder(AbandonedActionFormHandler::class)
-            ->disableOriginalConstructor()
-            ->setMethods(['getBaseActionFormHandler'])
+            ->setMethods(['getBaseFormHandler'])
             ->getMock();
 
         $animal = new Animal();

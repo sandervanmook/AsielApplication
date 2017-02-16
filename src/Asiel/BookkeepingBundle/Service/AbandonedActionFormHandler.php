@@ -20,7 +20,7 @@ class AbandonedActionFormHandler
     private $baseFormHandler;
     private $totalCosts;
 
-    public function __construct(BaseFormHandler $baseFormHandler, TotalCosts $totalCosts)
+    public function __construct(BaseFormHandler $baseFormHandler, TotalActionCosts $totalCosts)
     {
         $this->baseFormHandler = $baseFormHandler;
         $this->totalCosts = $totalCosts;

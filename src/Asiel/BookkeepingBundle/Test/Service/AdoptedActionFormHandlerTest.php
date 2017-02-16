@@ -14,8 +14,10 @@ use Asiel\BackendBundle\Entity\BookkeepingSettings;
 use Asiel\BackendBundle\Repository\BookkeepingSettingsRepository;
 use Asiel\BookkeepingBundle\Service\AdoptedActionFormHandler;
 use Asiel\BookkeepingBundle\Service\BaseActionFormHandler;
+use Asiel\BookkeepingBundle\Service\TotalActionCosts;
 use Asiel\Shared\Service\BaseFormHandler;
 use DateTime;
+use Doctrine\ORM\EntityManager;
 
 class AdoptedActionFormHandlerTest extends \PHPUnit_Framework_TestCase
 {
@@ -23,10 +25,12 @@ class AdoptedActionFormHandlerTest extends \PHPUnit_Framework_TestCase
     public $bookkeepingSettingsRepository;
     public $bookkeepingSetting;
     public $baseFormHandler;
+    public $em;
+    public $totalActionCosts;
 
     public function setUp()
     {
-        $this->baseActionFormHandler = $this->getMockBuilder(BaseActionFormHandler::class)
+        $this->baseActionFormHandler = $this->getMockBuilder(BaseFormHandler::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -41,15 +45,21 @@ class AdoptedActionFormHandlerTest extends \PHPUnit_Framework_TestCase
         $this->baseFormHandler = $this->getMockBuilder(BaseFormHandler::class)
             ->disableOriginalConstructor()
             ->getMock();
+
+        $this->em = $this->getMockBuilder(EntityManager::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->totalActionCosts = new TotalActionCosts($this->em);
     }
 
     public function test_state_change_is_not_allowed()
     {
-        $baseActionFormHandler = $this->getMockBuilder(BaseActionFormHandler::class)
+        $baseActionFormHandler = $this->getMockBuilder(BaseFormHandler::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $handler = new AdoptedActionFormHandler($baseActionFormHandler);
+        $handler = new AdoptedActionFormHandler($baseActionFormHandler, $this->totalActionCosts);
         $animal = new Animal();
         $status = new Adopted(new AnimalStateMachine());
         $animal->addStatus($status);
@@ -59,8 +69,8 @@ class AdoptedActionFormHandlerTest extends \PHPUnit_Framework_TestCase
 
     public function test_state_change_is_allowed()
     {
-        $baseActionFormHandler = $this->getMockBuilder(BaseActionFormHandler::class)->disableOriginalConstructor()->getMock();
-        $handler = new AdoptedActionFormHandler($baseActionFormHandler);
+        $baseActionFormHandler = $this->getMockBuilder(BaseFormHandler::class)->disableOriginalConstructor()->getMock();
+        $handler = new AdoptedActionFormHandler($baseActionFormHandler, $this->totalActionCosts);
         $animal = new Animal();
         $status = new Found(new AnimalStateMachine());
         $animal->addStatus($status);
@@ -68,151 +78,11 @@ class AdoptedActionFormHandlerTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($handler->stateChangeAllowed($animal));
     }
 
-    public function test_get_total_action_costs_kitten()
-    {
-        $handler = $this->getMockBuilder(AdoptedActionFormHandler::class)
-            ->disableOriginalConstructor()
-            ->setMethods(['getBaseActionFormHandler'])
-            ->getMock();
-
-        $handler->expects($this->once())
-            ->method('getBaseActionFormHandler')
-            ->willReturn($this->baseActionFormHandler);
-
-        $this->baseActionFormHandler->expects($this->once())
-            ->method('getBaseFormHandler')
-            ->willReturn($this->baseFormHandler);
-
-        $this->baseFormHandler->expects($this->once())
-            ->method('getBookkeepingSettingsRepository')
-            ->willReturn($this->bookkeepingSettingsRepository);
-
-        $this->bookkeepingSettingsRepository->expects($this->once())
-            ->method('getSettings')
-            ->willReturn($this->bookkeepingSetting);
-
-        $this->bookkeepingSetting->expects($this->once())
-            ->method('getPriceAdoptedKitten')
-            ->willReturn(100);
-
-        $animal = new Cat();
-        $animal->setDayOfBirth(new DateTime('yesterday'));
-
-        $this->assertEquals($handler->getTotalActionCosts($animal), 100);
-    }
-
-    public function test_get_total_action_costs_cat()
-    {
-        $handler = $this->getMockBuilder(AdoptedActionFormHandler::class)
-            ->disableOriginalConstructor()
-            ->setMethods(['getBaseActionFormHandler'])
-            ->getMock();
-
-        $handler->expects($this->once())
-            ->method('getBaseActionFormHandler')
-            ->willReturn($this->baseActionFormHandler);
-
-        $this->baseActionFormHandler->expects($this->once())
-            ->method('getBaseFormHandler')
-            ->willReturn($this->baseFormHandler);
-
-        $this->baseFormHandler->expects($this->once())
-            ->method('getBookkeepingSettingsRepository')
-            ->willReturn($this->bookkeepingSettingsRepository);
-
-        $this->bookkeepingSettingsRepository->expects($this->once())
-            ->method('getSettings')
-            ->willReturn($this->bookkeepingSetting);
-
-        $this->bookkeepingSetting->expects($this->once())
-            ->method('getPriceAdoptedCat')
-            ->willReturn(100);
-
-        $animal = new Cat();
-        $now = new \DateTime();
-        $twoYearsAgo = $now->modify('-3 year');
-        $animal->setDayOfBirth($twoYearsAgo);
-
-        $this->assertEquals($handler->getTotalActionCosts($animal), 100);
-    }
-
-    public function test_get_total_action_costs_dog()
-    {
-        $handler = $this->getMockBuilder(AdoptedActionFormHandler::class)
-            ->disableOriginalConstructor()
-            ->setMethods(['getBaseActionFormHandler'])
-            ->getMock();
-
-        $handler->expects($this->once())
-            ->method('getBaseActionFormHandler')
-            ->willReturn($this->baseActionFormHandler);
-
-        $this->baseActionFormHandler->expects($this->once())
-            ->method('getBaseFormHandler')
-            ->willReturn($this->baseFormHandler);
-
-        $this->baseFormHandler->expects($this->once())
-            ->method('getBookkeepingSettingsRepository')
-            ->willReturn($this->bookkeepingSettingsRepository);
-
-        $this->bookkeepingSettingsRepository->expects($this->once())
-            ->method('getSettings')
-            ->willReturn($this->bookkeepingSetting);
-
-        $this->bookkeepingSetting->expects($this->once())
-            ->method('getPriceAdoptedDog')
-            ->willReturn(100);
-
-        $animal = new Dog();
-        $now = new \DateTime();
-        $twoYearsAgo = $now->modify('-3 year');
-        $animal->setDayOfBirth($twoYearsAgo);
-
-        $this->assertEquals($handler->getTotalActionCosts($animal), 100);
-    }
-
-    public function test_get_total_action_costs_puppy()
-    {
-        $handler = $this->getMockBuilder(AdoptedActionFormHandler::class)
-            ->disableOriginalConstructor()
-            ->setMethods(['getBaseActionFormHandler'])
-            ->getMock();
-
-        $handler->expects($this->once())
-            ->method('getBaseActionFormHandler')
-            ->willReturn($this->baseActionFormHandler);
-
-        $this->baseActionFormHandler->expects($this->once())
-            ->method('getBaseFormHandler')
-            ->willReturn($this->baseFormHandler);
-
-        $this->baseFormHandler->expects($this->once())
-            ->method('getBookkeepingSettingsRepository')
-            ->willReturn($this->bookkeepingSettingsRepository);
-
-        $this->bookkeepingSettingsRepository->expects($this->once())
-            ->method('getSettings')
-            ->willReturn($this->bookkeepingSetting);
-
-        $this->bookkeepingSetting->expects($this->once())
-            ->method('getPriceAdoptedPuppy')
-            ->willReturn(100);
-
-        $animal = new Dog();
-        $animal->setDayOfBirth(new DateTime('yesterday'));
-
-        $this->assertEquals($handler->getTotalActionCosts($animal), 100);
-    }
-
     public function test_get_animal_repository()
     {
         $adoptedActionFormHandler = $this->getMockBuilder(AdoptedActionFormHandler::class)
             ->disableOriginalConstructor()
-            ->setMethods(['getBaseActionFormHandler'])
-            ->getMock();
-
-        $baseActionFormHandler = $this->getMockBuilder(BaseActionFormHandler::class)
-            ->disableOriginalConstructor()
+            ->setMethods(['getBaseFormHandler'])
             ->getMock();
 
         $baseFormHandler = $this->getMockBuilder(BaseFormHandler::class)
@@ -220,10 +90,6 @@ class AdoptedActionFormHandlerTest extends \PHPUnit_Framework_TestCase
             ->getMock();
 
         $adoptedActionFormHandler->expects($this->once())
-            ->method('getBaseActionFormHandler')
-            ->willReturn($baseActionFormHandler);
-
-        $baseActionFormHandler->expects($this->once())
             ->method('getBaseFormHandler')
             ->willReturn($baseFormHandler);
 
