@@ -66,6 +66,28 @@ class Abandoned extends Status implements AnimalState
      */
     private $needsPassport;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="needs_fur_treatment", type="text", nullable=false)
+     */
+    private $needsFurTreatment;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="is_ill", type="boolean", nullable=false)
+     */
+    private $isIll;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="municipalityaffiliation", type="boolean", nullable=false)
+     */
+    private $municipalityaffiliation;
+
+
     // Origin TaskEvent options
     const ABANDON_CHIPPED       = [
         'title'         => '(Afstand) Chippen',
@@ -253,4 +275,116 @@ class Abandoned extends Status implements AnimalState
         $this->needsPassport = $needsPassport;
     }
 
+
+    /**
+     * Get needsVaccines
+     *
+     * @return boolean
+     */
+    public function getNeedsVaccines()
+    {
+        return $this->needsVaccines;
+    }
+
+    /**
+     * Get needsChipping
+     *
+     * @return boolean
+     */
+    public function getNeedsChipping()
+    {
+        return $this->needsChipping;
+    }
+
+    /**
+     * Get needsSterilization
+     *
+     * @return boolean
+     */
+    public function getNeedsSterilization()
+    {
+        return $this->needsSterilization;
+    }
+
+    /**
+     * Get needsPassport
+     *
+     * @return boolean
+     */
+    public function getNeedsPassport()
+    {
+        return $this->needsPassport;
+    }
+
+    /**
+     * Set needsFurTreatment
+     *
+     * @param string $needsFurTreatment
+     *
+     * @return Abandoned
+     */
+    public function setNeedsFurTreatment($needsFurTreatment)
+    {
+        $this->needsFurTreatment = $needsFurTreatment;
+
+        return $this;
+    }
+
+    /**
+     * Get needsFurTreatment
+     *
+     * @return string
+     */
+    public function getNeedsFurTreatment()
+    {
+        return $this->needsFurTreatment;
+    }
+
+    /**
+     * Set isIll
+     *
+     * @param boolean $isIll
+     *
+     * @return Abandoned
+     */
+    public function setIsIll($isIll)
+    {
+        $this->isIll = $isIll;
+
+        return $this;
+    }
+
+    /**
+     * Get isIll
+     *
+     * @return boolean
+     */
+    public function getIsIll()
+    {
+        return $this->isIll;
+    }
+
+    /**
+     * Set municipalityaffiliation
+     *
+     * @param boolean $municipalityaffiliation
+     *
+     * @return Abandoned
+     */
+    public function setMunicipalityaffiliation($municipalityaffiliation)
+    {
+        $this->municipalityaffiliation = $municipalityaffiliation;
+
+        return $this;
+    }
+
+    /**
+     * Get municipalityaffiliation
+     *
+     * @return boolean
+     */
+    public function getMunicipalityaffiliation()
+    {
+        return $this->municipalityaffiliation;
+    }
 }

@@ -31,7 +31,6 @@ class AbandonedType extends StatusType
                     'Ja, grote hond' => 'largedog'
                 ],
                 'required' => true,
-                'mapped' => false,
                 'multiple' => false,
                 'data' => 'No',
             ])
@@ -54,12 +53,10 @@ class AbandonedType extends StatusType
             ->add('municipalityaffiliation', CheckboxType::class, [
                 'label' => 'Aangesloten gemeente ?',
                 'required' => false,
-                'mapped' => false,
             ])
-            ->add('illaddition', CheckboxType::class, [
+            ->add('isIll', CheckboxType::class, [
                 'label' => 'Erg ziek ?',
                 'required' => false,
-                'mapped' => false,
             ])
         ;
 

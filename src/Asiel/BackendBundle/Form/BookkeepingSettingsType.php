@@ -40,7 +40,7 @@ class BookkeepingSettingsType extends AbstractType
                 'scale' => 0,
             ])
             ->add('priceAbandonedDogUnaffiliatedPuppy', MoneyType::class, [
-                'label' => 'Prijs afstand puppy',
+                'label' => 'Prijs afstand puppy (jonger dan 3 maanden)',
                 'scale' => 0,
             ])
             ->add('priceAbandonedDogUnaffiliatedAdditionNotChipped', MoneyType::class, [
@@ -72,7 +72,7 @@ class BookkeepingSettingsType extends AbstractType
                 'scale' => 0,
             ])
             ->add('priceAbandonedDogAffiliatedPuppy', MoneyType::class, [
-                'label' => 'Prijs afstand hond puppy',
+                'label' => 'Prijs afstand puppy (jonger dan 3 maanden)',
                 'scale' => 0,
             ])
             ->add('priceAbandonedDogAffiliatedAdditionNotChipped', MoneyType::class, [
@@ -108,7 +108,7 @@ class BookkeepingSettingsType extends AbstractType
                 'scale' => 0,
             ])
             ->add('priceAbandonedCatUnaffiliatedKitten', MoneyType::class, [
-                'label' => 'Prijs afstand kitten',
+                'label' => 'Prijs afstand kitten (jonger dan 1 maand)',
                 'scale' => 0,
             ])
             ->add('priceAbandonedCatUnaffiliatedAdditionNotChipped', MoneyType::class, [
@@ -136,7 +136,7 @@ class BookkeepingSettingsType extends AbstractType
                 'scale' => 0,
             ])
             ->add('priceAbandonedCatAffiliatedKitten', MoneyType::class, [
-                'label' => 'Prijs afstand kitten ',
+                'label' => 'Prijs afstand kitten (jonger dan 1 maand)',
                 'scale' => 0,
             ])
             ->add('priceAbandonedCatAffiliatedAdditionNotChipped', MoneyType::class, [

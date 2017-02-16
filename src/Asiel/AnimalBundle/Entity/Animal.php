@@ -1133,7 +1133,7 @@ class Animal
 
     public function isPuppy() : bool
     {
-        if (($this instanceof Dog) && ($this->isCurrentlyADog())) {
+        if (($this instanceof Dog) && ($this->isCurrentlyAPuppy())) {
             return true;
         }
 
