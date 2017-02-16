@@ -69,12 +69,13 @@ class AdoptedActionFormHandler
         return $this->getBaseActionFormHandler()->getBaseFormHandler()->getAnimalRepository();
     }
 
-    public function createAction(Animal $animal, Customer $customer, int $totalCosts, Status $status): Action
+    public function createAction(Animal $animal, Customer $customer, Status $status): Action
     {
+        $totalCosts = new CalculateTotalCosts($animal, 'Adopted');
         $action = new Action();
         $action->setDate(new \DateTime('now'));
         $action->setType('Adopted');
-        $action->setTotalCosts($totalCosts);
+        $action->setTotalCosts($totalCosts->getTotalCosts());
         $action->setAnimal($animal);
         $action->setFullyPaid(false);
         $action->setCompleted(false);
@@ -116,5 +117,20 @@ class AdoptedActionFormHandler
         $this->getBaseActionFormHandler()->getBaseFormHandler()->getEm()->flush();
         $this->getBaseActionFormHandler()->getBaseFormHandler()->getEventDispatcher()->dispatch('user_alert.message',
             new UserAlertEvent(UserAlertEvent::SUCCESS, 'De adoptie status is aangemaakt.'));
+    }
+
+    public function findAnimal(int $animalId) : Animal
+    {
+        return $this->getBaseActionFormHandler()->findAnimal($animalId);
+    }
+
+    public function findCustomer(int $customerId) : Customer
+    {
+        return $this->getBaseActionFormHandler()->findCustomer($customerId);
+    }
+
+    public function getAnimalType(Animal $animal)
+    {
+        return $this->getBaseActionFormHandler()->getAnimalType($animal);
     }
 }

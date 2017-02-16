@@ -11,7 +11,7 @@ use Asiel\BookkeepingBundle\Entity\Action;
 use Asiel\CustomerBundle\Entity\Customer;
 use Asiel\Shared\Service\BaseFormHandler;
 
-abstract class BaseActionFormHandler
+class BaseActionFormHandler
 {
     protected $baseFormHandler;
 
@@ -19,14 +19,6 @@ abstract class BaseActionFormHandler
     {
         $this->baseFormHandler = $baseFormHandler;
     }
-
-    abstract public function stateChangeAllowed(Animal $animal);
-
-    abstract public function getTotalActionCosts(Animal $animal) : int;
-
-    abstract public function createAction(Animal $animal, Customer $customer, int $totalCosts, Status $status): Action;
-
-    abstract public function setNewStatus(Action $action);
 
     public function getBaseFormHandler() : BaseFormHandler
     {
