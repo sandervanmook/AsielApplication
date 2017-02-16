@@ -18,10 +18,12 @@ use DateTime;
 class AdoptedActionFormHandler
 {
     private $baseFormHandler;
+    private $totalCosts;
 
-    public function __construct(BaseFormHandler $baseFormHandler)
+    public function __construct(BaseFormHandler $baseFormHandler, TotalCosts $totalCosts)
     {
         $this->baseFormHandler = $baseFormHandler;
+        $this->totalCosts = $totalCosts;
     }
 
     public function getBaseFormHandler() : BaseFormHandler
@@ -47,24 +49,6 @@ class AdoptedActionFormHandler
         return true;
     }
 
-    public function getTotalActionCosts(Animal $animal): int
-    {
-        if (($animal->getClassName() == 'Cat') && ($animal->isCurrentlyAKitten())) {
-            return $this->getBaseFormHandler()->getBookkeepingSettingsRepository()->getSettings()->getPriceAdoptedKitten();
-        }
-        if (($animal->getClassName() == 'Cat') && ($animal->isCurrentlyACat())) {
-            return $this->getBaseFormHandler()->getBookkeepingSettingsRepository()->getSettings()->getPriceAdoptedCat();
-        }
-        if (($animal->getClassName() == 'Dog') && ($animal->isCurrentlyADog())) {
-            return $this->getBaseFormHandler()->getBookkeepingSettingsRepository()->getSettings()->getPriceAdoptedDog();
-        }
-        if (($animal->getClassName() == 'Dog') && ($animal->isCurrentlyAPuppy())) {
-            return $this->getBaseFormHandler()->getBookkeepingSettingsRepository()->getSettings()->getPriceAdoptedPuppy();
-        }
-
-        throw new \Exception('No setting available');
-    }
-
     public function getAnimalRepository(): AnimalRepository
     {
         return $this->getBaseFormHandler()->getAnimalRepository();
@@ -72,11 +56,12 @@ class AdoptedActionFormHandler
 
     public function createAction(Animal $animal, Customer $customer, Status $status): Action
     {
-        $totalCosts = new CalculateTotalCosts($animal, 'Adopted');
+        $this->totalCosts->setAnimal($animal);
+        $this->totalCosts->setActionType('Adopted');
         $action = new Action();
         $action->setDate(new \DateTime('now'));
         $action->setType('Adopted');
-        $action->setTotalCosts($totalCosts->getTotalCosts());
+        $action->setTotalCosts($this->totalCosts->getTotalCosts());
         $action->setAnimal($animal);
         $action->setFullyPaid(false);
         $action->setCompleted(false);
@@ -133,5 +118,20 @@ class AdoptedActionFormHandler
     public function getAnimalType(Animal $animal)
     {
         return $this->getBaseFormHandler()->getAnimalType($animal);
+    }
+
+    public function needCustomerToProceedMessage()
+    {
+        return $this->baseFormHandler->getEventDispatcher()->dispatch('user_alert.message',
+            new UserAlertEvent(UserAlertEvent::DANGER, 'U moet een klant kiezen om door te gaan.'));
+    }
+
+    public function verifyFinish(Action $action) : bool
+    {
+        if ($action->isFullyPaid()) {
+            return true;
+        }
+
+        return false;
     }
 }

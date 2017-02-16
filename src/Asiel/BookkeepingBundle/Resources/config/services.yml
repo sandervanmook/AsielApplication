@@ -3,6 +3,7 @@ services:
       class: Asiel\BookkeepingBundle\Service\AdoptedActionFormHandler
       arguments:
         - '@asiel.backendbundle.baseformhandler'
+        - '@asiel.bookkeepingbundle.calculatetotalcosts'
 
     asiel.bookkeepingbundle.actionformhandler:
       class: Asiel\BookkeepingBundle\Service\ActionFormHandler
@@ -18,6 +19,7 @@ services:
       class: Asiel\BookkeepingBundle\Service\AbandonedActionFormHandler
       arguments:
         - '@asiel.backendbundle.baseformhandler'
+        - '@asiel.bookkeepingbundle.calculatetotalcosts'
 
     asiel.bookkeepingbundle.seizedactionformhandler:
       class: Asiel\BookkeepingBundle\Service\SeizedActionFormHandler
@@ -35,6 +37,6 @@ services:
         - '@asiel.backendbundle.baseformhandler'
 
     asiel.bookkeepingbundle.calculatetotalcosts:
-      class: Asiel\BookkeepingBundle\Service\CalculateTotalCosts
+      class: Asiel\BookkeepingBundle\Service\TotalCosts
       arguments:
         - '@doctrine.orm.entity_manager'

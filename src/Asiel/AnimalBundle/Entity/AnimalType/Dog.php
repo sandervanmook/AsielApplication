@@ -372,15 +372,4 @@ class Dog extends Animal implements TypeInterface
         }
     }
 
-    public function getCurrentDogType() : string
-    {
-        if ($this->isCurrentlyADog()) {
-            return 'Dog';
-        }
-        if ($this->isCurrentlyAPuppy()) {
-            return 'Puppy';
-        }
-
-        return 'Unknown';
-    }
 }

@@ -18,10 +18,12 @@ use Asiel\Shared\Service\BaseFormHandler;
 class AbandonedActionFormHandler
 {
     private $baseFormHandler;
+    private $totalCosts;
 
-    public function __construct(BaseFormHandler $baseFormHandler)
+    public function __construct(BaseFormHandler $baseFormHandler, TotalCosts $totalCosts)
     {
         $this->baseFormHandler = $baseFormHandler;
+        $this->totalCosts = $totalCosts;
     }
 
     public function getBaseFormHandler() : BaseFormHandler
@@ -47,31 +49,16 @@ class AbandonedActionFormHandler
         return true;
     }
 
-    public function getTotalActionCosts(Animal $animal): int
-    {
-        if (($animal->getClassName() == 'Cat') && ($animal->isCurrentlyAKitten())) {
-            return $this->getBaseFormHandler()->getBookkeepingSettingsRepository()->getSettings()->getPriceAbandonedKitten();
-        }
-        if (($animal->getClassName() == 'Cat') && ($animal->isCurrentlyACat())) {
-            return $this->getBaseFormHandler()->getBookkeepingSettingsRepository()->getSettings()->getPriceAbandonedCat();
-        }
-        if (($animal->getClassName() == 'Dog') && ($animal->isCurrentlyADog())) {
-            return $this->getBaseFormHandler()->getBookkeepingSettingsRepository()->getSettings()->getPriceAbandonedDog();
-        }
-        if (($animal->getClassName() == 'Dog') && ($animal->isCurrentlyAPuppy())) {
-            return $this->getBaseFormHandler()->getBookkeepingSettingsRepository()->getSettings()->getPriceAbandonedPuppy();
-        }
-
-        throw new \Exception('No setting available');
-    }
-
-    public function createAction(Animal $animal, Customer $customer, int $totalCosts, Status $status): Action
+    public function createAction(Animal $animal, Customer $customer, Status $status): Action
     {
         // Create the action
+        $this->totalCosts->setAnimal($animal);
+        $this->totalCosts->setActionType('Abandoned');
+        $this->totalCosts->setStatus($status);
         $action = new Action();
         $action->setDate(new \DateTime('now'));
         $action->setType('Abandoned');
-        $action->setTotalCosts($totalCosts);
+        $action->setTotalCosts($this->totalCosts->getTotalCosts());
         $action->setAnimal($animal);
         $action->setFullyPaid(false);
         $action->setCompleted(false);
@@ -140,5 +127,30 @@ class AbandonedActionFormHandler
         $this->getBaseFormHandler()->getEm()->flush();
         $this->getBaseFormHandler()->getEventDispatcher()->dispatch('user_alert.message',
             new UserAlertEvent(UserAlertEvent::SUCCESS, 'De afstand status is aangemaakt.'));
+    }
+
+    public function needCustomerToProceedMessage()
+    {
+        return $this->baseFormHandler->getEventDispatcher()->dispatch('user_alert.message',
+            new UserAlertEvent(UserAlertEvent::DANGER, 'U moet een klant kiezen om door te gaan.'));
+    }
+
+    public function verifyFinish(Action $action) : bool
+    {
+        if ($action->isFullyPaid()) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function findAnimal(int $animalId) : Animal
+    {
+        return $this->getBaseFormHandler()->findAnimal($animalId);
+    }
+
+    public function findCustomer(int $customerId) : Customer
+    {
+        return $this->getBaseFormHandler()->findCustomer($customerId);
     }
 }

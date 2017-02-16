@@ -117,4 +117,13 @@ class FoundActionFormHandler
         $this->baseFormHandler->getEventDispatcher()->dispatch('user_alert.message',
             new UserAlertEvent(UserAlertEvent::SUCCESS, 'De gevonden status is aangemaakt.'));
     }
+
+    public function verifyFinish(Action $action) : bool
+    {
+        if ($action->isFullyPaid()) {
+            return true;
+        }
+
+        return false;
+    }
 }
