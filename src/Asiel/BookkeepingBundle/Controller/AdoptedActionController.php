@@ -40,9 +40,6 @@ class AdoptedActionController extends Controller
                 ['animalid' => $animalId]));
         }
 
-        // Get type of animal the costs are based upon
-        $animalType = $formHandler->getAnimalType($currentAnimal);
-
         $form = $this->createFormBuilder()
             ->add('submit', SubmitType::class, [
                 'label' => 'Aanmaken',
@@ -63,7 +60,6 @@ class AdoptedActionController extends Controller
         }
 
         return $this->render('@Bookkeeping/Backend/AdoptedAction/start.html.twig', [
-            'animaltype' => $animalType,
             'animal' => $currentAnimal,
             'customer' => $currentCustomer,
             'form' => $form->createView(),
