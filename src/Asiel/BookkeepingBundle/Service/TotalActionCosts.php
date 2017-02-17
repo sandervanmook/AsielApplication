@@ -74,13 +74,11 @@ class TotalActionCosts
                     // Determine animal type first
                     // Dogs
                     if ($this->animal->getAnimalType() == 'Dog' || $this->animal->getAnimalType() == 'Puppy') {
-                        if ($differenceInMonths <= 3) {
+                        if ($this->animal->isPuppy() && $differenceInMonths <= 3) {
                             $this->totalCosts = $this->getBookkeepingSettingsRepository()->getSettings()->getPriceAbandonedDogUnaffiliatedPuppy();
-                        }
-                        if ($this->animal->isPuppy()) {
+                        } elseif ($this->animal->isPuppy()) {
                             $this->totalCosts = $this->getBookkeepingSettingsRepository()->getSettings()->getpriceAbandonedDogUnaffiliatedYoungerThanOne();
-                        }
-                        if ($this->animal->isDog()) {
+                        } elseif ($this->animal->isDog()) {
                             $this->totalCosts = $this->getBookkeepingSettingsRepository()->getSettings()->getpriceAbandonedDogUnaffiliatedOlderThanOne();
                         }
 
@@ -103,18 +101,14 @@ class TotalActionCosts
                     }
                     // Cats
                     if ($this->animal->getAnimalType() == 'Cat' || $this->animal->getAnimalType() == 'Kitten') {
-                        if ($differenceInMonths <= 1) {
+                        if ($this->animal->isKitten() && $differenceInMonths <= 1) {
                             $this->totalCosts = $this->getBookkeepingSettingsRepository()->getSettings()->getPriceAbandonedCatUnaffiliatedKitten();
-                        }
-                        if ($this->animal->isKitten() && $differenceInMonths <= 3) {
+                        } elseif ($this->animal->isKitten() && $differenceInMonths <= 3) {
                             $this->totalCosts = $this->getBookkeepingSettingsRepository()->getSettings()->getPriceAbandonedCatUnaffiliatedYoungerThanThreeMonths();
-                        }
-                        if ($this->animal->isCat() && $differenceInYears > 10) {
+                        } elseif ($this->animal->isCat() && $differenceInYears > 10) {
                             $this->totalCosts = $this->getBookkeepingSettingsRepository()->getSettings()->getPriceAbandonedCatUnaffiliatedOlderThanTenYears();
-                        }
-                        if (($this->animal->getClassName() == 'Cat') &&
-                            ($differenceInMonths > 3) &&
-                            ($differenceInYears <= 10)
+                        } elseif (($differenceInMonths == 0 && $differenceInYears <= 10) ||
+                            ($differenceInYears == 0 && $differenceInMonths > 3)
                         ) {
                             $this->totalCosts = $this->getBookkeepingSettingsRepository()->getSettings()->getPriceAbandonedCatUnaffiliatedBetweenThreeMonthsAndTenYears();
                         }
@@ -139,11 +133,9 @@ class TotalActionCosts
                     if ($this->animal->getAnimalType() == 'Dog' || $this->animal->getAnimalType() == 'Puppy') {
                         if ($this->animal->isPuppy() && $differenceInMonths <= 3) {
                             $this->totalCosts = $this->getBookkeepingSettingsRepository()->getSettings()->getPriceAbandonedDogAffiliatedPuppy();
-                        }
-                        if ($this->animal->isPuppy()) {
+                        } elseif ($this->animal->isPuppy()) {
                             $this->totalCosts = $this->getBookkeepingSettingsRepository()->getSettings()->getpriceAbandonedDogAffiliatedYoungerThanOne();
-                        }
-                        if ($this->animal->isDog()) {
+                        } elseif ($this->animal->isDog()) {
                             $this->totalCosts = $this->getBookkeepingSettingsRepository()->getSettings()->getpriceAbandonedDogAffiliatedOlderThanOne();
                         }
 
@@ -166,18 +158,14 @@ class TotalActionCosts
                     }
                     // Cats
                     if ($this->animal->getAnimalType() == 'Cat' || $this->animal->getAnimalType() == 'Kitten') {
-                        if ($differenceInMonths <= 1) {
+                        if ($this->animal->isKitten() && $differenceInMonths <= 1) {
                             $this->totalCosts = $this->getBookkeepingSettingsRepository()->getSettings()->getPriceAbandonedCatAffiliatedKitten();
-                        }
-                        if ($this->animal->isKitten() && $differenceInMonths <= 3) {
+                        } elseif ($this->animal->isKitten() && $differenceInMonths <= 3) {
                             $this->totalCosts = $this->getBookkeepingSettingsRepository()->getSettings()->getPriceAbandonedCatAffiliatedYoungerThanThreeMonths();
-                        }
-                        if ($this->animal->isCat() && $differenceInYears > 10) {
+                        } elseif ($this->animal->isCat() && $differenceInYears > 10) {
                             $this->totalCosts = $this->getBookkeepingSettingsRepository()->getSettings()->getPriceAbandonedCatAffiliatedOlderThanTenYears();
-                        }
-                        if (($this->animal->getClassName() == 'Cat') &&
-                            ($differenceInMonths > 3) &&
-                            ($differenceInYears <= 10)
+                        } elseif (($differenceInMonths == 0 && $differenceInYears <= 10) ||
+                            ($differenceInYears == 0 && $differenceInMonths > 3)
                         ) {
                             $this->totalCosts = $this->getBookkeepingSettingsRepository()->getSettings()->getPriceAbandonedCatAffiliatedBetweenThreeMonthsAndTenYears();
                         }
