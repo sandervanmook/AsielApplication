@@ -1,35 +1,116 @@
 {% extends '@Backend/Base/Base.html.twig' %}
 {% block pagetitle %}Dier aanmelden{% endblock %}
 {% block body %}
-<div class="ui sixteen column grid container">
-    <div class="sixteen wide column">
-        <h3 class="ui header">Controleer eerst het chipnummer</h3>
-        <div class="ui form">
-            <div class="inline field">
-                <label for="chipnumbercheck">Chipnummer van het dier</label>
-                <input type="text" id="chipnumbercheck" placeholder="15 cijferige chipnummer" maxlength="15">
+    <div class="ui sixteen column grid container">
+        <div class="row">
+            <div class="four wide column">
+                <h3 class="ui header">Controleer het chipnummer</h3>
+                {{ form_start(form) }}
+                {{ form_widget(form) }}
+                {{ form_end(form) }}
             </div>
         </div>
-        <div id="chipresult"></div>
-        <div id="choices">
-            <br />
-            <a href="{{ path('backend_animal_register', {'type': 'Cat'}) }}">Kat aanmelden</a> |
-            <a href="{{ path('backend_animal_register', {'type': 'Dog'}) }}">Hond aanmelden</a>
+        <div class="row">
+            <div class="six wide column">
+                <p>Test chipnummer voor backhomeclub.nl : 528274000126496</p>
+                <p>Test chipnummer voor ndg.nl : 528274000126497</p>
+            </div>
         </div>
-        <div id="searchexternally">
-            <br />
-            <p>Of zoek extern: </p>
-            <ul>
-                <li><img id="bhc" src="{{ asset('img/logo-bhc.png') }}" height="50" alt="backhomeclub.nl"></li>
-            </ul>
-            <p>Test chipnummer voor backhomeclub.nl : 528274000126497</p>
-        </div>
-        <div id="externalresult"></div>
+        <hr/>
+        {% if internalresult is defined and internalresult is not null %}
+            <div class="row">
+                <div class="six wide column">
+                    <div id="internalresult">
+                        <p>Dit dier is al aanwezig in onze <a
+                                    href="{{ path('backend_animal_show', {'id' : internalresult.id}) }}">database</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        {% if internalresult is defined and internalresult is null %}
+            <div class="row">
+                <div class="six wide column">
+                    <div id="choices">
+                        <br/>
+                        <a href="{{ path('backend_animal_register', {'type': 'Cat'}) }}">Kat aanmelden</a> |
+                        <a href="{{ path('backend_animal_register', {'type': 'Dog'}) }}">Hond aanmelden</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="six wide column">
+                    <div id="externalresulttable">
+                        <h3 class="ui header">Externe zoekresultaten</h3>
+                        <table class="ui table very basic">
+                            <tbody>
+                            <tr>
+                                <td id="ndg-button">NDG</td>
+                                <td>
+                                    {% if ndgresult is defined and ndgresult is not null %}
+                                        {{ outputBool(true) }}
+                                    {% else %}
+                                        {{ outputBool(false) }}
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if ndgresult is defined and ndgresult is not null %}
+                                    <i id="ndg-view" class="eye icon"></i>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>BHC</td>
+                                <td>
+                                    {% if bhcresult is defined and bhcresult is not null %}
+                                        {{ outputBool(true) }}
+                                    {% else %}
+                                        {{ outputBool(false) }}
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if bhcresult is defined and bhcresult is not null %}
+                                    <i id="bhc-view" class="eye icon"></i>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
     </div>
-</div>
+    <div id="resultmodal" class="ui modal">
+        <div class="content">
+            {% if ndgresult is defined and ndgresult is not null %}
+                <div>{{ ndgresult|striptags('<table><td><tr>')|raw }}</div>
+            {% endif %}
+
+            {% if bhcresult is defined and bhcresult is not null %}
+                <div>{{ bhcresult|striptags('<table><td><tr>')|raw }}</div>
+            {% endif %}
+        </div>
+    </div>
 {% endblock %}
 {% block javascripts %}
     {{ parent() }}
-    <script src="{{ asset('js/views/AnimalBundle/Animal/AnimalCreate.js') }}"></script>
+    <script>
+        $('#ndgresult').hide();
+        $('#bhcresult').hide();
+
+        $('#ndg-view').click(function () {
+            $('#ndgresult').show();
+            $('#resultmodal')
+                .modal('show')
+            ;
+        })
+        $('#bhc-view').click(function () {
+            $('#bhcresult').show();
+            $('#resultmodal')
+                .modal('show')
+            ;
+        })
+    </script>
 {% endblock %}
 
