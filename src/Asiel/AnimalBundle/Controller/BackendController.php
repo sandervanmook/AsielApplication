@@ -5,9 +5,10 @@ namespace Asiel\AnimalBundle\Controller;
 use Asiel\AnimalBundle\AnimalFactory\AnimalFactory;
 use Asiel\AnimalBundle\AnimalFactory\AnimalType;
 use Asiel\AnimalBundle\Form\SearchAnimalType;
-use Asiel\AnimalBundle\SearchAnimal\FilterAnimal;
 use Asiel\Shared\Filter\Animal\AnimalFilter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,16 +24,83 @@ class BackendController extends Controller
         $form = $this->createForm(SearchAnimalType::class);
 
         return $this->render('@Animal/Backend/Animal/index.html.twig', [
-            'form'  => $form->createView(),
+            'form' => $form->createView(),
         ]);
     }
 
     /**
+     * @param Request $request
      * @return Response
      */
-    public function createAction()
+    public function createAction(Request $request)
     {
-        return $this->render('@Animal/Backend/Animal/create.html.twig');
+        $formHandler = $this->get('asiel.animalbundle.animalformhandler');
+
+        $form = $this->createFormBuilder()
+            ->add('chipnumber', TextType::class, [
+                'label' => 'Chipnummer',
+                'attr' => [
+                    'placeholder' => '15 cijferige chipnummer',
+                    'maxlength' => 15,
+                    'class' => 'inline field',
+                ],
+            ])
+            ->add('submit', SubmitType::class, [
+                'label' => 'Zoeken',
+                'attr' => [
+                    'class' => 'ui button positive',
+                ]
+            ])
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isValid() && $form->isSubmitted()) {
+            $chipnumber = $form->get('chipnumber')->getData();
+
+            // If it's not a valid chipnummer show error and let user try again.
+            if (!$formHandler->validChipnumber($chipnumber)) {
+                return $this->render('@Animal/Backend/Animal/create.html.twig', [
+                    'form' => $form->createView(),
+                ]);
+            }
+
+            // If we found it internally, show result. User can't create new animal.
+            if ($formHandler->searchChipnumberInternal($chipnumber)) {
+                $internalResult = $formHandler->searchChipnumberInternal($chipnumber);
+
+                return $this->render('@Animal/Backend/Animal/create.html.twig', [
+                    'form' => $form->createView(),
+                    'internalresult' => $internalResult,
+                ]);
+            } else {
+                $internalResult = null;
+            }
+
+            // We didn't found the animal internally, search externally and give the option to create new animal
+            if ($formHandler->ndgResult($chipnumber)) {
+                $ndgResult = $formHandler->ndgResult($chipnumber);
+            } else {
+                $ndgResult = null;
+            }
+
+            if ($formHandler->bhcResult($chipnumber)) {
+                $bhcResult = $formHandler->bhcResult($chipnumber);
+            } else {
+                $bhcResult = null;
+            }
+
+            return $this->render('@Animal/Backend/Animal/create.html.twig', [
+                'form' => $form->createView(),
+                'internalresult' => $internalResult,
+                'ndgresult' => $ndgResult,
+                'bhcresult' => $bhcResult,
+            ]);
+        }
+
+        return $this->render('@Animal/Backend/Animal/create.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 
     /**
@@ -105,6 +173,7 @@ class BackendController extends Controller
     /**
      * Ajax call
      * @param Request $request
+     * @param string $requestby
      * @return Response
      */
     public function searchAnimalsDataAction(Request $request, string $requestby)
@@ -119,8 +188,8 @@ class BackendController extends Controller
         $searchArray['gender'] = $request->get('gender');
         $searchArray['agestart'] = $request->get('agestart');
         $searchArray['ageend'] = $request->get('ageend');
-        $searchArray['status']  = $request->get('status');
-        $searchArray['sterilized']  = $request->get('sterilized');
+        $searchArray['status'] = $request->get('status');
+        $searchArray['sterilized'] = $request->get('sterilized');
 
         $filterAnimal = new AnimalFilter($allAnimals, $searchArray);
         $filterAnimal->filter();
@@ -166,7 +235,7 @@ class BackendController extends Controller
         $openTasks = $formHandler->getRepository()->findIncompleteTasks($id);
 
         return $this->render('@Animal/Backend/Animal/animalInfo.html.twig', [
-            'info'  => $formHandler->getRepository()->find($id),
+            'info' => $formHandler->getRepository()->find($id),
             'opentasks' => $openTasks,
         ]);
     }
