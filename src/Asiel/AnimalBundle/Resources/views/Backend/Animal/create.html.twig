@@ -12,8 +12,8 @@
         </div>
         <div class="row">
             <div class="six wide column">
-                <p>Test chipnummer voor backhomeclub.nl : 528274000126496</p>
-                <p>Test chipnummer voor ndg.nl : 528274000126497</p>
+                <p>Test chipnummer voor backhomeclub.nl : 528274000126497</p>
+                <p>Test chipnummer voor ndg.nl : 528274000126496</p>
             </div>
         </div>
         <hr/>
@@ -74,6 +74,21 @@
                                     {% endif %}
                                 </td>
                             </tr>
+                            <tr>
+                                <td>idchips.com</td>
+                                <td>
+                                    {% if idchipsresult is defined and idchipsresult is not null %}
+                                        {{ outputBool(true) }}
+                                    {% else %}
+                                        {{ outputBool(false) }}
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if idchipsresult is defined and idchipsresult is not null %}
+                                        <i id="idchips-view" class="eye icon"></i>
+                                    {% endif %}
+                                </td>
+                            </tr>
                             </tbody>
                         </table>
                     </div>
@@ -84,11 +99,23 @@
     <div id="resultmodal" class="ui modal">
         <div class="content">
             {% if ndgresult is defined and ndgresult is not null %}
-                <div>{{ ndgresult|striptags('<table><td><tr>')|raw }}</div>
+                <div id="ndg-result">
+                    <h3>NDG zoekresultaten</h3>
+                    {{ ndgresult|striptags('<table><td><tr>')|raw }}
+                </div>
             {% endif %}
 
             {% if bhcresult is defined and bhcresult is not null %}
-                <div>{{ bhcresult|striptags('<table><td><tr>')|raw }}</div>
+                <div id="bhc-result">
+                    <h3>BHC zoekresultaten</h3>
+                    {{ bhcresult|striptags('<table><td><tr>')|raw }}
+                </div>
+            {% endif %}
+            {% if idchipsresult is defined and idchipsresult is not null %}
+                <div id="idchips-result">
+                    <h3>idchips.com zoekresultaten</h3>
+                    {{ idchipsresult|striptags('<div>')|raw }}
+                </div>
             {% endif %}
         </div>
     </div>
@@ -96,17 +123,24 @@
 {% block javascripts %}
     {{ parent() }}
     <script>
-        $('#ndgresult').hide();
-        $('#bhcresult').hide();
+        $('#ndg-result').hide();
+        $('#bhc-result').hide();
+        $('#idchips-result').hide();
 
         $('#ndg-view').click(function () {
-            $('#ndgresult').show();
+            $('#ndg-result').show();
             $('#resultmodal')
                 .modal('show')
             ;
         })
         $('#bhc-view').click(function () {
-            $('#bhcresult').show();
+            $('#bhc-result').show();
+            $('#resultmodal')
+                .modal('show')
+            ;
+        })
+        $('#idchips-view').click(function () {
+            $('#idchips-result').show();
             $('#resultmodal')
                 .modal('show')
             ;

@@ -89,6 +89,7 @@ class AnimalFormHandler
         $client = new GuzzleHttp\Client();
 
         $response = $client->request('POST', 'https://ndgnl.secure.is.nl/search.php?loc=nl_NL', [
+            'timeout' => 2,
             'form_params' => [
                 'Barcode' => $chipnumber,
             ]
@@ -109,6 +110,7 @@ class AnimalFormHandler
         $client = new GuzzleHttp\Client();
 
         $response = $client->request('GET', 'http://particulier.backhomeclub.nl/Info_Chipnummer_nl.aspx', [
+            'timeout' => 2,
             'query' => ['chipnummer' => $chipnumber]
         ]);
 
@@ -116,6 +118,28 @@ class AnimalFormHandler
         $start = strpos($result, '<table id="tableResult"');
 
         if (strpos($result, 'Uw resultaten')) {
+            return substr($result, $start);
+        } else {
+            return null;
+        }
+    }
+
+    public function idchipsResult(int $chipnumber)
+    {
+        $client = new GuzzleHttp\Client();
+
+        $response = $client->request('POST', 'http://idchips.com/nl/search', [
+            'timeout' => 2,
+            'form_params' => [
+                'search_identification_number' => $chipnumber,
+            ]
+        ]);
+
+        $result = $response->getBody()->getContents();
+
+        $start = strpos($result, '<div id="content">');
+
+        if (strpos($result, 'registratie')) {
             return substr($result, $start);
         } else {
             return null;

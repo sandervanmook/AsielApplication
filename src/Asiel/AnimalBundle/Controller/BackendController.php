@@ -90,11 +90,18 @@ class BackendController extends Controller
                 $bhcResult = null;
             }
 
+            if ($formHandler->idchipsResult($chipnumber)) {
+                $idchipsResult = $formHandler->idchipsResult($chipnumber);
+            } else {
+                $idchipsResult = null;
+            }
+
             return $this->render('@Animal/Backend/Animal/create.html.twig', [
                 'form' => $form->createView(),
                 'internalresult' => $internalResult,
                 'ndgresult' => $ndgResult,
                 'bhcresult' => $bhcResult,
+                'idchipsresult' => $idchipsResult,
             ]);
         }
 
