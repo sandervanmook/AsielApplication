@@ -137,7 +137,7 @@ class AnimalFormHandler
 
         $result = $response->getBody()->getContents();
 
-        $start = strpos($result, '<div id="content">');
+        $start = strpos($result, '<table width="100%"');
 
         if (strpos($result, 'Animal')) {
             return substr($result, $start);
