@@ -97,7 +97,8 @@
             </div>
         {% endif %}
     </div>
-    <div id="resultmodal" class="ui modal">
+    <div id="result">
+        <div class="ui divider horizontal"></div>
         <div class="content">
             {% if ndgresult is defined and ndgresult is not null %}
                 <div id="ndg-result">
@@ -124,31 +125,20 @@
 {% block javascripts %}
     {{ parent() }}
     <script>
-        $('#ndg-result').hide();
-        $('#bhc-result').hide();
-        $('#idchips-result').hide();
+        $('#result').hide();
 
         $('#ndg-view').css('cursor','pointer');
         $('#bhc-view').css('cursor','pointer');
         $('#idchips-view').css('cursor','pointer');
 
         $('#ndg-view').click(function () {
-            $('#ndg-result').show();
-            $('#resultmodal')
-                .modal('show')
-            ;
+            $('#result').show();
         })
         $('#bhc-view').click(function () {
-            $('#bhc-result').show();
-            $('#resultmodal')
-                .modal('show')
-            ;
+            $('#result').show();
         })
         $('#idchips-view').click(function () {
-            $('#idchips-result').show();
-            $('#resultmodal')
-                .modal('show')
-            ;
+            $('#result').show();
         })
     </script>
 {% endblock %}
