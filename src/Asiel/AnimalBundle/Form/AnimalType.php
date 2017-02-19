@@ -43,11 +43,13 @@ class AnimalType extends AbstractType
                 'label'         => 'Datum van registratie',
                 'format'        => 'dd-MM-yyyy',
                 'data'          => new \DateTime(),
+                'years'         => $this->buildYears(),
             ])
             ->add('admissionDate', DateType::class, [
                 'label'         => 'Datum van binnenkomst',
                 'format'        => 'dd-MM-yyyy',
                 'data'          => new \DateTime(),
+                'years'         => $this->buildYears(),
             ])
             ->add('chipnumber', TextType::class, [
                 'label'         => 'Chip nummer van dier',
