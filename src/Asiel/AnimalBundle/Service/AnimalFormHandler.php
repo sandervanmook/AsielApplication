@@ -139,7 +139,7 @@ class AnimalFormHandler
 
         $start = strpos($result, '<div id="content">');
 
-        if (strpos($result, 'registratie')) {
+        if (strpos($result, 'Animal')) {
             return substr($result, $start);
         } else {
             return null;
