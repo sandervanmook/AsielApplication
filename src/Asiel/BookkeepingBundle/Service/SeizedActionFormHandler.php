@@ -47,7 +47,7 @@ class SeizedActionFormHandler
         if (!$decision) {
             $this->baseFormHandler->getEventDispatcher()->dispatch('user_alert.message',
                 new UserAlertEvent(UserAlertEvent::DANGER,
-                    "Vanwege de huidige status van dit dier ({$animal->getActiveState()}) is afstaan momenteel niet mogelijk."));
+                    "Vanwege de huidige status van dit dier ({$animal->getActiveState()}) is in beslag nemen momenteel niet mogelijk."));
             return false;
         }
 

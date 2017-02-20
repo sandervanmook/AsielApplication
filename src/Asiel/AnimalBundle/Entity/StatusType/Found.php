@@ -117,7 +117,7 @@ class Found extends Status implements AnimalState
     }
     public function toSeized() : bool
     {
-        return false;
+        return true;
     }
 
     /**
