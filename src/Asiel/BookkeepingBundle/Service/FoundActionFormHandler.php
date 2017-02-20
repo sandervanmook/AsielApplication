@@ -136,4 +136,9 @@ class FoundActionFormHandler
     {
         return $this->getBaseFormHandler()->findCustomer($customerId);
     }
+
+    public function findAction(int $actionId) : Action
+    {
+        return $this->getBaseFormHandler()->findAction($actionId);
+    }
 }
