@@ -117,12 +117,6 @@ class CatType extends AnimalType
         if (!is_null($event->getData()->getId())) {
             // We don't want to show these fields if it's a new registration.
             $event->getForm()
-                // These can't be changed after registration
-                ->add('registerDate', DateType::class, [
-                    'label' => 'Datum van registratie',
-                    'format' => 'dd-MM-yyyy',
-                    'disabled' => true,
-                ])
                 // In case of edit action don't fill field with default data
                 ->add('admissionDate', DateType::class, [
                     'label' => 'Datum van binnenkomst',

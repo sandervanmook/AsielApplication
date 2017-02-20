@@ -6,8 +6,7 @@ use Asiel\AnimalBundle\Form\MunicipalityType;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -34,9 +33,8 @@ class SeizedType extends StatusType
                     5 => 5,
                 ],
             ])
-            ->add('timespend', NumberType::class, [
+            ->add('timespend', TextType::class, [
                 'label' => 'Hoeveel uur tijd besteed',
-                'scale' => 0,
             ])
             ->add('medicalactions', CKEditorType::class, [
                 'label' => 'Medische ingrepen',

@@ -75,14 +75,6 @@ class Animal
     private $incidents;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="register_date", type="date", nullable=false)
-     * @Assert\NotBlank()
-     */
-    private $registerDate;
-
-    /**
      * @ORM\Column(name="chipnumber", type="string", length=15, nullable=true)
      * @Assert\Length(
      *     min= 15,
@@ -340,30 +332,6 @@ class Animal
     public function getIncidents()
     {
         return $this->incidents;
-    }
-
-    /**
-     * Set registerDate
-     *
-     * @param \DateTime $registerDate
-     *
-     * @return Animal
-     */
-    public function setRegisterDate($registerDate)
-    {
-        $this->registerDate = $registerDate;
-
-        return $this;
-    }
-
-    /**
-     * Get registerDate
-     *
-     * @return \DateTime
-     */
-    public function getRegisterDate()
-    {
-        return $this->registerDate;
     }
 
     /**

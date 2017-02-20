@@ -129,8 +129,7 @@ class BackendController extends Controller
             $formHandler = $this->get('asiel.animalbundle.animalformhandler');
             $formHandler->create($animal);
 
-            // Force the user to create a status as this is mandatory.
-            return new RedirectResponse($this->generateUrl('backend_animal_status_create', ['id' => $animal->getId()]));
+            return new RedirectResponse($this->generateUrl('backend_animal_show', ['id' => $animal->getId()]));
         }
 
         return $this->render('@Animal/Backend/Animal/' . $animalProduct . '/create.html.twig', [

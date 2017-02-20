@@ -4,7 +4,6 @@
         <th>Voornaam</th>
         <th>Achternaam</th>
         <th>Email</th>
-        <th>Stad</th>
         <th>BSN</th>
         <th>Telefoonnummer</th>
         <th class="collapsing">Op zwarte lijst?</th>
@@ -20,7 +19,6 @@
             <td>{{ customer.firstname }}</td>
             <td><a href="{{ path('backend_statistics_customer_actions_show', {'id' : customer.id }) }}">{{ customer.lastname }}</a></td>
             <td>{{ customer.email }}</td>
-            <td>{{ customer.city }}</td>
             <td>{{ customer.citizenservicenumber }}</td>
             <td>{{ customer.phone }}</td>
             <td>{{ outputBool(customer.blacklisted) }}</td>

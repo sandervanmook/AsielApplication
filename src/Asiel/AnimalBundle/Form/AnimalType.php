@@ -39,12 +39,6 @@ class AnimalType extends AbstractType
                 'class'         => 'Asiel\LocationBundle\Entity\Location',
                 'choice_label'  => 'Name',
             ])
-            ->add('registerDate', DateType::class, [
-                'label'         => 'Datum van registratie',
-                'format'        => 'dd-MM-yyyy',
-                'data'          => new \DateTime(),
-                'years'         => $this->buildYears(),
-            ])
             ->add('admissionDate', DateType::class, [
                 'label'         => 'Datum van binnenkomst',
                 'format'        => 'dd-MM-yyyy',

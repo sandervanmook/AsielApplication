@@ -51,7 +51,7 @@ class StatusFormHandler
         if ($this->getAnimalRepository()->find($animalId)->getStatus()->isEmpty()) {
             $this->baseFormHandler->getEventDispatcher()->dispatch('user_alert.message',
                 new UserAlertEvent(UserAlertEvent::DANGER,
-                    'U moet minimaal (en als eerste) een "Onsite" status aanmaken.'));
+                    'Het dier heeft nog geen status.'));
         }
     }
 
