@@ -41,7 +41,7 @@ class Action
     /**
      * @var int
      *
-     * @ORM\Column(name="total_costs", type="integer")
+     * @ORM\Column(name="total_costs", type="float")
      */
     private $totalCosts;
 

@@ -122,14 +122,6 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * @var string
      *
-     * @ORM\Column(name="city", type="string", length=255, nullable=false)
-     * @Assert\NotBlank(message="Dit veld mag niet leeg zijn")
-     */
-    private $city;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="country", type="string", length=255, nullable=false)
      * @Assert\NotBlank(message="Dit veld mag niet leeg zijn")
      */
@@ -481,22 +473,6 @@ class User implements AdvancedUserInterface, \Serializable
     public function setZipcode(string $zipcode)
     {
         $this->zipcode = $zipcode;
-    }
-
-    /**
-     * @return string
-     */
-    public function getCity()
-    {
-        return $this->city;
-    }
-
-    /**
-     * @param string $city
-     */
-    public function setCity(string $city)
-    {
-        $this->city = $city;
     }
 
     /**

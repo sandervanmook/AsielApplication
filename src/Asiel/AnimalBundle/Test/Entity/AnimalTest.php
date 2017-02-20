@@ -62,13 +62,6 @@ class AnimalTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($this->animal->getIncidents(), new Incident());
     }
 
-    public function test_set_register_date()
-    {
-        $this->animal->setRegisterDate(new \DateTime('tomorrow'));
-
-        $this->assertEquals($this->animal->getRegisterDate(), new \DateTime('tomorrow'));
-    }
-
     public function test_set_chipnumber()
     {
         $this->animal->setChipnumber(1);

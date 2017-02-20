@@ -55,7 +55,7 @@ class BackendController extends Controller
 
         $form->handleRequest($request);
 
-        if ($form->isValid() && $form->isSubmitted()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $chipnumber = $form->get('chipnumber')->getData();
 
             // If it's not a valid chipnummer show error and let user try again.

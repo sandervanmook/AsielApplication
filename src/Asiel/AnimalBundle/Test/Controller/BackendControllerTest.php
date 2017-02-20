@@ -28,7 +28,7 @@ class BackendControllerTest extends BaseFunctionalTest
         $this->assertStatusCode(200, $this->client);
 
         $contents = $this->getContents($url);
-        $this->assertContains('<input type="text" id="chipnumbercheck" placeholder="15 cijferige chipnummer" maxlength="15">', $contents);
+        $this->assertContains('<input type="text" id="form_chipnumber" name="form[chipnumber]" required="required" placeholder="15 cijferige chipnummer" maxlength="15" class="inline field form-control" />', $contents);
     }
 
     public function test_register_action_cat()

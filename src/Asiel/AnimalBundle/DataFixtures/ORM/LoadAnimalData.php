@@ -16,7 +16,6 @@ class LoadAnimalData implements FixtureInterface
         $animal->setName('Sam');
         $animal->setGender('Male');
         $animal->setRace('test');
-        $animal->setRegisterDate(new \DateTime('now'));
         $animal->setAdmissionDate(new \DateTime('now'));
         $animal->setDayOfBirth(new \DateTime('yesterday'));
         $animal->setOutsideAnimal('Ja');
@@ -39,7 +38,6 @@ class LoadAnimalData implements FixtureInterface
         $animal2->setName('Sammy');
         $animal2->setGender('Female');
         $animal2->setRace('test');
-        $animal2->setRegisterDate(new \DateTime('now'));
         $animal2->setAdmissionDate(new \DateTime('now'));
         $animal2->setDayOfBirth(new \DateTime('yesterday'));
         $animal2->setOutsideAnimal('Ja');

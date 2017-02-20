@@ -29,9 +29,9 @@ class AnimalKittenStatsTest extends \PHPUnit_Framework_TestCase
         $cat2->setDayOfBirth(new \DateTime('yesterday'));
         $dog1->setDayOfBirth(new \DateTime('yesterday'));
 
-        $cat1->setRegisterDate(new \DateTime('now'));
-        $cat2->setRegisterDate(new \DateTime('now'));
-        $dog1->setRegisterDate(new \DateTime('now'));
+        $cat1->setAdmissionDate(new \DateTime('now'));
+        $cat2->setAdmissionDate(new \DateTime('now'));
+        $dog1->setAdmissionDate(new \DateTime('now'));
 
         $allAnimals = [$cat1, $cat2, $dog1];
         $searchArray['datestart'] = new \DateTime('1-1-2012');

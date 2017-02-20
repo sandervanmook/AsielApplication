@@ -58,21 +58,4 @@ class CustomerFilterTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($result, [$customer]);
     }
-
-    public function test_city_sub_filter()
-    {
-        $customer = new Customer();
-        $customer->setLastname('van Mook');
-        $customer->setCity('Roosendaal');
-        $allCustomers = [$customer];
-        $searchArray['lastname'] = 'Mo';
-        $searchArray['city'] = 'Ro';
-
-        $filterCustomer = new CustomerFilter($allCustomers, $searchArray);
-        $filterCustomer->filter();
-
-        $result = $filterCustomer->getFilterResult();
-
-        $this->assertEquals($result, [$customer]);
-    }
 }

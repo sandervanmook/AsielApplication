@@ -37,15 +37,15 @@ class AnimalKittenStats
 
         if (!empty($this->allCats)) {
             foreach ($this->allCats as $animal) {
-                $registerDate = $animal->getRegisterDate();
+                $admissionDate = $animal->getAdmissionDate();
                 $dayOfBirth = $animal->getDayOfBirth();
 
-                $interval = $registerDate->diff($dayOfBirth);
+                $interval = $admissionDate->diff($dayOfBirth);
                 $ageAtRegistration = $interval->y;
 
-                $registerDate = $animal->getRegisterDate()->getTimestamp();
-                if (($registerDate >= $dateStart) &&
-                    ($registerDate <= $dateEnd) &&
+                $admissionDate = $animal->getAdmissionDate()->getTimestamp();
+                if (($admissionDate >= $dateStart) &&
+                    ($admissionDate <= $dateEnd) &&
                     ($ageAtRegistration <= 1)
                 ) {
                     $result ++;

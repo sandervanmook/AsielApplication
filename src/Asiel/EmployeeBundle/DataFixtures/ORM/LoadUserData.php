@@ -25,7 +25,6 @@ class LoadUserData implements FixtureInterface
         $userAdmin->setAddress('admin');
         $userAdmin->setHouseNumber(1);
         $userAdmin->setZipcode('0000aa');
-        $userAdmin->setCity('-');
         $userAdmin->setCountry('Nederland');
 
         $manager->persist($userAdmin);

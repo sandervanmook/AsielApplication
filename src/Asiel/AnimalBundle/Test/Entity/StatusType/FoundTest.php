@@ -100,7 +100,7 @@ class FoundTest extends \PHPUnit_Framework_TestCase
 
     public function test_to_seized()
     {
-        $this->assertFalse($this->found->toSeized());
+        $this->assertTrue($this->found->toSeized());
     }
 
 

@@ -20,7 +20,7 @@ class ReturnedOwnerType extends StatusType
         $builder
             ->add('totalcosts', MoneyType::class, [
                 'label' => 'Totale kosten',
-                'scale' => 0,
+                'scale' => 2,
                 'mapped' => false,
             ])
         ;

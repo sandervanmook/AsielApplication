@@ -19,9 +19,6 @@ class SearchCustomerType extends AbstractType
             ->add('lastname', TextType::class, [
                 'label' => false,
             ])
-            ->add('city', TextType::class, [
-                'label' => false,
-            ])
             ->add('citizenservicenumber', TextType::class, [
                 'label' => false,
             ])
