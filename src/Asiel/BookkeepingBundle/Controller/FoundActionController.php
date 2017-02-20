@@ -32,6 +32,14 @@ class FoundActionController extends Controller
             $currentCustomer = new Customer();
         }
 
+        // Check if the animal has open actions
+        if ($currentAnimal->hasOpenActions()) {
+            $actionFormHandler = $this->get('asiel.bookkeepingbundle.actionformhandler');
+            $actionFormHandler->hasOpenActionsMessage();
+
+            return new RedirectResponse($this->generateUrl('backend_bookkeeping_action_index'));
+        }
+
         // Check if animals active state allows to be changed to adopted
         if (!$formHandler->stateChangeAllowed($currentAnimal)) {
             return new RedirectResponse($this->generateUrl('backend_bookkeeping_action_select',
