@@ -27,7 +27,6 @@ class LoadAnimalData implements FixtureInterface
         $animal->setCompatibleChildrenBelow10y(true);
         $animal->setCompatibleOldPeople(true);
         $animal->setVisiblePublic(false);
-        $animal->setAge();
         $animal->setEscapesAlot(false);
         $animal->setChipnumber(123456789012345);
         $animal->setSterilized(false);
@@ -49,7 +48,6 @@ class LoadAnimalData implements FixtureInterface
         $animal2->setCompatibleChildrenBelow10y(true);
         $animal2->setCompatibleOldPeople(true);
         $animal2->setVisiblePublic(false);
-        $animal2->setAge();
         $animal2->setEscapesAlot(false);
         $animal2->setChipnumber(123456789012344);
         $animal2->setSterilized(false);

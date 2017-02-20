@@ -62,7 +62,7 @@ class AnimalFilterTest extends \PHPUnit_Framework_TestCase
     {
         $cat = new Cat();
         $cat->setDayOfBirth(new \DateTime('now'));
-        $cat->setAge();
+
         $allAnimals = [$cat];
         $searchArray['type'] = ['Cat'];
         $searchArray['agestart'] = 1;

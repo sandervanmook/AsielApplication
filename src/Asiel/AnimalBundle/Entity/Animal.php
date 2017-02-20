@@ -193,13 +193,6 @@ class Animal
     private $visiblePublic;
 
     /**
-     * @var
-     *
-     * @ORM\Column(name="age", type="integer")
-     */
-    private $age;
-
-    /**
      * @var bool
      *
      * @ORM\Column(name="escapes_alot", type="boolean")
@@ -368,7 +361,6 @@ class Animal
     public function setDayOfBirth($dayOfBirth)
     {
         $this->dayOfBirth = $dayOfBirth;
-        $this->setAge();
 
         return $this;
     }
@@ -708,22 +700,17 @@ class Animal
      */
     public function getAge()
     {
-        // If you change this, change the frontend animal search as well
-        if ($this->age == 0) {
-            return 1;
-        }
-        return $this->age;
-    }
-
-    /**
-     * Set Age
-     */
-    public function setAge()
-    {
-        $now = new DateTime();
+        $now = new DateTime('today');
         $interval = $now->diff($this->dayOfBirth);
 
-        $this->age = $interval->y;
+        $age = $interval->y;
+
+        // If you change this, change the frontend animal search as well
+        if ($age == 0) {
+            return 1;
+        }
+
+        return $age;
     }
 
     /**
