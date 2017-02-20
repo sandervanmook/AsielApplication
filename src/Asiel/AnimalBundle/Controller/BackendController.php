@@ -7,6 +7,7 @@ use Asiel\AnimalBundle\AnimalFactory\AnimalType;
 use Asiel\AnimalBundle\Form\SearchAnimalType;
 use Asiel\Shared\Filter\Animal\AnimalFilter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -44,6 +45,11 @@ class BackendController extends Controller
                     'maxlength' => 15,
                     'class' => 'inline field',
                 ],
+                'required' => false,
+            ])
+            ->add('nochipnumber', CheckboxType::class, [
+                'label' => 'Chipnummer niet aanwezig',
+                'required' => false,
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Zoeken',
@@ -57,6 +63,15 @@ class BackendController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $chipnumber = $form->get('chipnumber')->getData();
+            $radioNoChipnumber = $form->get('nochipnumber')->getData();
+
+            // If no chipnumber radio was selected
+            if ($radioNoChipnumber) {
+                return $this->render('@Animal/Backend/Animal/create.html.twig', [
+                    'form' => $form->createView(),
+                    'internalresult' => null,
+                ]);
+            }
 
             // If it's not a valid chipnummer show error and let user try again.
             if (!$formHandler->validChipnumber($chipnumber)) {
