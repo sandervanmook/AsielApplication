@@ -50,7 +50,7 @@ class SeizedActionFormHandler
                     "Vanwege de huidige status van dit dier ({$animal->getActiveState()}) is afstaan momenteel niet mogelijk."));
             return false;
         }
-29
+
         return true;
     }
 
