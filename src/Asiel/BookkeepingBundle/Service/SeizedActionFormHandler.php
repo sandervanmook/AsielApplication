@@ -21,6 +21,11 @@ class SeizedActionFormHandler
         $this->baseFormHandler = $baseFormHandler;
     }
 
+    public function getBaseFormHandler() : BaseFormHandler
+    {
+        return $this->baseFormHandler;
+    }
+
     public function findAnimal(int $animalId): Animal
     {
         return $this->baseFormHandler->findAnimal($animalId);
@@ -45,7 +50,7 @@ class SeizedActionFormHandler
                     "Vanwege de huidige status van dit dier ({$animal->getActiveState()}) is afstaan momenteel niet mogelijk."));
             return false;
         }
-
+29
         return true;
     }
 
@@ -118,5 +123,10 @@ class SeizedActionFormHandler
         }
 
         return false;
+    }
+
+    public function findAction(int $actionId) : Action
+    {
+        return $this->getBaseFormHandler()->findAction($actionId);
     }
 }
