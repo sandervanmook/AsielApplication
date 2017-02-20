@@ -37,15 +37,15 @@ class AnimalLeavingStats
 
         if (!empty($this->allAnimals)) {
             foreach ($this->allAnimals as $animal) {
-                $registerDate = $animal->getRegisterDate();
+                $admissionDate = $animal->getAdmissionDate();
                 $dayOfBirth = $animal->getDayOfBirth();
 
-                $interval = $registerDate->diff($dayOfBirth);
+                $interval = $admissionDate->diff($dayOfBirth);
                 $ageAtRegistration = $interval->y;
 
-                $registerDate = $animal->getRegisterDate()->getTimestamp();
-                if (($registerDate >= $dateStart) &&
-                    ($registerDate <= $dateEnd)
+                $admissionDate = $animal->getAdmissionDate()->getTimestamp();
+                if (($admissionDate >= $dateStart) &&
+                    ($admissionDate <= $dateEnd)
                 ) {
                     switch ($animal->getActiveState()->getClassName()) {
                         case 'Deceased':

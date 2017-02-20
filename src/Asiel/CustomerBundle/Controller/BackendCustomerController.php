@@ -38,7 +38,6 @@ class BackendCustomerController extends Controller
         $allCustomers = $formHandler->getRepository()->findAll();
 
         $searchArray['lastname'] = $request->get('lastname');
-        $searchArray['city'] = $request->get('city');
         $searchArray['citizenservicenumber'] = $request->get('citizenservicenumber');
         $searchArray['municipality'] = $request->get('municipality');
 

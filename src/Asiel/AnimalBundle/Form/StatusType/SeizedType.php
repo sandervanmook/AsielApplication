@@ -41,7 +41,7 @@ class SeizedType extends StatusType
             ])
             ->add('totalcosts', MoneyType::class, [
                 'label' => 'Totale kosten',
-                'scale' => 0,
+                'scale' => 2,
                 // Total costs are saved in the action/
                 'mapped' => false,
             ])

@@ -21,7 +21,6 @@ class LoadCustomerData implements FixtureInterface
         $customer->setAddress('Buiten');
         $customer->setHouseNumber(1);
         $customer->setZipcode('4700AA');
-        $customer->setCity('Roosendaal');
         $customer->setMunicipality('Roosendaal');
         $customer->setCountry('Netherlands');
         $customer->setBlacklisted(false);

@@ -45,7 +45,7 @@ class FoundType extends StatusType
             ])
             ->add('totalcosts', MoneyType::class, [
                 'label' => 'De totale kosten voor deze vondst',
-                'scale' => 0,
+                'scale' => 2,
                 'mapped' => false,
             ])
         ;

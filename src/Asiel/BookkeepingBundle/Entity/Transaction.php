@@ -32,7 +32,7 @@ class Transaction
     /**
      * @var int
      *
-     * @ORM\Column(name="paid_amount", type="integer")
+     * @ORM\Column(name="paid_amount", type="float")
      */
     private $paidAmount;
 

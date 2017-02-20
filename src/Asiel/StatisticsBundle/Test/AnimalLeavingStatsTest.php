@@ -71,23 +71,23 @@ class AnimalLeavingStatsTest extends \PHPUnit_Framework_TestCase
         $dog7->setDayOfBirth(new \DateTime('yesterday'));
         $dog8->setDayOfBirth($twoYearsAgo);
 
-        $cat1->setRegisterDate(new \DateTime('now'));
-        $cat2->setRegisterDate(new \DateTime('now'));
-        $cat3->setRegisterDate(new \DateTime('now'));
-        $cat4->setRegisterDate(new \DateTime('now'));
-        $cat5->setRegisterDate(new \DateTime('now'));
-        $cat6->setRegisterDate(new \DateTime('now'));
-        $cat7->setRegisterDate(new \DateTime('now'));
-        $cat8->setRegisterDate(new \DateTime('now'));
+        $cat1->setAdmissionDate(new \DateTime('now'));
+        $cat2->setAdmissionDate(new \DateTime('now'));
+        $cat3->setAdmissionDate(new \DateTime('now'));
+        $cat4->setAdmissionDate(new \DateTime('now'));
+        $cat5->setAdmissionDate(new \DateTime('now'));
+        $cat6->setAdmissionDate(new \DateTime('now'));
+        $cat7->setAdmissionDate(new \DateTime('now'));
+        $cat8->setAdmissionDate(new \DateTime('now'));
 
-        $dog1->setRegisterDate(new \DateTime('now'));
-        $dog2->setRegisterDate(new \DateTime('now'));
-        $dog3->setRegisterDate(new \DateTime('now'));
-        $dog4->setRegisterDate(new \DateTime('now'));
-        $dog5->setRegisterDate(new \DateTime('now'));
-        $dog6->setRegisterDate(new \DateTime('now'));
-        $dog7->setRegisterDate(new \DateTime('now'));
-        $dog8->setRegisterDate(new \DateTime('now'));
+        $dog1->setAdmissionDate(new \DateTime('now'));
+        $dog2->setAdmissionDate(new \DateTime('now'));
+        $dog3->setAdmissionDate(new \DateTime('now'));
+        $dog4->setAdmissionDate(new \DateTime('now'));
+        $dog5->setAdmissionDate(new \DateTime('now'));
+        $dog6->setAdmissionDate(new \DateTime('now'));
+        $dog7->setAdmissionDate(new \DateTime('now'));
+        $dog8->setAdmissionDate(new \DateTime('now'));
 
         $cat1->addStatus($deceased);
         $cat2->addStatus($deceased);

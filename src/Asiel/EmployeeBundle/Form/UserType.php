@@ -113,13 +113,6 @@ class UserType extends AbstractType
                 ],
                 'required'  => true,
             ])
-            ->add('city', TextType::class, [
-                'label'     => 'Stad',
-                'attr'      => [
-                    'placeholder'   => 'Vul een stad in'
-                ],
-                'required'  => true,
-            ])
             ->add('country', ChoiceType::class, [
                 'label'     => 'Land',
                 'choices'   => [
