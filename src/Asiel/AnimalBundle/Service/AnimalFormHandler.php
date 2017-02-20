@@ -68,9 +68,9 @@ class AnimalFormHandler
         return $this->baseFormHandler->getAnimalRepository();
     }
 
-    public function validChipnumber(int $chipnumber)
+    public function validChipnumber(string $chipnumber)
     {
-        if (strlen($chipnumber) != 15) {
+        if (strlen($chipnumber) != 15 || intval($chipnumber) === 0) {
             $this->baseFormHandler->getEventDispatcher()->dispatch('user_alert.message',
                 new UserAlertEvent(UserAlertEvent::DANGER, 'Een chipnummer bestaat uit 15 cijfers.'));
             return false;
