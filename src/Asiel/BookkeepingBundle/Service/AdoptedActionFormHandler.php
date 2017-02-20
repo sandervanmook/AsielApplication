@@ -134,4 +134,9 @@ class AdoptedActionFormHandler
 
         return false;
     }
+
+    public function findAction(int $actionId) : Action
+    {
+        return $this->getBaseFormHandler()->findAction($actionId);
+    }
 }
