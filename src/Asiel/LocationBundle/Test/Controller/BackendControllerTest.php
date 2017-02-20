@@ -14,6 +14,7 @@ class BackendControllerTest extends BaseFunctionalTest
 
         $contents = $this->getContents($url);
         $this->assertContains('<td>Lokaal 1</td>', $contents);
+        $this->assertContains('<td>Kat</td>', $contents);
 
         $this->assertStatusCode(200, $this->client);
     }

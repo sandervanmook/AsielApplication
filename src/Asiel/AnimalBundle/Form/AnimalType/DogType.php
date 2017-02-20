@@ -22,56 +22,55 @@ class DogType extends AnimalType
         parent::buildForm($builder, $options);
         $builder
             ->add('race', TextType::class, [
-                'label'     => 'Ras',
-                'required'  => false,
-                'attr'          => [
-                    'placeholder'   => 'Van welk ras is het dier'
+                'label' => 'Ras',
+                'required' => false,
+                'attr' => [
+                    'placeholder' => 'Van welk ras is het dier'
                 ]
             ])
             ->add('knownCommands', CKEditorType::class, [
-                'label'     => 'Welke commando\'s snapt de hond',
-                'required'  => false,
+                'label' => 'Welke commando\'s snapt de hond',
+                'required' => false,
             ])
             ->add('needsExercise', CheckboxType::class, [
-                'label'     => 'Heeft de hond beweging nodig ?',
-                'required'  => false,
+                'label' => 'Heeft de hond beweging nodig ?',
+                'required' => false,
             ])
             ->add('furType', TextType::class, [
-                'label'     => 'Type vacht',
-                'required'  => false,
-                'attr'          => [
-                    'placeholder'   => 'Wat is het type vacht'
+                'label' => 'Type vacht',
+                'required' => false,
+                'attr' => [
+                    'placeholder' => 'Wat is het type vacht'
                 ]
             ])
             ->add('sterilized', CheckboxType::class, [
-                'label'     => 'Gesteriliseerd / Gecastereerd',
-                'required'  => false,
+                'label' => 'Gesteriliseerd / Gecastereerd',
+                'required' => false,
             ])
             ->add('compatibleSmallDog', CKEditorType::class, [
-                'label'     => 'Kan het dier met kleine honden overweg ?',
-                'required'  => false,
+                'label' => 'Kan het dier met kleine honden overweg ?',
+                'required' => false,
             ])
             ->add('compatibleLargeDog', CKEditorType::class, [
-                'label'     => 'Kan het dier met grote honden overweg ?',
-                'required'  => false,
+                'label' => 'Kan het dier met grote honden overweg ?',
+                'required' => false,
             ])
             ->add('compatibleCat', CKEditorType::class, [
-                'label'     => 'Kan samen met katten ?',
-                'required'  => false,
+                'label' => 'Kan samen met katten ?',
+                'required' => false,
             ])
             ->add('compatibleOtherAnimals', CKEditorType::class, [
-                'label'     => 'Kan het met andere dieren overweg ?',
-                'required'  => false,
+                'label' => 'Kan het met andere dieren overweg ?',
+                'required' => false,
             ])
             ->add('toiletTrained', CheckboxType::class, [
-                'label'     => 'Zindelijk',
-                'required'  => false,
+                'label' => 'Zindelijk',
+                'required' => false,
             ])
             ->addEventListener(
                 FormEvents::PRE_SET_DATA,
                 array($this, 'onPreSetData')
-            )
-        ;
+            );
     }
 
     /**
@@ -85,14 +84,13 @@ class DogType extends AnimalType
             $event->getForm()
                 // In case of edit action don fill field with default data
                 ->add('admissionDate', DateType::class, [
-                    'label'         => 'Datum van binnenkomst',
-                    'format'        => 'dd-MM-yyyy',
+                    'label' => 'Datum van binnenkomst',
+                    'format' => 'dd-MM-yyyy',
                 ])
                 ->add('dayOfBirth', DateType::class, [
-                    'label'         => 'Geboortedatum',
-                    'format'        => 'dd-MM-yyyy',
-                ])
-            ;
+                    'label' => 'Geboortedatum',
+                    'format' => 'dd-MM-yyyy',
+                ]);
         }
 
     }
@@ -102,9 +100,11 @@ class DogType extends AnimalType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => 'Asiel\AnimalBundle\Entity\AnimalType\Dog',
-        ));
+        $resolver
+            ->setDefaults([
+                'data_class' => 'Asiel\AnimalBundle\Entity\AnimalType\Dog',
+            ])
+            ->setRequired('animaltype');;
     }
 
     /**
@@ -122,7 +122,7 @@ class DogType extends AnimalType
     private function buildYears()
     {
         $years = [];
-        for ($i= 1900;$i <= date('Y'); $i++) {
+        for ($i = 1900; $i <= date('Y'); $i++) {
             $years[] .= $i;
         }
 

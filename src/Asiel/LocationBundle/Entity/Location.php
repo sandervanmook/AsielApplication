@@ -31,6 +31,14 @@ class Location
      */
     private $name;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="animal_type", type="string", length=255, nullable=false)
+     * @Assert\NotBlank(message="Dit veld mag niet leeg zijn")
+     */
+    private $animalType;
+
     public function __toString()
     {
         return $this->getName();
@@ -69,5 +77,28 @@ class Location
     {
         return $this->name;
     }
-}
 
+    /**
+     * Set animalType
+     *
+     * @param string $animalType
+     *
+     * @return Location
+     */
+    public function setAnimalType($animalType)
+    {
+        $this->animalType = $animalType;
+
+        return $this;
+    }
+
+    /**
+     * Get animalType
+     *
+     * @return string
+     */
+    public function getAnimalType()
+    {
+        return $this->animalType;
+    }
+}
