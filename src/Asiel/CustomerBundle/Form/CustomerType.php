@@ -53,7 +53,7 @@ class CustomerType extends AbstractType
                 'attr'      => [
                     'placeholder'   => 'Het emailadres van de klant'
                 ],
-                'required'  => true,
+                'required'  => false,
             ])
             ->add('phone', TextType::class, [
                 'label'     => 'Telefoonnummer',
@@ -80,13 +80,6 @@ class CustomerType extends AbstractType
                 'label'     => 'Postcode',
                 'attr'      => [
                     'placeholder'   => 'Vul een postcode in'
-                ],
-                'required'  => true,
-            ])
-            ->add('city', TextType::class, [
-                'label'     => 'Stad',
-                'attr'      => [
-                    'placeholder'   => 'Vul een stad in'
                 ],
                 'required'  => true,
             ])

@@ -8,14 +8,6 @@ $(document).ready(function () {
         refreshData();
     });
 
-    // city (sub) filter
-    var city = '';
-    $('#customerbundle_search_customer_city').keyup(function () {
-        // Get the typed value
-        city = $(this).val();
-        refreshData();
-    });
-
     //citizenservicenumber filter
     var citizenservicenumber = '';
     $('#customerbundle_search_customer_citizenservicenumber').keyup(function () {
@@ -40,7 +32,6 @@ $(document).ready(function () {
             url: Routing.generate('backend_customer_search_data', {'requestby' : requestby}, true),
             data: {
                 lastname: lastname,
-                city: city,
                 citizenservicenumber: citizenservicenumber,
                 municipality: municipality
             },

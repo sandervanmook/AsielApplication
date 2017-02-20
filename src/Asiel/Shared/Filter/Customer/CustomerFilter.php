@@ -24,7 +24,6 @@ class CustomerFilter
     public function filter()
     {
         $this->filterLastname();
-        $this->filterCity();
         $this->filterMunicipality();
         $this->filterCitizenServiceNumber();
     }
@@ -76,16 +75,4 @@ class CustomerFilter
      * Subfilters use filterResult
      */
 
-    private function filterCity()
-    {
-        $result = [];
-        if ((!empty($this->searchArray['city'])) && (!empty($this->filterResult))) {
-            foreach ($this->filterResult as $customer) {
-                if (is_int(stripos($customer->getCity(), $this->searchArray['city']))) {
-                    $result[] = $customer;
-                }
-            }
-            $this->filterResult = $result;
-        }
-    }
 }

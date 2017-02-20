@@ -41,7 +41,7 @@ class Seized extends Status implements AnimalState
     /**
      * @var int
      *
-     * @ORM\Column(name="time_spend", type="integer", nullable=false)
+     * @ORM\Column(name="time_spend", type="string", length=255, nullable=false)
      */
     private $timeSpend;
 

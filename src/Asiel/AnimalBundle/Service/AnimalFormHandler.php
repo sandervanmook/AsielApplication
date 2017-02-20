@@ -88,12 +88,16 @@ class AnimalFormHandler
     {
         $client = new GuzzleHttp\Client();
 
-        $response = $client->request('POST', 'https://ndgnl.secure.is.nl/search.php?loc=nl_NL', [
-            'timeout' => 2,
-            'form_params' => [
-                'Barcode' => $chipnumber,
-            ]
-        ]);
+        try {
+            $response = $client->request('POST', 'https://ndgnl.secure.is.nl/search.php?loc=nl_NL', [
+                'timeout' => 2,
+                'form_params' => [
+                    'Barcode' => $chipnumber,
+                ]
+            ]);
+        } catch (GuzzleHttp\Exception\ConnectException $connectException) {
+            return $connectException->getMessage();
+        }
 
         $result = $response->getBody()->getContents();
         $start = strpos($result, '<table');
@@ -108,6 +112,15 @@ class AnimalFormHandler
     public function bhcResult(int $chipnumber)
     {
         $client = new GuzzleHttp\Client();
+
+        try {
+            $response = $client->request('GET', 'http://particulier.backhomeclub.nl/Info_Chipnummer_nl.aspx', [
+                'timeout' => 2,
+                'query' => ['chipnummer' => $chipnumber]
+            ]);
+        } catch (GuzzleHttp\Exception\ConnectException $connectException) {
+            return $connectException->getMessage();
+        }
 
         $response = $client->request('GET', 'http://particulier.backhomeclub.nl/Info_Chipnummer_nl.aspx', [
             'timeout' => 2,
@@ -128,12 +141,16 @@ class AnimalFormHandler
     {
         $client = new GuzzleHttp\Client();
 
-        $response = $client->request('POST', 'http://idchips.com/nl/search', [
-            'timeout' => 2,
-            'form_params' => [
-                'search_identification_number' => $chipnumber,
-            ]
-        ]);
+        try {
+            $response = $client->request('POST', 'http://idchips.com/nl/search', [
+                'timeout' => 2,
+                'form_params' => [
+                    'search_identification_number' => $chipnumber,
+                ]
+            ]);
+        } catch (GuzzleHttp\Exception\ConnectException $connectException) {
+            return $connectException->getMessage();
+        }
 
         $result = $response->getBody()->getContents();
 

@@ -24,238 +24,238 @@ class BookkeepingSettings
     /**
      * @var int
      *
-     * @ORM\Column(name="price_adopted_kitten", type="integer")
+     * @ORM\Column(name="price_adopted_kitten", type="float")
      */
     private $priceAdoptedKitten;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="price_adopted_cat", type="integer")
+     * @ORM\Column(name="price_adopted_cat", type="float")
      */
     private $priceAdoptedCat;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="price_adopted_puppy", type="integer")
+     * @ORM\Column(name="price_adopted_puppy", type="float")
      */
     private $priceAdoptedPuppy;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="price_adopted_dog", type="integer")
+     * @ORM\Column(name="price_adopted_dog", type="float")
      */
     private $priceAdoptedDog;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="dog_unaffiliated_younger_than_one", type="integer")
+     * @ORM\Column(name="dog_unaffiliated_younger_than_one", type="float")
      */
     private $priceAbandonedDogUnaffiliatedYoungerThanOne;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="dog_unaffiliated_older_than_one", type="integer")
+     * @ORM\Column(name="dog_unaffiliated_older_than_one", type="float")
      */
     private $priceAbandonedDogUnaffiliatedOlderThanOne;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="dog_unaffiliated_puppy", type="integer")
+     * @ORM\Column(name="dog_unaffiliated_puppy", type="float")
      */
     private $priceAbandonedDogUnaffiliatedPuppy;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="dog_unaffiliated_addition_not_chipped", type="integer")
+     * @ORM\Column(name="dog_unaffiliated_addition_not_chipped", type="float")
      */
     private $priceAbandonedDogUnaffiliatedAdditionNotChipped;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="dog_unaffiliated_addition_not_vaccinated", type="integer")
+     * @ORM\Column(name="dog_unaffiliated_addition_not_vaccinated", type="float")
      */
     private $priceAbandonedDogUnaffiliatedAdditionNotVaccinated;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="dog_unaffiliated_addition_fur_treatment_small_dog", type="integer")
+     * @ORM\Column(name="dog_unaffiliated_addition_fur_treatment_small_dog", type="float")
      */
     private $priceAbandonedDogUnaffiliatedAdditionFurTreatmentSmallDog;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="dog_unaffiliated_addition_fur_treatment_large_dog", type="integer")
+     * @ORM\Column(name="dog_unaffiliated_addition_fur_treatment_large_dog", type="float")
      */
     private $priceAbandonedDogUnaffiliatedAdditionFurTreatmentLargeDog;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="dog_unaffiliated_addition_ill", type="integer")
+     * @ORM\Column(name="dog_unaffiliated_addition_ill", type="float")
      */
     private $priceAbandonedDogUnaffiliatedAdditionIll;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="dog_affiliated_younger_than_one", type="integer")
+     * @ORM\Column(name="dog_affiliated_younger_than_one", type="float")
      */
     private $priceAbandonedDogAffiliatedYoungerThanOne;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="dog_affiliated_older_than_one", type="integer")
+     * @ORM\Column(name="dog_affiliated_older_than_one", type="float")
      */
     private $priceAbandonedDogAffiliatedOlderThanOne;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="dog_affiliated_puppy", type="integer")
+     * @ORM\Column(name="dog_affiliated_puppy", type="float")
      */
     private $priceAbandonedDogAffiliatedPuppy;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="dog_affiliated_addition_not_chipped", type="integer")
+     * @ORM\Column(name="dog_affiliated_addition_not_chipped", type="float")
      */
     private $priceAbandonedDogAffiliatedAdditionNotChipped;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="dog_affiliated_addition_not_vaccinated", type="integer")
+     * @ORM\Column(name="dog_affiliated_addition_not_vaccinated", type="float")
      */
     private $priceAbandonedDogAffiliatedAdditionNotVaccinated;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="dog_affiliated_addition_fur_treatment_small_dog", type="integer")
+     * @ORM\Column(name="dog_affiliated_addition_fur_treatment_small_dog", type="float")
      */
     private $priceAbandonedDogAffiliatedAdditionFurTreatmentSmallDog;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="dog_affiliated_addition_fur_treatment_large_dog", type="integer")
+     * @ORM\Column(name="dog_affiliated_addition_fur_treatment_large_dog", type="float")
      */
     private $priceAbandonedDogAffiliatedAdditionFurTreatmentLargeDog;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="dog_affiliated_addition_ill", type="integer")
+     * @ORM\Column(name="dog_affiliated_addition_ill", type="float")
      */
     private $priceAbandonedDogAffiliatedAdditionIll;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="cat_unaffiliated_younger_than_three_months", type="integer")
+     * @ORM\Column(name="cat_unaffiliated_younger_than_three_months", type="float")
      */
     private $priceAbandonedCatUnaffiliatedYoungerThanThreeMonths;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="cat_unaffiliated_between_three_months_and_ten_years", type="integer")
+     * @ORM\Column(name="cat_unaffiliated_between_three_months_and_ten_years", type="float")
      */
     private $priceAbandonedCatUnaffiliatedBetweenThreeMonthsAndTenYears;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="cat_unaffiliated_older_than_ten_years", type="integer")
+     * @ORM\Column(name="cat_unaffiliated_older_than_ten_years", type="float")
      */
     private $priceAbandonedCatUnaffiliatedOlderThanTenYears;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="cat_unaffiliated_kitten", type="integer")
+     * @ORM\Column(name="cat_unaffiliated_kitten", type="float")
      */
     private $priceAbandonedCatUnaffiliatedKitten;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="cat_unaffiliated_addition_not_chipped", type="integer")
+     * @ORM\Column(name="cat_unaffiliated_addition_not_chipped", type="float")
      */
     private $priceAbandonedCatUnaffiliatedAdditionNotChipped;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="cat_unaffiliated_addition_not_vaccinated", type="integer")
+     * @ORM\Column(name="cat_unaffiliated_addition_not_vaccinated", type="float")
      */
     private $priceAbandonedCatUnaffiliatedAdditionNotVaccinated;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="cat_unaffiliated_addition_needs_sterilization", type="integer")
+     * @ORM\Column(name="cat_unaffiliated_addition_needs_sterilization", type="float")
      */
     private $priceAbandonedCatUnaffiliatedAdditionNeedsSterilization ;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="cat_affiliated_younger_than_three_months", type="integer")
+     * @ORM\Column(name="cat_affiliated_younger_than_three_months", type="float")
      */
     private $priceAbandonedCatAffiliatedYoungerThanThreeMonths;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="cat_affiliated_between_three_months_and_ten_years", type="integer")
+     * @ORM\Column(name="cat_affiliated_between_three_months_and_ten_years", type="float")
      */
     private $priceAbandonedCatAffiliatedBetweenThreeMonthsAndTenYears;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="cat_affiliated_older_than_ten_years", type="integer")
+     * @ORM\Column(name="cat_affiliated_older_than_ten_years", type="float")
      */
     private $priceAbandonedCatAffiliatedOlderThanTenYears;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="cat_affiliated_kitten", type="integer")
+     * @ORM\Column(name="cat_affiliated_kitten", type="float")
      */
     private $priceAbandonedCatAffiliatedKitten;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="cat_affiliated_addition_not_chipped", type="integer")
+     * @ORM\Column(name="cat_affiliated_addition_not_chipped", type="float")
      */
     private $priceAbandonedCatAffiliatedAdditionNotChipped;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="cat_affiliated_addition_not_vaccinated", type="integer")
+     * @ORM\Column(name="cat_affiliated_addition_not_vaccinated", type="float")
      */
     private $priceAbandonedCatAffiliatedAdditionNotVaccinated;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="cat_affiliated_addition_needs_sterilization", type="integer")
+     * @ORM\Column(name="cat_affiliated_addition_needs_sterilization", type="float")
      */
     private $priceAbandonedCatAffiliatedAdditionNeedsSterilization ;
 
@@ -273,7 +273,7 @@ class BookkeepingSettings
     /**
      * Set priceAdoptedKitten
      *
-     * @param integer $priceAdoptedKitten
+     * @param float $priceAdoptedKitten
      *
      * @return BookkeepingSettings
      */
@@ -297,7 +297,7 @@ class BookkeepingSettings
     /**
      * Set priceAdoptedCat
      *
-     * @param integer $priceAdoptedCat
+     * @param float $priceAdoptedCat
      *
      * @return BookkeepingSettings
      */
@@ -321,7 +321,7 @@ class BookkeepingSettings
     /**
      * Set priceAdoptedPuppy
      *
-     * @param integer $priceAdoptedPuppy
+     * @param float $priceAdoptedPuppy
      *
      * @return BookkeepingSettings
      */
@@ -345,7 +345,7 @@ class BookkeepingSettings
     /**
      * Set priceAdoptedDog
      *
-     * @param integer $priceAdoptedDog
+     * @param float $priceAdoptedDog
      *
      * @return BookkeepingSettings
      */
@@ -369,7 +369,7 @@ class BookkeepingSettings
     /**
      * Set priceAbandonedDogUnaffiliatedYoungerThanOne
      *
-     * @param integer $priceAbandonedDogUnaffiliatedYoungerThanOne
+     * @param float $priceAbandonedDogUnaffiliatedYoungerThanOne
      *
      * @return BookkeepingSettings
      */
@@ -383,7 +383,7 @@ class BookkeepingSettings
     /**
      * Get priceAbandonedDogUnaffiliatedYoungerThanOne
      *
-     * @return integer
+     * @return float
      */
     public function getPriceAbandonedDogUnaffiliatedYoungerThanOne()
     {
@@ -393,7 +393,7 @@ class BookkeepingSettings
     /**
      * Set priceAbandonedDogUnaffiliatedOlderThanOne
      *
-     * @param integer $priceAbandonedDogUnaffiliatedOlderThanOne
+     * @param float $priceAbandonedDogUnaffiliatedOlderThanOne
      *
      * @return BookkeepingSettings
      */
@@ -407,7 +407,7 @@ class BookkeepingSettings
     /**
      * Get priceAbandonedDogUnaffiliatedOlderThanOne
      *
-     * @return integer
+     * @return float
      */
     public function getPriceAbandonedDogUnaffiliatedOlderThanOne()
     {
@@ -417,7 +417,7 @@ class BookkeepingSettings
     /**
      * Set priceAbandonedDogUnaffiliatedPuppy
      *
-     * @param integer $priceAbandonedDogUnaffiliatedPuppy
+     * @param float $priceAbandonedDogUnaffiliatedPuppy
      *
      * @return BookkeepingSettings
      */
@@ -431,7 +431,7 @@ class BookkeepingSettings
     /**
      * Get priceAbandonedDogUnaffiliatedPuppy
      *
-     * @return integer
+     * @return float
      */
     public function getPriceAbandonedDogUnaffiliatedPuppy()
     {
@@ -441,7 +441,7 @@ class BookkeepingSettings
     /**
      * Set priceAbandonedDogUnaffiliatedAdditionNotChipped
      *
-     * @param integer $priceAbandonedDogUnaffiliatedAdditionNotChipped
+     * @param float $priceAbandonedDogUnaffiliatedAdditionNotChipped
      *
      * @return BookkeepingSettings
      */
@@ -455,7 +455,7 @@ class BookkeepingSettings
     /**
      * Get priceAbandonedDogUnaffiliatedAdditionNotChipped
      *
-     * @return integer
+     * @return float
      */
     public function getPriceAbandonedDogUnaffiliatedAdditionNotChipped()
     {
@@ -465,7 +465,7 @@ class BookkeepingSettings
     /**
      * Set priceAbandonedDogUnaffiliatedAdditionNotVaccinated
      *
-     * @param integer $priceAbandonedDogUnaffiliatedAdditionNotVaccinated
+     * @param float $priceAbandonedDogUnaffiliatedAdditionNotVaccinated
      *
      * @return BookkeepingSettings
      */
@@ -479,7 +479,7 @@ class BookkeepingSettings
     /**
      * Get priceAbandonedDogUnaffiliatedAdditionNotVaccinated
      *
-     * @return integer
+     * @return float
      */
     public function getPriceAbandonedDogUnaffiliatedAdditionNotVaccinated()
     {
@@ -489,7 +489,7 @@ class BookkeepingSettings
     /**
      * Set priceAbandonedDogUnaffiliatedAdditionFurTreatmentSmallDog
      *
-     * @param integer $priceAbandonedDogUnaffiliatedAdditionFurTreatmentSmallDog
+     * @param float $priceAbandonedDogUnaffiliatedAdditionFurTreatmentSmallDog
      *
      * @return BookkeepingSettings
      */
@@ -503,7 +503,7 @@ class BookkeepingSettings
     /**
      * Get priceAbandonedDogUnaffiliatedAdditionFurTreatmentSmallDog
      *
-     * @return integer
+     * @return float
      */
     public function getPriceAbandonedDogUnaffiliatedAdditionFurTreatmentSmallDog()
     {
@@ -513,7 +513,7 @@ class BookkeepingSettings
     /**
      * Set priceAbandonedDogUnaffiliatedAdditionFurTreatmentLargeDog
      *
-     * @param integer $priceAbandonedDogUnaffiliatedAdditionFurTreatmentLargeDog
+     * @param float $priceAbandonedDogUnaffiliatedAdditionFurTreatmentLargeDog
      *
      * @return BookkeepingSettings
      */
@@ -527,7 +527,7 @@ class BookkeepingSettings
     /**
      * Get priceAbandonedDogUnaffiliatedAdditionFurTreatmentLargeDog
      *
-     * @return integer
+     * @return float
      */
     public function getPriceAbandonedDogUnaffiliatedAdditionFurTreatmentLargeDog()
     {
@@ -537,7 +537,7 @@ class BookkeepingSettings
     /**
      * Set priceAbandonedDogUnaffiliatedAdditionIll
      *
-     * @param integer $priceAbandonedDogUnaffiliatedAdditionIll
+     * @param float $priceAbandonedDogUnaffiliatedAdditionIll
      *
      * @return BookkeepingSettings
      */
@@ -551,7 +551,7 @@ class BookkeepingSettings
     /**
      * Get priceAbandonedDogUnaffiliatedAdditionIll
      *
-     * @return integer
+     * @return float
      */
     public function getPriceAbandonedDogUnaffiliatedAdditionIll()
     {
@@ -561,7 +561,7 @@ class BookkeepingSettings
     /**
      * Set priceAbandonedDogAffiliatedYoungerThanOne
      *
-     * @param integer $priceAbandonedDogAffiliatedYoungerThanOne
+     * @param float $priceAbandonedDogAffiliatedYoungerThanOne
      *
      * @return BookkeepingSettings
      */
@@ -575,7 +575,7 @@ class BookkeepingSettings
     /**
      * Get priceAbandonedDogAffiliatedYoungerThanOne
      *
-     * @return integer
+     * @return float
      */
     public function getPriceAbandonedDogAffiliatedYoungerThanOne()
     {
@@ -585,7 +585,7 @@ class BookkeepingSettings
     /**
      * Set priceAbandonedDogAffiliatedOlderThanOne
      *
-     * @param integer $priceAbandonedDogAffiliatedOlderThanOne
+     * @param float $priceAbandonedDogAffiliatedOlderThanOne
      *
      * @return BookkeepingSettings
      */
@@ -599,7 +599,7 @@ class BookkeepingSettings
     /**
      * Get priceAbandonedDogAffiliatedOlderThanOne
      *
-     * @return integer
+     * @return float
      */
     public function getPriceAbandonedDogAffiliatedOlderThanOne()
     {
@@ -609,7 +609,7 @@ class BookkeepingSettings
     /**
      * Set priceAbandonedDogAffiliatedPuppy
      *
-     * @param integer $priceAbandonedDogAffiliatedPuppy
+     * @param float $priceAbandonedDogAffiliatedPuppy
      *
      * @return BookkeepingSettings
      */
@@ -623,7 +623,7 @@ class BookkeepingSettings
     /**
      * Get priceAbandonedDogAffiliatedPuppy
      *
-     * @return integer
+     * @return float
      */
     public function getPriceAbandonedDogAffiliatedPuppy()
     {
@@ -633,7 +633,7 @@ class BookkeepingSettings
     /**
      * Set priceAbandonedDogAffiliatedAdditionNotChipped
      *
-     * @param integer $priceAbandonedDogAffiliatedAdditionNotChipped
+     * @param float $priceAbandonedDogAffiliatedAdditionNotChipped
      *
      * @return BookkeepingSettings
      */
@@ -647,7 +647,7 @@ class BookkeepingSettings
     /**
      * Get priceAbandonedDogAffiliatedAdditionNotChipped
      *
-     * @return integer
+     * @return float
      */
     public function getPriceAbandonedDogAffiliatedAdditionNotChipped()
     {
@@ -657,7 +657,7 @@ class BookkeepingSettings
     /**
      * Set priceAbandonedDogAffiliatedAdditionNotVaccinated
      *
-     * @param integer $priceAbandonedDogAffiliatedAdditionNotVaccinated
+     * @param float $priceAbandonedDogAffiliatedAdditionNotVaccinated
      *
      * @return BookkeepingSettings
      */
@@ -671,7 +671,7 @@ class BookkeepingSettings
     /**
      * Get priceAbandonedDogAffiliatedAdditionNotVaccinated
      *
-     * @return integer
+     * @return float
      */
     public function getPriceAbandonedDogAffiliatedAdditionNotVaccinated()
     {
@@ -681,7 +681,7 @@ class BookkeepingSettings
     /**
      * Set priceAbandonedDogAffiliatedAdditionFurTreatmentSmallDog
      *
-     * @param integer $priceAbandonedDogAffiliatedAdditionFurTreatmentSmallDog
+     * @param float $priceAbandonedDogAffiliatedAdditionFurTreatmentSmallDog
      *
      * @return BookkeepingSettings
      */
@@ -695,7 +695,7 @@ class BookkeepingSettings
     /**
      * Get priceAbandonedDogAffiliatedAdditionFurTreatmentSmallDog
      *
-     * @return integer
+     * @return float
      */
     public function getPriceAbandonedDogAffiliatedAdditionFurTreatmentSmallDog()
     {
@@ -705,7 +705,7 @@ class BookkeepingSettings
     /**
      * Set priceAbandonedDogAffiliatedAdditionFurTreatmentLargeDog
      *
-     * @param integer $priceAbandonedDogAffiliatedAdditionFurTreatmentLargeDog
+     * @param float $priceAbandonedDogAffiliatedAdditionFurTreatmentLargeDog
      *
      * @return BookkeepingSettings
      */
@@ -719,7 +719,7 @@ class BookkeepingSettings
     /**
      * Get priceAbandonedDogAffiliatedAdditionFurTreatmentLargeDog
      *
-     * @return integer
+     * @return float
      */
     public function getPriceAbandonedDogAffiliatedAdditionFurTreatmentLargeDog()
     {
@@ -729,7 +729,7 @@ class BookkeepingSettings
     /**
      * Set priceAbandonedDogAffiliatedAdditionIll
      *
-     * @param integer $priceAbandonedDogAffiliatedAdditionIll
+     * @param float $priceAbandonedDogAffiliatedAdditionIll
      *
      * @return BookkeepingSettings
      */
@@ -743,7 +743,7 @@ class BookkeepingSettings
     /**
      * Get priceAbandonedDogAffiliatedAdditionIll
      *
-     * @return integer
+     * @return float
      */
     public function getPriceAbandonedDogAffiliatedAdditionIll()
     {
@@ -753,7 +753,7 @@ class BookkeepingSettings
     /**
      * Set priceAbandonedCatUnaffiliatedYoungerThanThreeMonths
      *
-     * @param integer $priceAbandonedCatUnaffiliatedYoungerThanThreeMonths
+     * @param float $priceAbandonedCatUnaffiliatedYoungerThanThreeMonths
      *
      * @return BookkeepingSettings
      */
@@ -767,7 +767,7 @@ class BookkeepingSettings
     /**
      * Get priceAbandonedCatUnaffiliatedYoungerThanThreeMonths
      *
-     * @return integer
+     * @return float
      */
     public function getPriceAbandonedCatUnaffiliatedYoungerThanThreeMonths()
     {
@@ -777,7 +777,7 @@ class BookkeepingSettings
     /**
      * Set priceAbandonedCatUnaffiliatedBetweenThreeMonthsAndTenYears
      *
-     * @param integer $priceAbandonedCatUnaffiliatedBetweenThreeMonthsAndTenYears
+     * @param float $priceAbandonedCatUnaffiliatedBetweenThreeMonthsAndTenYears
      *
      * @return BookkeepingSettings
      */
@@ -791,7 +791,7 @@ class BookkeepingSettings
     /**
      * Get priceAbandonedCatUnaffiliatedBetweenThreeMonthsAndTenYears
      *
-     * @return integer
+     * @return float
      */
     public function getPriceAbandonedCatUnaffiliatedBetweenThreeMonthsAndTenYears()
     {
@@ -801,7 +801,7 @@ class BookkeepingSettings
     /**
      * Set priceAbandonedCatUnaffiliatedOlderThanTenYears
      *
-     * @param integer $priceAbandonedCatUnaffiliatedOlderThanTenYears
+     * @param float $priceAbandonedCatUnaffiliatedOlderThanTenYears
      *
      * @return BookkeepingSettings
      */
@@ -815,7 +815,7 @@ class BookkeepingSettings
     /**
      * Get priceAbandonedCatUnaffiliatedOlderThanTenYears
      *
-     * @return integer
+     * @return float
      */
     public function getPriceAbandonedCatUnaffiliatedOlderThanTenYears()
     {
@@ -825,7 +825,7 @@ class BookkeepingSettings
     /**
      * Set priceAbandonedCatUnaffiliatedKitten
      *
-     * @param integer $priceAbandonedCatUnaffiliatedKitten
+     * @param float $priceAbandonedCatUnaffiliatedKitten
      *
      * @return BookkeepingSettings
      */
@@ -839,7 +839,7 @@ class BookkeepingSettings
     /**
      * Get priceAbandonedCatUnaffiliatedKitten
      *
-     * @return integer
+     * @return float
      */
     public function getPriceAbandonedCatUnaffiliatedKitten()
     {
@@ -849,7 +849,7 @@ class BookkeepingSettings
     /**
      * Set priceAbandonedCatUnaffiliatedAdditionNotChipped
      *
-     * @param integer $priceAbandonedCatUnaffiliatedAdditionNotChipped
+     * @param float $priceAbandonedCatUnaffiliatedAdditionNotChipped
      *
      * @return BookkeepingSettings
      */
@@ -863,7 +863,7 @@ class BookkeepingSettings
     /**
      * Get priceAbandonedCatUnaffiliatedAdditionNotChipped
      *
-     * @return integer
+     * @return float
      */
     public function getPriceAbandonedCatUnaffiliatedAdditionNotChipped()
     {
@@ -873,7 +873,7 @@ class BookkeepingSettings
     /**
      * Set priceAbandonedCatUnaffiliatedAdditionNotVaccinated
      *
-     * @param integer $priceAbandonedCatUnaffiliatedAdditionNotVaccinated
+     * @param float $priceAbandonedCatUnaffiliatedAdditionNotVaccinated
      *
      * @return BookkeepingSettings
      */
@@ -887,7 +887,7 @@ class BookkeepingSettings
     /**
      * Get priceAbandonedCatUnaffiliatedAdditionNotVaccinated
      *
-     * @return integer
+     * @return float
      */
     public function getPriceAbandonedCatUnaffiliatedAdditionNotVaccinated()
     {
@@ -897,7 +897,7 @@ class BookkeepingSettings
     /**
      * Set priceAbandonedCatUnaffiliatedAdditionNeedsSterilization
      *
-     * @param integer $priceAbandonedCatUnaffiliatedAdditionNeedsSterilization
+     * @param float $priceAbandonedCatUnaffiliatedAdditionNeedsSterilization
      *
      * @return BookkeepingSettings
      */
@@ -911,7 +911,7 @@ class BookkeepingSettings
     /**
      * Get priceAbandonedCatUnaffiliatedAdditionNeedsSterilization
      *
-     * @return integer
+     * @return float
      */
     public function getPriceAbandonedCatUnaffiliatedAdditionNeedsSterilization()
     {
@@ -921,7 +921,7 @@ class BookkeepingSettings
     /**
      * Set priceAbandonedCatAffiliatedYoungerThanThreeMonths
      *
-     * @param integer $priceAbandonedCatAffiliatedYoungerThanThreeMonths
+     * @param float $priceAbandonedCatAffiliatedYoungerThanThreeMonths
      *
      * @return BookkeepingSettings
      */
@@ -935,7 +935,7 @@ class BookkeepingSettings
     /**
      * Get priceAbandonedCatAffiliatedYoungerThanThreeMonths
      *
-     * @return integer
+     * @return float
      */
     public function getPriceAbandonedCatAffiliatedYoungerThanThreeMonths()
     {
@@ -945,7 +945,7 @@ class BookkeepingSettings
     /**
      * Set priceAbandonedCatAffiliatedBetweenThreeMonthsAndTenYears
      *
-     * @param integer $priceAbandonedCatAffiliatedBetweenThreeMonthsAndTenYears
+     * @param float $priceAbandonedCatAffiliatedBetweenThreeMonthsAndTenYears
      *
      * @return BookkeepingSettings
      */
@@ -959,7 +959,7 @@ class BookkeepingSettings
     /**
      * Get priceAbandonedCatAffiliatedBetweenThreeMonthsAndTenYears
      *
-     * @return integer
+     * @return float
      */
     public function getPriceAbandonedCatAffiliatedBetweenThreeMonthsAndTenYears()
     {
@@ -969,7 +969,7 @@ class BookkeepingSettings
     /**
      * Set priceAbandonedCatAffiliatedOlderThanTenYears
      *
-     * @param integer $priceAbandonedCatAffiliatedOlderThanTenYears
+     * @param float $priceAbandonedCatAffiliatedOlderThanTenYears
      *
      * @return BookkeepingSettings
      */
@@ -983,7 +983,7 @@ class BookkeepingSettings
     /**
      * Get priceAbandonedCatAffiliatedOlderThanTenYears
      *
-     * @return integer
+     * @return float
      */
     public function getPriceAbandonedCatAffiliatedOlderThanTenYears()
     {
@@ -993,7 +993,7 @@ class BookkeepingSettings
     /**
      * Set priceAbandonedCatAffiliatedKitten
      *
-     * @param integer $priceAbandonedCatAffiliatedKitten
+     * @param float $priceAbandonedCatAffiliatedKitten
      *
      * @return BookkeepingSettings
      */
@@ -1007,7 +1007,7 @@ class BookkeepingSettings
     /**
      * Get priceAbandonedCatAffiliatedKitten
      *
-     * @return integer
+     * @return float
      */
     public function getPriceAbandonedCatAffiliatedKitten()
     {
@@ -1017,7 +1017,7 @@ class BookkeepingSettings
     /**
      * Set priceAbandonedCatAffiliatedAdditionNotChipped
      *
-     * @param integer $priceAbandonedCatAffiliatedAdditionNotChipped
+     * @param float $priceAbandonedCatAffiliatedAdditionNotChipped
      *
      * @return BookkeepingSettings
      */
@@ -1031,7 +1031,7 @@ class BookkeepingSettings
     /**
      * Get priceAbandonedCatAffiliatedAdditionNotChipped
      *
-     * @return integer
+     * @return float
      */
     public function getPriceAbandonedCatAffiliatedAdditionNotChipped()
     {
@@ -1041,7 +1041,7 @@ class BookkeepingSettings
     /**
      * Set priceAbandonedCatAffiliatedAdditionNotVaccinated
      *
-     * @param integer $priceAbandonedCatAffiliatedAdditionNotVaccinated
+     * @param float $priceAbandonedCatAffiliatedAdditionNotVaccinated
      *
      * @return BookkeepingSettings
      */
@@ -1055,7 +1055,7 @@ class BookkeepingSettings
     /**
      * Get priceAbandonedCatAffiliatedAdditionNotVaccinated
      *
-     * @return integer
+     * @return float
      */
     public function getPriceAbandonedCatAffiliatedAdditionNotVaccinated()
     {
@@ -1065,7 +1065,7 @@ class BookkeepingSettings
     /**
      * Set priceAbandonedCatAffiliatedAdditionNeedsSterilization
      *
-     * @param integer $priceAbandonedCatAffiliatedAdditionNeedsSterilization
+     * @param float $priceAbandonedCatAffiliatedAdditionNeedsSterilization
      *
      * @return BookkeepingSettings
      */
@@ -1079,7 +1079,7 @@ class BookkeepingSettings
     /**
      * Get priceAbandonedCatAffiliatedAdditionNeedsSterilization
      *
-     * @return integer
+     * @return float
      */
     public function getPriceAbandonedCatAffiliatedAdditionNeedsSterilization()
     {

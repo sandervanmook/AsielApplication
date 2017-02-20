@@ -114,14 +114,6 @@ class Customer
     /**
      * @var string
      *
-     * @ORM\Column(name="city", type="string", length=255, nullable=false)
-     * @Assert\NotBlank(message="Dit veld mag niet leeg zijn")
-     */
-    private $city;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="country", type="string", length=255, nullable=false)
      * @Assert\NotBlank(message="Dit veld mag niet leeg zijn")
      */
@@ -414,30 +406,6 @@ class Customer
     public function getZipcode()
     {
         return $this->zipcode;
-    }
-
-    /**
-     * Set city
-     *
-     * @param string $city
-     *
-     * @return Customer
-     */
-    public function setCity($city)
-    {
-        $this->city = $city;
-
-        return $this;
-    }
-
-    /**
-     * Get city
-     *
-     * @return string
-     */
-    public function getCity()
-    {
-        return $this->city;
     }
 
     /**
