@@ -30,7 +30,6 @@ class AnimalFormHandler
 
     public function create(Animal $animal)
     {
-        $animal->setAge();
         $this->baseFormHandler->getEm()->persist($animal);
         $this->baseFormHandler->getEm()->flush();
         $this->baseFormHandler->getEventDispatcher()->dispatch('user_alert.message',
@@ -47,7 +46,6 @@ class AnimalFormHandler
 
     public function edit(Animal $animal)
     {
-        $animal->setAge();
         $this->baseFormHandler->getEm()->flush();
         $this->baseFormHandler->getEventDispatcher()->dispatch('user_alert.message',
             new UserAlertEvent(UserAlertEvent::SUCCESS, 'De wijziging is opgeslagen.'));
