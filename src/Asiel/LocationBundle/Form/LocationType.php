@@ -3,6 +3,7 @@
 namespace Asiel\LocationBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -22,9 +23,16 @@ class LocationType extends AbstractType
                     ],
                 'required'  => true,
             ])
+            ->add('animalType', ChoiceType::class, [
+                'label' => 'Geschikt voor',
+                'required'  => true,
+                'choices' => [
+                    'Kat' => 'Cat',
+                    'Hond' => 'Dog',
+                ]
+            ])
         ;
     }
-
 
     /**
      * {@inheritdoc}

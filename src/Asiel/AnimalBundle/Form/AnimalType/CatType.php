@@ -136,8 +136,8 @@ class CatType extends AnimalType
     {
         $resolver->setDefaults(array(
             'data_class' => 'Asiel\AnimalBundle\Entity\AnimalType\Cat',
-
-        ));
+        ))
+            ->setRequired('animaltype');;
     }
 
     /**

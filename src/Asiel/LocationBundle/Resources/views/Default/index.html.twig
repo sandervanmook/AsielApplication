@@ -3,10 +3,11 @@
 {% block body %}
     <div class="ui twelve column grid container">
         <div class="six wide column">
-            <table class="ui table compact collapsing striped">
+            <table class="ui table compact striped">
                 <thead>
                 <tr>
                     <th>Naam</th>
+                    <th class="collapsing">Geschikt voor</th>
                     <th></th>
                 </tr>
                 </thead>
@@ -14,6 +15,7 @@
                 {% for location in alllocations %}
                     <tr>
                         <td>{{ location.name }}</td>
+                        <td>{{ location.animalType|trans }}</td>
                         <td>
                             <div id="{{ location.id }}" class="ui mini negative labeled icon button delete">
                                 <i class="remove icon"></i> Verwijderen
@@ -24,13 +26,14 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th>
+                        <th class="collapsing">
                             <a href="{{ path('backend_location_create') }}">
                                 <div class="ui mini positive labeled icon button">
                                     <i class="add square icon"></i> Locatie toevoegen
                                 </div>
                             </a>
                         </th>
+                        <th></th>
                         <th></th>
                     </tr>
                 </tfoot>

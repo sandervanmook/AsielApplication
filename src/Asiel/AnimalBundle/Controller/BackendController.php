@@ -137,7 +137,7 @@ class BackendController extends Controller
         $animalProduct = $animalFactory->startFactory($animalType);
         $animal = $animalProduct->getEntity();
 
-        $form = $this->createForm($animalProduct->getFormType(), $animal);
+        $form = $this->createForm($animalProduct->getFormType(), $animal, ['animaltype' => $animalProduct->getType()]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -177,7 +177,7 @@ class BackendController extends Controller
         $animalFactory = new AnimalFactory();
         $animalProduct = $animalFactory->startFactory(new AnimalType($animal->getClassName()));
 
-        $form = $this->createForm($animalProduct->getFormType(), $animal);
+        $form = $this->createForm($animalProduct->getFormType(), $animal, ['animaltype' => $animalProduct->getType()]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
