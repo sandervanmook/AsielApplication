@@ -3,7 +3,7 @@
 {% block body %}
     <div class="ui sixteen column grid container">
         <div class="eight wide column">
-            {% if customer.getclassname == 'PrivateCustomer' %}
+            {% if customer.isPrivate %}
                 <h3 class="ui header">Klantinformatie</h3>
                 <table class="ui table very basic">
                     <tbody>
@@ -14,7 +14,7 @@
                     </tbody>
                 </table>
             {% endif %}
-            {% if customer.getclassname == 'BusinessCustomer' %}
+            {% if customer.isBusiness %}
                 <h3 class="ui header">Klantinformatie</h3>
                 <table class="ui table very basic">
                     <tbody>
@@ -62,10 +62,6 @@
                         <td>{{ customer.idcard.placeofbirth }}</td>
                     </tr>
                     <tr>
-                        <td>Foto</td>
-                        <td>TODO</td>
-                    </tr>
-                    <tr>
                         <td>Type document</td>
                         <td>{{ customer.idcard.documenttype }}</td>
                     </tr>
@@ -100,6 +96,10 @@
                     <tr>
                         <td>Gemeente</td>
                         <td>{{ customer.idcard.municipality }}</td>
+                    </tr>
+                    <tr>
+                        <td>Foto</td>
+                        <td><img class="ui tiny image" src="{{ asset('pictures/customer.gif') }}" alt="customer_photo"></td>
                     </tr>
                     </tbody>
                 </table>
