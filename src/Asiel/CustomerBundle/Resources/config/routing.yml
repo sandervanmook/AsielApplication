@@ -24,4 +24,8 @@ backend_customer_search_data:
     defaults: { _controller: CustomerBundle:BackendCustomer:searchCustomersData }
     options:
            expose: true
+
+backend_customer_show:
+    path:     /customer/show/{customerid}
+    defaults: { _controller: CustomerBundle:BackendCustomer:show }
 # End Backend Customer

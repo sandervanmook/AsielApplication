@@ -88,7 +88,9 @@ class BackendCustomerController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $formHandler->edit();
+            $idCard = $form->get('idcard')->getData();
+
+            $formHandler->edit($customer, $idCard);
 
             return new RedirectResponse($this->generateUrl('backend_customer_index'));
         }
@@ -118,7 +120,8 @@ class BackendCustomerController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $formHandler->createPrivate($privateCustomer);
+            $idCard = $form->get('idcard')->getData();
+            $formHandler->createPrivate($privateCustomer, $idCard);
 
             return new RedirectResponse($this->generateUrl('backend_customer_index'));
         }
@@ -148,6 +151,21 @@ class BackendCustomerController extends Controller
 
         return $this->render('@Customer/Backend/BusinessCustomer/create.html.twig', [
             'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @param int $customerid
+     * @return Response
+     */
+    public function showAction(int $customerid)
+    {
+        $formHandler = $this->get('asiel.customerbundle.customerformhandler');
+
+        $customer = $formHandler->findCustomer($customerid);
+
+        return $this->render('@Customer/Backend/show.html.twig', [
+            'customer' => $customer,
         ]);
     }
 
