@@ -63,7 +63,6 @@ class AdoptedActionFormHandler
         $action->setType('Adopted');
         $action->setTotalCosts($this->totalCosts->getTotalCosts());
         $action->setAnimal($animal);
-        $action->setFullyPaid(false);
         $action->setCompleted(false);
         $action->setCustomer($customer);
 

@@ -53,9 +53,8 @@ class FoundActionFormHandler
         $action = new Action();
         $action->setDate(new \DateTime('now'));
         $action->setType('Found');
-        $action->setTotalCosts($totalCosts); // 0 at the moment
+        $action->setTotalCosts($totalCosts);
         $action->setAnimal($animal);
-        $action->setFullyPaid(false);
         $action->setCompleted(false);
         if (!is_null($customer->getId())) {
             $action->setCustomer($customer); // null if none selected

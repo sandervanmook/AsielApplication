@@ -60,7 +60,6 @@ class AbandonedActionFormHandler
         $action->setType('Abandoned');
         $action->setTotalCosts($this->totalCosts->getTotalCosts());
         $action->setAnimal($animal);
-        $action->setFullyPaid(false);
         $action->setCompleted(false);
         $action->setCustomer($customer);
         $action->setStatus($status);
