@@ -37,18 +37,6 @@
                         <td>Naam</td>
                         <td>{{ customer.name }}</td>
                     </tr>
-                    <tr>
-                        <td>BSN/Rijksnummer</td>
-                        <td>{{ customer.citizenServiceNumber }}</td>
-                    </tr>
-                    <tr>
-                        <td>Geboortedatum</td>
-                        <td>{{ customer.dayOfBirth|date('d-m-Y') }}</td>
-                    </tr>
-                    <tr>
-                        <td>Adres</td>
-                        <td>{{ customer.address }} {{ customer.houseNumber }}</td>
-                    </tr>
                     </tbody>
                 </table>
                 <p><a href="{{ path('backend_customer_edit', {'id' : customer.id}) }}" target="_blank">Meer informatie

@@ -58,13 +58,6 @@ class Action
     private $animal;
 
     /**
-     * @var bool
-     *
-     * @ORM\Column(name="fully_paid", type="boolean")
-     */
-    private $fullyPaid;
-
-    /**
      * @ORM\ManyToOne(targetEntity="Asiel\CustomerBundle\Entity\Customer", inversedBy="actions")
      */
     private $customer;
@@ -80,6 +73,14 @@ class Action
      * @ORM\OneToOne(targetEntity="Asiel\AnimalBundle\Entity\Status", inversedBy="action")
      */
     private $status;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->transaction = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -162,13 +163,6 @@ class Action
     {
         return $this->date;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->transaction = new ArrayCollection();
-    }
 
     /**
      * Add transaction
@@ -231,12 +225,18 @@ class Action
 
     public function isFullyPaid()
     {
-        return $this->fullyPaid;
-    }
+        $paid = 0;
+        if (!$this->getTransaction()->isEmpty()) {
+            foreach ($this->getTransaction() as $transaction) {
+                $paid += $transaction->getPaidAmount();
+            }
+        }
+        $result = $this->totalCosts - $paid;
+        if ($result <= 0) {
+            return true;
+        }
 
-    public function setFullyPaid(Bool $bool)
-    {
-        $this->fullyPaid = $bool;
+        return false;
     }
 
     /**
@@ -285,16 +285,6 @@ class Action
     public function isCompleted()
     {
         return $this->completed;
-    }
-
-    /**
-     * Get fullyPaid
-     *
-     * @return boolean
-     */
-    public function getFullyPaid()
-    {
-        return $this->fullyPaid;
     }
 
     /**

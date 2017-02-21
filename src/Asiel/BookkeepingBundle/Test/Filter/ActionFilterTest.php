@@ -58,7 +58,6 @@ class ActionFilterTest extends \PHPUnit_Framework_TestCase
         $action = new Action();
         $action->setDate(new \DateTime('now'));
         $action->setType('Adopted');
-        $action->setFullyPaid(true);
         $allActions = [$action];
 
         $searchArray['datestart'] = new \DateTime('yesterday');

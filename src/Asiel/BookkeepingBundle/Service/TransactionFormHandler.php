@@ -47,13 +47,6 @@ class TransactionFormHandler
 
     public function create(Action $action, Customer $customer, Transaction $transaction)
     {
-        // Is action fully paid ?
-        $result = $action->sumRemaining() - $transaction->getPaidAmount();
-        if ($result == 0) {
-            // Mark action complete
-            $action->setFullyPaid(true);
-        }
-
         // Is transaction a deposit or in full
         if ($action->getTotalCosts() == $transaction->getPaidAmount()) {
             $transaction->setDeposit(false);

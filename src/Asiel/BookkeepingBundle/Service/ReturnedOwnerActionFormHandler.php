@@ -57,7 +57,6 @@ class ReturnedOwnerActionFormHandler
         $action->setType('ReturnedOwner');
         $action->setTotalCosts($totalCosts);
         $action->setAnimal($animal);
-        $action->setFullyPaid(false);
         $action->setCompleted(false);
         $action->setCustomer($customer);
         $action->setStatus($status);

@@ -71,7 +71,7 @@
                             <td class="collapsing">{{ action.date|date('d-m-Y') }}</td>
                             <td>{{ action.type|trans }}</td>
                             <td><i class="euro icon"></i>{{ action.totalCosts }}</td>
-                            <td {% if action.fullyPaid %} class="text-success" {% endif %}>
+                            <td {% if action.isfullyPaid %} class="text-success" {% endif %}>
                                 <i class="euro icon"></i>{{ action.sumRemaining }}
                             </td>
                             {% if action.customer  != null%}
@@ -89,7 +89,7 @@
                             </td>
                             <td {% if action.completed == false %} class="text-danger" {% endif %}>{{ outputBool(action.completed) }}</td>
                             <td class="collapsing">
-                                {% if action.fullyPaid == false and action.totalCosts != 0 %}
+                                {% if action.isfullyPaid == false and action.totalCosts != 0 %}
                                     <a href="{{ path('backend_bookkeeping_transaction_searchcustomer', {'actionid' : action.id}) }}">
                                         <button class="ui tiny button positive"><i class="plus icon"></i>Transactie
                                         </button>

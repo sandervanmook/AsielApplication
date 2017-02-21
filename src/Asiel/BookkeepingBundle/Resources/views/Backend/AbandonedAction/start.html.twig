@@ -11,18 +11,6 @@
                         <td>Naam</td>
                         <td>{{ animal.name }}</td>
                     </tr>
-                    <tr>
-                        <td>Chipnummer</td>
-                        <td>{{ animal.chipnumber }}</td>
-                    </tr>
-                    <tr>
-                        <td>Ras</td>
-                        <td>{{ animal.race }}</td>
-                    </tr>
-                    <tr>
-                        <td>Geboortedatum</td>
-                        <td>{{ animal.dayOfBirth|date('d-m-Y') }}</td>
-                    </tr>
                     </tbody>
                 </table>
                 <p><a href="{{ path('backend_animal_show', {'id' : animal.id}) }}" target="_blank">Meer informatie

@@ -85,7 +85,7 @@
                         <div class="title">Betaling</div>
                         <div class="description">
                             Zorg ervoor dat alle kosten betaald zijn.
-                            {% if action.fullypaid == false %}
+                            {% if action.isfullypaid == false %}
                                 <br/><br/> <a
                                     href="{{ path('backend_bookkeeping_transaction_searchcustomer', {'actionid' : action.id}) }}">
                                 <button class="ui tiny button positive"><i class="plus icon"></i>Transactie</button>
