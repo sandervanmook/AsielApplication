@@ -3,7 +3,9 @@
 namespace Asiel\CustomerBundle\Service;
 
 use Asiel\BackendBundle\Event\UserAlertEvent;
+use Asiel\CustomerBundle\Entity\BusinessCustomer;
 use Asiel\CustomerBundle\Entity\Customer;
+use Asiel\CustomerBundle\Entity\PrivateCustomer;
 use Asiel\CustomerBundle\Repository\CustomerRepository;
 use Asiel\Shared\Service\BaseFormHandler;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -17,7 +19,7 @@ class CustomerFormHandler
         $this->baseFormHandler = $baseFormHandler;
     }
 
-    public function find(int $customerId): Customer
+    public function findCustomer(int $customerId): Customer
     {
         return $this->baseFormHandler->findCustomer($customerId);
     }
@@ -29,9 +31,17 @@ class CustomerFormHandler
             new UserAlertEvent(UserAlertEvent::SUCCESS, 'De wijziging is opgeslagen.'));
     }
 
-    public function create(Customer $customer)
+    public function createPrivate(PrivateCustomer $privateCustomer)
     {
-        $this->baseFormHandler->getEm()->persist($customer);
+        $this->baseFormHandler->getEm()->persist($privateCustomer);
+        $this->baseFormHandler->getEm()->flush();
+        $this->baseFormHandler->getEventDispatcher()->dispatch('user_alert.message',
+            new UserAlertEvent(UserAlertEvent::SUCCESS, 'Klant is aangemaakt.'));
+    }
+
+    public function createBusiness(BusinessCustomer $businessCustomer)
+    {
+        $this->baseFormHandler->getEm()->persist($businessCustomer);
         $this->baseFormHandler->getEm()->flush();
         $this->baseFormHandler->getEventDispatcher()->dispatch('user_alert.message',
             new UserAlertEvent(UserAlertEvent::SUCCESS, 'Klant is aangemaakt.'));

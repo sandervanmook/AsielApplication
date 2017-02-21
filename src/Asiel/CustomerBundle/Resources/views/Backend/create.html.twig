@@ -3,14 +3,8 @@
 {% block body %}
     <div class="ui twelve column grid container">
         <div class="six wide column">
-            {{ form_start(form) }}
-            {{ form_widget(form) }}
-            {{ outputFormButton('Aanmaken') }}
-            {{ form_end(form) }}
+            <a href="{{ path('backend_customer_create_private') }}"><button class="ui button teal">Particuliere klant</button></a>
+            <a href="{{ path('backend_customer_create_business') }}"><button class="ui button olive">Zakelijke klant</button></a>
         </div>
     </div>
-{% endblock %}
-{% block javascripts %}
-    {{ parent() }}
-    <script src="{{ asset('js/views/CustomerBundle/BlacklistReason.js') }}"></script>
 {% endblock %}

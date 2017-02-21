@@ -6,24 +6,43 @@
             <i class="info icon"></i>In het geval van een gevonden status gaat het om de persoon die het dier gevonden
             heeft.
         </div>
-        <div class="eight wide column">
-            <h3 class="ui header">Filters</h3>
-            <table class="ui table very basic">
-                <thead>
-                <tr>
-                    <th class="four wide">Achternaam</th>
-                    <th class="four wide">BSN/Rijksnummer</th>
-                    <th class="four wide">Gemeente</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>{{ form_row(form.lastname) }}</td>
-                    <td>{{ form_row(form.citizenservicenumber) }}</td>
-                    <td>{{ form_row(form.municipality) }}</td>
-                </tr>
-                </tbody>
-            </table>
+        <div class="row">
+            <div class="eight wide column">
+                <h3 class="ui header">Particuliere Filters</h3>
+                <table class="ui table very basic">
+                    <thead>
+                    <tr>
+                        <th class="four wide">Achternaam</th>
+                        <th class="four wide">BSN/Rijksnummer</th>
+                        <th class="four wide">Gemeente</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>{{ form_row(form.lastname) }}</td>
+                        <td>{{ form_row(form.citizenservicenumber) }}</td>
+                        <td>{{ form_row(form.municipality) }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="four wide column">
+                <h3 class="ui header">Zakelijke Filters</h3>
+                <table class="ui table very basic">
+                    <thead>
+                    <tr>
+                        <th>Bedrijfsnaam</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>{{ form_row(form.companyname) }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
         <div class="sixteen wide column">
             <div class="ui segment collapsed">

@@ -20,7 +20,7 @@
                 <tr>
                     <td>Door klant</td>
                     <td>
-                        <a href="{{ path('backend_customer_edit', {'id' : transaction.customer.id}) }}">{{ transaction.customer.lastname }}</a>
+                        <a href="{{ path('backend_customer_edit', {'id' : transaction.customer.id}) }}">{{ transaction.customer.name }}</a>
                     </td>
                 </tr>
                 <tr>
@@ -44,6 +44,10 @@
                     {% elseif transaction.inFull %}
                         <td>Volledig</td>
                     {% endif %}
+                </tr>
+                <tr>
+                    <td>Voldaan</td>
+                    <td>{{ outputBool(transaction.ispaid) }}</td>
                 </tr>
                 </tbody>
             </table>

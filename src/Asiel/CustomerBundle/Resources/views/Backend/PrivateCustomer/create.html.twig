@@ -1,0 +1,16 @@
+{% extends '@Backend/Base/Base.html.twig' %}
+{% block pagetitle %}Particuliere klant aanmaken{% endblock %}
+{% block body %}
+    <div class="ui twelve column grid container">
+        <div class="six wide column">
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            {{ outputFormButton('Aanmaken') }}
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/views/CustomerBundle/BlacklistReason.js') }}"></script>
+{% endblock %}

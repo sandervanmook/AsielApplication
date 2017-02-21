@@ -2,16 +2,15 @@
 
 namespace Asiel\Shared\TestTools\DataFixtures;
 
-use Asiel\CustomerBundle\Entity\Customer;
+use Asiel\CustomerBundle\Entity\PrivateCustomer;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-
 
 class LoadCustomerData implements FixtureInterface
 {
     public function load(ObjectManager $manager)
     {
-        $customer  = new Customer();
+        $customer  = new PrivateCustomer();
         $customer->setFirstname('Jan');
         $customer->setLastname('de Tester');
         $customer->setDayOfBirth(new \DateTime('now'));

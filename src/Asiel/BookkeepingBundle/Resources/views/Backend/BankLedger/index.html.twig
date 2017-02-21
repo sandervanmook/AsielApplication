@@ -56,7 +56,7 @@
                             </td>
                             <td>{{ transaction.date|date('d-m-Y') }}</td>
                             <td><a href="{{ path('backend_animal_show', {'id' : transaction.action.animal.id}) }}">{{ transaction.action.animal.name }}</a></td>
-                            <td><a href="{{ path('backend_customer_edit', {'id' : transaction.customer.id}) }}">{{ transaction.customer.lastname }}</a></td>
+                            <td><a href="{{ path('backend_customer_edit', {'id' : transaction.customer.id}) }}">{{ transaction.customer.name }}</a></td>
                             <td><i class="euro icon"></i>{{ transaction.paidAmount }}</td>
                             <td><a href="{{ path('backend_bookkeeping_action_show', {'actionid' : transaction.action.id}) }}">{{ transaction.action.id }}</a></td>
                             <td>{{ outputBool(transaction.deposit) }}</td>

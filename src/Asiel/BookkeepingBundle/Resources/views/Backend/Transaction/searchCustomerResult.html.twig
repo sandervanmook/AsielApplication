@@ -1,69 +1,60 @@
 <table class="ui table compact striped">
-    <thead>
-    <tr>
-        <th>Voornaam</th>
-        <th>Achternaam</th>
-        <th>Email</th>
-        <th>Gemeente</th>
-        <th>BSN</th>
-        <th>Telefoonnummer</th>
-        <th class="collapsing">Op zwarte lijst?</th>
-        <th>Geadopteerd</th>
-        <th class="collapsing">Eigenaar van</th>
-        <th>Afgestaan</th>
-        <th>Gevonden</th>
-    </tr>
-    </thead>
+    {% for customer in result %}
+        {% if customer.classname == 'PrivateCustomer' %}
+            <thead>
+            <tr>
+                <th>Voornaam</th>
+                <th>Achternaam</th>
+                <th>Email</th>
+                <th>Gemeente</th>
+                <th>BSN</th>
+                <th>Telefoonnummer</th>
+                <th class="collapsing">Op zwarte lijst?</th>
+            </tr>
+            </thead>
+        {% endif %}
+    {% endfor %}
+    {% for customer in result %}
+        {% if customer.classname == 'BusinessCustomer' %}
+            <thead>
+            <tr>
+                <th>Voornaam</th>
+                <th>Achternaam</th>
+                <th>Email</th>
+                <th>Gemeente</th>
+                <th>Bedrijfsnaam</th>
+                <th>Telefoonnummer</th>
+            </tr>
+            </thead>
+        {% endif %}
+    {% endfor %}
     <tbody>
     {% for customer in result %}
-        <tr
-                {% if customer.blacklisted %}
-                    class="negative"
-                {% endif %}
-        >
-            <td>{{ customer.firstname }}</td>
-            <td><a href="{{ path('backend_bookkeeping_transaction_create', {'customerid' : customer.id}) }}">{{ customer.lastname }}</a></td>
-            <td>{{ customer.email }}</td>
-            <td>{{ customer.municipality }}</td>
-            <td>{{ customer.citizenservicenumber }}</td>
-            <td>{{ customer.phone }}</td>
-            <td>{{ outputBool(customer.blacklisted) }}</td>
-            <td>
-                {% for animal in customer.adoptedPets %}
-                    <li><a href="{{ path('backend_animal_show', {'id' : animal.animal.id}) }}">{{ animal.animal.name }}</a></li>
-                {% endfor %}
-            </td>
-            <td>
-                {% for animal in customer.ownsanimals %}
-                    <li><a href="{{ path('backend_animal_show', {'id' : animal.animal.id}) }}">{{ animal.animal.name }}</a></li>
-                {% endfor %}
-            </td>
-            <td>
-                {% for animal in customer.abandonedanimals %}
-                    <li><a href="{{ path('backend_animal_show', {'id' : animal.animal.id}) }}">{{ animal.animal.name }}</a></li>
-                {% endfor %}
-            </td>
-            <td>
-                {% for animal in customer.foundanimals %}
-                    <li><a href="{{ path('backend_animal_show', {'id' : animal.animal.id}) }}">{{ animal.animal.name }}</a></li>
-                {% endfor %}
-            </td>
-        </tr>
+        {% if customer.classname == 'PrivateCustomer' %}
+            <tr
+                    {% if customer.blacklisted %}
+                        class="negative"
+                    {% endif %}
+            >
+                <td>{{ customer.firstname }}</td>
+                <td><a href="{{ path('backend_bookkeeping_transaction_create', {'customerid' : customer.id }) }}">{{ customer.lastname }}</a></td>
+                <td>{{ customer.email }}</td>
+                <td>{{ customer.municipality }}</td>
+                <td>{{ customer.citizenservicenumber }}</td>
+                <td>{{ customer.phone }}</td>
+                <td>{{ outputBool(customer.blacklisted) }}</td>
+            </tr>
+        {% endif %}
+        {% if customer.classname == 'BusinessCustomer' %}
+            <tr>
+                <td>{{ customer.contactfirstname }}</td>
+                <td>{{ customer.contactlastname }}</a></td>
+                <td>{{ customer.email }}</td>
+                <td>{{ customer.municipality }}</td>
+                <td><a href="{{ path('backend_bookkeeping_transaction_create', {'customerid' : customer.id }) }}">{{ customer.companyname }}</a></td>
+                <td>{{ customer.phone }}</td>
+            </tr>
+        {% endif %}
     {% endfor %}
     </tbody>
-    <tfoot>
-    <tr>
-        <th class="collapsing">{{ result|length }} Klant(en)</th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-    </tr>
-    </tfoot>
 </table>

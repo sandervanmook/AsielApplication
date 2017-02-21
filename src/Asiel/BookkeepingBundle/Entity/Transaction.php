@@ -77,6 +77,12 @@ class Transaction
      */
     private $inFull;
 
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="paid", type="boolean", nullable=true)
+     */
+    private $paid;
 
     /**
      * Get id
@@ -290,5 +296,29 @@ class Transaction
         }
 
         return false;
+    }
+
+    /**
+     * Set paid
+     *
+     * @param boolean $paid
+     *
+     * @return Transaction
+     */
+    public function setPaid($paid)
+    {
+        $this->paid = $paid;
+
+        return $this;
+    }
+
+    /**
+     * Get paid
+     *
+     * @return boolean
+     */
+    public function isPaid()
+    {
+        return $this->paid;
     }
 }

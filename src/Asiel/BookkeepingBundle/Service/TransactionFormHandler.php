@@ -20,6 +20,11 @@ class TransactionFormHandler
         $this->baseFormHandler = $baseFormHandler;
     }
 
+    public function getBaseFormHandler() : BaseFormHandler
+    {
+        return $this->baseFormHandler;
+    }
+
     public function findAnimal(int $animalId): Animal
     {
         return $this->baseFormHandler->findAnimal($animalId);
@@ -58,6 +63,13 @@ class TransactionFormHandler
             $transaction->setInFull(false);
         }
 
+        // Is transaction paid ?
+        if ($transaction->getPaymentType() == 'Cash' || $transaction->getPaymentType() == 'Bank') {
+            $transaction->setPaid(true);
+        } else {
+            $transaction->setPaid(false);
+        }
+
         $transaction->setCustomer($customer);
         $transaction->setAction($action);
 
@@ -75,5 +87,15 @@ class TransactionFormHandler
         $this->baseFormHandler->getEventDispatcher()->dispatch('user_alert.message',
             new UserAlertEvent(UserAlertEvent::DANGER,
                 "Het betaalde bedrag kan niet hoger zijn dan het resterende bedrag."));
+    }
+
+    public function payTransaction(Transaction $transaction)
+    {
+        $transaction->setPaid(true);
+        $this->getBaseFormHandler()->getEm()->flush();
+
+        $this->baseFormHandler->getEventDispatcher()->dispatch('user_alert.message',
+            new UserAlertEvent(UserAlertEvent::SUCCESS,
+                "Transactie status is nu voldaan."));
     }
 }

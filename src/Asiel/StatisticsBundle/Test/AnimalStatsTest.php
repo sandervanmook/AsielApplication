@@ -10,6 +10,7 @@ use Asiel\AnimalBundle\Entity\AnimalType\Dog;
 use Asiel\AnimalBundle\Entity\StatusType\Abandoned;
 use Asiel\AnimalBundle\Entity\StatusType\Found;
 use Asiel\CustomerBundle\Entity\Customer;
+use Asiel\CustomerBundle\Entity\PrivateCustomer;
 use Asiel\StatisticsBundle\Stats\AnimalStats;
 use DateTime;
 
@@ -116,7 +117,7 @@ class AnimalStatsTest extends \PHPUnit_Framework_TestCase
     public function test_via_found_abandoned_filter()
     {
         $cat = new Cat();
-        $customer = new Customer();
+        $customer = new PrivateCustomer();
         $customer->setMunicipality('Bree');
         $status = new Abandoned(new AnimalStateMachine());
         $status->setDate(new DateTime('today'));
@@ -151,7 +152,7 @@ class AnimalStatsTest extends \PHPUnit_Framework_TestCase
     public function test_via_no_argument_filter()
     {
         $cat = new Cat();
-        $customer = new Customer();
+        $customer = new PrivateCustomer();
         $customer->setMunicipality('Bree');
         $status = new Abandoned(new AnimalStateMachine());
         $status->setDate(new DateTime('today'));
@@ -204,7 +205,7 @@ class AnimalStatsTest extends \PHPUnit_Framework_TestCase
     public function test_municipality_dog_abandon_filter()
     {
         $dog = new Dog();
-        $customer = new Customer();
+        $customer = new PrivateCustomer();
         $customer->setMunicipality('Bree');
         $status = new Abandoned(new AnimalStateMachine());
         $status->setDate(new DateTime('today'));

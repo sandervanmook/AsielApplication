@@ -24,6 +24,14 @@ $(document).ready(function () {
         refreshData();
     });
 
+    // companyname filter
+    var companyname = '';
+    $('#customerbundle_search_customer_companyname').keyup(function () {
+        // Get the typed value
+        companyname = $(this).val();
+        refreshData();
+    });
+
     function refreshData() {
         if (typeof requestby == 'undefined') {
             requestby = 'customerbundle';
@@ -33,7 +41,8 @@ $(document).ready(function () {
             data: {
                 lastname: lastname,
                 citizenservicenumber: citizenservicenumber,
-                municipality: municipality
+                municipality: municipality,
+                companyname: companyname
             },
             type: "GET",
             dataType: "html"

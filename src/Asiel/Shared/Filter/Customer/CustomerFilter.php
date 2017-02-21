@@ -26,6 +26,7 @@ class CustomerFilter
         $this->filterLastname();
         $this->filterMunicipality();
         $this->filterCitizenServiceNumber();
+        $this->filterCompanyName();
     }
 
     /**
@@ -37,7 +38,7 @@ class CustomerFilter
         $result = [];
         if ((!empty($this->searchArray['lastname'])) && (!empty($this->allCustomers))) {
             foreach ($this->allCustomers as $customer) {
-                if (is_int(stripos($customer->getLastName(), $this->searchArray['lastname']))) {
+                if (($customer->getClassName() == 'PrivateCustomer') && (is_int(stripos($customer->getLastName(), $this->searchArray['lastname'])))) {
                     $result[] = $customer;
                 }
             }
@@ -50,7 +51,7 @@ class CustomerFilter
         $result = [];
         if ((!empty($this->searchArray['citizenservicenumber'])) && (!empty($this->allCustomers))) {
             foreach ($this->allCustomers as $customer) {
-                if ($customer->getCitizenServiceNumber() == $this->searchArray['citizenservicenumber']) {
+                if (($customer->getClassName() == 'PrivateCustomer') && ($customer->getCitizenServiceNumber() == $this->searchArray['citizenservicenumber'])) {
                     $result[] = $customer;
                 }
             }
@@ -63,7 +64,21 @@ class CustomerFilter
         $result = [];
         if ((!empty($this->searchArray['municipality'])) && (!empty($this->allCustomers))) {
             foreach ($this->allCustomers as $customer) {
-                if ($customer->getMunicipality() == $this->searchArray['municipality']) {
+                if (($customer->getClassName() == 'PrivateCustomer') && ($customer->getMunicipality() == $this->searchArray['municipality'])) {
+                    $result[] = $customer;
+                }
+            }
+            $this->filterResult = $result;
+        }
+    }
+
+    private function filterCompanyName()
+    {
+        $result = [];
+        if ((!empty($this->searchArray['companyname'])) &&
+            (!empty($this->allCustomers))) {
+            foreach ($this->allCustomers as $customer) {
+                if (($customer->getClassName() == 'BusinessCustomer') && (is_int(stripos($customer->getCompanyName(), $this->searchArray['companyname'])))) {
                     $result[] = $customer;
                 }
             }
