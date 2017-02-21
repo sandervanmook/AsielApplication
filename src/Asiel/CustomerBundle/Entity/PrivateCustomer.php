@@ -2,6 +2,7 @@
 
 namespace Asiel\CustomerBundle\Entity;
 
+use Asiel\CustomerBundle\Entity\IDCard;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -125,6 +126,11 @@ class PrivateCustomer extends Customer implements TypeInterface
      * @ORM\Column(name="blacklisted_reason", type="text", nullable=true)
      */
     private $blacklistedReason;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Asiel\CustomerBundle\Entity\IDCard", mappedBy="privateCustomer")
+     */
+    private $idCard;
 
     public function getClassName() : string
     {
@@ -464,5 +470,29 @@ class PrivateCustomer extends Customer implements TypeInterface
     public function getBlacklistedReason()
     {
         return $this->blacklistedReason;
+    }
+
+    /**
+     * Set idCard
+     *
+     * @param IDCard $idCard
+     *
+     * @return PrivateCustomer
+     */
+    public function setIdCard(IDCard $idCard = null)
+    {
+        $this->idCard = $idCard;
+
+        return $this;
+    }
+
+    /**
+     * Get idCard
+     *
+     * @return IDCard
+     */
+    public function getIdCard()
+    {
+        return $this->idCard;
     }
 }

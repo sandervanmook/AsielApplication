@@ -1,0 +1,109 @@
+{% extends '@Backend/Base/Base.html.twig' %}
+{% block pagetitle %}Bekijk klant{% endblock %}
+{% block body %}
+    <div class="ui sixteen column grid container">
+        <div class="eight wide column">
+            {% if customer.getclassname == 'PrivateCustomer' %}
+                <h3 class="ui header">Klantinformatie</h3>
+                <table class="ui table very basic">
+                    <tbody>
+                    <tr>
+                        <td>Naam</td>
+                        <td>{{ customer.name }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            {% endif %}
+            {% if customer.getclassname == 'BusinessCustomer' %}
+                <h3 class="ui header">Klantinformatie</h3>
+                <table class="ui table very basic">
+                    <tbody>
+                    <tr>
+                        <td>Naam</td>
+                        <td>{{ customer.name }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            {% endif %}
+            {% if customer.idcard is defined and customer.idcard is not null %}
+                <h3 class="ui header">ID kaart informatie</h3>
+                <table class="ui table very basic">
+                    <tbody>
+                    <tr>
+                        <td>Nationalnumber</td>
+                        <td>{{ customer.idcard.nationalnumber }}</td>
+                    </tr>
+                    <tr>
+                        <td>Geboortedatum</td>
+                        <td>{{ customer.idcard.dayofbirth }}</td>
+                    </tr>
+                    <tr>
+                        <td>Geslacht</td>
+                        <td>{{ customer.idcard.gender }}</td>
+                    </tr>
+                    <tr>
+                        <td>Naam</td>
+                        <td>{{ customer.idcard.name }}</td>
+                    </tr>
+                    <tr>
+                        <td>Voornaam</td>
+                        <td>{{ customer.idcard.firstname }}</td>
+                    </tr>
+                    <tr>
+                        <td>Doopnamen</td>
+                        <td>{{ customer.idcard.middlenames }}</td>
+                    </tr>
+                    <tr>
+                        <td>Nationaliteit</td>
+                        <td>{{ customer.idcard.nationality }}</td>
+                    </tr>
+                    <tr>
+                        <td>Geboorteplaats</td>
+                        <td>{{ customer.idcard.placeofbirth }}</td>
+                    </tr>
+                    <tr>
+                        <td>Foto</td>
+                        <td>TODO</td>
+                    </tr>
+                    <tr>
+                        <td>Type document</td>
+                        <td>{{ customer.idcard.documenttype }}</td>
+                    </tr>
+                    <tr>
+                        <td>Kaartnummer</td>
+                        <td>{{ customer.idcard.cardnumber }}</td>
+                    </tr>
+                    <tr>
+                        <td>Chipnummer</td>
+                        <td>{{ customer.idcard.chipnumber }}</td>
+                    </tr>
+                    <tr>
+                        <td>Geldig van</td>
+                        <td>{{ customer.idcard.validitydatebegin }}</td>
+                    </tr>
+                    <tr>
+                        <td>Geldig tot</td>
+                        <td>{{ customer.idcard.validitydateend }}</td>
+                    </tr>
+                    <tr>
+                        <td>Afgegeven in</td>
+                        <td>{{ customer.idcard.deliverymunicipality }}</td>
+                    </tr>
+                    <tr>
+                        <td>Straat en huisnummer</td>
+                        <td>{{ customer.idcard.streetandnumber }}</td>
+                    </tr>
+                    <tr>
+                        <td>Postcode</td>
+                        <td>{{ customer.idcard.zip }}</td>
+                    </tr>
+                    <tr>
+                        <td>Gemeente</td>
+                        <td>{{ customer.idcard.municipality }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

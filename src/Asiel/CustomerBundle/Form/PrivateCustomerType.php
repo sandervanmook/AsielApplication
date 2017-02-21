@@ -8,6 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -105,6 +106,11 @@ class PrivateCustomerType extends CustomerType
                     'id'    => 'blacklistreasonlabel',
                 ],
                 'required'  => false,
+            ])
+            ->add('idcard', FileType::class, [
+                'label' => 'Upload ID card gegevens',
+                'required' => false,
+                'mapped' => false,
             ])
         ;
     }
