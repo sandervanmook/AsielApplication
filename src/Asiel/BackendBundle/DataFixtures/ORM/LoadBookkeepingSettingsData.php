@@ -13,14 +13,40 @@ class LoadBookkeepingSettingsData implements FixtureInterface
     {
         $entity = new BookkeepingSettings();
 
-        $entity->setPriceAdoptedKitten(200);
-        $entity->setPriceAdoptedCat(200);
-        $entity->setPriceAdoptedPuppy(200);
-        $entity->setPriceAdoptedDog(200);
-        $entity->setPriceAbandonedKitten(200);
-        $entity->setPriceAbandonedCat(200);
-        $entity->setPriceAbandonedPuppy(200);
-        $entity->setPriceAbandonedDog(200);
+        $entity->setPriceAdoptedKitten(150);
+        $entity->setPriceAdoptedCat(120);
+        $entity->setPriceAdoptedPuppy(250);
+        $entity->setPriceAdoptedDog(185);
+        $entity->setPriceAbandonedDogUnaffiliatedYoungerThanOne(45);
+        $entity->setPriceAbandonedDogUnaffiliatedOlderThanOne(65);
+        $entity->setPriceAbandonedDogUnaffiliatedPuppy(18);
+        $entity->setPriceAbandonedDogUnaffiliatedAdditionNotChipped(30);
+        $entity->setPriceAbandonedDogUnaffiliatedAdditionNotVaccinated(20);
+        $entity->setPriceAbandonedDogUnaffiliatedAdditionFurTreatmentSmallDog(45);
+        $entity->setPriceAbandonedDogUnaffiliatedAdditionFurTreatmentLargeDog(100);
+        $entity->setPriceAbandonedDogUnaffiliatedAdditionIll(35);
+        $entity->setPriceAbandonedDogAffiliatedYoungerThanOne(30);
+        $entity->setPriceAbandonedDogAffiliatedOlderThanOne(50);
+        $entity->setPriceAbandonedDogAffiliatedPuppy(10);
+        $entity->setPriceAbandonedDogAffiliatedAdditionNotChipped(15);
+        $entity->setPriceAbandonedDogAffiliatedAdditionNotVaccinated(15);
+        $entity->setPriceAbandonedDogAffiliatedAdditionFurTreatmentSmallDog(35);
+        $entity->setPriceAbandonedDogAffiliatedAdditionFurTreatmentLargeDog(80);
+        $entity->setPriceAbandonedDogAffiliatedAdditionIll(35);
+        $entity->setPriceAbandonedCatUnaffiliatedYoungerThanThreeMonths(20);
+        $entity->setPriceAbandonedCatUnaffiliatedBetweenThreeMonthsAndTenYears(30);
+        $entity->setPriceAbandonedCatUnaffiliatedOlderThanTenYears(40);
+        $entity->setPriceAbandonedCatUnaffiliatedKitten(10);
+        $entity->setPriceAbandonedCatUnaffiliatedAdditionNotChipped(20);
+        $entity->setPriceAbandonedCatUnaffiliatedAdditionNotVaccinated(15);
+        $entity->setPriceAbandonedCatUnaffiliatedAdditionNeedsSterilization(20);
+        $entity->setPriceAbandonedCatAffiliatedYoungerThanThreeMonths(10);
+        $entity->setPriceAbandonedCatAffiliatedBetweenThreeMonthsAndTenYears(15);
+        $entity->setPriceAbandonedCatAffiliatedOlderThanTenYears(25);
+        $entity->setPriceAbandonedCatAffiliatedKitten(5);
+        $entity->setPriceAbandonedCatAffiliatedAdditionNotChipped(15);
+        $entity->setPriceAbandonedCatAffiliatedAdditionNotVaccinated(15);
+        $entity->setPriceAbandonedCatAffiliatedAdditionNeedsSterilization(15);
 
         $manager->persist($entity);
         $manager->flush();

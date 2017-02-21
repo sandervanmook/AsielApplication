@@ -36,15 +36,14 @@
             <table class="ui table very basic">
                 <thead>
                 <tr>
-                    <th>ID</th>
+                    <th></th>
                     <th>Datum</th>
                     <th>Dier</th>
                     <th>Klant</th>
                     <th>Hoeveelheid</th>
                     <th>Actie</th>
-                    <th>Aanbetaling</th>
-                    <th>Volledig</th>
                     <th>Overtijd</th>
+                    <th>Voldaan</th>
                     <th></th>
                 </tr>
                 </thead>
@@ -57,12 +56,16 @@
                             </td>
                             <td>{{ transaction.date|date('d-m-Y') }}</td>
                             <td><a href="{{ path('backend_animal_show', {'id' : transaction.action.animal.id}) }}">{{ transaction.action.animal.name }}</a></td>
-                            <td><a href="{{ path('backend_customer_edit', {'id' : transaction.customer.id}) }}">{{ transaction.customer.lastname }}</a></td>
+                            <td><a href="{{ path('backend_customer_edit', {'id' : transaction.customer.id}) }}">{{ transaction.customer.name }}</a></td>
                             <td><i class="euro icon"></i>{{ transaction.paidAmount }}</td>
                             <td><a href="{{ path('backend_bookkeeping_action_show', {'actionid' : transaction.action.id}) }}">{{ transaction.action.id }}</a></td>
-                            <td>{{ outputBool(transaction.deposit) }}</td>
-                            <td>{{ outputBool(transaction.inFull) }}</td>
                             <td>{{ outputBool(transaction.isoverdue) }}</td>
+                            <td>{{ outputBool(transaction.ispaid) }}</td>
+                            <td>
+                                {% if transaction.ispaid == false %}
+                                <a href="{{ path('backend_bookkeeping_transaction_pay', {'transactionid' : transaction.id}) }}"><button class="ui tiny button positive">Voldaan</button></a>
+                                {% endif %}
+                            </td>
                         </tr>
                     {% endfor %}
                 {% endif %}

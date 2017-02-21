@@ -5,6 +5,7 @@ namespace Asiel\Shared\Test\Filter\Customer;
 
 
 use Asiel\CustomerBundle\Entity\Customer;
+use Asiel\CustomerBundle\Entity\PrivateCustomer;
 use Asiel\Shared\Filter\Customer\CustomerFilter;
 
 class CustomerFilterTest extends \PHPUnit_Framework_TestCase
@@ -16,7 +17,7 @@ class CustomerFilterTest extends \PHPUnit_Framework_TestCase
 
     public function test_lastname_filter()
     {
-        $customer = new Customer();
+        $customer = new PrivateCustomer();
         $customer->setLastname('van Mook');
         $allCustomers = [$customer];
         $searchArray['lastname'] = 'Mo';
@@ -31,7 +32,7 @@ class CustomerFilterTest extends \PHPUnit_Framework_TestCase
 
     public function test_belgium_citizenservicenumber_filter()
     {
-        $customer = new Customer();
+        $customer = new PrivateCustomer();
         $customer->setCitizenServiceNumber(123456);
         $allCustomers = [$customer];
         $searchArray['citizenservicenumber'] = 123456;
@@ -46,7 +47,7 @@ class CustomerFilterTest extends \PHPUnit_Framework_TestCase
 
     public function test_dutch_citizenservicenumber_filter()
     {
-        $customer = new Customer();
+        $customer = new PrivateCustomer();
         $customer->setCitizenServiceNumber('233gfasf63');
         $allCustomers = [$customer];
         $searchArray['citizenservicenumber'] = '233gfasf63';

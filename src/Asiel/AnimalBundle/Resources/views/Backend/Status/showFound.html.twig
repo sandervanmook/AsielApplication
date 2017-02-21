@@ -6,7 +6,7 @@
     <p>Gevonden in: {{ status.foundMunicipality }}</p>
     <p>Moet door ons gechipped worden: {{ outputBool(status.needsChipping) }}</p>
     {% if status.foundby is not empty %}
-        <p>Gevonden door: <a href="{{ path('backend_customer_edit', { 'id' : status.foundby.id}) }}">{{ status.foundby.firstname }} {{ status.foundby.lastname }}</a></p>
+        <p>Gevonden door: <a href="{{ path('backend_customer_edit', { 'id' : status.foundby.id}) }}">{{ status.foundby.name }}</a></p>
     {% endif %}
     <p>Waar is het dier gevonden: {{ status.foundatlocation|raw }}</p>
     <p>Hoe was de staat van het dier: {{ status.animalstate|raw }}</p>

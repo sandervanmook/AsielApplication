@@ -2,8 +2,12 @@
 
 namespace Asiel\CustomerBundle\Controller;
 
+use Asiel\CustomerBundle\Entity\BusinessCustomer;
 use Asiel\CustomerBundle\Entity\Customer;
+use Asiel\CustomerBundle\Entity\PrivateCustomer;
+use Asiel\CustomerBundle\Form\BusinessCustomerType;
 use Asiel\CustomerBundle\Form\CustomerType;
+use Asiel\CustomerBundle\Form\PrivateCustomerType;
 use Asiel\CustomerBundle\Form\SearchCustomerType;
 use Asiel\CustomerBundle\SearchCustomer\FilterCustomer;
 use Asiel\Shared\Filter\Customer\CustomerFilter;
@@ -29,6 +33,7 @@ class BackendCustomerController extends Controller
     /**
      * Ajax call
      * @param Request $request
+     * @param string $requestby
      * @return Response
      */
     public function searchCustomersDataAction(Request $request, string $requestby)
@@ -40,6 +45,7 @@ class BackendCustomerController extends Controller
         $searchArray['lastname'] = $request->get('lastname');
         $searchArray['citizenservicenumber'] = $request->get('citizenservicenumber');
         $searchArray['municipality'] = $request->get('municipality');
+        $searchArray['companyname'] = $request->get('companyname');
 
         $filterCustomer = new CustomerFilter($allCustomers, $searchArray);
         $filterCustomer->filter();
@@ -75,7 +81,10 @@ class BackendCustomerController extends Controller
     {
         $formHandler = $this->get('asiel.customerbundle.customerformhandler');
 
-        $form = $this->createForm(CustomerType::class, $formHandler->find($id));
+        $customer = $formHandler->findCustomer($id);
+        $customerType = $customer->getClassName();
+
+        $form = $this->createForm('Asiel\CustomerBundle\Form\\'.$customerType.'Type', $customer);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -89,42 +98,57 @@ class BackendCustomerController extends Controller
     }
 
     /**
+     * @return Response
+     */
+    public function createAction()
+    {
+        return $this->render('@Customer/Backend/create.html.twig');
+    }
+
+    /**
      * @param Request $request
      * @return RedirectResponse|Response
      */
-    public function createAction(Request $request)
+    public function createPrivateAction(Request $request)
     {
         $formHandler = $this->get('asiel.customerbundle.customerformhandler');
-        $customer = new Customer();
+        $privateCustomer = new PrivateCustomer();
 
-        $form = $this->createForm(CustomerType::class, $customer);
+        $form = $this->createForm(PrivateCustomerType::class, $privateCustomer);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $formHandler->create($customer);
+            $formHandler->createPrivate($privateCustomer);
 
             return new RedirectResponse($this->generateUrl('backend_customer_index'));
         }
 
-        return $this->render('@Customer/Backend/create.html.twig', [
+        return $this->render('@Customer/Backend/PrivateCustomer/create.html.twig', [
             'form' => $form->createView()
         ]);
     }
 
     /**
-     * Ajax call
-     * @param string $searchon
-     * @return Response
+     * @param Request $request
+     * @return RedirectResponse|Response
      */
-    public function searchOnLastNameAction($searchon = 'lastname')
+    public function createBusinessAction(Request $request)
     {
         $formHandler = $this->get('asiel.customerbundle.customerformhandler');
+        $businessCustomer = new BusinessCustomer();
 
-        $query['query']     = $formHandler->getRequestStack()->getCurrentRequest()->get('lastname');
-        $query['searchon']  = $searchon;
+        $form = $this->createForm(BusinessCustomerType::class, $businessCustomer);
+        $form->handleRequest($request);
 
-        return $this->render('@Customer/Backend/customerSearch.html.twig', [
-            'results' => $formHandler->getRepository()->findCustomers($query, 10),
+        if ($form->isSubmitted() && $form->isValid()) {
+            $formHandler->createBusiness($businessCustomer);
+
+            return new RedirectResponse($this->generateUrl('backend_customer_index'));
+        }
+
+        return $this->render('@Customer/Backend/BusinessCustomer/create.html.twig', [
+            'form' => $form->createView()
         ]);
     }
+
 }

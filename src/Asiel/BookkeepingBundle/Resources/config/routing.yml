@@ -61,6 +61,10 @@ backend_bookkeeping_transaction_create:
 backend_bookkeeping_transaction_show:
     path:     /transaction/show/{transactionid}
     defaults: { _controller: BookkeepingBundle:Transaction:show }
+
+backend_bookkeeping_transaction_pay:
+    path:     /transaction/pay/{transactionid}
+    defaults: { _controller: BookkeepingBundle:Transaction:pay }
 #End transaction
 # Seized action
 backend_bookkeeping_action_seized_start:

@@ -1,0 +1,12 @@
+{% extends '@Backend/Base/Base.html.twig' %}
+{% block pagetitle %}Zakelijke klant aanmaken{% endblock %}
+{% block body %}
+    <div class="ui twelve column grid container">
+        <div class="six wide column">
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            {{ outputFormButton('Aanmaken') }}
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

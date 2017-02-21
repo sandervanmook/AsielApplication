@@ -92,4 +92,18 @@ class TransactionController extends Controller
             'transaction' => $transaction,
         ]);
     }
+
+    /**
+     * @param int $transactionid
+     * @return RedirectResponse
+     */
+    public function payAction(int $transactionid)
+    {
+        $formHandler = $this->get('asiel.bookkeepingbundle.transactionformhandler');
+        $transaction = $formHandler->findTransaction($transactionid);
+
+        $formHandler->payTransaction($transaction);
+
+        return new RedirectResponse($this->generateUrl('backend_bookkeeping_transaction_show', ['transactionid' => $transactionid]));
+    }
 }

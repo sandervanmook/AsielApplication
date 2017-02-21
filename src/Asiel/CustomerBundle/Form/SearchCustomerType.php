@@ -25,6 +25,9 @@ class SearchCustomerType extends AbstractType
             ->add('municipality', MunicipalityType::class, [
                 'label' => false,
             ])
+            ->add('companyname', TextType::class, [
+                'label' => false,
+            ])
         ;
     }
 
