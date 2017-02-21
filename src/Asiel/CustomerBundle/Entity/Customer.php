@@ -307,4 +307,23 @@ class Customer
         return 'Unknown';
     }
 
+    public function isPrivate() : bool
+    {
+        if ($this instanceof PrivateCustomer) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function isBusiness() : bool
+    {
+        if ($this instanceof BusinessCustomer) {
+            return true;
+        }
+
+        return false;
+    }
+
+
 }

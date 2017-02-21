@@ -12,6 +12,7 @@ use Asiel\CustomerBundle\Form\SearchCustomerType;
 use Asiel\CustomerBundle\SearchCustomer\FilterCustomer;
 use Asiel\Shared\Filter\Customer\CustomerFilter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -164,9 +165,16 @@ class BackendCustomerController extends Controller
 
         $customer = $formHandler->findCustomer($customerid);
 
+        if ($customer->isPrivate() && $customer->getIdCard()) {
+            $photoData = $customer->getIdCard()->getPhoto();
+            $photo = imagecreatefromstring(base64_decode($photoData));
+            imagegif($photo, './pictures/customer.gif');
+        } else {
+            $photo = null;
+        }
+
         return $this->render('@Customer/Backend/show.html.twig', [
             'customer' => $customer,
         ]);
     }
-
 }
