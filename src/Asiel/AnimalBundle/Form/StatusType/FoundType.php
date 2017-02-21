@@ -43,10 +43,13 @@ class FoundType extends StatusType
                 'label' => 'Moet door ons gechipt worden',
                 'required' => false,
             ])
-            ->add('totalcosts', MoneyType::class, [
-                'label' => 'De totale kosten voor deze vondst',
-                'scale' => 2,
-                'mapped' => false,
+            ->add('needsDeWorm', CheckboxType::class, [
+                'label' => 'Moet door ons ontwormt worden',
+                'required' => false,
+            ])
+            ->add('needsVaccines', CheckboxType::class, [
+                'label' => 'Moet door ons gevaccineerd worden',
+                'required' => false,
             ])
         ;
     }

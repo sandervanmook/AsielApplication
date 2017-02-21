@@ -30,6 +30,7 @@ services:
       class: Asiel\BookkeepingBundle\Service\FoundActionFormHandler
       arguments:
         - '@asiel.backendbundle.baseformhandler'
+        - '@asiel.bookkeepingbundle.totalactioncosts'
 
     asiel.bookkeepingbundle.returnedowneractionformhandler:
       class: Asiel\BookkeepingBundle\Service\ReturnedOwnerActionFormHandler
