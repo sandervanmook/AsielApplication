@@ -151,6 +151,26 @@ class BookkeepingSettingsType extends AbstractType
                 'label' => 'Prijs afstand kat toeslag sterilisatie',
                 'scale' => 2,
             ])
+            ->add('priceFoundFee', MoneyType::class, [
+                'label' => 'Prijs gevonden retributie toeslag ',
+                'scale' => 2,
+            ])
+            ->add('priceFoundNotChipped', MoneyType::class, [
+                'label' => 'Prijs gevonden niet gechipt toeslag ',
+                'scale' => 2,
+            ])
+            ->add('priceFoundNotVaccinated', MoneyType::class, [
+                'label' => 'Prijs gevonden vaccinatie toeslag ',
+                'scale' => 2,
+            ])
+            ->add('priceFoundDeWorm', MoneyType::class, [
+                'label' => 'Prijs gevonden ontwormen toeslag ',
+                'scale' => 2,
+            ])
+            ->add('priceFoundTenancyPerDay', MoneyType::class, [
+                'label' => 'Prijs gevonden verblijf per dag toeslag ',
+                'scale' => 2,
+            ])
         ;
     }
     

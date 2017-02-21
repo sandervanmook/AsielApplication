@@ -47,6 +47,11 @@ class LoadBookkeepingSettingsData implements FixtureInterface
         $entity->setPriceAbandonedCatAffiliatedAdditionNotChipped(15);
         $entity->setPriceAbandonedCatAffiliatedAdditionNotVaccinated(15);
         $entity->setPriceAbandonedCatAffiliatedAdditionNeedsSterilization(15);
+        $entity->setPriceFoundFee(75);
+        $entity->setPriceFoundNotChipped(42);
+        $entity->setPriceFoundNotVaccinated(18);
+        $entity->setPriceFoundDeWorm(10);
+        $entity->setPriceFoundTenancyPerDay(18.15);
 
         $manager->persist($entity);
         $manager->flush();

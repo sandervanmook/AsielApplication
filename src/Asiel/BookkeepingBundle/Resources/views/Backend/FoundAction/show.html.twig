@@ -28,7 +28,7 @@
                     <td>
                         <a href="{{ path('backend_customer_edit', {'id' : action.customer.id}) }}">{{ action.customer.name }}</a>
                     </td>
-                {% endif %}
+                    {% endif %}
                 </tr>
                 <tr>
                     <td>Nog te voldoen</td>
@@ -43,7 +43,9 @@
                 <tbody>
                 {% for transaction in action.transaction %}
                     <tr>
-                        <td>Id : <a href="{{ path('backend_bookkeeping_transaction_show', {'transactionid' : transaction.id}) }}">{{ transaction.id }}</a></td>
+                        <td>Id :
+                            <a href="{{ path('backend_bookkeeping_transaction_show', {'transactionid' : transaction.id}) }}">{{ transaction.id }}</a>
+                        </td>
                         <td>{{ transaction.paymenttype|trans }}</td>
                         <td>Bedrag: <i class="euro icon"></i>{{ transaction.paidamount }}</td>
                     </tr>
@@ -68,7 +70,7 @@
     <hr/>
     <div class="ui sixteen column grid container">
         <div class="ui sixteen wide column">
-            <div class="ui ordered steps">
+            <div class="ui ordered steps four wide">
                 <div class="completed step">
                     <div class="content">
                         <div class="title">Gevonden actie aanmaken</div>
@@ -78,14 +80,33 @@
                     </div>
                 </div>
                 <div class="
-        {% if action.isfullypaid %} completed
-        {% else %} active {% endif %}
-         step">
+                {% if action.status.isExtraCostsApplied == false %} active
+                {% else %} completed
+                {% endif %}
+                step">
+                    <div class="content">
+                        <div class="title">Extra kosten</div>
+                        <div class="description">
+                            Indien er extra kosten zijn geef ze dan in.
+                            {% if action.status.isExtraCostsApplied == false %}
+                                <br/><br/> <a
+                                    href="{{ path('backend_bookkeeping_action_found_extra_costs', {'actionid' : action.id}) }}">
+                                <button class="ui tiny button positive"><i class="plus icon"></i>Toevoegen</button>
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="
+                    {% if action.isfullypaid %} completed
+                    {% elseif action.status.isExtraCostsApplied == false %} disabled
+                    {% else %} active {% endif %}
+                step">
                     <div class="content">
                         <div class="title">Betaling</div>
                         <div class="description">
                             Zorg ervoor dat alle kosten betaald zijn.
-                            {% if action.isfullypaid == false %}
+                            {% if action.isfullypaid == false  and action.status.isExtraCostsApplied == true %}
                                 <br/><br/> <a
                                     href="{{ path('backend_bookkeeping_transaction_searchcustomer', {'actionid' : action.id}) }}">
                                 <button class="ui tiny button positive"><i class="plus icon"></i>Transactie</button>
@@ -95,10 +116,10 @@
                     </div>
                 </div>
                 <div class="
-        {% if action.completed %} completed
-        {% elseif action.isfullypaid %} active
-        {% elseif action.isfullypaid == false %} disabled {% endif %}
-        step">
+                {% if action.completed %} completed
+                {% elseif action.isfullypaid %} active
+                {% elseif action.isfullypaid == false %} disabled {% endif %}
+                step">
                     <div class="content">
                         <div class="title">Voltooi de actie</div>
                         <div class="description">Wijzig de status van het dier.

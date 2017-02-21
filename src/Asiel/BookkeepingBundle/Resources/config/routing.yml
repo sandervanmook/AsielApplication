@@ -45,6 +45,10 @@ backend_bookkeeping_action_found_start:
     path:     /action/found/start
     defaults: { _controller: BookkeepingBundle:FoundAction:start }
 
+backend_bookkeeping_action_found_extra_costs:
+    path:     /action/{actionid}/found/extracosts
+    defaults: { _controller: BookkeepingBundle:FoundAction:extraCosts }
+
 backend_bookkeeping_action_found_finish:
     path:     /action/{actionid}/found/finish
     defaults: { _controller: BookkeepingBundle:FoundAction:finish }

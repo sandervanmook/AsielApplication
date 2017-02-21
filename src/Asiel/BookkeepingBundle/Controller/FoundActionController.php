@@ -7,6 +7,7 @@ namespace Asiel\BookkeepingBundle\Controller;
 use Asiel\AnimalBundle\AnimalStateMachine\AnimalStateMachine;
 use Asiel\AnimalBundle\Entity\StatusType\Found;
 use Asiel\AnimalBundle\Form\StatusType\FoundType;
+use Asiel\BookkeepingBundle\Form\FoundExtraCostsType;
 use Asiel\CustomerBundle\Entity\Customer;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -52,8 +53,7 @@ class FoundActionController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
-            $totalCosts = $form->get('totalcosts')->getData();
-            $action = $formHandler->createAction($currentAnimal, $currentCustomer, $totalCosts ,$status);
+            $action = $formHandler->createAction($currentAnimal, $currentCustomer, $status);
             $actionId = $action->getId();
 
             return new RedirectResponse($this->generateUrl('backend_bookkeeping_action_show',
@@ -63,6 +63,36 @@ class FoundActionController extends Controller
         return $this->render('@Bookkeeping/Backend/FoundAction/start.html.twig', [
             'animal' => $currentAnimal,
             'customer' => $currentCustomer,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     * @param int $actionid
+     * @return RedirectResponse|Response
+     */
+    public function extraCostsAction(Request $request, int $actionid)
+    {
+        $formHandler = $this->get('asiel.bookkeepingbundle.foundactionformhandler');
+        $form = $this->createForm(FoundExtraCostsType::class);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $action = $formHandler->findAction($actionid);
+
+            $formValues['sterilization'] = $form->get('sterilization')->getData();
+            $formValues['medical'] = $form->get('medical')->getData();
+            $formValues['damage'] = $form->get('damage')->getData();
+            $formValues['tenancydays'] = $form->get('tenancydays')->getData();
+
+            $formHandler->addExtraCosts($formValues, $action);
+
+            return new RedirectResponse($this->generateUrl('backend_bookkeeping_action_show', ['actionid' => $actionid]));
+        }
+
+        return $this->render('@Bookkeeping/Backend/FoundAction/extraCosts.html.twig', [
             'form' => $form->createView(),
         ]);
     }

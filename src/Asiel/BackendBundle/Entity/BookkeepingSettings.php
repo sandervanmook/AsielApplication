@@ -257,7 +257,42 @@ class BookkeepingSettings
      *
      * @ORM\Column(name="cat_affiliated_addition_needs_sterilization", type="float")
      */
-    private $priceAbandonedCatAffiliatedAdditionNeedsSterilization ;
+    private $priceAbandonedCatAffiliatedAdditionNeedsSterilization;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="price_found_fee", type="float")
+     */
+    private $priceFoundFee;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="price_found_not_chipped", type="float")
+     */
+    private $priceFoundNotChipped;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="price_found_not_vaccinated", type="float")
+     */
+    private $priceFoundNotVaccinated;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="price_found_de_worm", type="float")
+     */
+    private $priceFoundDeWorm;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="price_found_tenancy_per_day", type="float")
+     */
+    private $priceFoundTenancyPerDay;
 
 
     /**
@@ -1084,5 +1119,125 @@ class BookkeepingSettings
     public function getPriceAbandonedCatAffiliatedAdditionNeedsSterilization()
     {
         return $this->priceAbandonedCatAffiliatedAdditionNeedsSterilization;
+    }
+
+    /**
+     * Set priceFoundFee
+     *
+     * @param float $priceFoundFee
+     *
+     * @return BookkeepingSettings
+     */
+    public function setPriceFoundFee($priceFoundFee)
+    {
+        $this->priceFoundFee = $priceFoundFee;
+
+        return $this;
+    }
+
+    /**
+     * Get priceFoundFee
+     *
+     * @return float
+     */
+    public function getPriceFoundFee()
+    {
+        return $this->priceFoundFee;
+    }
+
+    /**
+     * Set priceFoundNotChipped
+     *
+     * @param float $priceFoundNotChipped
+     *
+     * @return BookkeepingSettings
+     */
+    public function setPriceFoundNotChipped($priceFoundNotChipped)
+    {
+        $this->priceFoundNotChipped = $priceFoundNotChipped;
+
+        return $this;
+    }
+
+    /**
+     * Get priceFoundNotChipped
+     *
+     * @return float
+     */
+    public function getPriceFoundNotChipped()
+    {
+        return $this->priceFoundNotChipped;
+    }
+
+    /**
+     * Set priceFoundNotVaccinated
+     *
+     * @param float $priceFoundNotVaccinated
+     *
+     * @return BookkeepingSettings
+     */
+    public function setPriceFoundNotVaccinated($priceFoundNotVaccinated)
+    {
+        $this->priceFoundNotVaccinated = $priceFoundNotVaccinated;
+
+        return $this;
+    }
+
+    /**
+     * Get priceFoundNotVaccinated
+     *
+     * @return float
+     */
+    public function getPriceFoundNotVaccinated()
+    {
+        return $this->priceFoundNotVaccinated;
+    }
+
+    /**
+     * Set priceFoundDeWorm
+     *
+     * @param float $priceFoundDeWorm
+     *
+     * @return BookkeepingSettings
+     */
+    public function setPriceFoundDeWorm($priceFoundDeWorm)
+    {
+        $this->priceFoundDeWorm = $priceFoundDeWorm;
+
+        return $this;
+    }
+
+    /**
+     * Get priceFoundDeWorm
+     *
+     * @return float
+     */
+    public function getPriceFoundDeWorm()
+    {
+        return $this->priceFoundDeWorm;
+    }
+
+    /**
+     * Set priceFoundTenancyPerDay
+     *
+     * @param float $priceFoundTenancyPerDay
+     *
+     * @return BookkeepingSettings
+     */
+    public function setPriceFoundTenancyPerDay($priceFoundTenancyPerDay)
+    {
+        $this->priceFoundTenancyPerDay = $priceFoundTenancyPerDay;
+
+        return $this;
+    }
+
+    /**
+     * Get priceFoundTenancyPerDay
+     *
+     * @return float
+     */
+    public function getPriceFoundTenancyPerDay()
+    {
+        return $this->priceFoundTenancyPerDay;
     }
 }

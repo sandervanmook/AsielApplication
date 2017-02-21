@@ -65,6 +65,27 @@ class Found extends Status implements AnimalState
      */
     private $foundMunicipality;
 
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="needs_vaccines", type="boolean", nullable=true)
+     */
+    private $needsVaccines;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="extra_costs_applied", type="boolean", nullable=true)
+     */
+    private $extraCostsApplied;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="needs_de_worm", type="boolean", nullable=true)
+     */
+    private $needsDeWorm;
+
     private $stateMachine;
 
     // Origin TaskEvent options
@@ -79,6 +100,14 @@ class Found extends Status implements AnimalState
     const FOUND_AVAILABLE       = [
         'title'         => '(Gevonden) Beschikbaar',
         'description'   => 'Het dier is 15 dagen in het asiel, het mag ter adoptie worden aangeboden. Zet het eventueel zichtbaar voor publiek.',
+    ];
+    const FOUND_DEWORM       = [
+        'title'         => '(Gevonden) Ontwormen',
+        'description'   => 'Het dier is gevonden en moet ontwormt worden.',
+    ];
+    const FOUND_VACCINATE       = [
+        'title'         => '(Gevonden) Vaccinatie',
+        'description'   => 'Het dier is gevonden en moet gevaccineerd worden.',
     ];
 
     public function __construct(AnimalStateMachine $animalStateMachine)
@@ -251,16 +280,6 @@ class Found extends Status implements AnimalState
     }
 
     /**
-     * Get needsChipping
-     *
-     * @return boolean
-     */
-    public function getNeedsChipping()
-    {
-        return $this->needsChipping;
-    }
-
-    /**
      * Set foundMunicipality
      *
      * @param string $foundMunicipality
@@ -282,5 +301,107 @@ class Found extends Status implements AnimalState
     public function getFoundMunicipality()
     {
         return $this->foundMunicipality;
+    }
+
+    /**
+     * Set needsVaccines
+     *
+     * @param boolean $needsVaccines
+     *
+     * @return Found
+     */
+    public function setNeedsVaccines($needsVaccines)
+    {
+        $this->needsVaccines = $needsVaccines;
+
+        return $this;
+    }
+
+    /**
+     * Get needsVaccines
+     *
+     * @return boolean
+     */
+    public function needsVaccines()
+    {
+        return $this->needsVaccines;
+    }
+
+    /**
+     * Set needsDeWorm
+     *
+     * @param boolean $needsDeWorm
+     *
+     * @return Found
+     */
+    public function setNeedsDeWorm($needsDeWorm)
+    {
+        $this->needsDeWorm = $needsDeWorm;
+
+        return $this;
+    }
+
+    /**
+     * Get needsDeWorm
+     *
+     * @return boolean
+     */
+    public function needsDeWorm()
+    {
+        return $this->needsDeWorm;
+    }
+
+    /**
+     * Get needsChipping
+     *
+     * @return boolean
+     */
+    public function getNeedsChipping()
+    {
+        return $this->needsChipping;
+    }
+
+    /**
+     * Get needsVaccines
+     *
+     * @return boolean
+     */
+    public function getNeedsVaccines()
+    {
+        return $this->needsVaccines;
+    }
+
+    /**
+     * Set extraCostsApplied
+     *
+     * @param boolean $extraCostsApplied
+     *
+     * @return Found
+     */
+    public function setExtraCostsApplied($extraCostsApplied)
+    {
+        $this->extraCostsApplied = $extraCostsApplied;
+
+        return $this;
+    }
+
+    /**
+     * Get extraCostsApplied
+     *
+     * @return boolean
+     */
+    public function isExtraCostsApplied()
+    {
+        return $this->extraCostsApplied;
+    }
+
+    /**
+     * Get needsDeWorm
+     *
+     * @return boolean
+     */
+    public function getNeedsDeWorm()
+    {
+        return $this->needsDeWorm;
     }
 }

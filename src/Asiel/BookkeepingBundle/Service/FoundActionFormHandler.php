@@ -6,7 +6,6 @@ namespace Asiel\BookkeepingBundle\Service;
 
 use Asiel\AnimalBundle\AnimalStateMachine\AnimalStateMachine;
 use Asiel\AnimalBundle\Entity\Animal;
-use Asiel\AnimalBundle\Entity\Status;
 use Asiel\AnimalBundle\Entity\StatusType\Found;
 use Asiel\BackendBundle\Event\UserAlertEvent;
 use Asiel\BookkeepingBundle\Entity\Action;
@@ -18,10 +17,12 @@ use Asiel\Shared\Service\BaseFormHandler;
 class FoundActionFormHandler
 {
     private $baseFormHandler;
+    private $totalCosts;
 
-    public function __construct(BaseFormHandler $baseFormHandler)
+    public function __construct(BaseFormHandler $baseFormHandler, TotalActionCosts $totalCosts)
     {
         $this->baseFormHandler = $baseFormHandler;
+        $this->totalCosts = $totalCosts;
     }
 
     public function getBaseFormHandler()
@@ -47,13 +48,17 @@ class FoundActionFormHandler
         return true;
     }
 
-    public function createAction(Animal $animal, Customer $customer, int $totalCosts, Status $status): Action
+    public function createAction(Animal $animal, Customer $customer, Found $status): Action
     {
+        $this->totalCosts->setAnimal($animal);
+        $this->totalCosts->setActionType('Found');
+        $this->totalCosts->setStatus($status);
+
         // Create the action
         $action = new Action();
         $action->setDate(new \DateTime('now'));
         $action->setType('Found');
-        $action->setTotalCosts($totalCosts);
+        $action->setTotalCosts($this->totalCosts->getTotalCosts());
         $action->setAnimal($animal);
         $action->setCompleted(false);
         if (!is_null($customer->getId())) {
@@ -111,6 +116,16 @@ class FoundActionFormHandler
             $this->baseFormHandler->getEventDispatcher()->dispatch('createtask',
                 new TaskEvent($currentAnimal, Task::TOMORROW, Found::FOUND_CHIPPED));
         }
+        // If we need to deworm the animal, create a task.
+        if ($status->needsDeWorm()) {
+            $this->baseFormHandler->getEventDispatcher()->dispatch('createtask',
+                new TaskEvent($currentAnimal, Task::TOMORROW, Found::FOUND_DEWORM));
+        }
+        // If we need to vaccine the animal, create a task.
+        if ($status->needsVaccines()) {
+            $this->baseFormHandler->getEventDispatcher()->dispatch('createtask',
+                new TaskEvent($currentAnimal, Task::TOMORROW, Found::FOUND_VACCINATE));
+        }
 
         $this->baseFormHandler->getEm()->flush();
         $this->baseFormHandler->getEventDispatcher()->dispatch('user_alert.message',
@@ -139,5 +154,37 @@ class FoundActionFormHandler
     public function findAction(int $actionId) : Action
     {
         return $this->getBaseFormHandler()->findAction($actionId);
+    }
+
+    public function addExtraCosts(array $formValues, Action $action)
+    {
+        // Check if costs were already added
+        if ($action->getStatus()->isExtraCostsApplied()) {
+            $this->baseFormHandler->getEventDispatcher()->dispatch('user_alert.message',
+                new UserAlertEvent(UserAlertEvent::DANGER, 'De extra kosten zijn al toegevoegd.'));
+
+            return;
+        }
+
+        $currentTotalCosts = $action->getTotalCosts();
+
+        $bookkeepingSettingsRepository = $this->getBaseFormHandler()->getBookkeepingSettingsRepository();
+        $costsPerDay = $bookkeepingSettingsRepository->getSettings()->getPriceFoundTenancyPerDay();
+
+        $tenacyCosts = $formValues['tenancydays'] * $costsPerDay;
+
+        $add = $formValues['sterilization'] +
+            $formValues['medical'] +
+            $formValues['damage'] +
+            $tenacyCosts;
+
+        $newTotalCosts = $currentTotalCosts + $add;
+        $action->setTotalCosts($newTotalCosts);
+        $action->getStatus()->setExtraCostsApplied(true);
+
+        $this->getBaseFormHandler()->getEm()->flush();
+
+        $this->baseFormHandler->getEventDispatcher()->dispatch('user_alert.message',
+            new UserAlertEvent(UserAlertEvent::SUCCESS, 'De extra kosten zijn toegevoegd.'));
     }
 }

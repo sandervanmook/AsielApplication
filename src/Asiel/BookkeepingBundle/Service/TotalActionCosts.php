@@ -183,6 +183,21 @@ class TotalActionCosts
                     }
                 }
                 break;
+            case 'Found' :
+                // Fee always applies
+                $this->totalCosts += $this->getBookkeepingSettingsRepository()->getSettings()->getPriceFoundFee();
+
+                if ($this->status->isNeedsChipping()) {
+                    $this->totalCosts += $this->getBookkeepingSettingsRepository()->getSettings()->getPriceFoundNotChipped();
+                }
+                if ($this->status->needsDeWorm()) {
+                    $this->totalCosts += $this->getBookkeepingSettingsRepository()->getSettings()->getPriceFoundDeWorm();
+                }
+                if ($this->status->needsVaccines()) {
+                    $this->totalCosts += $this->getBookkeepingSettingsRepository()->getSettings()->getPriceFoundNotVaccinated();
+                }
+
+                break;
             default :
                 $this->totalCosts = 999;
         }
