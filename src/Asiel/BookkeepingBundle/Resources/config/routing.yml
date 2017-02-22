@@ -106,4 +106,12 @@ backend_bookkeeping_bankledger_index:
 backend_bookkeeping_invoiceledger_index:
     path:     /invoiceledger
     defaults: { _controller: BookkeepingBundle:InvoiceLedger:index }
+
+backend_bookkeeping_invoiceledger_searchcustomer:
+    path:     /invoiceledger/searchcustomer
+    defaults: { _controller: BookkeepingBundle:InvoiceLedger:searchCustomer }
+
+backend_bookkeeping_invoiceledger_invoice_per_customer:
+    path:     /invoiceledger/invoicepercustomer/customer/{customerid}
+    defaults: { _controller: BookkeepingBundle:InvoiceLedger:invoicePerCustomer }
 # end Invoice Ledger

@@ -66,6 +66,10 @@ class BackendCustomerController extends Controller
                 return $this->render('@Bookkeeping/Backend/Transaction/searchCustomerResult.html.twig', [
                     'result' => $endResult,
                 ]);
+            case 'bookkeepingbundle_invoiceledger' :
+                return $this->render('@Bookkeeping/Backend/InvoiceLedger/searchCustomerResult.html.twig', [
+                    'result' => $endResult,
+                ]);
             default:
                 return $this->render('@Customer/Backend/searchResult.html.twig', [
                     'result' => $endResult,

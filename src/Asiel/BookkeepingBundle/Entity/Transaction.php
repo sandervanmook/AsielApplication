@@ -321,4 +321,13 @@ class Transaction
     {
         return $this->paid;
     }
+
+    public function isInvoice()
+    {
+        if ($this->getPaymentType() === 'Invoice') {
+            return true;
+        }
+
+        return false;
+    }
 }

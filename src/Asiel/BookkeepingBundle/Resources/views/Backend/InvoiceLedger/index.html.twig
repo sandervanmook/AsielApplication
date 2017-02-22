@@ -67,7 +67,7 @@
                                 <a href="{{ path('backend_bookkeeping_transaction_pay', {'transactionid' : transaction.id}) }}"><button class="ui tiny button positive">Voldaan</button></a>
                                 {% endif %}
                             </td>
-                            <td><a href="{{ path('backend_bookkeeping_transaction_print_single_invoice', {'transactionid' : transaction.id}) }}"><button class="ui tiny button"><i class="print icon"></i></button></a></td>
+                            <td><a href="{{ path('backend_bookkeeping_transaction_print_single_invoice', {'transactionid' : transaction.id}) }}" target="_blank"><button class="ui tiny button"><i class="print icon"></i></button></a></td>
                         </tr>
                     {% endfor %}
                 {% endif %}
