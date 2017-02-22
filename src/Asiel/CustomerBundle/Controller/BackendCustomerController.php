@@ -93,7 +93,11 @@ class BackendCustomerController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $idCard = $form->get('idcard')->getData();
+            if ($form->has('idcard')) {
+                $idCard = $form->get('idcard')->getData();
+            } else {
+                $idCard = null;
+            }
 
             $formHandler->edit($customer, $idCard);
 
