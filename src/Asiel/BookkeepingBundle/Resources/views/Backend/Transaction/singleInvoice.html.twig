@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ asset('semantic/dist/semantic.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/print/singleTransactionInvoice.css') }}">
+
+    <title>Factuur {{ transaction.id }}</title>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div>
+            <img class="center-block" src="{{ asset('img/frontpage_logo.jpg') }}">
+        </div>
+        <br />
+        <br />
+    </div>
+    <div class="row">
+        <div class="col-xs-3">
+            <div class="ui list">
+                <div class="item">vzw Dieren in Nood</div>
+                <div class="item">Eygenweg 1</div>
+                <div class="item">3640 Kinrooi</div>
+                <div class="item">0471 74 36 91</div>
+                <div class="item">info@vzwdiereninnood.be</div>
+            </div>
+        </div>
+        <div class="col-xs-6"></div>
+        {% if transaction.customer.isBusiness %}
+            <div class="col-xs-3">
+                <div class="ui list">
+                    <div class="item">{{ transaction.customer.name }}</div>
+                    <div class="item">{{ transaction.customer.contactfirstname }} {{ transaction.customer.contactlastname }}</div>
+                    <div class="item">{{ transaction.customer.email }}</div>
+                    <div class="item">{{ transaction.customer.phone }}</div>
+                    <div class="item">{{ transaction.customer.address }} {{ transaction.customer.housenumber }}</div>
+                    <div class="item">{{ transaction.customer.zipcode }} {{ transaction.customer.municipality }}</div>
+                    <div class="item">{{ transaction.customer.country|trans }}</div>
+                    <div class="item">{{ transaction.customer.accountnumber }}</div>
+                </div>
+            </div>
+        {% elseif transaction.customer.isPrivate %}
+            <div class="col-xs-3">
+                <div class="ui list">
+                    <div class="item">{{ transaction.customer.name }}</div>
+                    <div class="item">{{ transaction.customer.email }}</div>
+                    <div class="item">{{ transaction.customer.phone }}</div>
+                    <div class="item">{{ transaction.customer.address }} {{ transaction.customer.housenumber }}</div>
+                    <div class="item">{{ transaction.customer.zipcode }} {{ transaction.customer.municipality }}</div>
+                    <div class="item">{{ transaction.customer.country|trans }}</div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+    <br /><br /><br />
+    <div class="row">
+        <div class="col-xs-3">
+            <div class="ui list">
+                <div class="item"><h2 class="ui header">Factuur</h2></div>
+                <div class="item">
+                    <table class="ui small table very basic compact collapsing">
+                        <tbody>
+                        <tr>
+                            <td>Factuurnummer</td>
+                            <td>{{ transaction.id }}</td>
+                        </tr>
+                        <tr>
+                            <td>Factuurdatum</td>
+                            <td>{{ transaction.date|date('d-m-Y') }}</td>
+                        </tr>
+                        <tr>
+                            <td>Factuur vervaldatum</td>
+                            <td>{{ transaction.duedate|date('d-m-Y') }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br/><br /><br /><br />
+    <div class="row">
+        <div class="col-xs-12">
+            <table class="ui table single line">
+                <thead>
+                <tr>
+                    <th>Datum</th>
+                    <th>Omschrijving</th>
+                    <th>Categorie</th>
+                    <th>Dier</th>
+                    <th>Betaalwijze</th>
+                    <th>Prijs</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>{{ transaction.date|date('d-m-Y') }}</td>
+                    <td>{{ transaction.action.type|trans }}</td>
+                    <td>{{ transaction.action.animal.animalType|trans }}</td>
+                    <td>{{ transaction.action.animal.name }}</td>
+                    <td>{{ transaction.paymentType|trans }}</td>
+                    <td><i class="euro icon"></i>{{ transaction.paidAmount }}</td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th>Totaal</th>
+                    <th><i class="euro icon"></i>{{ transaction.paidAmount }}</th>
+                </tr>
+                </tfoot>
+            </table>
+            {% if transaction.paid == false %}
+                <br />
+                <br />
+                <p>Wij verzoeken u vriendelijk het totaalbedrag voor {{ transaction.dueDate|date('d-m-Y') }} te voldoen op TODO Rekeningnummer</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<script>window.print()</script>
+</body>
+</html>

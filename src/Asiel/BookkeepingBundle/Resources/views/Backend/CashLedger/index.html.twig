@@ -45,6 +45,7 @@
                     <th>Aanbetaling</th>
                     <th>Volledig</th>
                     <th></th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -61,6 +62,7 @@
                             <td><a href="{{ path('backend_bookkeeping_action_show', {'actionid' : transaction.action.id}) }}">{{ transaction.action.id }}</a></td>
                             <td>{{ outputBool(transaction.deposit) }}</td>
                             <td>{{ outputBool(transaction.inFull) }}</td>
+                            <td><a href="{{ path('backend_bookkeeping_transaction_print_single_invoice', {'transactionid' : transaction.id}) }}"><button class="ui tiny button"><i class="print icon"></i></button></a></td>
                         </tr>
                     {% endfor %}
                 {% endif %}
