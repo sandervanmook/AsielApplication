@@ -106,4 +106,19 @@ class TransactionController extends Controller
 
         return new RedirectResponse($this->generateUrl('backend_bookkeeping_transaction_show', ['transactionid' => $transactionid]));
     }
+
+    /**
+     * @param int $transactionid
+     * @return Response
+     */
+    public function printSingleInvoiceAction(int $transactionid)
+    {
+        $formHandler = $this->get('asiel.bookkeepingbundle.transactionformhandler');
+
+        $transaction = $formHandler->findTransaction($transactionid);
+
+        return $this->render('@Bookkeeping/Backend/Transaction/singleInvoice.html.twig', [
+            'transaction' => $transaction,
+        ]);
+    }
 }
