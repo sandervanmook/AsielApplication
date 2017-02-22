@@ -1,0 +1,12 @@
+{% extends '@Backend/Base/Base.html.twig' %}
+{% block pagetitle %}Periode{% endblock %}
+{% block body %}
+    <div class="ui sixteen column grid container">
+        <div class="four wide column">
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            {{ outputFormButton('Genereer factuur') }}
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

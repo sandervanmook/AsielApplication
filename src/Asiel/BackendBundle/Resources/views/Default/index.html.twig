@@ -1,5 +1,7 @@
 {% extends '@Backend/Base/Base.html.twig' %}
 {% block pagetitle %}Welkom{% endblock %}
 {% block body %}
-    <p>Begin pagina.</p>
+    {% if browser %}
+        <p><i class="info icon"></i>{{ browser }}</p>
+    {% endif %}
 {% endblock %}

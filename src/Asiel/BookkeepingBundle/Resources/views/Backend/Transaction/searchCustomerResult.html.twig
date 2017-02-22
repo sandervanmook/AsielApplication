@@ -1,5 +1,5 @@
 <table class="ui table compact striped">
-    {% for customer in result %}
+    {% for customer in result|slice(1) %}
         {% if customer.classname == 'PrivateCustomer' %}
             <thead>
             <tr>
@@ -14,7 +14,7 @@
             </thead>
         {% endif %}
     {% endfor %}
-    {% for customer in result %}
+    {% for customer in result|slice(1) %}
         {% if customer.classname == 'BusinessCustomer' %}
             <thead>
             <tr>

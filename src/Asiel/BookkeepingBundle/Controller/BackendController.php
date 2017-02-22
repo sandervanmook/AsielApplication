@@ -14,6 +14,4 @@ class BackendController extends Controller
     {
         return $this->render('BookkeepingBundle:Backend:index.html.twig');
     }
-
-
 }
