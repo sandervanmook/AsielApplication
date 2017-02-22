@@ -1,6 +1,6 @@
 <table class="ui table compact striped">
-    {% for customer in result|slice(1) %}
-    {% if customer.getclassname == 'PrivateCustomer' %}
+    {% for customer in result %}
+    {% if customer.isPrivate %}
     <thead>
     <tr>
         <th></th>
@@ -13,7 +13,10 @@
         <th class="collapsing">Op zwarte lijst?</th>
     </tr>
     </thead>
-    {% elseif customer.getclassname == 'BusinessCustomer' %}
+    {% endif %}
+    {% endfor %}
+    {% for customer in result %}
+    {% if customer.isBusiness %}
     <thead>
     <tr>
         <th></th>
@@ -29,7 +32,7 @@
     {% endfor %}
     <tbody>
     {% for customer in result %}
-    {% if customer.getclassname == 'PrivateCustomer' %}
+    {% if customer.isPrivate %}
     <tr
             {% if customer.blacklisted %}
                 class="negative"
@@ -46,7 +49,7 @@
         <td>{{ customer.phone }}</td>
         <td>{{ outputBool(customer.blacklisted) }}</td>
     </tr>
-    {% elseif customer.getclassname == 'BusinessCustomer' %}
+    {% elseif customer.isBusiness %}
     <tr>
         <td><a href="{{ path('backend_customer_show', {'customerid' : customer.id}) }}">
                 <button class="ui tiny button primary"><i class="eye icon"></i></button>
