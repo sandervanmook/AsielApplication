@@ -1,6 +1,6 @@
 <?php
 
-namespace Asiel\BackendBundle\DataFixtures\ORM;
+namespace Asiel\Shared\TestTools\DataFixtures;
 
 use Asiel\BackendBundle\Entity\BookkeepingSettings;
 use Doctrine\Common\DataFixtures\FixtureInterface;
