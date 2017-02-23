@@ -307,6 +307,15 @@ class Customer
         return 'Unknown';
     }
 
+    public function getContactName()
+    {
+        if ($this instanceof BusinessCustomer) {
+            return $this->getContactFirstname().' '.$this->getContactLastname();
+        }
+
+        return 'Unknown';
+    }
+
     public function isPrivate() : bool
     {
         if ($this instanceof PrivateCustomer) {
