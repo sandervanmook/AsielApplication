@@ -4,23 +4,97 @@
     <div class="ui sixteen column grid container">
         <div class="eight wide column">
             {% if customer.isPrivate %}
-                <h3 class="ui header">Klantinformatie</h3>
+                <h3 class="ui header">Klantinformatie (Particuliere klant)</h3>
                 <table class="ui table very basic">
                     <tbody>
                     <tr>
                         <td>Naam</td>
                         <td>{{ customer.name }}</td>
                     </tr>
+                    <tr>
+                        <td>Geboortedatum</td>
+                        <td>{{ customer.dayofbirth|date('d-m-Y') }}</td>
+                    </tr>
+                    <tr>
+                        <td>BSN/Rijksnummer</td>
+                        <td>{{ customer.citizenServiceNumber }}</td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td>{{ customer.email }}</td>
+                    </tr>
+                    <tr>
+                        <td>Telefoon</td>
+                        <td>{{ customer.phone }}</td>
+                    </tr>
+                    <tr>
+                        <td>Adres</td>
+                        <td>{{ customer.address }} {{ customer.housenumber }}</td>
+                    </tr>
+                    <tr>
+                        <td>Postcode</td>
+                        <td>{{ customer.zipcode }}</td>
+                    </tr>
+                    <tr>
+                        <td>Gemeente</td>
+                        <td>{{ customer.municipality }}</td>
+                    </tr>
+                    <tr>
+                        <td>Land</td>
+                        <td>{{ customer.country }}</td>
+                    </tr>
+                    <tr>
+                        <td>Zwartelijst ?</td>
+                        <td>{{ outputBool(customer.blacklisted) }}</td>
+                    </tr>
+                    {% if customer.blacklisted %}
+                    <tr>
+                        <td>Reden</td>
+                        <td>{{ customer.blacklistedreason }}</td>
+                    </tr>
+                    {% endif %}
                     </tbody>
                 </table>
             {% endif %}
             {% if customer.isBusiness %}
-                <h3 class="ui header">Klantinformatie</h3>
+                <h3 class="ui header">Klantinformatie (Zakelijke klant)</h3>
                 <table class="ui table very basic">
                     <tbody>
                     <tr>
-                        <td>Naam</td>
-                        <td>{{ customer.name }}</td>
+                        <td>Bedrijfsnaam</td>
+                        <td>{{ customer.companyname }}</td>
+                    </tr>
+                    <tr>
+                        <td>Contactpersoon</td>
+                        <td>{{ customer.contactname }}</td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td>{{ customer.email }}</td>
+                    </tr>
+                    <tr>
+                        <td>Telefoonnummer</td>
+                        <td>{{ customer.phone }}</td>
+                    </tr>
+                    <tr>
+                        <td>Adres</td>
+                        <td>{{ customer.address }} {{ customer.housenumber }}</td>
+                    </tr>
+                    <tr>
+                        <td>Gemeente</td>
+                        <td>{{ customer.municipality }}</td>
+                    </tr>
+                    <tr>
+                        <td>Postcode</td>
+                        <td>{{ customer.zipcode }}</td>
+                    </tr>
+                    <tr>
+                        <td>Land</td>
+                        <td>{{ customer.country }}</td>
+                    </tr>
+                    <tr>
+                        <td>Bankrekeningnummer</td>
+                        <td>{{ customer.accountnumber }}</td>
                     </tr>
                     </tbody>
                 </table>
