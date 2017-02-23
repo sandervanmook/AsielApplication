@@ -41,7 +41,6 @@ class FilterAnimalsType extends AbstractType
                 'attr' => [
                     'size'=>'20'
                 ],
-                'data' => MunicipalityType::CHOICES,
             ])
         ;
     }
