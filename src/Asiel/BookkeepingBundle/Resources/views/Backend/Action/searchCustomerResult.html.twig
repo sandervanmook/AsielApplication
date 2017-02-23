@@ -1,6 +1,6 @@
 <table class="ui table compact striped">
     <thead>
-    {% for customer in result|slice(0) %}
+    {% for customer in result|slice(0,1) %}
         {% if customer.isPrivate %}
             <tr>
                 <th>Naam</th>
@@ -12,7 +12,7 @@
             </tr>
         {% endif %}
     {% endfor %}
-    {% for customer in result|slice(0) %}
+    {% for customer in result|slice(0,1) %}
         {% if customer.isBusiness %}
             <tr>
                 <th>Naam</th>
