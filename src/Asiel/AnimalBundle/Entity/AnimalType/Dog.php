@@ -96,6 +96,14 @@ class Dog extends Animal implements TypeInterface
     private $toiletTrained;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="colour", type="string", length=100, nullable=false)
+     * @Assert\NotBlank(message="Dit veld mag niet leeg zijn")
+     */
+    private $colour;
+
+    /**
      * Get id
      *
      * @return int
@@ -370,6 +378,30 @@ class Dog extends Animal implements TypeInterface
         } else {
             return false;
         }
+    }
+
+    /**
+     * Set colour
+     *
+     * @param string $colour
+     *
+     * @return Animal
+     */
+    public function setColour($colour)
+    {
+        $this->colour = $colour;
+
+        return $this;
+    }
+
+    /**
+     * Get colour
+     *
+     * @return string
+     */
+    public function getColour()
+    {
+        return $this->colour;
     }
 
 }

@@ -101,13 +101,6 @@ class AnimalType extends AbstractType
                 'multiple' => false,
                 'required' => true,
             ])
-            ->add('colour', TextType::class, [
-                'label' => 'Kleur van het dier',
-                'required' => false,
-                'attr' => [
-                    'placeholder' => 'Wat is de kleur van het dier'
-                ]
-            ])
             ->add('characteristics', CKEditorType::class, [
                 'label' => 'Specifieke eigenschappen van het dier',
                 'required' => false,

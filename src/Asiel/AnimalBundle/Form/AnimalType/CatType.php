@@ -76,7 +76,6 @@ class CatType extends AnimalType
                     'Turkse Van' => 'Turkse Van',
                     'Ural Rex' => 'Ural Rex',
                 ]
-
             ])
             ->add('sterilized', CheckboxType::class, [
                 'label' => 'Gesteriliseerd / Gecastereerd',
@@ -101,6 +100,41 @@ class CatType extends AnimalType
             ->add('toiletTrained', CheckboxType::class, [
                 'label' => 'Zindelijk',
                 'required' => false,
+            ])
+            ->add('colour', ChoiceType::class, [
+                'label' => 'Kleur van het dier',
+                'required' => true,
+                'choices' => [
+                    'Albino' => 'Albino',
+                    'Apricot' => 'Apricot',
+                    'Blauw' => 'Blauw',
+                    'Bronze' => 'Bronze',
+                    'Caramel' => 'Caramel',
+                    'Champagne' => 'Champagne',
+                    'Charcoal' => 'Charcoal',
+                    'Chocolate' => 'Chocolate',
+                    'Cinnamon' => 'Cinnamon',
+                    'Crème' => 'Crème',
+                    'Fawn' => 'Fawn',
+                    'Golden' => 'Golden',
+                    'Lilac' => 'Lilac',
+                    'Mink' => 'Mink',
+                    'Peach' => 'Peach',
+                    'Platinum' => 'Platinum',
+                    'Rood' => 'Rood',
+                    'Ruddy' => 'Ruddy',
+                    'Seal' => 'Seal',
+                    'Sepia' => 'Sepia',
+                    'Snow' => 'Snow',
+                    'Sorrel' => 'Sorrel',
+                    'Tan' => 'Tan',
+                    'Tawny' => 'Tawny',
+                    'Wildkleur' => 'Wildkleur',
+                    'Wit' => 'Wit',
+                    'Zilver' => 'Zilver',
+                    'Zwart' => 'Zwart',
+                ],
+                'multiple' => false,
             ])
             ->addEventListener(
                 FormEvents::PRE_SET_DATA,
