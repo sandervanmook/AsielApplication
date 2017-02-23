@@ -25,6 +25,7 @@ class BackendBundleBookkeepingSettings extends AbstractMigration
      * Remember to call "create()" or "update()" and NOT "save()" when working
      * with the Table class.
      */
+
     public function up()
     {
         $singleRow = [
@@ -77,6 +78,6 @@ class BackendBundleBookkeepingSettings extends AbstractMigration
 
     public function down()
     {
-        $this->execute('DELETE FROM AsielApplication.backend_bookkeeping_settings WHERE id = 1');
+        $this->dropTable('AsielApplication.backend_bookkeeping_settings');
     }
 }
