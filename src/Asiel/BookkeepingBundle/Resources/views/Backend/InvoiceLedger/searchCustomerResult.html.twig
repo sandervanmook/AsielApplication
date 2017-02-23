@@ -1,33 +1,29 @@
 <table class="ui table compact striped">
+    <thead>
     {% for customer in result|slice(1) %}
         {% if customer.isPrivate %}
-            <thead>
             <tr>
-                <th>Voornaam</th>
-                <th>Achternaam</th>
+                <th>Naam</th>
                 <th>Email</th>
                 <th>Gemeente</th>
                 <th>BSN</th>
                 <th>Telefoonnummer</th>
                 <th class="collapsing">Op zwarte lijst?</th>
             </tr>
-            </thead>
         {% endif %}
     {% endfor %}
     {% for customer in result|slice(1) %}
         {% if customer.isBusiness %}
-            <thead>
             <tr>
-                <th>Voornaam</th>
-                <th>Achternaam</th>
+                <th>Naam</th>
                 <th>Email</th>
                 <th>Gemeente</th>
                 <th>Bedrijfsnaam</th>
                 <th>Telefoonnummer</th>
             </tr>
-            </thead>
         {% endif %}
     {% endfor %}
+    </thead>
     <tbody>
     {% for customer in result %}
         {% if customer.isPrivate %}
@@ -36,8 +32,7 @@
                         class="negative"
                     {% endif %}
             >
-                <td>{{ customer.firstname }}</td>
-                <td><a href="{{ path('backend_bookkeeping_invoiceledger_invoice_per_customer', {'customerid' : customer.id }) }}">{{ customer.lastname }}</a></td>
+                <td><a href="{{ path('backend_bookkeeping_invoiceledger_invoice_per_customer', {'customerid' : customer.id }) }}">{{ customer.name }}</a></td>
                 <td>{{ customer.email }}</td>
                 <td>{{ customer.municipality }}</td>
                 <td>{{ customer.citizenservicenumber }}</td>
@@ -47,8 +42,7 @@
         {% endif %}
         {% if customer.isBusiness %}
             <tr>
-                <td>{{ customer.contactfirstname }}</td>
-                <td>{{ customer.contactlastname }}</a></td>
+                <td>{{ customer.contactname }}</a></td>
                 <td>{{ customer.email }}</td>
                 <td>{{ customer.municipality }}</td>
                 <td><a href="{{ path('backend_bookkeeping_invoiceledger_invoice_per_customer', {'customerid' : customer.id }) }}">{{ customer.companyname }}</a></td>
