@@ -130,14 +130,6 @@ class Animal
     /**
      * @var string
      *
-     * @ORM\Column(name="colour", type="string", length=100, nullable=false)
-     * @Assert\NotBlank(message="Dit veld mag niet leeg zijn")
-     */
-    private $colour;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="characteristics", type="text", nullable=true)
      */
     private $characteristics;
@@ -421,30 +413,6 @@ class Animal
     public function getGender()
     {
         return $this->gender;
-    }
-
-    /**
-     * Set colour
-     *
-     * @param string $colour
-     *
-     * @return Animal
-     */
-    public function setColour($colour)
-    {
-        $this->colour = $colour;
-
-        return $this;
-    }
-
-    /**
-     * Get colour
-     *
-     * @return string
-     */
-    public function getColour()
-    {
-        return $this->colour;
     }
 
     /**
