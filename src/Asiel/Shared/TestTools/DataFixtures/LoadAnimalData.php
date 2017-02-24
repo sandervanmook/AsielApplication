@@ -9,6 +9,7 @@ use Asiel\AnimalBundle\Entity\Medical;
 use Asiel\AnimalBundle\Entity\Picture;
 use Asiel\AnimalBundle\Entity\StatusType\Found;
 use Asiel\AnimalBundle\Entity\StatusType\Lost;
+use Asiel\CalendarBundle\Entity\Task;
 use DateTime;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -48,6 +49,15 @@ class LoadAnimalData implements FixtureInterface
         $status->setDate(new DateTime('now'));
         $status->setArchived(false);
         $status->setFoundMunicipality('Kinrooi');
+        // Task for animal
+        $task = new Task();
+        $task->setAnimal($animal);
+        $task->setDateCreated(new DateTime('today'));
+        $task->setDateDue(new DateTime('tomorrow'));
+        $task->setCreatedBy('Admin');
+        $task->setTitle('Titel');
+        $task->setDescription('contents');
+        $task->setIsComplete(false);
 
         // Animal 2
         $animal2  = new Cat();
@@ -109,6 +119,7 @@ class LoadAnimalData implements FixtureInterface
 
         $manager->persist($picture);
         $manager->persist($status);
+        $manager->persist($task);
         $manager->persist($animal);
         $manager->persist($incident);
         $manager->persist($medical);

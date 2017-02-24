@@ -8,7 +8,8 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        $browser = $_SERVER['HTTP_USER_AGENT'];
+        $browser = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : null;
+
         if (!strpos($browser,'Chrome')) {
             $warning = 'We zien dat u geen Chrome als browser gebruikt. Om optimaal gebruik van deze applicatie te maken adviseren wij u Chrome te gebruiken.';
         } else {
