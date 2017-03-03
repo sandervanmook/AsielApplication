@@ -74,7 +74,7 @@ class BackendBundleBookkeepingSettings extends AbstractMigration
             'invoice_email_address' => 'demo@demo.com'
         ];
 
-        $table = $this->table('AsielApplication.backend_bookkeeping_settings');
+        $table = $this->table('backend_bookkeeping_settings');
         $table->insert($singleRow);
         $table->saveData();
     }

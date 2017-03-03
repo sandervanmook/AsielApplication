@@ -44,7 +44,7 @@ class BackendBundleFrontendSettings extends AbstractMigration
             'about_us' => '<p>Informatie over het asiel</p>'
         ];
 
-        $table = $this->table('AsielApplication.backend_frontend_settings');
+        $table = $this->table('backend_frontend_settings');
         $table->insert($singleRow);
         $table->saveData();
     }
