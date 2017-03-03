@@ -21,3 +21,4 @@ phinx.yml
 /.idea
 /web/logo/*
 !/web/logo/logo_dino.jpg
+!/web/logo/default_logo.jpg
