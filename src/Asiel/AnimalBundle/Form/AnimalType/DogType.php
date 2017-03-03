@@ -214,6 +214,7 @@ class DogType extends AnimalType
             ])
             ->add('crossbred', CheckboxType::class, [
                 'label' => 'Kruising',
+                'required' => false,
 
             ])
             ->addEventListener(
