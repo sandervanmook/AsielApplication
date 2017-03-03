@@ -19,3 +19,5 @@ phinx.yml
 /cc
 /phpunit.xml
 /.idea
+/web/logo/*
+!/web/logo/logo_dino.jpg

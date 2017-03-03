@@ -65,7 +65,11 @@ class DefaultController extends Controller
      */
     public function aboutAction()
     {
-        return $this->render('@Frontend/Default/about.html.twig');
+        $settings = $this->getDoctrine()->getRepository('BackendBundle:FrontendSettings')->find(1);
+
+        return $this->render('@Frontend/Default/about.html.twig', [
+            'info' => $settings,
+        ]);
     }
 
     /**
@@ -75,6 +79,7 @@ class DefaultController extends Controller
     public function contactAction(Request $request)
     {
         $formHandler = $this->get('asiel.frontendbundle.defaultformhandler');
+        $settings = $this->getDoctrine()->getRepository('BackendBundle:FrontendSettings')->find(1);
 
         $form = $this->createForm(ContactType::class);
         $form->handleRequest($request);
@@ -85,7 +90,35 @@ class DefaultController extends Controller
             return new RedirectResponse($this->generateUrl('frontend_contact'));
         }
         return $this->render('@Frontend/Default/contact.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'info' => $settings,
         ]);
     }
+
+    /**
+     * @return Response
+     */
+    public function renderHeaderAction()
+    {
+        $repository = $this->getDoctrine()->getRepository('BackendBundle:FrontendSettings');
+        $settings = $repository->find(1);
+
+        return $this->render('@Frontend/Base/Header.html.twig', [
+            'info' => $settings,
+        ]);
+    }
+
+    /**
+     * @return Response
+     */
+    public function renderFooterAction()
+    {
+        $repository = $this->getDoctrine()->getRepository('BackendBundle:FrontendSettings');
+        $settings = $repository->find(1);
+
+        return $this->render('@Frontend/Base/Footer.html.twig', [
+            'info' => $settings,
+        ]);
+    }
+
 }

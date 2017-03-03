@@ -49,89 +49,14 @@
             <a class="item right" href="{{ path('backend_default_index') }}"><i class="sign in icon"></i>Inloggen</a>
         </div>
         <div class="pusher">
-            <div class="ui horizontal divider"></div>
-            <div class="ui vertical masthead center aligned segment">
-                <img class="image" src="{{ asset('img/frontpage_logo.jpg') }}">
-            </div>
+            {{ render(controller('FrontendBundle:Default:renderHeader')) }}
             <div class="ui container page">
                 <h1 class="ui header">{% block pagetitle %}{% endblock %}</h1>
                 {% block pagesubtitle %}{% endblock %}
                 {% block body %}{% endblock %}
             </div>
         </div>
-        <div class="ui inverted vertical footer segment">
-            <div class="ui container">
-                <div class="ui stackable inverted divided equal height stackable grid">
-                    <div class="three wide column">
-                        <div class="ui inverted link list">
-                            <a class="item" href="#">Link 1</a>
-                            <a class="item" href="#">Link 2</a>
-                            <a class="item" href="#">Link 3</a>
-                            <a class="item" href="#">Link 4</a>
-                        </div>
-                    </div>
-                    <div class="three wide column">
-                        <h4 class="ui inverted header">Doneer</h4>
-                        <div class="ui inverted link list">
-                            <a class="item" href="#">Link 1</a>
-                            <a class="item" href="#">Link 2</a>
-                            <a class="item" href="#">Link 3</a>
-                            <a class="item" href="#">Link 4</a>
-                        </div>
-                    </div>
-                    <div class="four wide column">
-                        <h4 class="ui inverted header">Algemene informatie</h4>
-                        <div class="ui list">
-                            <div class="item">
-                                <i class="users icon"></i>
-                                <div class="content">
-                                    vzw Dieren in Nood
-                                </div>
-                            </div>
-                            <div class="item">
-                                <i class="marker icon"></i>
-                                <div class="content">
-                                    Eygenweg 1, 3640 Kinrooi
-                                </div>
-                            </div>
-                            <div class="item">
-                                <i class="phone icon"></i>
-                                <div class="content">
-                                    0471 74 36 91
-                                </div>
-                            </div>
-                            <div class="item">
-                                <i class="mail icon"></i>
-                                <div class="content">
-                                    <a href="mailto:info@vzwdiereninnood.be">info@vzwdiereninnood.be</a>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <i class="folder icon"></i>
-                                <div class="content">
-                                    0838-237-871
-                                </div>
-                            </div>
-                            <div class="item">
-                                <i class="linkify icon"></i>
-                                <div class="content">
-                                    <a href="http://vzwdiereninnood.be/">vzwdiereninnood.be</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="three wide column">
-                        <h4 class="ui inverted header">Volg Ons</h4>
-                        <div class="ui inverted link list">
-                            <a class="item" href="http://www.facebook.com/diereninnooddino"><i class="facebook icon" style="font-size: 1.9em"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="ui inverted section divider"></div>
-                <div class="ui header inverted centered aligned"><p><i class="copyright icon"></i> S. van Mook {{ "now"|date('Y') }}</p></div>
-            </div>
-        </div>
-
+        {{ render(controller('FrontendBundle:Default:renderFooter')) }}
 {% block javascripts %}
     <!-- Semantic-UI JS -->
     <script src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>
