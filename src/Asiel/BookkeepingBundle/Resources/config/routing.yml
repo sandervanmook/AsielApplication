@@ -21,6 +21,10 @@ backend_bookkeeping_action_index:
 backend_bookkeeping_action_show:
     path:     /action/show/{actionid}
     defaults: { _controller: BookkeepingBundle:Action:show }
+
+backend_bookkeeping_action_zerototalcosts:
+    path:     /action/zerototalcosts/{actionid}
+    defaults: { _controller: BookkeepingBundle:Action:zeroTotalCosts }
 #End Action
 #Action Adopted
 backend_bookkeeping_action_adopted_start:

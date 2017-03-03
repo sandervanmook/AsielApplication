@@ -88,6 +88,9 @@
                                     href="{{ path('backend_bookkeeping_transaction_searchcustomer', {'actionid' : action.id}) }}">
                                 <button class="ui tiny button positive"><i class="plus icon"></i>Transactie</button>
                             </a>
+                                <a href="{{ path('backend_bookkeeping_action_zerototalcosts', {'actionid' : action.id}) }}">
+                                    <button class="ui tiny button negative"><i class="remove icon"></i>Geen kosten rekenen</button>
+                                </a>
                             {% endif %}
                         </div>
                     </div>

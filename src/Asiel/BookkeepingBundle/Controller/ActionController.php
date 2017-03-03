@@ -148,4 +148,18 @@ class ActionController extends Controller
             'action' => $action,
         ]);
     }
+
+    /**
+     * @param int $actionid
+     * @return RedirectResponse
+     */
+    public function zeroTotalCostsAction(int $actionid)
+    {
+        $formHandler = $this->get('asiel.bookkeepingbundle.actionformhandler');
+        $action = $formHandler->findAction(($actionid));
+
+        $formHandler->setTotalCostsToZero($action);
+
+        return new RedirectResponse($this->generateUrl('backend_bookkeeping_action_show', ['actionid' => $actionid]));
+    }
 }
