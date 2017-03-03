@@ -1,0 +1,464 @@
+{% extends '@Backend/Base/Base.html.twig' %}
+{% block pagetitle %}{% endblock %}
+{% block body %}
+    <div class="ui sixteen column grid container">
+        <div class="ten wide column">
+            <div class="ui ordered list">
+                <a href="#introductie" class="item">Introductie</a>
+                <div class="item">
+                    <a href="#frontend">Frontend</a>
+                    <div class="list">
+                        <a href="#menu-frontend" class="item">Menu</a>
+                        <a href="#overons" class="item">Over ons</a>
+                        <a href="#contact" class="item">Contact</a>
+                        <a href="#inloggen" class="item">Inloggen</a>
+                    </div>
+                </div>
+                <div class="item">
+                    <a href="#backend">Backend</a>
+                    <div class="list">
+                        <a href="#menu-backend" class="item">Menu</a>
+                        <a href="#agenda-backend" class="item">Agenda</a>
+                        <a href="#instellingen-backend" class="item">Instellingen</a>
+                        <a href="#profiel" class="item">Profiel</a>
+                    </div>
+                </div>
+                <div class="item">
+                    <a href="#dieren">Dieren</a>
+                    <div class="list">
+                        <a href="#alledieren" class="item">Alle dieren</a>
+                        <a href="#aanmelden" class="item">Aanmelden</a>
+                        <a href="#dier-aanpassen" class="item">Aanpassen</a>
+                        <a href="#incidenten" class="item">Incidenten</a>
+                        <a href="#medischdossier" class="item">Medisch dossier</a>
+                        <a href="#status" class="item">Status</a>
+                        <a href="#fotos" class="item">Foto's</a>
+                        <a href="#facebook" class="item">Facebook</a>
+                        <a href="#taken" class="item">Taken</a>
+                    </div>
+                </div>
+                <div class="item">
+                    <a>Locaties</a>
+                    <div class="list">
+                        <a class="item">Overzicht</a>
+                        <a class="item">Toevoegen</a>
+                    </div>
+                </div>
+                <div class="item">
+                    <a>Klanten</a>
+                    <div class="list">
+                        <a class="item">Overzicht</a>
+                        <a class="item">Toevoegen</a>
+                    </div>
+                </div>
+                <div class="item">
+                    <a>Gebruikers</a>
+                    <div class="list">
+                        <a class="item">Overzicht</a>
+                        <a class="item">Toevoegen</a>
+                    </div>
+                </div>
+                <div class="item">
+                    <a>Statistieken</a>
+                    <div class="list">
+                        <a class="item">Overzicht</a>
+                    </div>
+                </div>
+                <div class="item">
+                    <a>Boekhouding</a>
+                    <div class="list">
+                        <a class="item">Status aanpassen</a>
+                        <a class="item">Actie overzicht</a>
+                        <a class="item">Kas overzicht</a>
+                        <a class="item">Bank overzicht</a>
+                        <a class="item">Factuur overzicht</a>
+                        <a class="item">Verzamelfactuur per klant</a>
+                    </div>
+                </div>
+                <div class="item">
+                    <a>Calender</a>
+                    <div class="list">
+                        <a class="item">Taken</a>
+                        <a class="item">Agenda punten</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ui divider horizontal"></div>
+            <div class="ui divider horizontal"></div>
+
+            <div class="ui sizer vertical segment">
+                <h1 id="introductie" class="ui header teal">Introductie</h1>
+                <p>
+                    Deze applicatie bestaat uit een aantal samenwerkende modules. Op deze pagina staan
+                    de verschillende modules en hun onderlinge relatie beschreven.
+                </p>
+                <p>
+                    De 2 belangrijkste modules zijn de "frontend" en "backend" modules. Deze modules
+                    brengen de overige modules samen tot 1 applicatie. Alles wat zich in het publieke
+                    gedeelte van de website afspeelt valt onder de frontend (voorkant). Dit gedeelte is
+                    bedoelt voor klanten die interesse hebben om een dier te adopteren. Alles wat u te
+                    zien krijgt na het inloggen valt onder de backend (achterkant) van de applicatie.
+                    Hier kunt u wijzigingen aanbrengen. Zonder een geldig account is dit gedeelte niet
+                    toegankelijk.
+                </p>
+            </div>
+
+            <div class="ui divider horizontal"></div>
+
+            <div class="ui sizer vertical segment">
+                <h1 id="frontend" class="ui header teal">Frontend</h1>
+                <p>
+                    Dit is het publieke gedeelte van de website. De informatie in de "footer" (het onderste
+                    gedeelte van de pagina) vult u zelf in onder de <a href="#frontend-instellingen">frontend instellingen</a>.
+                </p>
+                <p>
+                    Of een dier wel of niet getoond wordt in het publieke gedeelte heeft met 2 zaken te maken:
+                </p>
+                <ul>
+                    <li>Is het zichtbaar voor publiek ? Dit kunt u terugvinden in het overzicht van het dier</li>
+                    <li>Heeft het dier een onsite <a href="#status">status ?</a></li>
+                </ul>
+
+                <h3 id="menu-frontend" class="ui header blue">Menu</h3>
+                <p>
+                    Hier kunnen klanten een keuze maken in wat ze willen bekijken. Ze kunnen een
+                    categorie kiezen (honden of katten) of naar een pagina gaan waar ze kunnen zoeken
+                    d.m.v. een filter.
+                </p>
+
+                <h3 id="overons" class="ui header blue">Over Ons</h3>
+                <p>
+                    Op deze pagina kunnen klanten informatie over uw organisatie vinden. Deze informatie
+                    kunt u zelf invoeren in de backend module bij de <a href="#frontend-instellingen">frontend instellingen</a>.
+                </p>
+
+                <h3 id="contact" class="ui header blue">Contact</h3>
+                <p>
+                    Op deze pagina kunnen klanten d.m.v. een formulier contact met u opnemen. Het
+                    is momenteel niet mogelijk zelf op te geven waar deze informatie (email) terecht
+                    komt, dit stellen wij in bij installatie. De contact informatie geeft u zelf in
+                    via de backend module bij de <a href="#frontend-instellingen">frontend instellingen</a>.
+                </p>
+
+                <h3 id="inloggen" class="ui header blue">Inloggen</h3>
+                <p>
+                    Op deze pagina kunt u met een geldig gebruikersaccount inloggen. In het hoofdstuk
+                    over de <a href="#gebruikers">gebruikersmodule</a> vind u meer informatie hierover.
+                </p>
+
+            </div>
+
+            <div class="ui divider horizontal"></div>
+
+            <div class="ui sizer vertical segment">
+                <h1 id="backend" class="ui header teal">Backend</h1>
+                <p>
+                    Deze module geeft toegang tot andere modules binnen de applicatie.
+                </p>
+
+                <h3 id="menu-backend" class="ui header blue">Menu</h3>
+                <p>
+                    In het menu vind u links naar alle andere modules. Voor meer informatie over
+                    de betreffende module verwijzen wij u naar het betreffende hoofdstuk.
+                </p>
+
+                <h3 id="agenda-backend" class="ui header blue">Agenda</h3>
+                <p>
+                    <i class="calendar icon"></i> Via deze link kunt u de centrale agenda bekijken
+                    of een nieuwe afspraak in de agenda maken. Meer informatie is beschikbaar in het
+                    hoofdstuk over de <a href="#agenda">agenda</a>.
+                </p>
+
+                <h3 id="instellingen-backend" class="ui header blue">Instellingen</h3>
+                <p>
+                    <i class="configure icon"></i>Onder deze link zitten momenteel 2 opties:
+                </p>
+                <ul>
+                    <li>Boekhoud instellingen</li>
+                    <li>Frontend instellingen</li>
+                </ul>
+                <h5 id="boekhoud-instellingen" class="ui header">Boekhoud instellingen</h5>
+                <p>
+                    Op deze pagina geeft u informatie in die de boekhoudmodule nodig heeft om goed
+                    te kunnen werken. De instellingen hebben veelal te maken met prijzen of informatie
+                    die op de factuur moet komen te staan.
+                </p>
+
+                <h5 id="frontend-instellingen" class="ui header">Frontend instellingen</h5>
+                <p>
+                    Op deze pagina geeft u informatie in die terugkomt op het publieke gedeelte van de website.
+                </p>
+
+                <h3 id="profiel" class="ui header blue">Profiel</h3>
+                <p>
+                    <i class="user icon"></i>Het menu met dit icoon en daarnaast u gebruikersnaam
+                    geeft de mogelijkheid om:
+                </p>
+                <ul>
+                    <li>
+                        Uw profiel te bewerken. Momenteel laat deze pagina uw persoonlijke gegevens
+                        zien. Ook kunt u hier uw wachtwoord om in te loggen wijzigen. Een beheerder
+                        kan het wachtwoord van andere gebruikers ook wijzigen.
+                    </li>
+                    <li>Direct naar het publieke gedeelte van de website te gaan</li>
+                    <li>Uit te loggen</li>
+                </ul>
+
+            </div>
+
+            <div class="ui divider horizontal"></div>
+
+            <div class="ui sizer vertical segment">
+                <h1 id="dieren" class="ui header teal">Dieren</h1>
+                <p>Deze module is het hart van de applicatie. Hier staat alle informatie over
+                de dieren die in het asiel zitten of gezeten hebben.</p>
+                <p>
+                    Via het algemene menu kunt u een overzicht krijgen van alle dieren (of sorteren met het filer.
+                    Ook is het mogelijk nieuwe dieren aan te melden.
+                </p>
+
+
+                <h3 id="alledieren" class="ui header blue">Alle dieren</h3>
+                <p>
+                    Via een filter krijgt u inzicht in alle dieren die in het asiel zitten of gezeten
+                    hebben. Als u op de naam van het dier wat u gevonden heeft klikt gaat u naar
+                    de overzichtspagina van het dier. Als het dier openstaande taken heeft en u klikt
+                    op de "Ja" komt u direct in het takenoverzicht van dit dier.
+                    <span class="text-danger">Let op: U moet altijd de kat/hond filter gebruiken.</span>
+                </p>
+
+                <h3 id="aanmelden" class="ui header blue">Aanmelden</h3>
+                <p>
+                    Via het algemene menu kunt u direct een dier aanmelden. Het systeem zal u eerst vragen
+                    een chipnummer in te voeren om te voorkomen dat dieren dubbel in de database komen te staan.
+                    U kunt deze stap ook overslaan als u geen chipnummer beschikbaar heeft. Indien u wel een
+                    chipnummer invoert zal het systeem in externe databases gaan zoeken (momenteel 3) en u daar,
+                     indien van toepassing, de resultaten van laten zien. Als het dier al in de database staat
+                    wordt u daarna doorverwezen. Indien het dier nog niet in de database staat kunt u hem als
+                    nieuw dier aanmelden.
+                </p>
+                <p>
+                    De procedure om een kat of hond aan te melden is nagenoeg hetzelfde. U krijgt een formulier
+                    te zien wat u in dient te vullen. Zodra het is ingevuld kunt u het dier "aanmaken". Deze
+                    gegevens zijn later nog te wijzigen.
+                </p>
+
+                <h3 id="dier-aanpassen" class="ui header blue">Aanpassen</h3>
+                <p>
+                    Zodra u een nieuw dier heeft aangemeld (of via een filter geselecteerd) komt u in
+                    overzicht van het dier terecht. Dit is een overzicht met algemene informatie over het dier.
+                </p>
+                <p>
+                    Bovenin het scherm ziet u een aantal links staan waaronder aanpassen. Op deze pagina kunt u
+                    informatie aanpassen die u eerder heeft ingevoerd bij het aanmelden van het dier.
+                </p>
+
+                <h3 id="incidenten" class="ui header blue">Incidenten</h3>
+                <p>
+                    Via de incidenten link kunt u een incident registreren. Hiermee kunt u bijvoorbeeld
+                    vastleggen dat het dier een ander dier heeft gebeten.
+                </p>
+
+                <h3 id="medischdossier" class="ui header blue">Medisch dossier</h3>
+                <p>
+                    Via het medisch dossier kunt u medische handelingen vastleggen.
+                </p>
+
+                <h3 id="status" class="ui header blue">Status</h3>
+                <p>
+                    De status is een van de belangrijkste eigenschappen die het systeem over een dier
+                    bijhoudt. De status geeft aan waar in het "proces" het dier zich bevindt. Er zijn 2
+                    soorten statussen, onsite en offsite. Simpel gezien is het de vraag of het dier fysiek
+                    aanwezig in het asiel (onsite) of niet (offsite). Als een dier een onsite status heeft
+                    en bij de opties is aangegeven dat het zichtbaar is voor publiek zal het in het publieke
+                    gedeelte te zien zijn.<span class="text-danger"> Als een dier nieuw binnen komt
+                    (geen status) moet het altijd als eerste een "onsite" status krijgen.</span>
+                </p>
+                <p>
+                    Het systeem kent de volgende statussen:
+                </p>
+                <ul>
+                    <li>Afgestaan (onsite), als de eigenaar het dier vrijwillig afstaat.</li>
+                    <li>Adoptie (offsite), als een klant een dier adopteerd.</li>
+                    <li>Overleden (offsite), als het dier overleden is.</li>
+                    <li>Gevonden (onsite), als het dier gevonden is.</li>
+                    <li>Kwijt (offsite), het dier is ontsnapt uit het asiel.</li>
+                    <li>Geen status (offsite), het dier is nieuw in het systeem en heeft nog geen
+                    status.</li>
+                    <li>Terug naar eigenaar (offsite), het dier is terug naar de oorspronkelijke
+                    eigenaar</li>
+                    <li>In beslag genomen (onsite), het dier is in beslag genomen.</li>
+                </ul>
+                <p>
+                    Via de knop status kunt u de huidige en gearchiveerde statussen bekijken. U kunt via
+                    dit menu 2 statussen aanmaken, kwijt en overleden. Dit zijn namelijk de enige statussen
+                    waar geen "kosten" aan verbonden zijn. Alle andere statussen kunnen alleen via de boekhoud
+                    module aan een dier gekoppeld worden. Het veranderen van de status van een dier wordt verder
+                    besproken in de <a href="#boekhouding">boekhoud</a> module.
+                </p>
+                <p>
+                    Het zou niet logisch zijn als een dier 2 keer dezelfde status kon krijgen, of dat als het overleden
+                    is nog van status zou kunnen veranderen. Daarom is deze matrix opgesteld, houdt daar rekening
+                    mee als u een dier van status wil veranderen. Alleen deze statusaanpassingen zijn toegestaan:
+                </p>
+                <table class="ui single line table">
+                    <thead>
+                    <tr>
+                        <th>Huidige status</th>
+                        <th>Nieuwe status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="ui inverted grey table">
+                        <td>Afgestaan</td>
+                        <td>Adoptie</td>
+                    </tr>
+                    <tr class="ui inverted grey table">
+                        <td>Afgestaan</td>
+                        <td>Overleden</td>
+                    </tr>
+                    <tr class="ui inverted grey table">
+                        <td>Afgestaan</td>
+                        <td>Kwijt</td>
+                    </tr>
+                    <tr class="ui inverted grey table">
+                        <td>Afgestaan</td>
+                        <td>Terug naar eigenaar</td>
+                    </tr>
+                    <tr>
+                        <td>Adoptie</td>
+                        <td>Afgestaan</td>
+                    </tr>
+                    <tr>
+                        <td>Adoptie</td>
+                        <td>Gevonden</td>
+                    </tr>
+                    <tr>
+                        <td>Adoptie</td>
+                        <td>In beslag genomen</td>
+                    </tr>
+                    <tr class="ui inverted grey table">
+                        <td>Gevonden</td>
+                        <td>Afgestaan</td>
+                    </tr>
+                    <tr class="ui inverted grey table">
+                        <td>Gevonden</td>
+                        <td>Adoptie</td>
+                    </tr>
+                    <tr class="ui inverted grey table">
+                        <td>Gevonden</td>
+                        <td>Overleden</td>
+                    </tr>
+                    <tr class="ui inverted grey table">
+                        <td>Gevonden</td>
+                        <td>Kwijt</td>
+                    </tr>
+                    <tr class="ui inverted grey table">
+                        <td>Gevonden</td>
+                        <td>Terug naar eigenaar</td>
+                    </tr>
+                    <tr class="ui inverted grey table">
+                        <td>Gevonden</td>
+                        <td>In beslag genomen</td>
+                    </tr>
+                    <tr>
+                        <td>Kwijt</td>
+                        <td>Gevonden</td>
+                    </tr>
+                    <tr>
+                        <td>Kwijt</td>
+                        <td>In beslag genomen</td>
+                    </tr>
+                    <tr class="ui inverted grey table">
+                        <td>Geen status</td>
+                        <td>Gevonden</td>
+                    </tr>
+                    <tr class="ui inverted grey table">
+                        <td>Geen status</td>
+                        <td>In beslag genomen</td>
+                    </tr>
+                    <tr class="ui inverted grey table">
+                        <td>Geen status</td>
+                        <td>Afgestaan</td>
+                    </tr>
+                    <tr>
+                        <td>Terug naar eigenaar</td>
+                        <td>Afgestaan</td>
+                    </tr>
+                    <tr>
+                        <td>Terug naar eigenaar</td>
+                        <td>Gevonden</td>
+                    </tr>
+                    <tr>
+                        <td>Terug naar eigenaar</td>
+                        <td>In beslag genomen</td>
+                    </tr>
+                    <tr class="ui inverted grey table">
+                        <td>In beslag genomen</td>
+                        <td>Adoptie</td>
+                    </tr>
+                    <tr class="ui inverted grey table">
+                        <td>In beslag genomen</td>
+                        <td>Overleden</td>
+                    </tr>
+                    <tr class="ui inverted grey table">
+                        <td>In beslag genomen</td>
+                        <td>Terug naar eigenaar</td>
+                    </tr>
+                    <tr class="ui inverted grey table">
+                        <td>In beslag genomen</td>
+                        <td>Kwijt</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <p>
+                    Als u probeert toch een statusaanpassing uit te voeren die hier niet beschreven staat zal het
+                    systeem een foutmelding geven.
+                </p>
+
+                <h3 id="fotos" class="ui header blue">Foto's</h3>
+                <p>
+
+                </p>
+
+                <h3 id="facebook" class="ui header blue">Facebook</h3>
+                <p>
+
+                </p>
+
+                <h3 id="taken" class="ui header blue">Taken</h3>
+                <p>
+
+                </p>
+
+            </div>
+
+            <div class="ui sizer vertical segment">
+                <h1 id="locaties" class="ui header teal">Locaties</h1>
+            </div>
+
+            <div class="ui sizer vertical segment">
+                <h1 id="klanten" class="ui header teal">Klanten</h1>
+            </div>
+
+            <div class="ui sizer vertical segment">
+                <h1 id="gebruikers" class="ui header teal">Gebruikers</h1>
+            </div>
+
+            <div class="ui sizer vertical segment">
+                <h1 id="statistieken" class="ui header teal">Statistieken</h1>
+            </div>
+
+            <div class="ui sizer vertical segment">
+                <h1 id="boekhouding" class="ui header teal">Boekhouding</h1>
+            </div>
+
+            <div class="ui sizer vertical segment">
+                <h1 id="agenda" class="ui header teal">Agenda</h1>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}

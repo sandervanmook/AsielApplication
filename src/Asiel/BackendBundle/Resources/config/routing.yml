@@ -2,6 +2,10 @@ backend_default_index:
     path:     /home
     defaults: { _controller: BackendBundle:Default:index }
 
+backend_default_help:
+    path:     /help
+    defaults: { _controller: BackendBundle:Default:help }
+
 #Settings section
 backend_settings_bookkeeping:
     path:     /settings/bookkeeping
