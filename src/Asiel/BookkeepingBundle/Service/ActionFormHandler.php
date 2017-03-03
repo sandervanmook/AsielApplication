@@ -39,4 +39,14 @@ class ActionFormHandler
     {
         return $this->getBaseFormHandler()->findAction($actionId);
     }
+
+    public function setTotalCostsToZero(Action $action)
+    {
+        $action->setTotalCosts(0);
+        $this->getBaseFormHandler()->getEm()->flush();
+
+        $this->baseFormHandler->getEventDispatcher()->dispatch('user_alert.message',
+            new UserAlertEvent(UserAlertEvent::SUCCESS,
+                "De totale kosten voor de actie zijn nu 0."));
+    }
 }
