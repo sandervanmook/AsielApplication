@@ -114,11 +114,14 @@ class TransactionController extends Controller
     public function printSingleInvoiceAction(int $transactionid)
     {
         $formHandler = $this->get('asiel.bookkeepingbundle.transactionformhandler');
-
         $transaction = $formHandler->findTransaction($transactionid);
+        $frondendSettings = $this->getDoctrine()->getRepository('BackendBundle:FrontendSettings')->find(1);
+        $bookkeepingSettings = $this->getDoctrine()->getRepository('BackendBundle:BookkeepingSettings')->find(1);
 
         return $this->render('@Bookkeeping/Backend/Transaction/singleInvoice.html.twig', [
             'transaction' => $transaction,
+            'frontendsettings' => $frondendSettings,
+            'bookkeepingsettings' => $bookkeepingSettings,
         ]);
     }
 }

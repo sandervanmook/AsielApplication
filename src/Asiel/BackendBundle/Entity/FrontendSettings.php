@@ -101,20 +101,6 @@ class FrontendSettings
     /**
      * @var string
      *
-     * @ORM\Column(name="iban", type="string", length=20)
-     */
-    private $iban;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="bic", type="string", length=15)
-     */
-    private $bic;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="about_us", type="text", nullable=false)
      */
     private $aboutUs;
@@ -377,38 +363,6 @@ class FrontendSettings
     public function setZipcode(string $zipcode)
     {
         $this->zipcode = $zipcode;
-    }
-
-    /**
-     * @return string
-     */
-    public function getIban(): string
-    {
-        return $this->iban;
-    }
-
-    /**
-     * @param string $iban
-     */
-    public function setIban(string $iban)
-    {
-        $this->iban = $iban;
-    }
-
-    /**
-     * @return string
-     */
-    public function getBic(): string
-    {
-        return $this->bic;
-    }
-
-    /**
-     * @param string $bic
-     */
-    public function setBic(string $bic)
-    {
-        $this->bic = $bic;
     }
 
     /**

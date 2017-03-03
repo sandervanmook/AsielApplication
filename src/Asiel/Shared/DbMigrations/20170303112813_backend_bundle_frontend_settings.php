@@ -41,8 +41,6 @@ class BackendBundleFrontendSettings extends AbstractMigration
             'url' => 'http://www.asielpro.nl',
             'facebook' => 'http://www.facebook.com',
             'logo_filename' => 'default_logo.jpg',
-            'iban' => 'BE01 1111 2222 3333',
-            'bic' => 'BICCODE',
             'about_us' => '<p>Informatie over het asiel</p>'
         ];
 

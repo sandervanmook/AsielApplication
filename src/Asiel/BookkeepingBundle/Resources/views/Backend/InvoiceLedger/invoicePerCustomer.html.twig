@@ -12,7 +12,7 @@
 <div class="container">
     <div class="row">
         <div>
-            <img class="center-block" src="{{ asset('img/frontpage_logo.jpg') }}">
+            <img class="center-block" src="{{ asset('logo/'~frontendsettings.logoFilename) }}">
         </div>
         <br/>
         <br/>
@@ -20,13 +20,13 @@
     <div class="row">
         <div class="col-xs-3">
             <div class="ui list">
-                <div class="item">vzw Dieren in Nood</div>
-                <div class="item">Eygenweg 1</div>
-                <div class="item">3640 Kinrooi</div>
-                <div class="item">0471 74 36 91</div>
-                <div class="item">sofie@vzwdiereninnood.be</div>
-                <div>IBAN BE05 7340 3271 5075</div>
-                <div>BIC KREDBEBB</div>
+                <div class="item">{{ frontendsettings.name }}</div>
+                <div class="item">{{ frontendsettings.address }} {{ frontendsettings.housenumber }}</div>
+                <div class="item">{{ frontendsettings.zipcode }} {{ frontendsettings.municipality }}</div>
+                <div class="item">{{ frontendsettings.phone }}</div>
+                <div class="item">{{ bookkeepingsettings.invoiceEmailAddress }}</div>
+                <div>IBAN {{ bookkeepingsettings.iban }}</div>
+                <div>BIC {{ bookkeepingsettings.bic }}</div>
             </div>
         </div>
         <div class="col-xs-6"></div>
@@ -116,10 +116,10 @@
             </table>
             <br/>
             <br/>
-            <p>Wij verzoeken u vriendelijk het totaalbedrag van {{ totalcosts }} binnen 14 dagen te voldoen op rekeningnummer BE05 7340 3271 5075 onder vermelding van het factuurnummer</p>
+            <p>Wij verzoeken u vriendelijk het totaalbedrag van {{ totalcosts }} binnen 14 dagen te voldoen op rekeningnummer {{ bookkeepingsettings.iban }} onder vermelding van het factuurnummer.</p>
         </div>
     </div>
 </div>
-<script>//window.print()</script>
+<script>window.print()</script>
 </body>
 </html>

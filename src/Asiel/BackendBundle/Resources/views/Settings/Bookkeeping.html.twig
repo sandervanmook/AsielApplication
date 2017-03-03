@@ -5,6 +5,14 @@
         {{ form_start(form) }}
         <div class="ui three column very relaxed grid">
             <div class="five wide column">
+                <h3 class="ui header">Algemeen</h3>
+                {{ form_row(form.iban) }}
+                {{ form_row(form.bic) }}
+                {{ form_row(form.invoiceEmailAddress) }}
+            </div>
+        </div>
+        <div class="ui three column very relaxed grid">
+            <div class="five wide column">
                 <h3 class="ui header">Adoptie</h3>
                 {{ form_row(form.priceAdoptedKitten) }}
                 {{ form_row(form.priceAdoptedCat) }}
