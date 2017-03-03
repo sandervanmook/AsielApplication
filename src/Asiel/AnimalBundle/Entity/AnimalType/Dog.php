@@ -104,6 +104,13 @@ class Dog extends Animal implements TypeInterface
     private $colour;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="crossbred", type="boolean", nullable=true)
+     */
+    private $crossbred;
+
+    /**
      * Get id
      *
      * @return int
@@ -402,6 +409,16 @@ class Dog extends Animal implements TypeInterface
     public function getColour()
     {
         return $this->colour;
+    }
+
+    public function isCrossbred()
+    {
+        return $this->crossbred;
+    }
+
+    public function setCrossbred(bool $crossbred)
+    {
+        $this->crossbred = $crossbred;
     }
 
 }

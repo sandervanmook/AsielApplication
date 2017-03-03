@@ -212,6 +212,10 @@ class DogType extends AnimalType
                     'Zwart' => 'Zwart',
                 ],
             ])
+            ->add('crossbred', CheckboxType::class, [
+                'label' => 'Kruising',
+
+            ])
             ->addEventListener(
                 FormEvents::PRE_SET_DATA,
                 array($this, 'onPreSetData')
