@@ -20,4 +20,9 @@ class DefaultController extends Controller
             'browser' => $warning,
         ]);
     }
+
+    public function helpAction()
+    {
+        return $this->render('@Backend/Help/index.html.twig');
+    }
 }
