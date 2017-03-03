@@ -31,10 +31,12 @@ class TaskType extends AbstractType
                 'data'          => new \DateTime(),
             ])
             ->add('title', TextType::class, [
-                'label'         => 'Titel'
+                'label'         => 'Titel',
+                'required' => true,
             ])
             ->add('description', CKEditorType::class, [
-                'label'         => 'Omschrijf wat er moet gebeuren'
+                'label'         => 'Omschrijf wat er moet gebeuren',
+                'required' => false,
             ])
             ->add('isComplete', CheckboxType::class, [
                 'label'         => 'Taak volbracht ?',
