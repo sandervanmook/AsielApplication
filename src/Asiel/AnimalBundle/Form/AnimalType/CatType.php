@@ -75,7 +75,8 @@ class CatType extends AnimalType
                     'Turkse Angora' => 'Turkse Angora',
                     'Turkse Van' => 'Turkse Van',
                     'Ural Rex' => 'Ural Rex',
-                ]
+                ],
+                'data' => 'Europees Korthaar',
             ])
             ->add('sterilized', CheckboxType::class, [
                 'label' => 'Gesteriliseerd / Gecastereerd',
@@ -125,10 +126,12 @@ class CatType extends AnimalType
                     'Ruddy' => 'Ruddy',
                     'Seal' => 'Seal',
                     'Sepia' => 'Sepia',
+                    'Schildpad' => 'Schilpad',
                     'Snow' => 'Snow',
                     'Sorrel' => 'Sorrel',
                     'Tan' => 'Tan',
                     'Tawny' => 'Tawny',
+                    'Tricolor' => 'Tricolor',
                     'Wildkleur' => 'Wildkleur',
                     'Wit' => 'Wit',
                     'Zilver' => 'Zilver',
