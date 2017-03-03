@@ -32,6 +32,9 @@ $(document).ready(function() {
             if (event.animalname) {
                 content += "Dier: "+event.animalname+ "<br />";
             }
+            if (event.description == null){
+                event.description = 'geen omschrijving';
+            }
             element.qtip({
                 content: content +
                          "Titel: "+event.title+"<hr>"+
