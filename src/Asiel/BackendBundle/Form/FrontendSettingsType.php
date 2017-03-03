@@ -60,14 +60,6 @@ class FrontendSettingsType extends AbstractType
                 'label' => 'Naam van het logobestand',
                 'required' => true,
             ])
-            ->add('iban', TextType::class, [
-                'label' => 'Rekeningnummer (iban)',
-                'required' => true,
-            ])
-            ->add('bic', TextType::class, [
-                'label' => 'BIC code',
-                'required' => true,
-            ])
             ->add('aboutUs', CKEditorType::class, [
                 'label' => 'Informatie voor op de over ons pagina',
                 'required' => true,

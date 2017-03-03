@@ -69,6 +69,9 @@ class BackendBundleBookkeepingSettings extends AbstractMigration
             'price_found_not_vaccinated' => 18,
             'price_found_de_worm' => 10,
             'price_found_tenancy_per_day' => 18.15,
+            'iban' => 'BE01 1111 2222 3333',
+            'bic' => 'BICCODE',
+            'invoice_email_address' => 'demo@demo.com'
         ];
 
         $table = $this->table('AsielApplication.backend_bookkeeping_settings');

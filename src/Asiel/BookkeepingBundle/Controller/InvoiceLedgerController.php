@@ -64,6 +64,11 @@ class InvoiceLedgerController extends Controller
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @param int $customerid
+     * @return Response
+     */
     public function invoicePerCustomerAction(Request $request, int $customerid)
     {
         $form = $this->createFormBuilder()
@@ -99,21 +104,21 @@ class InvoiceLedgerController extends Controller
                 }
             }
 
+            $frondendSettings = $this->getDoctrine()->getRepository('BackendBundle:FrontendSettings')->find(1);
+            $bookkeepingSettings = $this->getDoctrine()->getRepository('BackendBundle:BookkeepingSettings')->find(1);
+
             return $this->render('@Bookkeeping/Backend/InvoiceLedger/invoicePerCustomer.html.twig', [
                 'transactions' => $transactions,
                 'totalcosts' => $totalCosts,
                 'customer' => $customer,
+                'frontendsettings' => $frondendSettings,
+                'bookkeepingsettings' => $bookkeepingSettings,
             ]);
         }
 
         return $this->render('@Bookkeeping/Backend/InvoiceLedger/selectDate.html.twig', [
             'form' => $form->createView(),
         ]);
-    }
-
-    public function printInvoicePerCustomerAction()
-    {
-
     }
 
 }

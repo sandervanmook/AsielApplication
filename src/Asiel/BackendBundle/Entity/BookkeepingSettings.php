@@ -294,6 +294,26 @@ class BookkeepingSettings
      */
     private $priceFoundTenancyPerDay;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="iban", type="string", length=25)
+     */
+    private $iban;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="bic", type="string", length=25)
+     */
+    private $bic;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="invoice_email_address", type="string", length=255)
+     */
+    private $invoiceEmailAddress;
 
     /**
      * Get id
@@ -1240,4 +1260,54 @@ class BookkeepingSettings
     {
         return $this->priceFoundTenancyPerDay;
     }
+
+    /**
+     * @return string
+     */
+    public function getIban(): string
+    {
+        return $this->iban;
+    }
+
+    /**
+     * @param string $iban
+     */
+    public function setIban(string $iban)
+    {
+        $this->iban = $iban;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBic(): string
+    {
+        return $this->bic;
+    }
+
+    /**
+     * @param string $bic
+     */
+    public function setBic(string $bic)
+    {
+        $this->bic = $bic;
+    }
+
+    /**
+     * @return string
+     */
+    public function getInvoiceEmailAddress(): string
+    {
+        return $this->invoiceEmailAddress;
+    }
+
+    /**
+     * @param string $invoiceEmailAddress
+     */
+    public function setInvoiceEmailAddress(string $invoiceEmailAddress)
+    {
+        $this->invoiceEmailAddress = $invoiceEmailAddress;
+    }
+
+
 }

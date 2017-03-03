@@ -4,6 +4,7 @@ namespace Asiel\BackendBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -170,6 +171,18 @@ class BookkeepingSettingsType extends AbstractType
             ->add('priceFoundTenancyPerDay', MoneyType::class, [
                 'label' => 'Prijs gevonden verblijf per dag toeslag ',
                 'scale' => 2,
+            ])
+            ->add('iban', TextType::class, [
+                'label' => 'Rekeningnummer (iban)',
+                'required' => true,
+            ])
+            ->add('bic', TextType::class, [
+                'label' => 'BIC code',
+                'required' => true,
+            ])
+            ->add('invoiceEmailAddress', TextType::class, [
+                'label' => 'Factuur emailadres',
+                'required' => true,
             ])
         ;
     }
