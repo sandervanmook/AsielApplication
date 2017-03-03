@@ -36,10 +36,12 @@ class CalendarItemType extends AbstractType
                 'data'          => new \DateTime(),
             ])
             ->add('title', TextType::class, [
-                'label'         => 'Titel'
+                'label'         => 'Titel',
+                'required' => true,
             ])
             ->add('description', CKEditorType::class, [
-                'label'         => 'Omschrijf de afspraak'
+                'label'         => 'Omschrijf de afspraak',
+                'required' => false,
             ])
             ->addEventListener(
                 FormEvents::PRE_SET_DATA,
