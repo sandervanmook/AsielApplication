@@ -2,7 +2,7 @@
 {% block pagetitle %}{% endblock %}
 {% block body %}
     <div class="ui sixteen column grid container">
-        <div class="ten wide column">
+        <div class="twelve wide column">
             <div class="ui ordered list">
                 <a href="#introductie" class="item">Introductie</a>
                 <div class="item">
@@ -38,16 +38,12 @@
                     </div>
                 </div>
                 <div class="item">
-                    <a>Locaties</a>
-                    <div class="list">
-                        <a class="item">Overzicht</a>
-                        <a class="item">Toevoegen</a>
-                    </div>
+                    <a href="#locaties">Locaties</a>
                 </div>
                 <div class="item">
-                    <a>Klanten</a>
+                    <a href="#klanten">Klanten</a>
                     <div class="list">
-                        <a class="item">Overzicht</a>
+                        <a class="item">Beheer</a>
                         <a class="item">Toevoegen</a>
                     </div>
                 </div>
@@ -448,10 +444,61 @@
 
             <div class="ui sizer vertical segment">
                 <h1 id="locaties" class="ui header teal">Locaties</h1>
+                <p>
+                    Via het algemene menu heeft u de mogelijkheid een locatie toe te voegen en
+                    locaties te beheren. Een locatie is niets anders dan de huidige verblijfplaats
+                    van een dier. Een dier heeft een nacht en een dag locatie. Deze zijn via de
+                    aanpassen functie in te stellen. We maken onderscheid in locaties voor katten
+                    en honden. Als u een locatie wil verwijderen is het belangrijk dat u eerst het
+                    dier wat de betreffende locatie heeft een andere locatie geeft, anders is het niet
+                    mogelijk de locatie te verwijderen.
+                </p>
             </div>
 
             <div class="ui sizer vertical segment">
                 <h1 id="klanten" class="ui header teal">Klanten</h1>
+                <p>
+                    Klanten hebben vaak een directe relatie met de dieren in het systeem. Als een dier
+                    wordt afgestaan is er een klant aan verbonden, maar ook als het dier gevonden is of
+                    als een klant een dier adopteerd. Er bestaan 2 soorten klanten, particuliere klanten
+                    en zakelijke klanten. Van een particuliere klant leggen we andere gegevens vast dan
+                    een zakelijke klant. Een zakelijke klant, meestal een gemeente, zal vaak gebruikt worden
+                    om facturen naar te sturen.
+                </p>
+
+                <h3 id="klanten-beheer" class="ui header blue">Beheer</h3>
+                <p>
+                    Via het algemene menu heeft u de mogelijkheid klantbeheer uit te voeren. De pagina
+                    laat een aantal filters zien waarop u kunt zoeken. Zodra u de filters invult verschijnt
+                    er onder de filters een tabel met zoekresultaten. Daar heeft u 2 mogelijkheden, als u op
+                    het blauwe icoontje <button class="ui tiny button primary"><i class="eye icon"></i></button>
+                    klikt krijgt u een overzicht te zien van de betreffende klant. Klikt u op de naam / bedrijfsnaam
+                    van de klant heeft u de mogelijkheid de klant aan te passen.
+                </p>
+
+                <h3 id="klanten-toevoegen" class="ui header blue">Toevoegen</h3>
+                <p>
+                    Via het algemene menu heeft u de mogelijkheid een klant toe te voegen. Daarna krijgt
+                    u de keuze te zien of het een zakelijke of particuliere klant is. Een aantal belangrijke
+                    punten:
+                </p>
+                <ul>
+                    <li>
+                        Email veld, het systeem controleert of dit een geldig email adres is. Ook is dit
+                        veld uniek in het system, d.w.z. dat een email adres maar voor 1 klant gebruikt mag
+                        worden.
+                    </li>
+                    <li>
+                        Gemeente veld, dit veld is heel belangrijk, het wordt namelijk ook in andere
+                        modules (statistieken) gebruikt.
+                    </li>
+                    <li>
+                        Upload ID card gegevens, deze functie geeft de mogelijkheid een Belgische id kaart
+                        te uploaden. Het systeem verwacht een bestand in XML formaat gemaakt met het programma
+                        wat te downloaden is vanaf <a target="_blank" href="http://eid.belgium.be">http://eid.belgium.be</a>.
+                    </li>
+                </ul>
+
             </div>
 
             <div class="ui sizer vertical segment">
