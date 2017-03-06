@@ -67,7 +67,7 @@ class SearchAnimalType extends AbstractType
                     'In beslag genomen' => 'seized',
                     'Adoptie'   => 'adopted',
                     'Overleden' => 'deceased',
-                    'Kwijt' => 'lost',
+                    'Vermist' => 'lost',
                     'Terug naar eigenaar'   => 'returnedowner',
                     'Geen'  => 'nostate',
                 ],

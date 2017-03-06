@@ -20,7 +20,7 @@ class NewStatusType extends AbstractType
                 'mapped'    => false,
                 'choices'       => [
                     'Overleden'             => 'Deceased',
-                    'Kwijt'                 => 'Lost',
+                    'Vermist'                 => 'Lost',
                 ],
                 'expanded'  => true,
                 'multiple'  => false,

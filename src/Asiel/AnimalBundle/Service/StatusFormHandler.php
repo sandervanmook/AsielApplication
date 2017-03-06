@@ -30,13 +30,14 @@ class StatusFormHandler
         return $this->baseFormHandler->findStatus($statusId);
     }
 
-    public function delete(Status $status)
-    {
-        $this->baseFormHandler->getEm()->remove($status);
-        $this->baseFormHandler->getEm()->flush();
-        $this->baseFormHandler->getEventDispatcher()->dispatch('user_alert.message',
-            new UserAlertEvent(UserAlertEvent::SUCCESS, 'Status verwijderd.'));
-    }
+    // Not in use atm
+    //    public function delete(Status $status)
+//    {
+//        $this->baseFormHandler->getEm()->remove($status);
+//        $this->baseFormHandler->getEm()->flush();
+//        $this->baseFormHandler->getEventDispatcher()->dispatch('user_alert.message',
+//            new UserAlertEvent(UserAlertEvent::SUCCESS, 'Status verwijderd.'));
+//    }
 
     /**
      * Check if the animal has no state, if it has, show message.
