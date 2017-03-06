@@ -106,43 +106,44 @@ class BackendStatusController extends Controller
      * @return Response
      * @internal param int $id
      */
-    public function deleteAction(int $statusid)
-    {
-        $formHandler = $this->get('asiel.animalbundle.statusformhandler');
-
-        $selectedStatus = $formHandler->find($statusid);
-        $animalId = $selectedStatus->getAnimal()->getId();
-        $allStates = $formHandler->getAnimalRepository()->find($animalId)->getStatus();
-        $amount = count($allStates);
-
-        // If its an archived status just delete it.
-        if ($selectedStatus->isArchived()) {
-            $formHandler->removeArchivedStatus($selectedStatus);
-
-            return new Response('Command received.');
-        }
-
-        // If there is more than 1 state, we have a choice
-        if ($amount > 1) {
-            // First delete the active one.
-            $formHandler->delete($selectedStatus);
-
-            // If the animal has more then 1 old states we need to make the newest one active.
-            $ids = $formHandler->getIdsFromStates($allStates);
-
-            $newestStateId = max($ids);
-
-            $state = $formHandler->find($newestStateId);
-            $state->setArchived(false);
-
-            $this->getDoctrine()->getManager()->flush();
-            $formHandler->setSuccessMessage('Status verwijderd en nieuwste gearchiveerde status actief gemaakt.');
-        } else {
-            // If the animal has none or 1 old state delete it.
-            $formHandler->removeActiveStatus($selectedStatus);
-        }
-
-        return new Response('Command received.');
-    }
+    // not in use atm
+//    public function deleteAction(int $statusid)
+//    {
+//        $formHandler = $this->get('asiel.animalbundle.statusformhandler');
+//
+//        $selectedStatus = $formHandler->find($statusid);
+//        $animalId = $selectedStatus->getAnimal()->getId();
+//        $allStates = $formHandler->getAnimalRepository()->find($animalId)->getStatus();
+//        $amount = count($allStates);
+//
+//        // If its an archived status just delete it.
+//        if ($selectedStatus->isArchived()) {
+//            $formHandler->removeArchivedStatus($selectedStatus);
+//
+//            return new Response('Command received.');
+//        }
+//
+//        // If there is more than 1 state, we have a choice
+//        if ($amount > 1) {
+//            // First delete the active one.
+//            $formHandler->delete($selectedStatus);
+//
+//            // If the animal has more then 1 old states we need to make the newest one active.
+//            $ids = $formHandler->getIdsFromStates($allStates);
+//
+//            $newestStateId = max($ids);
+//
+//            $state = $formHandler->find($newestStateId);
+//            $state->setArchived(false);
+//
+//            $this->getDoctrine()->getManager()->flush();
+//            $formHandler->setSuccessMessage('Status verwijderd en nieuwste gearchiveerde status actief gemaakt.');
+//        } else {
+//            // If the animal has none or 1 old state delete it.
+//            $formHandler->removeActiveStatus($selectedStatus);
+//        }
+//
+//        return new Response('Command received.');
+//    }
 
 }

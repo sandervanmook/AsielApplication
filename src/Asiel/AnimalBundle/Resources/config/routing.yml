@@ -95,12 +95,6 @@ backend_animal_status_show:
     defaults: { _controller: AnimalBundle:BackendStatus:show }
     options:
            expose: true
-
-backend_animal_status_delete:
-    path:     /status/delete/{statusid}
-    defaults: { _controller: AnimalBundle:BackendStatus:delete }
-    options:
-           expose: true
 # End Backend Status
 # Backend Picture
 backend_animal_picture_index:

@@ -16,7 +16,7 @@ class LostType extends StatusType
         parent::buildForm($builder, $options);
         $builder
             ->add('reason', CKEditorType::class, [
-                'label'         => 'Waarom is het dier kwijt',
+                'label'         => 'Waarom is het dier vermist',
             ])
         ;
     }

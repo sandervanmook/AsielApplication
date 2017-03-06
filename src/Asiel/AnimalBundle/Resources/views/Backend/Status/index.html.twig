@@ -5,7 +5,7 @@
         <div class="ui sixteen column grid container">
             <div class="sixteen wide column">
                 <div class="ui two column very relaxed grid">
-                    <div class="ten wide column">
+                    <div class="eight wide column">
                         <table class="ui table compact collapsing striped">
                             <thead>
                             <tr>
@@ -26,11 +26,6 @@
                                         <td>Actief</td>
                                     {% endif %}
                                     <td>
-                                        <div id="{{ entry.id }}" class="ui mini negative labeled icon button delete">
-                                            <i class="remove icon"></i> Verwijderen
-                                        </div>
-                                    </td>
-                                    <td>
                                         <div id="{{ entry.id }}" class="ui mini info labeled icon button view">
                                             <i class="folder open icon"></i> Bekijken
                                         </div>
@@ -40,7 +35,7 @@
                             </tbody>
                             <tfoot>
                             <tr>
-                                <th>
+                                <th class="collapsing">
                                     <a href="{{ path('backend_animal_status_create', {'id' : app.request.attributes.get('id')}) }}">
                                         <div class="ui tiny positive labeled icon button">
                                             <i class="add square icon"></i> Status toevoegen
@@ -50,30 +45,12 @@
                                 <th></th>
                                 <th></th>
                                 <th></th>
-                                <th></th>
                             </tr>
                             </tfoot>
                         </table>
                     </div>
-                    <div class="six wide column">
+                    <div class="eight wide column">
                         <div id="result"></div>
-                    </div>
-                </div>
-                <div id="confirmmodal" class="ui basic modal">
-                    <div class="ui icon header">
-                        <i class="archive icon"></i>
-                        Status verwijderen
-                    </div>
-                    <div class="content">
-                        <p>Weet u zeker dat u de status wil verwijderen?</p>
-                    </div>
-                    <div class="actions">
-                        <div class="ui red basic cancel inverted button">
-                            <i class="remove icon"></i>
-                        </div>
-                        <div id="approve" class="ui green ok inverted button">
-                            <i class="checkmark icon"></i>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -82,6 +59,5 @@
 {% endblock %}
 {% block javascripts %}
     {{ parent() }}
-    <script src="{{ asset('js/views/AnimalBundle/Status/StatusConfirmDelete.js') }}"></script>
     <script src="{{ asset('js/views/AnimalBundle/Status/StatusShow.js') }}"></script>
 {% endblock %}

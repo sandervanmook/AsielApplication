@@ -45,7 +45,7 @@ class BackendStatusControllerTest extends BaseFunctionalTest
         $contents = $this->getContents($url);
 
         $this->assertContains('<h3 class="ui header">Status 1</h3>', $contents);
-        $this->assertContains('<p>Type status:  Kwijt</p>', $contents);
+        $this->assertContains('<p>Type status:  Vermist</p>', $contents);
     }
 
     public function test_delete_action()
