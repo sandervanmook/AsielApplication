@@ -117,7 +117,7 @@
                 </tr>
                 </tfoot>
             </table>
-            {% if transaction.paid == false %}
+            {% if transaction.paid == false and transaction.paymenttype == 'Invoice'%}
                 <br />
                 <br />
                 <p>Wij verzoeken u vriendelijk het totaalbedrag voor {{ transaction.dueDate|date('d-m-Y') }} te voldoen op rekeningnummer {{ bookkeepingsettings.iban }} onder vermelding van het factuurnummer.</p>

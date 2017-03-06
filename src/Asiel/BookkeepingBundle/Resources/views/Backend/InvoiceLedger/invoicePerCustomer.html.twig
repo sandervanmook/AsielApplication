@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}"/>
     <link rel="stylesheet" href="{{ asset('css/print/invoice.css') }}">
 
-    <title>Factuur TODO</title>
+    <title>Factuur</title>
 </head>
 <body>
 <div class="container">
@@ -80,6 +80,7 @@
             <table class="ui table single line">
                 <thead>
                 <tr>
+                    <th>Factuur</th>
                     <th>Datum</th>
                     <th>Vervaldatum</th>
                     <th>Omschrijving</th>
@@ -92,6 +93,7 @@
                 <tbody>
                 {% for transaction in transactions %}
                     <tr>
+                        <td>{{ transaction.id }}</td>
                         <td>{{ transaction.date|date('d-m-Y') }}</td>
                         <td>{{ transaction.duedate|date('d-m-Y') }}</td>
                         <td>{{ transaction.action.type|trans }}</td>
@@ -104,6 +106,7 @@
                 </tbody>
                 <tfoot>
                 <tr>
+                    <th></th>
                     <th></th>
                     <th></th>
                     <th></th>
