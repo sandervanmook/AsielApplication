@@ -98,7 +98,9 @@ class InvoiceLedgerController extends Controller
                 $transactionDate = $transaction->getDate()->getTimestamp();
                 if ($transaction->isInvoice() &&
                     $transactionDate >= $start &&
-                    $transactionDate <= $end) {
+                    $transactionDate <= $end &&
+                    !$transaction->isPaid()
+            ){
                     $transactions[] = $transaction;
                     $totalCosts += $transaction->getPaidAmount();
                 }
