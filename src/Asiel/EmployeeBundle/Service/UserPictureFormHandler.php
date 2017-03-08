@@ -26,7 +26,7 @@ class UserPictureFormHandler
 
     public function create(UserPicture $userPicture)
     {
-        $user = $this->baseFormHandler->findCustomer($this->baseFormHandler->getRequestId());
+        $user = $this->baseFormHandler->findUser($this->baseFormHandler->getRequestId());
         $userPicture->setUser($user);
         $this->baseFormHandler->getEm()->persist($userPicture);
         $this->baseFormHandler->getEm()->flush();

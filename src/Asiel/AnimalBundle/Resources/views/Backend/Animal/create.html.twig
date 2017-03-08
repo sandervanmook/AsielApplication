@@ -1,144 +1,164 @@
 {% extends '@Backend/Base/Base.html.twig' %}
 {% block pagetitle %}Dier aanmelden{% endblock %}
 {% block body %}
-    <div class="ui sixteen column grid container">
-        <div class="row">
-            <div class="four wide column">
-                <h3 class="ui header">Controleer het chipnummer</h3>
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="box box-primary box-padding-small">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Controleer het chipnummer</h3>
+                </div>
+                <br/>
                 {{ form_start(form) }}
                 {{ form_widget(form) }}
                 {{ form_end(form) }}
-            </div>
-        </div>
-        <div class="row">
-            <div class="six wide column">
+
                 <p>Test chipnummer voor backhomeclub.nl : 528274000126497</p>
                 <p>Test chipnummer voor ndg.nl : 528274000126496</p>
                 <p>Test chipnummer voor idchips.com : 981100004069200</p>
+
             </div>
         </div>
-        <hr/>
-        {% if internalresult is defined and internalresult is not null %}
-            <div class="row">
-                <div class="six wide column">
-                    <div id="internalresult">
-                        <p>Dit dier is al aanwezig in onze <a
-                                    href="{{ path('backend_animal_show', {'id' : internalresult.id}) }}">database</a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        {% endif %}
-        {% if internalresult is defined and internalresult is null %}
-            <div class="row">
-                <div class="six wide column">
-                    <div id="choices">
-                        <br/>
-                        <a href="{{ path('backend_animal_register', {'type': 'Cat'}) }}">Kat aanmelden</a> |
-                        <a href="{{ path('backend_animal_register', {'type': 'Dog'}) }}">Hond aanmelden</a>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="six wide column">
-                    <div id="externalresulttable">
-                        <h3 class="ui header">Externe zoekresultaten</h3>
-                        <table class="ui table very basic">
-                            <tbody>
-                            <tr>
-                                <td id="ndg-button">NDG</td>
-                                <td>
-                                    {% if ndgresult is defined and ndgresult is not null %}
-                                        {{ outputBool(true) }}
-                                    {% else %}
-                                        {{ outputBool(false) }}
-                                    {% endif %}
-                                </td>
-                                <td>
-                                    {% if ndgresult is defined and ndgresult is not null %}
-                                    <i id="ndg-view" class="eye icon"></i>
-                                    {% endif %}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>BHC</td>
-                                <td>
-                                    {% if bhcresult is defined and bhcresult is not null %}
-                                        {{ outputBool(true) }}
-                                    {% else %}
-                                        {{ outputBool(false) }}
-                                    {% endif %}
-                                </td>
-                                <td>
-                                    {% if bhcresult is defined and bhcresult is not null %}
-                                    <i id="bhc-view" class="eye icon"></i>
-                                    {% endif %}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>idchips.com</td>
-                                <td>
-                                    {% if idchipsresult is defined and idchipsresult is not null %}
-                                        {{ outputBool(true) }}
-                                    {% else %}
-                                        {{ outputBool(false) }}
-                                    {% endif %}
-                                </td>
-                                <td>
-                                    {% if idchipsresult is defined and idchipsresult is not null %}
-                                        <i id="idchips-view" class="eye icon"></i>
-                                    {% endif %}
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        {% endif %}
     </div>
-    <div id="result">
-        <div class="ui divider horizontal"></div>
-        <div class="content">
-            {% if ndgresult is defined and ndgresult is not null %}
-                <div id="ndg-result">
-                    <h3>NDG zoekresultaten</h3>
-                    {{ ndgresult|striptags('<table><td><tr>')|raw }}
+
+    <div class="row">
+        <div class="col-sm-8">
+            <hr/>
+
+            {% if internalresult is defined and internalresult is not null %}
+                <div id="internalresult">
+                    <p>Dit dier is al aanwezig in onze <a
+                                href="{{ path('backend_animal_show', {'id' : internalresult.id}) }}">database</a>
+                    </p>
                 </div>
             {% endif %}
 
-            {% if bhcresult is defined and bhcresult is not null %}
-                <div id="bhc-result">
-                    <h3>BHC zoekresultaten</h3>
-                    {{ bhcresult|striptags('<table><td><tr>')|raw }}
+            {% if internalresult is defined and internalresult is null %}
+                <div id="choices">
+                    <br/>
+                    <p>Het dier is niet in de database gevonden.</p>
+                    <br/>
+                    <a href="{{ path('backend_animal_register', {'type': 'Cat'}) }}">
+                        <button class="btn btn-primary">Kat aanmelden</button>
+                    </a>
+                    <a href="{{ path('backend_animal_register', {'type': 'Dog'}) }}">
+                        <button class="btn btn-primary">Hond aanmelden</button>
+                    </a>
+                </div>
+                <br/>
+                <hr/>
+                <br/>
+                <div id="externalresulttable">
+                    <h3>Externe zoekresultaten</h3>
+                    <table class="table">
+                        <tbody>
+                        <tr>
+                            <td id="ndg-button">NDG</td>
+                            <td>
+                                {% if ndgresult is defined and ndgresult is not null %}
+                                    {{ outputBool(true) }}
+                                {% else %}
+                                    {{ outputBool(false) }}
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if ndgresult is defined and ndgresult is not null %}
+                                    <i id="ndg-view" class="fa fa-eye"></i>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>BHC</td>
+                            <td>
+                                {% if bhcresult is defined and bhcresult is not null %}
+                                    {{ outputBool(true) }}
+                                {% else %}
+                                    {{ outputBool(false) }}
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if bhcresult is defined and bhcresult is not null %}
+                                    <i id="bhc-view" class="fa fa-eye"></i>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>idchips.com</td>
+                            <td>
+                                {% if idchipsresult is defined and idchipsresult is not null %}
+                                    {{ outputBool(true) }}
+                                {% else %}
+                                    {{ outputBool(false) }}
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if idchipsresult is defined and idchipsresult is not null %}
+                                    <i id="idchips-view" class="fa fa-eye"></i>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
             {% endif %}
-            {% if idchipsresult is defined and idchipsresult is not null %}
-                <div id="idchips-result">
-                    <h3>idchips.com zoekresultaten</h3>
-                    {{ idchipsresult|striptags('<div>')|raw }}
+        </div>
+    </div>
+
+    <div id="result">
+        <div class="modal fade" id="resultModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Resultaat</h4>
+                    </div>
+                    <div class="modal-body">
+                        {% if ndgresult is defined and ndgresult is not null %}
+                            <div id="ndg-result">
+                                <h3>NDG zoekresultaten</h3>
+                                {{ ndgresult|striptags('<table><td><tr>')|raw }}
+                            </div>
+                        {% endif %}
+
+                        {% if bhcresult is defined and bhcresult is not null %}
+                            <div id="bhc-result">
+                                <h3>BHC zoekresultaten</h3>
+                                {{ bhcresult|striptags('<table><td><tr>')|raw }}
+                            </div>
+                        {% endif %}
+                        {% if idchipsresult is defined and idchipsresult is not null %}
+                            <div id="idchips-result">
+                                <h3>idchips.com zoekresultaten</h3>
+                                {{ idchipsresult|striptags('<div>')|raw }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Sluiten</button>
+                    </div>
                 </div>
-            {% endif %}
+            </div>
         </div>
     </div>
 {% endblock %}
 {% block javascripts %}
     {{ parent() }}
     <script>
-        $('#result').hide();
-
-        $('#ndg-view').css('cursor','pointer');
-        $('#bhc-view').css('cursor','pointer');
-        $('#idchips-view').css('cursor','pointer');
+        $('#ndg-view').css('cursor', 'pointer');
+        $('#bhc-view').css('cursor', 'pointer');
+        $('#idchips-view').css('cursor', 'pointer');
 
         $('#ndg-view').click(function () {
-            $('#result').show();
+            $('#resultModal')
+                .modal('show');
         })
         $('#bhc-view').click(function () {
-            $('#result').show();
+            $('#resultModal')
+                .modal('show');
         })
         $('#idchips-view').click(function () {
-            $('#result').show();
+            $('#resultModal')
+                .modal('show');
         })
     </script>
 {% endblock %}

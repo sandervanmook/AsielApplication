@@ -1,10 +1,10 @@
 {% extends '@Backend/Base/Base.html.twig' %}
 {% block pagetitle %}{% endblock %}
 {% block body %}
-    <div class="ui tab segment active">
-        <div class="ui sixteen column grid container">
-            <div class="sixteen wide column">
-                <table class="ui table compact striped">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="table-responsive">
+                <table class="table table-striped table-condensed">
                     <thead>
                     <tr>
                         <th>Aanmaakdatum</th>
@@ -20,10 +20,10 @@
                     {% for task in result %}
                         <tr
                                 {% if task.isComplete == false and task.isOverdue %}
-                                    class="error"
+                                    class="danger"
                                 {% endif %}
                                 {% if task.isComplete %}
-                                    class="positive"
+                                    class="success"
                                 {% endif %}
                                 {% if task.isComplete == false and task.isOverdue == false %}
                                     class="warning"
@@ -35,14 +35,14 @@
                             <td><a href="{{ path('backend_animal_task_edit', {'id' : task.animal.id, 'taskid' : task.id}) }}">{{ task.title|length > 25 ? task.title|slice(0, 25)~'..' : task.title }}</a></td>
                             <td>{{ outputBool(task.isComplete) }}</td>
                             <td>
-                                <div id="{{ task.id }}" class="ui mini negative labeled icon button delete">
-                                    <i class="remove icon"></i> Verwijderen
+                                <div id="{{ task.id }}" class="btn btn-sm btn-danger delete">
+                                    <i class="fa fa-trash-o"></i> Verwijderen
                                 </div>
                             </td>
                             <td>
                                 <a href="{{ path('backend_animal_task_edit', {'taskid': task.id, 'id' : app.request.get('id')}) }}">
-                                    <div id="{{ task.id }}" class="ui mini info labeled icon button view">
-                                        <i class="edit icon"></i> Aanpassen
+                                    <div id="{{ task.id }}" class="btn btn-sm btn-primary view">
+                                        <i class="fa fa-edit"></i> Aanpassen
                                     </div>
                                 </a>
                             </td>
@@ -53,8 +53,8 @@
                     <tr>
                         <th>
                             <a href="{{ path('backend_animal_task_create', {'id' : app.request.attributes.get('id')}) }}">
-                                <div class="ui tiny positive labeled icon button">
-                                    <i class="add square icon"></i> Taak toevoegen
+                                <div class="btn btn-sm btn-success">
+                                    <i class="fa fa-plus"></i> Taak toevoegen
                                 </div>
                             </a>
                         </th>
@@ -67,23 +67,25 @@
                     </tr>
                     </tfoot>
                 </table>
-                <div id="confirmmodal" class="ui basic modal">
-                    <div class="ui icon header">
-                        <i class="archive icon"></i>
-                        Taak verwijderen
-                    </div>
-                    <div class="content">
-                        <p>Weet u zeker dat u de taak wil verwijderen?</p>
-                    </div>
-                    <div class="actions">
-                        <div class="ui red basic cancel inverted button">
-                            <i class="remove icon"></i>
+            </div>
+            <div id="confirmmodal" class="modal modal-danger">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span></button>
+                            <h4 class="modal-title">Waarschuwing</h4>
                         </div>
-                        <div id="approve" class="ui green ok inverted button">
-                            <i class="checkmark icon"></i>
+                        <div class="modal-body">
+                            <p>Weet u zeker dat u de taak wil verwijderen?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Nee</button>
+                            <button id="approve" type="button" class="btn btn-outline">Ja</button>
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
         </div>
     </div>

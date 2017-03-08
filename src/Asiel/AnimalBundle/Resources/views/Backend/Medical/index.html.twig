@@ -1,72 +1,83 @@
 {% extends '@Backend/Base/Base.html.twig' %}
-{% block pagetitle %}{% endblock %}
+{% block pagetitle %}Medisch dossier{% endblock %}
 {% block body %}
-    <div class="ui tab segment active">
-        <div class="ui sixteen column grid container">
-            <div class="sixteen wide column">
-                <div class="ui two column very relaxed grid">
-                    <div class="ten wide column">
-                        <table class="ui table compact collapsing striped">
-                            <thead>
-                            <tr>
-                                <td>Datum</td>
-                                <td>Type behandeling</td>
-                                <td>&nbsp;</td>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {% for entry in result %}
-                                <tr>
-                                    <td>{{ entry.date|date('d-m-Y') }}</td>
-                                    <td>{{ entry.type }}</td>
-                                    <td>
-                                        <div id="{{ entry.id }}" class="ui mini negative labeled icon button delete">
-                                            <i class="remove icon"></i> Verwijderen
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div id="{{ entry.id }}" class="ui mini info labeled icon button view">
-                                            <i class="folder open icon"></i> Bekijken
-                                        </div>
-                                    </td>
-                                </tr>
-                            {% endfor %}
-                            </tbody>
-                            <tfoot>
-                            <tr>
-                                <th>
-                                    <a href="{{ path('backend_animal_medical_create', {'id' : app.request.attributes.get('id')}) }}">
-                                        <div class="ui tiny positive labeled icon button">
-                                            <i class="add square icon"></i> Dossier toevoegen
-                                        </div>
-                                    </a>
-                                </th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                            </tr>
-                            </tfoot>
-                        </table>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8">
+                <table class="table table-striped table-condensed">
+                    <thead>
+                    <tr>
+                        <td>Datum</td>
+                        <td>Type behandeling</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for entry in result %}
+                        <tr>
+                            <td>{{ entry.date|date('d-m-Y') }}</td>
+                            <td>{{ entry.type }}</td>
+                            <td>
+                                <div id="{{ entry.id }}" class="btn btn-sm btn-danger delete">
+                                    <i class="fa fa-trash-o"></i> Verwijderen
+                                </div>
+                            </td>
+                            <td>
+                                <div id="{{ entry.id }}" class="btn btn-sm btn-primary view">
+                                    <i class="fa fa-eye"></i> Bekijken
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <th>
+                            <a href="{{ path('backend_animal_medical_create', {'id' : app.request.attributes.get('id')}) }}">
+                                <div class="btn btn-sm btn-success">
+                                    <i class="fa fa-plus"></i> Dossier toevoegen
+                                </div>
+                            </a>
+                        </th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+        <div id="confirmmodal" class="modal modal-danger">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span></button>
+                        <h4 class="modal-title">Waarschuwing</h4>
                     </div>
-                    <div class="six wide column">
-                        <div id="result"></div>
-                    </div>
-                </div>
-                <div id="confirmmodal"class="ui basic modal">
-                    <div class="ui icon header">
-                        <i class="archive icon"></i>
-                        Dossier verwijderen
-                    </div>
-                    <div class="content">
+                    <div class="modal-body">
                         <p>Weet u zeker dat u het dossier wil verwijderen?</p>
                     </div>
-                    <div class="actions">
-                        <div class="ui red basic cancel inverted button">
-                            <i class="remove icon"></i>
-                        </div>
-                        <div id="approve" class="ui green ok inverted button">
-                            <i class="checkmark icon"></i>
-                        </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Nee</button>
+                        <button id="approve" type="button" class="btn btn-outline">Ja</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="viewmodal" class="modal modal-primary">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span></button>
+                        <h4 class="modal-title">Dossier</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div id="result"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Ok</button>
                     </div>
                 </div>
             </div>

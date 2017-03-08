@@ -235,6 +235,9 @@ class Animal
     public function __construct()
     {
         $this->status = new ArrayCollection();
+        $this->pictures = new ArrayCollection();
+        $this->tasks = new ArrayCollection();
+        $this->actions = new ArrayCollection();
     }
 
     /**
@@ -269,54 +272,6 @@ class Animal
     public function setName($name)
     {
         $this->name = $name;
-    }
-
-    /**
-     * Set medicalEntry
-     *
-     * @param string $medicalEntry
-     *
-     * @return Animal
-     */
-    public function setMedicalEntry($medicalEntry)
-    {
-        $this->medicalEntry = $medicalEntry;
-
-        return $this;
-    }
-
-    /**
-     * Get medicalEntry
-     *
-     * @return string
-     */
-    public function getMedicalEntry()
-    {
-        return $this->medicalEntry;
-    }
-
-    /**
-     * Set incidents
-     *
-     * @param string $incidents
-     *
-     * @return Animal
-     */
-    public function setIncidents($incidents)
-    {
-        $this->incidents = $incidents;
-
-        return $this;
-    }
-
-    /**
-     * Get incidents
-     *
-     * @return string
-     */
-    public function getIncidents()
-    {
-        return $this->incidents;
     }
 
     /**
@@ -1070,5 +1025,54 @@ class Animal
         }
 
         return false;
+    }
+
+
+    /**
+     * Set medicalEntry
+     *
+     * @param string $medicalEntry
+     *
+     * @return Animal
+     */
+    public function setMedicalEntry($medicalEntry)
+    {
+        $this->medicalEntry = $medicalEntry;
+
+        return $this;
+    }
+
+    /**
+     * Get medicalEntry
+     *
+     * @return string
+     */
+    public function getMedicalEntry()
+    {
+        return $this->medicalEntry;
+    }
+
+    /**
+     * Set incidents
+     *
+     * @param string $incidents
+     *
+     * @return Animal
+     */
+    public function setIncidents($incidents)
+    {
+        $this->incidents = $incidents;
+
+        return $this;
+    }
+
+    /**
+     * Get incidents
+     *
+     * @return string
+     */
+    public function getIncidents()
+    {
+        return $this->incidents;
     }
 }

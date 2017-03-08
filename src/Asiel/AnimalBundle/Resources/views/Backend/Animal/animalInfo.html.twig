@@ -1,13 +1,13 @@
 <input id="animalId" type="hidden" value="{{ info.id }}">
-<div class="ui segment center aligned inverted">
-        <span>
-            {{ info.name }} ({{ info.getclassname|trans }})
-            {% if opentasks|length > 0 %}
-                    <span class="text-alert">Open taken: {{ opentasks|length }}</span>
-            {% endif %}
-
-            {% for picture in info.pictures|slice(0,1) %}
-                    <img class="ui avatar image mini" src="{{ picture.publicurl }}">
-            {% endfor %}
-        </span>
+<div class="container-fluid">
+<ul class="nav nav-tabs">
+    <li role="presentation" class="{% if app.request.get('_route') == 'backend_animal_show' %} active {% endif %}"><a href="{{ path('backend_animal_show', {'id' : app.request.get('id')}) }}">Overzicht</a></li>
+    <li role="presentation" class="{% if app.request.get('_route') == 'backend_animal_edit' %} active {% endif %}"><a href="{{ path('backend_animal_edit', {'id' : app.request.get('id')}) }}">Aanpassen</a></li>
+    <li role="presentation" class="{% if 'incident' in app.request.get('_route') %} active {% endif %}"><a href="{{ path('backend_animal_incident_index', {'id': app.request.get('id')}) }}">Incidenten <span class="badge bg-yellow">{{ incidentamount }}</span></a></li>
+    <li role="presentation" class="{% if 'medical' in app.request.get('_route') %} active {% endif %}"><a href="{{ path('backend_animal_medical_index', {'id': app.request.get('id')}) }}">Medisch dossier <span class="badge bg-yellow">{{ medicalamount }}</span></a></li>
+    <li role="presentation" class="item {% if 'status' in app.request.get('_route') %} active {% endif %}"><a href="{{ path('backend_animal_status_index', {'id': app.request.get('id')}) }}">Status</a></li>
+    <li role="presentation" class="item {% if 'picture' in app.request.get('_route') %} active {% endif %}"><a href="{{ path('backend_animal_picture_index', {'id': app.request.get('id')}) }}">Foto's <span class="badge bg-yellow">{{ photoamount }}</span></a></li>
+    <li role="presentation" class="item {% if 'facebook' in app.request.get('_route') %} active {% endif %}"><a href="{{ path('backend_animal_facebook_index', {'id': app.request.get('id')}) }}">Facebook</a></li>
+    <li role="presentation" class="item {% if 'task' in app.request.get('_route') %} active {% endif %}"><a href="{{ path('backend_animal_task_index', {'id': app.request.get('id')}) }}">Taken <span class="badge bg-red">{{ opentasks }}</span></a></li>
+</ul>
 </div>

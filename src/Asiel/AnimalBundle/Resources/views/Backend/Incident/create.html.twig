@@ -1,9 +1,9 @@
 {% extends '@Backend/Base/Base.html.twig' %}
-{% block pagesubtitle %}Incident aanmaken{% endblock %}
+{% block pagetitle %}Incident aanmaken{% endblock %}
 {% block body %}
-    <div class="ui tab segment active">
-        <div class="ui twelve column grid container">
-            <div class="six wide column">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4">
                 {{ form_start(form) }}
                 {{ form_widget(form) }}
                 {{ outputFormButton('Aanmaken') }}

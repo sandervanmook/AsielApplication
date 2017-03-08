@@ -1,62 +1,80 @@
-<table class="ui table selectable striped">
-    <thead>
-    <tr>
-        <th>&nbsp;</th>
-        <th>Naam</th>
-        <th>Soort</th>
-        <th>Status</th>
-        <th>Geslacht</th>
-        <th>Leeftijd</th>
-        <th>Chipnummer</th>
-        <th>Open taken</th>
-        <th>Zichtbaar publiek</th>
-    </tr>
-    </thead>
-    <tbody>
-    {% for animal in result %}
-        <tr {% if animal.status is empty %} class="negative" {% endif %}>
-            <td>
-                {% if animal.pictures is not empty %}
-                    {% for picture in animal.pictures|slice(0,1) %}
-                        <img src="{{ picture.publicurl }}" height="30" alt="animal_picture">
-                    {% endfor %}
-                {% else %}
-                    <img src="{{ asset('img/no_picture.jpg') }}" height="20" alt="no_animal_picture">
-                {% endif %}
-            </td>
-            <td><a href="{{ path('backend_animal_show', {'id' : animal.id}) }}">{{ animal.name }}</a></td>
-            <td>{{ animal.getclassname|trans }}</td>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Resultaten</h3>
+            </div>
+            <div class="box-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover table-condensed">
+                        <thead>
+                        <tr>
+                            <th>&nbsp;</th>
+                            <th>Naam</th>
+                            <th>Soort</th>
+                            <th>Status</th>
+                            <th>Geslacht</th>
+                            <th>Leeftijd</th>
+                            <th>Chipnummer</th>
+                            <th>Open taken</th>
+                            <th>Zichtbaar publiek</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for animal in result %}
+                            <tr {% if animal.status is empty %} class="danger" {% endif %}>
+                                <td>
+                                    {% if animal.pictures is not empty %}
+                                        {% for picture in animal.pictures|slice(0,1) %}
+                                            <img src="{{ picture.publicurl }}" height="30" alt="animal_picture">
+                                        {% endfor %}
+                                    {% else %}
+                                        <img src="{{ asset('img/no_picture.jpg') }}" height="20"
+                                             alt="no_animal_picture">
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <a href="{{ path('backend_animal_show', {'id' : animal.id}) }}">{{ animal.name }}</a>
+                                </td>
+                                <td>{{ animal.getclassname|trans }}</td>
 
-            {% if animal.status is empty %}
-                <td>Nog geen</td>
-            {% else %}
-                {% for state in animal.status %}
-                    {% if state.archived == false %}
-                        <td>{{ state.getclassname|trans }}</td>
-                    {% endif %}
-                {% endfor %}
-            {% endif %}
-            <td>{{ outputGender(animal.gender) }}</td>
-            <td>{{ animal.age }}</td>
-            <td>{{ animal.chipnumber }}</td>
-            <td><a href="#">
-                    {% if animal.openTasks(animal.tasks) %}<a href="{{ path('backend_animal_task_index', {'id': animal.id}) }}">Ja</a>{% endif %}
-                </a></td>
-            <td>{{ outputBool(animal.visiblePublic) }}</td>
-        </tr>
-    {% endfor %}
-    </tbody>
-    <tfoot>
-    <tr>
-        <th>Totaal: {{ result|length }}</th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-    </tr>
-    </tfoot>
-</table>
+                                {% if animal.status is empty %}
+                                    <td>Nog geen</td>
+                                {% else %}
+                                    {% for state in animal.status %}
+                                        {% if state.archived == false %}
+                                            <td>{{ state.getclassname|trans }}</td>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                                <td>{{ outputGender(animal.gender) }}</td>
+                                <td>{{ animal.age }}</td>
+                                <td>{{ animal.chipnumber }}</td>
+                                <td><a href="#">
+                                        {% if animal.openTasks(animal.tasks) %}<a
+                                            href="{{ path('backend_animal_task_index', {'id': animal.id}) }}">
+                                                Ja</a>{% endif %}
+                                    </a></td>
+                                <td>{{ outputBool(animal.visiblePublic) }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <th>Totaal: {{ result|length }}</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

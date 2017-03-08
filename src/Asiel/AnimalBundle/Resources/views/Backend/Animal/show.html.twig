@@ -1,27 +1,27 @@
 {% extends '@Backend/Base/Base.html.twig' %}
-{% block pagetitle %}{% endblock %}
+{% block pagetitle %}Overzicht dier{% endblock %}
 {% block body %}
-    <div class="ui tab segment active">
-        <div class="ui sixteen column grid container">
-            <div class="sixteen wide column">
-                <div>
-                    {% for picture in animal.pictures|slice(0,1) %}
-                        <img class="ui avatar image small" src="{{ picture.getpublicurl }}">
-                    {% endfor %}
-                    <h2 class="ui left aligned header">{{ activestate.getclassname|trans }}
-                        {% if activestate.getclassname == 'Onsite' %}
-                            ({{ activestate.registertype|trans }})
-                        {% endif %}
-                    </h2>
-                </div>
-
-                <div class="ui horizontal divider"></div>
-
-                <div class="ui three column very relaxed grid">
-                    <div class="column">
-                        <h3 class="ui header">Algemeen</h3>
-                        <table class="ui table compact">
-                            <tbody>
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingOne">
+                        <h4 class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
+                               aria-expanded="true" aria-controls="collapseOne">
+                                Algemeen
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel"
+                         aria-labelledby="headingOne">
+                        <div class="panel-body">
+                            <table class="table table-condensed">
+                                <tbody>
+                                <tr>
+                                    <td>Status</td>
+                                    <td>{{ activestate.getclassname|trans }}</td>
+                                </tr>
                                 <tr>
                                     <td><p class="text-alert">Zichtbaar voor publiek</p></td>
                                     <td>{{ outputBool(animal.visiblePublic) }}</td>
@@ -106,201 +106,254 @@
                                     <td>Bekend met agressie</td>
                                     <td>{{ animal.knownAggression|raw }}</td>
                                 </tr>
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                    <div class="column">
-                        {% if animal.getClassName == 'Cat' %}
-                            <h3 class="ui header">Kat</h3>
-                        {% elseif animal.getClassName == 'Dog' %}
-                            <h3 class="ui header">Hond</h3>
-                        {% endif %}
-                        {% if animal.getClassName == 'Cat' %}
-                            <table class="ui table compact">
-                                <tbody>
-                                <tr>
-                                    <td><i>Kan het dier met kleine honden overweg ?</i></td>
-                                </tr>
-                                <tr>
-                                    <td>{{ animal.compatibleSmallDog|raw }}</td>
-                                </tr>
-                                <tr>
-                                    <td><i>Kan het dier met grote honden overweg ?</i></td>
-                                </tr>
-                                <tr>
-                                    <td>{{ animal.compatibleLargeDog|raw }}</td>
-                                </tr>
-                                <tr>
-                                    <td><i>Kan samen met andere katten ?</i></td>
-                                </tr>
-                                <tr>
-                                    <td>{{ animal.compatibleCat|raw }}</td>
-                                </tr>
-                                <tr>
-                                    <td><i>Kan het met andere dieren overweg ?</i></td>
-                                </tr>
-                                <tr>
-                                    <td>{{ animal.compatibleOtherAnimals|raw }}</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        {% endif %}
-                        {% if animal.getClassName == 'Dog' %}
-                            <p>Type vacht: {{ animal.furType }}</p>
-                            <p>Kruising: {{ outputBool(animal.crossbred) }}</p>
-                            <p>Heeft beweging nodig: {{ outputBool(animal.needsExercise) }}</p>
-                            <table class="ui table compact">
-                                <tbody>
-                                <tr>
-                                    <td><i>Kan het dier met kleine honden overweg ?</i></td>
-                                </tr>
-                                <tr>
-                                    <td>{{ animal.compatibleSmallDog|raw }}</td>
-                                </tr>
-                                <tr>
-                                    <td><i>Kan het dier met grote honden overweg ?</i></td>
-                                </tr>
-                                <tr>
-                                    <td>{{ animal.compatibleLargeDog|raw }}</td>
-                                </tr>
-                                <tr>
-                                    <td><i>Kan samen met katten ?</i></td>
-                                </tr>
-                                <tr>
-                                    <td>{{ animal.compatibleCat|raw }}</td>
-                                </tr>
-                                <tr>
-                                    <td><i>Kan het met andere dieren overweg ?</i></td>
-                                </tr>
-                                <tr>
-                                    <td>{{ animal.compatibleOtherAnimals|raw }}</td>
-                                </tr>
-                                <tr>
-                                    <td><i>Bekende commando's</i></td>
-                                </tr>
-                                <tr>
-                                    <td>{{ animal.knownCommands|raw }}</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        {% endif %}
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingTwo">
+                        <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+                               href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                Specifieke gegevens
+                            </a>
+                        </h4>
                     </div>
-                    <div class="column">
-                        <h3 class="ui header">Klant</h3>
-                        {% if activestate.getclassname == 'Adopted' %}
-                            <p>Datum: {{ activestate.date|date('d/m/Y') }}</p>
-                            <p><i>Geadopteerd door:</i></p>
-                            <table class="ui table compact">
-                                <tbody>
-                                <tr>
-                                    <td>Naam</td>
-                                    <td>{{ activestate.customer.name }}</td>
-                                </tr>
-                                <tr>
-                                    <td>Adres</td>
-                                    <td>{{ activestate.customer.address }} {{ activestate.customer.housenumber }}</td>
-                                </tr>
-                                <tr>
-                                    <td>Postcode</td>
-                                    <td>{{ activestate.customer.zipcode }}</td>
-                                </tr>
-                                <tr>
-                                    <td>Gemeente</td>
-                                    <td>{{ activestate.customer.municipality }}</td>
-                                </tr>
-                                <tr>
-                                    <td>Land</td>
-                                    <td>{{ activestate.customer.country }}</td>
-                                </tr>
-                                <tr>
-                                    <td>Telefoonnummer</td>
-                                    <td>{{ activestate.customer.phone }}</td>
-                                </tr>
-                                <tr>
-                                    <td>Email</td>
-                                    <td>{{ activestate.customer.email }}</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        {% elseif activestate.getclassname == 'Abandoned' %}
-                            <p>Datum: {{ activestate.date|date('d/m/Y') }}</p>
-                            <p><i>Afgestaan door:</i></p>
-                            <table class="table">
-                                <tbody>
-                                <tr>
-                                    <td>Naam</td>
-                                    <td>{{ activestate.abandonedby.name }}</td>
-                                </tr>
-                                <tr>
-                                    <td>Adres</td>
-                                    <td>{{ activestate.abandonedby.address }} {{ activestate.abandonedby.housenumber }}</td>
-                                </tr>
-                                <tr>
-                                    <td>Postcode</td>
-                                    <td>{{ activestate.abandonedby.zipcode }}</td>
-                                </tr>
-                                <tr>
-                                    <td>Gemeente</td>
-                                    <td>{{ activestate.abandonedby.municipality }}</td>
-                                </tr>
-                                <tr>
-                                    <td>Land</td>
-                                    <td>{{ activestate.abandonedby.country }}</td>
-                                </tr>
-                                <tr>
-                                    <td>Telefoonnummer</td>
-                                    <td>{{ activestate.abandonedby.phone }}</td>
-                                </tr>
-                                <tr>
-                                    <td>Email</td>
-                                    <td>{{ activestate.abandonedby.email }}</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        {% elseif activestate.getclassname == 'Found' %}
-                            {% if activestate.foundBy is not empty %}
-                                <p>Datum: {{ activestate.date|date('d/m/Y') }}</p>
-                                <p><i>Gevonden type: {{ activestate.foundtype }}</i></p>
-                                <p><i>Locatie:</i> {{ activestate.foundatlocation|raw }}</p>
-                                <p><i>Staat van het dier:</i> {{ activestate.animalstate|raw }}</p>
-                                <p><i>Gevonden door: </i></p>
-                                <table class="ui table">
+                    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                        <div class="panel-body">
+                            {% if animal.getClassName == 'Cat' %}
+                                <table class="table table-condensed">
                                     <tbody>
                                     <tr>
-                                        <td>Naam</td>
-                                        <td>{{ activestate.foundBy.name }}</td>
+                                        <td><i>Kan het dier met kleine honden overweg ?</i></td>
                                     </tr>
                                     <tr>
-                                        <td>Adres</td>
-                                        <td>{{ activestate.foundBy.address }} {{ activestate.foundBy.housenumber }}</td>
+                                        <td>{{ animal.compatibleSmallDog|raw }}</td>
                                     </tr>
                                     <tr>
-                                        <td>Postcode</td>
-                                        <td>{{ activestate.foundBy.zipcode }}</td>
+                                        <td><i>Kan het dier met grote honden overweg ?</i></td>
                                     </tr>
                                     <tr>
-                                        <td>Gemeente</td>
-                                        <td>{{ activestate.foundBy.municipality }}</td>
+                                        <td>{{ animal.compatibleLargeDog|raw }}</td>
                                     </tr>
                                     <tr>
-                                        <td>Land</td>
-                                        <td>{{ activestate.foundBy.country }}</td>
+                                        <td><i>Kan samen met andere katten ?</i></td>
                                     </tr>
                                     <tr>
-                                        <td>Telefoonnummer</td>
-                                        <td>{{ activestate.foundBy.phone }}</td>
+                                        <td>{{ animal.compatibleCat|raw }}</td>
                                     </tr>
                                     <tr>
-                                        <td>Email</td>
-                                        <td>{{ activestate.foundBy.email }}</td>
+                                        <td><i>Kan het met andere dieren overweg ?</i></td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{ animal.compatibleOtherAnimals|raw }}</td>
                                     </tr>
                                     </tbody>
                                 </table>
                             {% endif %}
-                        {% endif %}
+                            {% if animal.getClassName == 'Dog' %}
+                                <table class="table table-condensed">
+                                    <tbody>
+                                    <tr>
+                                        <td>Type vacht</td>
+                                        <td>{{ animal.furType }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Kruising</td>
+                                        <td>{{ outputBool(animal.crossbred) }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Heeft beweging nodig</td>
+                                        <td>{{ outputBool(animal.needsExercise) }}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <table class="table table-condensed">
+                                    <tbody>
+                                    <tr>
+                                        <td><i>Kan het dier met kleine honden overweg ?</i></td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{ animal.compatibleSmallDog|raw }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i>Kan het dier met grote honden overweg ?</i></td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{ animal.compatibleLargeDog|raw }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i>Kan samen met katten ?</i></td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{ animal.compatibleCat|raw }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i>Kan het met andere dieren overweg ?</i></td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{ animal.compatibleOtherAnimals|raw }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i>Bekende commando's</i></td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{ animal.knownCommands|raw }}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingThree">
+                        <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+                               href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                Klant
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel"
+                         aria-labelledby="headingThree">
+                        <div class="panel-body">
+                            {% if activestate.getclassname == 'Adopted' %}
+                                <p>Datum: {{ activestate.date|date('d/m/Y') }}</p>
+                                <p><i>Geadopteerd door:</i></p>
+                                <table class="table table-condensed">
+                                    <tbody>
+                                    <tr>
+                                        <td>Naam</td>
+                                        <td>{{ activestate.customer.name }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Adres</td>
+                                        <td>{{ activestate.customer.address }} {{ activestate.customer.housenumber }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Postcode</td>
+                                        <td>{{ activestate.customer.zipcode }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Gemeente</td>
+                                        <td>{{ activestate.customer.municipality }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Land</td>
+                                        <td>{{ activestate.customer.country }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Telefoonnummer</td>
+                                        <td>{{ activestate.customer.phone }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Email</td>
+                                        <td>{{ activestate.customer.email }}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            {% elseif activestate.getclassname == 'Abandoned' %}
+                                <p>Datum: {{ activestate.date|date('d/m/Y') }}</p>
+                                <p><i>Afgestaan door:</i></p>
+                                <table class="table table-condensed">
+                                    <tbody>
+                                    <tr>
+                                        <td>Naam</td>
+                                        <td>{{ activestate.abandonedby.name }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Adres</td>
+                                        <td>{{ activestate.abandonedby.address }} {{ activestate.abandonedby.housenumber }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Postcode</td>
+                                        <td>{{ activestate.abandonedby.zipcode }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Gemeente</td>
+                                        <td>{{ activestate.abandonedby.municipality }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Land</td>
+                                        <td>{{ activestate.abandonedby.country }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Telefoonnummer</td>
+                                        <td>{{ activestate.abandonedby.phone }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Email</td>
+                                        <td>{{ activestate.abandonedby.email }}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            {% elseif activestate.getclassname == 'Found' %}
+                                {% if activestate.foundBy is not empty %}
+                                    <table class="table table-condensed">
+                                        <tbody>
+                                        <tr>
+                                            <td>Datum</td>
+                                            <td>{{ activestate.date|date('d/m/Y') }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Gevonden type</td>
+                                            <td>{{ activestate.foundtype }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Locatie</td>
+                                            <td>{{ activestate.foundatlocation|raw }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Staat van het dier</td>
+                                            <td>{{ activestate.animalstate|raw }}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <p>Gevonden door</p>
+                                    <table class="table table-condensed">
+                                        <tbody>
+                                        <tr>
+                                            <td>Naam</td>
+                                            <td>{{ activestate.foundBy.name }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Adres</td>
+                                            <td>{{ activestate.foundBy.address }} {{ activestate.foundBy.housenumber }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Postcode</td>
+                                            <td>{{ activestate.foundBy.zipcode }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Gemeente</td>
+                                            <td>{{ activestate.foundBy.municipality }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Land</td>
+                                            <td>{{ activestate.foundBy.country }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Telefoonnummer</td>
+                                            <td>{{ activestate.foundBy.phone }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Email</td>
+                                            <td>{{ activestate.foundBy.email }}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                {% endif %}
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    </div> <!-- end div row -->
+    </div> <!-- end col-sm-12 -->
+    </div> <!-- end box box-primary -->
 {% endblock %}

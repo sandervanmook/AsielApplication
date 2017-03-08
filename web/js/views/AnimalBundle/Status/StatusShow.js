@@ -6,6 +6,7 @@ $('.view').click(function () {
         dataType: "html",
     })
         .done(function (json) {
-            $("#result").html(json).hide().show('slide', {duration: 600});
+            $("#result").html(json);
+            $("#viewmodal").modal('show');
         })
 });

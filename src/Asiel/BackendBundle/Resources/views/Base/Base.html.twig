@@ -1,218 +1,272 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<html style="height: auto;">
 <head>
-    <meta charset="UTF-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <title>{% block title %}AsielPro{% endblock %}</title>
 
-    {% block stylesheets %}
-        <!-- Bootstrap CSS, only for forms, leave it at the top -->
-        <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}"/>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
+    {% block stylesheets %}
+        <!-- jQuery -->
         <link rel="stylesheet" href="{{ asset('css/jquery-ui.min.css') }}"/>
         <link rel="stylesheet" href="{{ asset('css/jquery-ui.structure.min.css') }}"/>
         <link rel="stylesheet" href="{{ asset('css/jquery-ui.theme.min.css') }}"/>
-        <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/backend.css') }}">
 
-        <!-- Semantic-UI CSS -->
-        <link rel="stylesheet" type="text/css" href="{{ asset('semantic/dist/semantic.min.css') }}">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}"/>
+        <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
+
+        <!-- AdminLTE CSS -->
+        <link rel="stylesheet" href="{{ asset('css/ionicons.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/AdminLTE.min.css') }}"/>
+        <link rel="stylesheet" href="{{ asset('css/skin-blue.min.css') }}"/>
+
+        <link rel="stylesheet" href="{{ asset('css/backend.css') }}">
     {% endblock %}
 
     <link rel="icon" type="image/x-icon" href="{{ asset('img/favicon.png') }}"/>
 </head>
-<body>
+<body class="skin-blue sidebar-mini" style="height: auto;">
+<div class="wrapper" style="height: auto;">
 
-<div id="leftsidebar" class="ui sidebar inverted vertical menu">
-    <div class="item">
-        <img class="ui centered aligned tiny image" src="{{ asset('img/public_logo.png') }}" alt="logo">
-    </div>
-    <div class="item">
-        <div class="header">Dieren</div>
-        <div class="menu">
-            <a class="item" href="{{ path('backend_animal_index') }}">Alle Dieren</a>
-            <a class="item" href="{{ path('backend_animal_create') }}">Aanmelden</a>
-        </div>
-    </div>
-    <div class="item">
-        <div class="header">Locaties</div>
-        <div class="menu">
-            <a class="item" href="{{ path('backend_location_create') }}">Locatie toevoegen</a>
-            <a class="item" href="{{ path('backend_location_index') }}">Locatiebeheer</a>
-        </div>
-    </div>
-    <div class="item">
-        <div class="header">Klanten</div>
-        <div class="menu">
-            <a class="item" href="{{ path('backend_customer_create') }}">Klant toevoegen</a>
-            <a class="item" href="{{ path('backend_customer_index') }}">Klantbeheer</a>
-        </div>
-    </div>
-    <div class="item">
-        <div class="header">Gebruikers</div>
-        <div class="menu">
-            <a class="item" href="{{ path('backend_employee_create') }}">Gebruiker toevoegen</a>
-            <a class="item" href="{{ path('backend_employee_index') }}">Gebruikersbeheer</a>
-        </div>
-    </div>
-    <div class="item">
-        <div class="header">Statistieken</div>
-        <div class="menu">
-            <a class="item" href="{{ path('backend_statistics_index') }}">Selecteer categorie</a>
-        </div>
-    </div>
-    <div class="item">
-        <div class="header">Boekhouding</div>
-        <div class="menu">
-            <a class="item" href="{{ path('backend_bookkeeping_index') }}">Beheer</a>
-        </div>
-    </div>
-</div>
+    <!-- Main Header -->
+    <header class="main-header">
+        <!-- Logo -->
+        <a href="{{ path('backend_default_index') }}" class="logo">
+            <!-- mini logo for sidebar mini 50x50 pixels -->
+            <span class="logo-mini"><b>A</b>Pro</span>
+            <!-- logo for regular state and mobile devices -->
+            <span class="logo-lg"><b>Asiel</b>Pro</span>
+        </a>
 
-<div class="ui top fixed menu borderless">
-    <div id="menu">
-        <a class="item"><i class="sidebar icon"></i>Menu</a>
-    </div>
-    <a class="item" href="{{ path('backend_default_index') }}"><i class="home icon"></i></a>
-    <div id="calendarmenu" class="ui dropdown item">
-        <i class="calendar icon"></i><i class="dropdown icon"></i>
-        <div class="menu">
-            <a class="item" href="{{ path('backend_calendar') }}">Agenda bekijken</a>
-            <a class="item" href="{{ path('backend_calendaritem_create') }}">Agendapunt aanmaken</a>
-        </div>
-    </div>
-    <div id="systemmenu" class="ui dropdown item">
-        <i class="configure icon"></i><i class="dropdown icon"></i>
-        <div class="menu">
-            <a class="item" href="{{ path('backend_settings_bookkeeping') }}">Boekhouding instellingen</a>
-            <a class="item" href="{{ path('backend_settings_frontend') }}">Frontend instellingen</a>
-        </div>
-    </div>
-    <a class="item right" href="{{ path('backend_default_help') }}"><i class="info icon"></i>Hulp</a>
-    <div id="profile" class="ui dropdown item">
-        <i class="user icon"></i>{{ app.user.username }}<i class="dropdown icon"></i>
-        <div class="menu">
-            <a class="item" href="{{ path('backend_employee_profile', {'id' : app.user.id}) }}"><i
-                        class="edit icon"></i> Profiel</a>
-            <a class="item" href="{{ path('frontend_index') }}"><i class="users icon"></i> Publiek</a>
-            <a class="item" href="{{ path('logout') }}"><i class="sign out icon"></i> Afmelden</a>
-        </div>
-    </div>
-</div>
+        <!-- Header Navbar -->
+        <nav class="navbar navbar-static-top" role="navigation">
+            <!-- Sidebar toggle button-->
+            <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                <span class="sr-only">Navigatie</span>
+            </a>
+            <!-- Navbar Right Menu -->
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <!-- Home button -->
+                    <li><a href="{{ path('backend_default_index') }}"><i class="fa fa-home"></i></a></li>
 
-<div class="ui horizontal divider"></div>
+                    <!-- Help button -->
+                    <li><a class="item right" href="{{ path('backend_default_help') }}"><i class="fa fa-info"></i></a>
+                    </li>
 
-<div class="pusher page">
-    <div class="ui horizontal divider"></div>
-    <div class="ui container">
-        <h1 class="ui header">{% block pagetitle %}{% endblock %}</h1>
+                    <!-- Calendar menu -->
+                    <li class="dropdown notifications-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-calendar"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <ul class="menu">
+                                    <li>
+                                        <a href="{{ path('backend_calendar') }}">Agenda bekijken</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('backend_calendaritem_create') }}">Agendapunt aanmaken</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
 
-        {% if ('animal' in app.request.get('_route')) and (app.request.attributes.get('id')) %}
-            {% use '@Backend/EditNav/animal.html.twig' %}
-            {% block editAnimal %}{{ parent() }}{% endblock %}
-        {% endif %}
+                    <!-- Settings menu -->
+                    <li class="dropdown notifications-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-gears"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <ul class="menu">
+                                    <li>
+                                        <a href="{{ path('backend_settings_bookkeeping') }}">Boekhouding
+                                            instellingen</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('backend_settings_frontend') }}">Frontend instellingen</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
 
-        {% if ('employee' in app.request.get('_route')) and (app.request.attributes.get('id')) and ('profile' not in app.request.get('_route')) %}
-            {% use '@Backend/EditNav/user.html.twig' %}
-            {% block editUser %}{{ parent() }}{% endblock %}
-        {% endif %}
-
-        <h3 class="ui header">{% block pagesubtitle %}{% endblock %}</h3>
-        {% block body %}{% endblock %}
-    </div>
-
-    {% if app.session.flashBag.has('success') or
-    app.session.flashBag.has('info') or
-    app.session.flashBag.has('warning') or
-    app.session.flashBag.has('danger') %}
-        <div id="modalflash" class="ui basic modal">
-            <div class="ui icon header">
-                <i class="announcement icon"></i>
-                Berichten
+                    <!-- User Account Menu -->
+                    <li class="dropdown notifications-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span>{{ app.user.username }}</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <ul class="menu">
+                                    <li>
+                                        <a href="{{ path('backend_employee_profile', {'id' : app.user.id}) }}"><i
+                                                    class="fa fa-pencil-square-o"></i> Profiel</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('frontend_index') }}"><i class="fa fa-users"></i> Publiek</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('logout') }}"><i class="fa fa-sign-out"></i> Afmelden</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
-            <div class="content">
-                {% for flash_message in app.session.flashBag.get('success') %}
-                    <div class="ui positive message">
-                        <i class="close icon"></i>
-                        <div class="header">
-                            Gelukt
+        </nav>
+    </header>
+    <!-- Left side column -->
+    <aside class="main-sidebar">
+        <section class="sidebar">
+            <!-- Sidebar Menu -->
+            <ul class="sidebar-menu">
+                <li class="header">DIEREN</li>
+                <li {% if app.request.get('_route') == 'backend_animal_index' %} class="active" {% endif %}><a
+                            href="{{ path('backend_animal_index') }}"><i class="fa fa-link"></i>
+                        <span>Alle dieren</span></a></li>
+                <li {% if app.request.get('_route') == 'backend_animal_create' %} class="active" {% endif %}><a
+                            href="{{ path('backend_animal_create') }}"><i class="fa fa-link"></i> <span>Aanmelden</span></a>
+                </li>
+                <li class="header">LOCATIES</li>
+                <li {% if app.request.get('_route') == 'backend_location_create' %} class="active" {% endif %}><a
+                            href="{{ path('backend_location_create') }}"><i class="fa fa-link"></i> <span>Locatie toevoegen</span></a>
+                </li>
+                <li {% if app.request.get('_route') == 'backend_location_index' %} class="active" {% endif %}><a
+                            href="{{ path('backend_location_index') }}"><i class="fa fa-link"></i>
+                        <span>Locatiebeheer</span></a></li>
+                <li class="header">KLANTEN</li>
+                <li {% if app.request.get('_route') == 'backend_customer_create' %} class="active" {% endif %}><a
+                            href="{{ path('backend_customer_create') }}"><i class="fa fa-link"></i> <span>Klant toevoegen</span></a>
+                </li>
+                <li {% if app.request.get('_route') == 'backend_customer_index' %} class="active" {% endif %}><a
+                            href="{{ path('backend_customer_index') }}"><i class="fa fa-link"></i>
+                        <span>Klantbeheer</span></a></li>
+                <li class="header">GEBRUIKERS</li>
+                <li {% if app.request.get('_route') == 'backend_employee_create' %} class="active" {% endif %}><a
+                            href="{{ path('backend_employee_create') }}"><i class="fa fa-link"></i> <span>Gebruiker toevoegen</span></a>
+                </li>
+                <li {% if app.request.get('_route') == 'backend_employee_index' %} class="active" {% endif %}><a
+                            href="{{ path('backend_employee_index') }}"><i class="fa fa-link"></i> <span>Gebruikersbeheer</span></a>
+                </li>
+                <li class="header">STATISTIEKEN</li>
+                <li {% if app.request.get('_route') == 'backend_statistics_index' %} class="active" {% endif %}><a
+                            href="{{ path('backend_statistics_index') }}"><i class="fa fa-link"></i> <span>Selecteer categorie</span></a>
+                </li>
+                <li class="header">BOEKHOUDING</li>
+                <li {% if app.request.get('_route') == 'backend_bookkeeping_index' %} class="active" {% endif %}><a
+                            href="{{ path('backend_bookkeeping_index') }}"><i class="fa fa-link"></i>
+                        <span>Beheer</span></a></li>
+            </ul>
+            <!-- /.sidebar-menu -->
+        </section>
+        <!-- /.sidebar -->
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper" style="min-height: 328px;">
+
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <h1>
+                    {% block pagetitle %}{% endblock %}
+                    <small>{% block pagesubtitle %}{% endblock %}</small>
+                </h1>
+            </section>
+
+            <!-- Main content -->
+            <section class="content">
+
+                <!-- Optional menus -->
+                {% if ('animal' in app.request.get('_route')) and (app.request.attributes.get('id')) %}
+                    {% use '@Backend/EditNav/animal.html.twig' %}
+                    {% block editAnimal %}{{ parent() }}{% endblock %}
+                {% endif %}
+
+                {% if ('employee' in app.request.get('_route')) and (app.request.attributes.get('id')) and ('profile' not in app.request.get('_route')) %}
+                    {% use '@Backend/EditNav/user.html.twig' %}
+                    {% block editUser %}{{ parent() }}{% endblock %}
+                {% endif %}
+
+                {% block body %}
+
+                {% endblock %}
+
+                <!-- Flash message -->
+                {% if app.session.flashBag.has('success') or
+                app.session.flashBag.has('info') or
+                app.session.flashBag.has('warning') or
+                app.session.flashBag.has('danger') %}
+                    <div class="modal fade" id="flashMessageModal" tabindex="-1" role="dialog"
+                         aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                                aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">Bericht</h4>
+                                </div>
+                                <div class="modal-body">
+                                    {% for flash_message in app.session.flashBag.get('success') %}
+                                        <p>{{ flash_message }}</p>
+                                    {% endfor %}
+                                    {% for flash_message in app.session.flashBag.get('info') %}
+                                        <p>{{ flash_message }}</p>
+                                    {% endfor %}
+                                    {% for flash_message in app.session.flashBag.get('warning') %}
+                                        <p>{{ flash_message }}</p>
+                                    {% endfor %}
+                                    {% for flash_message in app.session.flashBag.get('danger') %}
+                                        <p>{{ flash_message }}</p>
+                                    {% endfor %}
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Sluiten</button>
+                                </div>
+                            </div>
                         </div>
-                        <p>{{ flash_message }}</p>
                     </div>
-                {% endfor %}
-                {% for flash_message in app.session.flashBag.get('info') %}
-                    <div class="ui info message">
-                        <i class="close icon"></i>
-                        <div class="header">
-                            Info
-                        </div>
-                        <p>{{ flash_message }}</p>
-                    </div>
-                {% endfor %}
-                {% for flash_message in app.session.flashBag.get('warning') %}
-                    <div class="ui warning message">
-                        <i class="close icon"></i>
-                        <div class="header">
-                            Waarschuwing
-                        </div>
-                        <p>{{ flash_message }}</p>
-                    </div>
-                {% endfor %}
-                {% for flash_message in app.session.flashBag.get('danger') %}
-                    <div class="ui negative message">
-                        <i class="close icon"></i>
-                        <div class="header">
-                            Fout
-                        </div>
-                        <p>{{ flash_message }}</p>
-                    </div>
-                {% endfor %}
-            </div>
-            <div class="actions">
-                <div class="ui green ok inverted button">
-                    <i class="checkmark icon"></i>
-                    Gezien!
-                </div>
-            </div>
-        </div>
-    {% endif %}
-</div>
-<div class="ui inverted vertical footer segment">
-    <div class="ui container">
-        <div class="ui inverted section divider"></div>
-        <div class="ui header inverted centered aligned"><p><i class="copyright icon"></i> AsielPro
-                 {{ "now"|date('Y') }}</p></div>
+                {% endif %}
+                <!-- End flash message -->
+
+            </section>
+            <!-- /.content -->
+
     </div>
+    <!-- /.content-wrapper -->
+
+    <!-- Main Footer -->
+    <footer class="main-footer">
+        <strong>Copyright © {{ "now"|date('Y') }} <a href="http://www.asielpro.nl">AsielPro</a></strong>
+    </footer>
 </div>
+<!-- ./wrapper -->
+
 {% block javascripts %}
-    <!-- Semantic-UI JS -->
+    <!-- jQuery -->
     <script src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>
     <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
-    <script src="{{ asset('semantic/dist/semantic.min.js') }}"></script>
-    <script src="{{ asset('js/backend.js') }}"></script>
 
+    <!-- Bootstrap JS -->
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+
+    <!-- AdminLTE JS -->
+    <script src="{{ asset('js/adminlte.app.min.js') }}"></script>
+
+    <!-- Symfony helpers -->
     <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
     <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+
+    <!-- Custom JS -->
+    <script src="{{ asset('js/backend.js') }}"></script>
     <script src="{{ asset('js/global.js') }}"></script>
-    <script>
-        $('#profile').click(function () {
-            $('.ui.dropdown')
-                .dropdown()
-            ;
-        });
-        $('#calendarmenu').click(function () {
-            $('.ui.dropdown')
-                .dropdown()
-            ;
-        });
-        $('#systemmenu').click(function () {
-            $('.ui.dropdown')
-                .dropdown()
-            ;
-        });
-    </script>
+
 {% endblock %}
 </body>
 </html>

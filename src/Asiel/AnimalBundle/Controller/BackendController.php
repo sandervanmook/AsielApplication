@@ -54,7 +54,7 @@ class BackendController extends Controller
             ->add('submit', SubmitType::class, [
                 'label' => 'Zoeken',
                 'attr' => [
-                    'class' => 'ui button positive',
+                    'class' => 'btn btn-success',
                 ]
             ])
             ->getForm();
@@ -253,11 +253,18 @@ class BackendController extends Controller
     public function animalInfoAction(int $id)
     {
         $formHandler = $this->get('asiel.animalbundle.animalformhandler');
-        $openTasks = $formHandler->getRepository()->findIncompleteTasks($id);
+        $openTasks = count($formHandler->getRepository()->findIncompleteTasks($id));
+        $animal = $formHandler->find($id);
+        $incidentAmount = count($animal->getIncidents());
+        $medicalAmount = count($animal->getMedicalEntry());
+        $photoAmount = count($animal->getPictures());
 
         return $this->render('@Animal/Backend/Animal/animalInfo.html.twig', [
             'info' => $formHandler->getRepository()->find($id),
             'opentasks' => $openTasks,
+            'incidentamount' => $incidentAmount,
+            'medicalamount' => $medicalAmount,
+            'photoamount' => $photoAmount,
         ]);
     }
 
