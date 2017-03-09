@@ -52,7 +52,7 @@ class AdoptedActionController extends Controller
             ->add('submit', SubmitType::class, [
                 'label' => 'Aanmaken',
                 'attr' => [
-                    'class' => 'ui button positive'
+                    'class' => 'btn btn-success'
                 ]
             ])
             ->getForm();

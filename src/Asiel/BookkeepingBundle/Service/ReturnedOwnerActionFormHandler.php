@@ -99,7 +99,7 @@ class ReturnedOwnerActionFormHandler
 
         $this->baseFormHandler->getEm()->flush();
         $this->baseFormHandler->getEventDispatcher()->dispatch('user_alert.message',
-            new UserAlertEvent(UserAlertEvent::SUCCESS, 'De in terug naar eigenaar status is aangemaakt.'));
+            new UserAlertEvent(UserAlertEvent::SUCCESS, 'De terug naar eigenaar status is aangemaakt.'));
     }
 
     public function needCustomerToProceedMessage()

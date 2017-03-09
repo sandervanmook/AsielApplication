@@ -32,7 +32,7 @@ class InvoiceLedgerSearchType extends AbstractType
             ->add('submit', SubmitType::class, [
                 'label' => 'Zoeken',
                 'attr' => [
-                    'class' => 'ui button positive'
+                    'class' => 'btn btn-success'
                 ],
             ]);
 

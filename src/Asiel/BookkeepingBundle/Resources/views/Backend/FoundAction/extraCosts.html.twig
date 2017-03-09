@@ -1,12 +1,16 @@
 {% extends '@Backend/Base/Base.html.twig' %}
-{% block pagetitle %}Extra kosten - Gevonden{% endblock %}
+{% block pagetitle %}Gevonden actie{% endblock %}
+{% block pagesubtitle %}Extra kosten{% endblock %}
+
 {% block body %}
-    <div class="ui sixteen column grid container">
-        <div class="four wide column">
-            {{ form_start(form) }}
-            {{ form_widget(form) }}
-            {{ outputFormButton('Toevoegen') }}
-            {{ form_end(form) }}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4">
+                {{ form_start(form) }}
+                {{ form_widget(form) }}
+                {{ outputFormButton('Toevoegen') }}
+                {{ form_end(form) }}
+            </div>
         </div>
     </div>
 {% endblock %}

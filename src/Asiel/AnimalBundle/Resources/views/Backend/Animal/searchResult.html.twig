@@ -17,6 +17,7 @@
                             <th>Leeftijd</th>
                             <th>Chipnummer</th>
                             <th>Open taken</th>
+                            <th>Open actie</th>
                             <th>Zichtbaar publiek</th>
                         </tr>
                         </thead>
@@ -55,6 +56,7 @@
                                             href="{{ path('backend_animal_task_index', {'id': animal.id}) }}">
                                                 Ja</a>{% endif %}
                                     </a></td>
+                                <td>{{ outputBool(animal.hasopenactions) }}</td>
                                 <td>{{ outputBool(animal.visiblePublic) }}</td>
                             </tr>
                         {% endfor %}
@@ -62,6 +64,7 @@
                         <tfoot>
                         <tr>
                             <th>Totaal: {{ result|length }}</th>
+                            <th></th>
                             <th></th>
                             <th></th>
                             <th></th>

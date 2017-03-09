@@ -1,10 +1,10 @@
 {% extends '@Backend/Base/Base.html.twig' %}
 {% block pagetitle %}Bekijk actie{% endblock %}
 {% block body %}
-    <div class="ui three column very relaxed grid">
-        <div class="five wide column">
-            <h3 class="ui header">Actie</h3>
-            <table class="ui table very basic">
+    <div class="row">
+        <div class="col-sm-4">
+            <h3>Actie</h3>
+            <table class="table table-condensed">
                 <tbody>
                 <tr>
                     <td>Id</td>
@@ -30,91 +30,96 @@
                 </tr>
                 <tr>
                     <td>Nog te voldoen</td>
-                    <td><i class="euro icon"></i>{{ action.sumRemaining }}</td>
+                    <td><i class="fa fa-euro"></i> {{ action.sumRemaining }}</td>
                 </tr>
                 </tbody>
             </table>
         </div>
-        <div class="five wide column">
-            <h3 class="ui header">Eerdere transacties</h3>
-            <table class="ui table very basic">
+        <div class="col-sm-4">
+            <h3>Eerdere transacties</h3>
+            <table class="table table-condensed">
                 <tbody>
                 {% for transaction in action.transaction %}
                     <tr>
-                        <td>Id : <a href="{{ path('backend_bookkeeping_transaction_show', {'transactionid' : transaction.id}) }}">{{ transaction.id }}</a></td>
+                        <td>Id :
+                            <a href="{{ path('backend_bookkeeping_transaction_show', {'transactionid' : transaction.id}) }}">{{ transaction.id }}</a>
+                        </td>
                         <td>{{ transaction.paymenttype|trans }}</td>
-                        <td>Bedrag: <i class="euro icon"></i>{{ transaction.paidamount }}</td>
+                        <td><i class="fa fa-euro"></i> {{ transaction.paidamount }}</td>
                     </tr>
                 {% endfor %}
                 </tbody>
             </table>
         </div>
-        <div class="five wide column">
-            <h3 class="ui header">Betreft dier</h3>
-            <table class="ui table very basic">
+        <div class="col-sm-4">
+            <h3>Betreft dier</h3>
+            <table class="table table-condensed">
                 <tbody>
                 <tr>
                     <td>Naam</td>
                     <td>
-                        <a href="{{ path('backend_animal_show', {'id' : action.animal.id}) }}">{{ action.animal.name }}</a>
+                        <a href="{{ path('backend_animal_show', {'id' : action.animal.id}) }}" target="_blank">{{ action.animal.name }}</a>
                     </td>
                 </tr>
                 </tbody>
             </table>
         </div>
     </div>
-    <hr/>
-    <div class="ui sixteen column grid container">
-        <div class="ui sixteen wide column">
-            <div class="ui ordered steps">
-                <div class="completed step">
-                    <div class="content">
-                        <div class="title">Adoptie actie aanmaken</div>
-                        <div class="description">Selecteer het dier wat geadopteerd gaat worden <br/> en koppel er een
-                            klant aan
+    <br/>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-7">
+                <ul class="list-group list-group-unbordered">
+                    <li class="list-group-item">
+                        <div class="callout callout-success">
+                            <h4>Adoptie actie aanmaken</h4>
+                            <p>Selecteer het dier wat geadopteerd gaat worden en koppel er een
+                                klant aan.
+                            </p>
                         </div>
-                    </div>
-                </div>
-                <div class="
-        {% if action.isfullypaid %} completed
-        {% else %} active {% endif %}
-         step">
-                    <div class="content">
-                        <div class="title">Betaling</div>
-                        <div class="description">
-                            Zorg ervoor dat alle kosten betaald zijn.
+                    </li>
+                    <li class="list-group-item">
+                        <div class="callout
+                        {% if action.isfullypaid %} callout-success
+                        {% else %} callout-info {% endif %}
+                        ">
+                            <h4>Betaling</h4>
+                            <p>Zorg ervoor dat alle kosten betaald zijn.</p>
                             {% if action.isfullypaid == false %}
-                                <br/><br/> <a
-                                    href="{{ path('backend_bookkeeping_transaction_searchcustomer', {'actionid' : action.id}) }}">
-                                <button class="ui tiny button positive"><i class="plus icon"></i>Transactie</button>
-                            </a>
+                                <a href="{{ path('backend_bookkeeping_transaction_searchcustomer', {'actionid' : action.id}) }}">
+                                    <button class="btn btn-sm btn-success"><i class="fa fa-plus"></i> Transactie
+                                    </button>
+                                </a>
                                 <a href="{{ path('backend_bookkeeping_action_zerototalcosts', {'actionid' : action.id}) }}">
-                                    <button class="ui tiny button negative"><i class="remove icon"></i>Geen kosten rekenen</button>
+                                    <button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Geen kosten
+                                        rekenen
+                                    </button>
                                 </a>
                             {% endif %}
                         </div>
-                    </div>
-                </div>
-                <div class="
-        {% if action.completed %} completed
-        {% elseif action.isfullypaid %} active
-        {% elseif action.isfullypaid == false %} disabled {% endif %}
-        step">
-                    <div class="content">
-                        <div class="title">Voltooi de actie</div>
-                        <div class="description">Wijzig de status van het dier.
+                    </li>
+                    <li class="list-group-item">
+                        <div class="callout
+                    {% if action.completed %} callout-success
+                    {% elseif action.isfullypaid %} callout-info
+                    {% elseif action.isfullypaid == false %} callout-warning
+                    {% endif %}
+                    ">
+                            <h4>Voltooi de actie</h4>
+                            <p>Wijzig de status van het dier.</p>
                             {% if action.completed == false and action.isfullypaid %}
-                                <br/><br/> <a
-                                    href="{{ path('backend_bookkeeping_action_adopted_finish', {'actionid' : action.id}) }}">
-                                <button class="ui tiny button positive"><i class="flag checkered icon"></i>Afronden
-                                </button>
-                            </a>
+                                <a href="{{ path('backend_bookkeeping_action_adopted_finish', {'actionid' : action.id}) }}">
+                                    <button class="btn btn-sm btn-success"><i class="fa fa-flag-checkered"></i> Afronden
+                                    </button>
+                                </a>
                             {% endif %}
                         </div>
-                    </div>
-                </div>
+                    </li>
+                </ul>
+                <br />
+                <a href="{{ path('backend_bookkeeping_action_index') }}"><button class="btn btn-primary">Terug naar overzicht</button>
+                </a>
             </div>
-            <a href="{{ path('backend_bookkeeping_action_index') }}"><button class="ui button primary">Terug naar overzicht</button></a>
         </div>
     </div>
 {% endblock %}
