@@ -1,5 +1,5 @@
-<div class="ui segment">
-    <h3 class="ui header">Status {{ status.id }}</h3>
+<div>
+    <h3>Status {{ status.id }}</h3>
     <p>Datum: {{ status.date|date('d-m-Y') }}</p>
     <p>Type status:  {{ status.getclassname|trans }}</p>
     <p>Gemeente: {{ status.getmunicipality }}</p>

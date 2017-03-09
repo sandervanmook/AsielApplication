@@ -1,106 +1,121 @@
 {% extends '@Backend/Base/Base.html.twig' %}
 {% block pagetitle %}Actie overzicht{% endblock %}
 {% block body %}
-    <div class="ui sixteen column grid container">
-        <div class="four wide column">
-            <h3 class="ui header">Filters</h3>
-            {{ form_start(form) }}
-            <table class="ui table very basic collapsing">
-                <tbody>
-                <tr>
-                    <td>Van</td>
-                </tr>
-                <tr>
-                    <td>{{ form_row(form.datestart) }}</td>
-                </tr>
-                <tr>
-                    <td>Tot</td>
-                </tr>
-                <tr>
-                    <td>{{ form_row(form.dateend) }}</td>
-                </tr>
-                <tr>
-                    <td>Type</td>
-                </tr>
-                <tr>
-                    <td>{{ form_row(form.type) }}</td>
-                </tr>
-                <tr>
-                    <td>Status</td>
-                </tr>
-                <tr>
-                    <td>{{ form_row(form.status) }}</td>
-                </tr>
-                <tr>
-                    <td>{{ form_row(form.showall) }}</td>
-                </tr>
-                </tbody>
-            </table>
-            {{ form_end(form) }}
-            <a href="{{ path('backend_bookkeeping_index') }}">
-                <button class="ui button primary">Terug naar boekhouding</button>
-            </a>
-        </div>
-        <div class="twelve wide column">
-            {% if result is defined %}
-                <p>Periode: {{ datestart }} t/m {{ dateend }}</p>
-            {% endif %}
-            <table class="ui table very basic">
-                <thead>
-                <tr>
-                    <th></th>
-                    <th>Datum</th>
-                    <th>Type</th>
-                    <th>Kosten</th>
-                    <th class="collapsing">Te voldoen</th>
-                    <th>Klant</th>
-                    <th>Dier</th>
-                    <th>Afgerond</th>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                {% if result is defined %}
-                    {% for action in result %}
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="box box-primary box-padding-small">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Filters</h3>
+                </div>
+                {{ form_start(form) }}
+                <div class="table-responsive">
+                    <table class="table table-condensed">
+                        <tbody>
                         <tr>
-                            <td>
-                                <a href="{{ path('backend_bookkeeping_action_show', {'actionid' : action.id}) }}">
-                                    <button class="ui tiny button primary"><i class="eye icon"></i></button>
-                                </a>
-                            </td>
-                            <td class="collapsing">{{ action.date|date('d-m-Y') }}</td>
-                            <td>{{ action.type|trans }}</td>
-                            <td><i class="euro icon"></i>{{ action.totalCosts }}</td>
-                            <td {% if action.isfullyPaid %} class="text-success" {% endif %}>
-                                <i class="euro icon"></i>{{ action.sumRemaining }}
-                            </td>
-                            {% if action.customer  != null%}
-                                <td class="collapsing">
-                                    <a href="{{ path('backend_customer_edit', {'id' : action.customer.id}) }}">
-                                        {{ action.customer.name }}
-                                    </a>
-                                </td>
-                            {% else %}
-                                <td>{{ outputBool(false) }}</td>
-                            {% endif %}
-                            <td class="collapsing">
-                                <a href="{{ path('backend_animal_show', {'id' : action.animal.id}) }}">{{ action.animal.name }}
-                                </a>
-                            </td>
-                            <td {% if action.completed == false %} class="text-danger" {% endif %}>{{ outputBool(action.completed) }}</td>
-                            <td class="collapsing">
-                                {% if action.isfullyPaid == false and action.totalCosts != 0 %}
-                                    <a href="{{ path('backend_bookkeeping_transaction_searchcustomer', {'actionid' : action.id}) }}">
-                                        <button class="ui tiny button positive"><i class="plus icon"></i>Transactie
-                                        </button>
-                                    </a>
-                                {% endif %}
-                            </td>
+                            <td>Van</td>
                         </tr>
-                    {% endfor %}
-                {% endif %}
-                </tbody>
-            </table>
+                        <tr>
+                            <td>{{ form_row(form.datestart) }}</td>
+                        </tr>
+                        <tr>
+                            <td>Tot</td>
+                        </tr>
+                        <tr>
+                            <td>{{ form_row(form.dateend) }}</td>
+                        </tr>
+                        <tr>
+                            <td>Type</td>
+                        </tr>
+                        <tr>
+                            <td>{{ form_row(form.type) }}</td>
+                        </tr>
+                        <tr>
+                            <td>Status</td>
+                        </tr>
+                        <tr>
+                            <td>{{ form_row(form.status) }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ form_row(form.showall) }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                {{ form_end(form) }}
+                <a href="{{ path('backend_bookkeeping_index') }}">
+                    <button class="btn btn-primary">Terug naar boekhouding</button>
+                </a>
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Resultaten</h3>
+                </div>
+                <div class="box-body">
+                    {% if result is defined %}
+                        <p>Periode: {{ datestart }} t/m {{ dateend }}</p>
+                    {% endif %}
+                    <div class="table-responsive">
+                        <table class="table table-hover table-condensed">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th>Datum</th>
+                                <th>Type</th>
+                                <th>Kosten</th>
+                                <th>Te voldoen</th>
+                                <th>Klant</th>
+                                <th>Dier</th>
+                                <th>Afgerond</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% if result is defined %}
+                                {% for action in result %}
+                                    <tr>
+                                        <td>
+                                            <a href="{{ path('backend_bookkeeping_action_show', {'actionid' : action.id}) }}">
+                                                <button class="btn btn-sm btn-primary"><i class="fa fa-eye"></i></button>
+                                            </a>
+                                        </td>
+                                        <td>{{ action.date|date('d-m-Y') }}</td>
+                                        <td>{{ action.type|trans }}</td>
+                                        <td><i class="fa fa-euro"></i>{{ action.totalCosts }}</td>
+                                        <td {% if action.isfullyPaid %} class="text-success" {% endif %}>
+                                            <i class="fa fa-euro"></i>{{ action.sumRemaining }}
+                                        </td>
+                                        {% if action.customer  != null %}
+                                            <td>
+                                                <a href="{{ path('backend_customer_edit', {'id' : action.customer.id}) }}">
+                                                    {{ action.customer.name }}
+                                                </a>
+                                            </td>
+                                        {% else %}
+                                            <td>{{ outputBool(false) }}</td>
+                                        {% endif %}
+                                        <td>
+                                            <a href="{{ path('backend_animal_show', {'id' : action.animal.id}) }}">{{ action.animal.name }}
+                                            </a>
+                                        </td>
+                                        <td {% if action.completed == false %} class="text-danger" {% endif %}>{{ outputBool(action.completed) }}</td>
+                                        <td>
+                                            {% if action.isfullyPaid == false and action.totalCosts != 0 %}
+                                                <a href="{{ path('backend_bookkeeping_transaction_searchcustomer', {'actionid' : action.id}) }}">
+                                                    <button class="btn btn-sm btn-success"><i class="fa fa-plus"></i>Transactie
+                                                    </button>
+                                                </a>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}

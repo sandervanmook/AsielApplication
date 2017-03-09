@@ -1,43 +1,42 @@
 {% extends '@Backend/Base/Base.html.twig' %}
-{% block pagetitle %}Actie starten - Afstaan{% endblock %}
+{% block pagetitle %}Actie starten{% endblock %}
+{% block pagesubtitle %}Afstaan{% endblock %}
 {% block body %}
-    <div class="ui sixteen column grid container">
-        <div class="row">
-            <div class="six wide column">
-                <h3 class="ui header">Dier</h3>
-                <table class="ui table very basic">
-                    <tbody>
-                    <tr>
-                        <td>Naam</td>
-                        <td>{{ animal.name }}</td>
-                    </tr>
-                    </tbody>
-                </table>
-                <p><a href="{{ path('backend_animal_show', {'id' : animal.id}) }}" target="_blank">Meer informatie
-                        (nieuw venster)</a></p>
-            </div>
-            <div class="two wide column"></div>
-            <div class="six wide column">
-                <h3 class="ui header">Klant</h3>
-                <table class="ui table very basic">
-                    <tbody>
-                    <tr>
-                        <td>Naam</td>
-                        <td>{{ customer.name }}</td>
-                    </tr>
-                    </tbody>
-                </table>
-                <p><a href="{{ path('backend_customer_edit', {'id' : customer.id}) }}" target="_blank">Meer informatie
-                        (nieuw venster)</a></p>
-            </div>
+    <div class="row">
+        <div class="col-sm-3 col-sm-offset-1">
+            <h3>Dier</h3>
+            <table class="table table-condensed">
+                <tbody>
+                <tr>
+                    <td>Naam</td>
+                    <td>{{ animal.name }}</td>
+                </tr>
+                </tbody>
+            </table>
+            <p>
+                <a href="{{ path('backend_animal_show', {'id' : animal.id}) }}" target="_blank">Meer informatie
+                    </a><i class="fa fa-external-link"></i>
+            </p>
         </div>
-        <br/><br/>
-        <div class="six wide column">
-            <hr />
+        <div class="col-sm-3">
+            <h3>Klant</h3>
+                <table class="table table-condensed">
+                <tbody>
+                <tr>
+                    <td>Naam</td>
+                    <td>{{ customer.name }}</td>
+                </tr>
+                </tbody>
+            </table>
+            <p><a href="{{ path('backend_customer_show', {'customerid' : customer.id}) }}" target="_blank">Meer informatie
+                    </a><i class="fa fa-external-link"></i></p>
+        </div>
+    </div>
+    <hr/>
+    <div class="row">
+        <div class="col-sm-3 col-sm-offset-1">
             {{ form_start(form) }}
             {{ form_widget(form) }}
-            <hr />
-            <p>Als deze gegevens kloppen kunt u nu de actie aanmaken in het systeem.</p>
             {{ outputFormButton('Aanmaken') }}
             {{ form_end(form) }}
         </div>

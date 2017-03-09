@@ -1,142 +1,157 @@
 {% extends '@Backend/Base/Base.html.twig' %}
-{% block pagetitle %}Statistieken - Dieren - Uitgeschreven{% endblock %}
+{% block pagetitle %}Statistieken{% endblock %}
+{% block pagesubtitle %}Dieren uitgeschreven{% endblock %}
 {% block body %}
-    <div class="ui sixteen column grid container">
-        <div class="four wide column">
-            <h3 class="ui header">Filters</h3>
-            {{ form_start(form) }}
-            <table class="ui table very basic collapsing">
-                <tbody>
-                <tr>
-                    <td>Van</td>
-                </tr>
-                <tr>
-                    <td>{{ form_row(form.datestart) }}</td>
-                </tr>
-                <tr>
-                    <td>Tot</td>
-                </tr>
-                <tr>
-                    <td>{{ form_row(form.dateend) }}</td>
-                </tr>
-                <tr>
-                    <td>{{ outputFormButton('Zoeken') }}</td>
-                </tr>
-                </tbody>
-            </table>
-            {{ form_end(form) }}
-            <p>Data zal worden opgehaald d.m.v. de registratie datum te vergelijken met de geboortedatum. De verdeling
-                is gebaseerd op de actieve status van het dier.</p>
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="box box-primary box-padding-small">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Filters</h3>
+                </div>
+                {{ form_start(form) }}
+                <div class="table-responsive">
+                    <table class="table table-condensed">
+                        <tbody>
+                        <tr>
+                            <td>Van</td>
+                        </tr>
+                        <tr>
+                            <td>{{ form_row(form.datestart) }}</td>
+                        </tr>
+                        <tr>
+                            <td>Tot</td>
+                        </tr>
+                        <tr>
+                            <td>{{ form_row(form.dateend) }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ outputFormButton('Zoeken') }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                {{ form_end(form) }}
+                <p>Data zal worden opgehaald d.m.v. de registratie datum te vergelijken met de geboortedatum. De
+                    verdeling
+                    is gebaseerd op de actieve status van het dier.</p>
+            </div>
         </div>
-        <div class="twelve wide column">
-            {% if result is defined %}
-                <p>Periode: {{ datestart }} t/m {{ dateend }}</p>
-            {% endif %}
-            <table class="ui table very basic">
-                <thead>
-                <tr>
-                    <th></th>
-                    <th>Overleden</th>
-                    <th>Terug naar eigenaar</th>
-                    <th>Geadopteerd</th>
-                    <th>Vermist</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>Kitten</td>
-                    {% if result.Deceased.Kitten is defined and result.Deceased.Kitten is not empty %}
-                        <td>{{ result.Deceased.Kitten|length }}</td>
-                    {% else %}
-                        <td>0</td>
+        <div class="col-sm-9">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Resultaten</h3>
+                </div>
+                <div class="box-body">
+                    {% if result is defined %}
+                        <p>Periode: {{ datestart }} t/m {{ dateend }}</p>
                     {% endif %}
-                    {% if result.ReturnedOwner.Kitten is defined and result.ReturnedOwner.Kitten is not empty %}
-                        <td>{{ result.ReturnedOwner.Kitten|length }}</td>
-                    {% else %}
-                        <td>0</td>
-                    {% endif %}
-                    {% if result.Adopted.Kitten is defined and result.Adopted.Kitten is not empty %}
-                        <td>{{ result.Adopted.Kitten|length }}</td>
-                    {% else %}
-                        <td>0</td>
-                    {% endif %}
-                    {% if result.Lost.Kitten is defined and result.Lost.Kitten is not empty %}
-                        <td>{{ result.Lost.Kitten|length }}</td>
-                    {% else %}
-                        <td>0</td>
-                    {% endif %}
-                </tr>
-                <tr>
-                    <td>Katten</td>
-                    {% if result.Deceased.Cat is defined and result.Deceased.Cat is not empty %}
-                        <td>{{ result.Deceased.Cat|length }}</td>
-                    {% else %}
-                        <td>0</td>
-                    {% endif %}
-                    {% if result.ReturnedOwner.Cat is defined and result.ReturnedOwner.Cat is not empty %}
-                        <td>{{ result.ReturnedOwner.Cat|length }}</td>
-                    {% else %}
-                        <td>0</td>
-                    {% endif %}
-                    {% if result.Adopted.Cat is defined and result.Adopted.Cat is not empty %}
-                        <td>{{ result.Adopted.Cat|length }}</td>
-                    {% else %}
-                        <td>0</td>
-                    {% endif %}
-                    {% if result.Lost.Cat is defined and result.Lost.Cat is not empty %}
-                        <td>{{ result.Lost.Cat|length }}</td>
-                    {% else %}
-                        <td>0</td>
-                    {% endif %}
-                </tr>
-                <tr>
-                    <td>Puppy</td>
-                    {% if result.Deceased.Puppy is defined and result.Deceased.Puppy is not empty %}
-                        <td>{{ result.Deceased.Puppy|length }}</td>
-                    {% else %}
-                        <td>0</td>
-                    {% endif %}
-                    {% if result.ReturnedOwner.Puppy is defined and result.ReturnedOwner.Puppy is not empty %}
-                        <td>{{ result.ReturnedOwner.Puppy|length }}</td>
-                    {% else %}
-                        <td>0</td>
-                    {% endif %}
-                    {% if result.Adopted.Puppy is defined and result.Adopted.Puppy is not empty %}
-                        <td>{{ result.Adopted.Puppy|length }}</td>
-                    {% else %}
-                        <td>0</td>
-                    {% endif %}
-                    {% if result.Lost.Puppy is defined and result.Lost.Puppy is not empty %}
-                        <td>{{ result.Lost.Puppy|length }}</td>
-                    {% else %}
-                        <td>0</td>
-                    {% endif %}
-                </tr>
-                <tr>
-                    <td>Honden</td>
-                    {% if result.Deceased.Dog is defined and result.Deceased.Dog is not empty %}
-                        <td>{{ result.Deceased.Dog|length }}</td>
-                    {% else %}
-                        <td>0</td>
-                    {% endif %}
-                    {% if result.ReturnedOwner.Dog is defined and result.ReturnedOwner.Dog is not empty %}
-                        <td>{{ result.ReturnedOwner.Dog|length }}</td>
-                    {% else %}
-                        <td>0</td>
-                    {% endif %}
-                    {% if result.Adopted.Dog is defined and result.Adopted.Dog is not empty %}
-                        <td>{{ result.Adopted.Dog|length }}</td>
-                    {% else %}
-                        <td>0</td>
-                    {% endif %}
-                    {% if result.Lost.Dog is defined and result.Lost.Dog is not empty %}
-                        <td>{{ result.Lost.Dog|length }}</td>
-                    {% else %}
-                        <td>0</td>
-                    {% endif %}
-                </tr>
-                </tbody>
-            </table>
+                    <table class="table table-condensed">
+                        <thead>
+                        <tr>
+                            <th></th>
+                            <th>Overleden</th>
+                            <th>Terug naar eigenaar</th>
+                            <th>Geadopteerd</th>
+                            <th>Vermist</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>Kitten</td>
+                            {% if result.Deceased.Kitten is defined and result.Deceased.Kitten is not empty %}
+                                <td>{{ result.Deceased.Kitten|length }}</td>
+                            {% else %}
+                                <td>0</td>
+                            {% endif %}
+                            {% if result.ReturnedOwner.Kitten is defined and result.ReturnedOwner.Kitten is not empty %}
+                                <td>{{ result.ReturnedOwner.Kitten|length }}</td>
+                            {% else %}
+                                <td>0</td>
+                            {% endif %}
+                            {% if result.Adopted.Kitten is defined and result.Adopted.Kitten is not empty %}
+                                <td>{{ result.Adopted.Kitten|length }}</td>
+                            {% else %}
+                                <td>0</td>
+                            {% endif %}
+                            {% if result.Lost.Kitten is defined and result.Lost.Kitten is not empty %}
+                                <td>{{ result.Lost.Kitten|length }}</td>
+                            {% else %}
+                                <td>0</td>
+                            {% endif %}
+                        </tr>
+                        <tr>
+                            <td>Katten</td>
+                            {% if result.Deceased.Cat is defined and result.Deceased.Cat is not empty %}
+                                <td>{{ result.Deceased.Cat|length }}</td>
+                            {% else %}
+                                <td>0</td>
+                            {% endif %}
+                            {% if result.ReturnedOwner.Cat is defined and result.ReturnedOwner.Cat is not empty %}
+                                <td>{{ result.ReturnedOwner.Cat|length }}</td>
+                            {% else %}
+                                <td>0</td>
+                            {% endif %}
+                            {% if result.Adopted.Cat is defined and result.Adopted.Cat is not empty %}
+                                <td>{{ result.Adopted.Cat|length }}</td>
+                            {% else %}
+                                <td>0</td>
+                            {% endif %}
+                            {% if result.Lost.Cat is defined and result.Lost.Cat is not empty %}
+                                <td>{{ result.Lost.Cat|length }}</td>
+                            {% else %}
+                                <td>0</td>
+                            {% endif %}
+                        </tr>
+                        <tr>
+                            <td>Puppy</td>
+                            {% if result.Deceased.Puppy is defined and result.Deceased.Puppy is not empty %}
+                                <td>{{ result.Deceased.Puppy|length }}</td>
+                            {% else %}
+                                <td>0</td>
+                            {% endif %}
+                            {% if result.ReturnedOwner.Puppy is defined and result.ReturnedOwner.Puppy is not empty %}
+                                <td>{{ result.ReturnedOwner.Puppy|length }}</td>
+                            {% else %}
+                                <td>0</td>
+                            {% endif %}
+                            {% if result.Adopted.Puppy is defined and result.Adopted.Puppy is not empty %}
+                                <td>{{ result.Adopted.Puppy|length }}</td>
+                            {% else %}
+                                <td>0</td>
+                            {% endif %}
+                            {% if result.Lost.Puppy is defined and result.Lost.Puppy is not empty %}
+                                <td>{{ result.Lost.Puppy|length }}</td>
+                            {% else %}
+                                <td>0</td>
+                            {% endif %}
+                        </tr>
+                        <tr>
+                            <td>Honden</td>
+                            {% if result.Deceased.Dog is defined and result.Deceased.Dog is not empty %}
+                                <td>{{ result.Deceased.Dog|length }}</td>
+                            {% else %}
+                                <td>0</td>
+                            {% endif %}
+                            {% if result.ReturnedOwner.Dog is defined and result.ReturnedOwner.Dog is not empty %}
+                                <td>{{ result.ReturnedOwner.Dog|length }}</td>
+                            {% else %}
+                                <td>0</td>
+                            {% endif %}
+                            {% if result.Adopted.Dog is defined and result.Adopted.Dog is not empty %}
+                                <td>{{ result.Adopted.Dog|length }}</td>
+                            {% else %}
+                                <td>0</td>
+                            {% endif %}
+                            {% if result.Lost.Dog is defined and result.Lost.Dog is not empty %}
+                                <td>{{ result.Lost.Dog|length }}</td>
+                            {% else %}
+                                <td>0</td>
+                            {% endif %}
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}

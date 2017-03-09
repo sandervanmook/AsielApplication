@@ -1,68 +1,93 @@
 {% extends '@Backend/Base/Base.html.twig' %}
-{% block pagesubtitle %}Hond aanpassen{% endblock %}
+{% block pagetitle %}Gegevens aanpassen{% endblock %}
+{% block pagesubtitle %}Hond{% endblock %}
 {% block body %}
-    <div class="ui tab segment active">
-        <div class="ui sixteen column grid container">
-            <div class="sixteen wide column">
-                {{ form_start(form) }}
-                <div class="ui three column very relaxed grid">
-                    <div class="column">
-                        <h3 class="ui header">Opties</h3>
-                        {{ form_row(form.gender) }}
-                        {{ form_row(form.outsideAnimal) }}
-                        {{ form_row(form.compatibleChildrenBelow10y) }}
-                        {{ form_row(form.compatibleChildrenAbove10y) }}
-                        {{ form_row(form.compatibleChildrenAbove7y) }}
-                        {{ form_row(form.compatibleChildrenBelow7y) }}
-                        {{ form_row(form.compatibleOldPeople) }}
-                        {{ form_row(form.escapesAlot) }}
-                        {{ form_row(form.toiletTrained) }}
-                        {{ form_row(form.sterilized) }}
-                        {{ form_row(form.needsExercise) }}
-                        {{ form_row(form.visiblePublic) }}
+    <div class="row">
+        <div class="col-sm-12">
+            {{ form_start(form) }}
+            <div class="col-sm-4">
+                <div class="box box-primary box-padding-small">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Opties</h3>
                     </div>
-
-                    <div class="column">
-                        <h3 class="ui header">Algemeen</h3>
-                        {{ form_row(form.name) }}
-                        {{ form_row(form.dayLocation) }}
-                        {{ form_row(form.nightLocation) }}
-                        {{ form_row(form.chipnumber) }}
-                        {{ form_row(form.notChipped) }}
-                        {{ form_row(form.passportNumber) }}
-                        {{ form_row(form.colour) }}
-                        {{ form_row(form.race) }}
-                        {{ form_row(form.furType) }}
-                        {{ form_row(form.crossbred) }}
-                    </div>
-
-                    <div class="column">
-                        <h3 class="ui header">Data</h3>
-                        {{ form_row(form.dayOfBirth) }}
-                        {{ form_row(form.admissionDate) }}
-                    </div>
+                    {{ form_row(form.gender) }}
+                    {{ form_row(form.outsideAnimal) }}
+                    {{ form_row(form.compatibleChildrenBelow10y) }}
+                    {{ form_row(form.compatibleChildrenAbove10y) }}
+                    {{ form_row(form.compatibleChildrenAbove7y) }}
+                    {{ form_row(form.compatibleChildrenBelow7y) }}
+                    {{ form_row(form.compatibleOldPeople) }}
+                    {{ form_row(form.escapesAlot) }}
+                    {{ form_row(form.toiletTrained) }}
+                    {{ form_row(form.sterilized) }}
+                    {{ form_row(form.needsExercise) }}
+                    {{ form_row(form.visiblePublic) }}
                 </div>
-                <div class="ui two column very relaxed grid">
-                    <div class="column">
-                        <h3 class="ui header">Specifieke gegevens</h3>
-                        {{ form_row(form.characteristics) }}
-                        {{ form_row(form.medicalProblems) }}
-                        {{ form_row(form.description) }}
-                        {{ form_row(form.knownAggression) }}
-                        {{ form_row(form.knownCommands) }}
+            </div>
+            <div class="col-sm-4">
+                <div class="box box-primary box-padding-small">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Algemeen</h3>
                     </div>
-                    <div class="column">
-                        <h3 class="ui header">Andere dieren</h3>
-                        {{ form_row(form.compatibleSmallDog) }}
-                        {{ form_row(form.compatibleLargeDog) }}
-                        {{ form_row(form.compatibleCat) }}
-                        {{ form_row(form.compatibleOtherAnimals) }}
-                    </div>
+                    {{ form_row(form.name) }}
+                    {{ form_row(form.dayLocation) }}
+                    {{ form_row(form.nightLocation) }}
+                    {{ form_row(form.chipnumber) }}
+                    {{ form_row(form.notChipped) }}
+                    {{ form_row(form.passportNumber) }}
+                    {{ form_row(form.colour) }}
+                    {{ form_row(form.race) }}
+                    {{ form_row(form.furType) }}
+                    {{ form_row(form.crossbred) }}
                 </div>
-                <div class="ui horizontal divider"></div>
-                {{ outputFormButton('Bijwerken') }}
-                {{ form_end(form) }}
+            </div>
+            <div class="col-sm-4">
+                <div class="box box-primary box-padding-small">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Data</h3>
+                    </div>
+                    {{ form_row(form.dayOfBirth) }}
+                    {{ form_row(form.admissionDate) }}
+                </div>
             </div>
         </div>
     </div>
+    <br/>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="col-sm-6">
+                <div class="box box-primary box-padding-small">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Specifieke gegevens</h3>
+                    </div>
+                    {{ form_row(form.characteristics) }}
+                    {{ form_row(form.medicalProblems) }}
+                    {{ form_row(form.description) }}
+                    {{ form_row(form.knownAggression) }}
+                    {{ form_row(form.knownCommands) }}
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="box box-primary box-padding-small">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Andere dieren</h3>
+                    </div>
+                    {{ form_row(form.compatibleSmallDog) }}
+                    {{ form_row(form.compatibleLargeDog) }}
+                    {{ form_row(form.compatibleCat) }}
+                    {{ form_row(form.compatibleOtherAnimals) }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            {{ outputFormButton('Bijwerken') }}
+            {{ form_end(form) }}
+        </div>
+    </div>
+    <br/>
+    </div> <!-- end div row -->
+    </div> <!-- end col-sm-12 -->
+    </div> <!-- end box box-primary -->
 {% endblock %}

@@ -1,39 +1,44 @@
 {% extends '@Backend/Base/Base.html.twig' %}
-{% block pagesubtitle %}Post op Facebook{% endblock %}
+{% block pagetitle %}Facebook{% endblock %}
+{% block pagesubtitle %}Plaats een post{% endblock %}
+
 {% block body %}
-    <div class="ui tab segment active">
-        <div class="ui sixteen column grid container">
-            <div class="sixteen wide column">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
                 {% if facebooklink is not null %}
-                    <p class="text-alert">Let op, dit dier staat al op <a href="{{ facebooklink }}" target="_blank">facebook</a></p>
+                    <p class="text-danger">Let op, dit dier staat al op <a href="{{ facebooklink }}" target="_blank">facebook</a></p>
                 {% endif %}
 
-                <form class="ui form" method="post" action="{{ path('backend_animal_facebook_post', {'id' : app.request.attributes.get('id')}) }}">
+                <form class="form-group" method="post" action="{{ path('backend_animal_facebook_post', {'id' : app.request.attributes.get('id')}) }}">
 
                     <p>Welke foto moet er worden gepost ?</p>
                     <div>
                         {% for picture in pictures %}
                             <div>
-                                <img id="{{ picture.id }}" class="ui image small Dog" src="{{ picture.getpublicurl }}">
+                                <img id="{{ picture.id }}" class="Dog" src="{{ picture.getpublicurl }}" height="100">
                                 <br />
                                 <input value="{{ picture.id }}" type="radio" name="picture">
                             </div>
                         {% endfor %}
                     </div>
-                    <div class="ui divider horizontal"></div>
+                    <br />
                     <div>
-                        <div class="field">
+                        <div class="form-group">
                             <label for="message">Het bericht bij de post *</label>
                             <textarea id="message" name="message" placeholder="Vul het bericht in"></textarea>
                         </div>
-                        <div class="ui divider horizontal"></div>
-                        <input class="ui small positive button" type="submit" name="submit" value="Plaatsen">
-                        <div class="ui divider horizontal"></div>
+                        <br />
+                        <input class="btn btn-success" type="submit" name="submit" value="Plaatsen">
+                        <br />
                         <p>* Aan het einde van de post zal een link naar de website worden geplaatst.
-                            <span class="text-alert">Als het dier niet zichtbaar is voor publiek krijgt de klant een fout te zien.</span></p>
+                            <span class="text-danger">Als het dier niet zichtbaar is voor publiek krijgt de klant een fout te zien.</span></p>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+    </div> <!-- end div row -->
+    </div> <!-- end col-sm-12 -->
+    </div> <!-- end box box-primary -->
 {% endblock %}

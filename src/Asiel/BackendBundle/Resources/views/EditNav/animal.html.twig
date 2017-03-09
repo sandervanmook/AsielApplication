@@ -1,14 +1,9 @@
 {% block editAnimal %}
-    <div class="ui top attached tabular menu">
-        <a class="item {% if app.request.get('_route') == 'backend_animal_show' %} active {% endif %}" href="{{ path('backend_animal_show', {'id' : app.request.get('id')}) }}">Overzicht</a>
-        <a class="item {% if app.request.get('_route') == 'backend_animal_edit' %} active {% endif %}" href="{{ path('backend_animal_edit', {'id' : app.request.get('id')}) }}">Aanpassen</a>
-        <a class="item {% if 'incident' in app.request.get('_route') %} active {% endif %}" href="{{ path('backend_animal_incident_index', {'id': app.request.get('id')}) }}">Incidenten</a>
-        <a class="item {% if 'medical' in app.request.get('_route') %} active {% endif %}" href="{{ path('backend_animal_medical_index', {'id': app.request.get('id')}) }}">Medisch dossier</a>
-        <a class="item {% if 'status' in app.request.get('_route') %} active {% endif %}" href="{{ path('backend_animal_status_index', {'id': app.request.get('id')}) }}">Status</a>
-        <a class="item {% if 'picture' in app.request.get('_route') %} active {% endif %}" href="{{ path('backend_animal_picture_index', {'id': app.request.get('id')}) }}">Foto's</a>
-        <a class="item {% if 'facebook' in app.request.get('_route') %} active {% endif %}" href="{{ path('backend_animal_facebook_index', {'id': app.request.get('id')}) }}">Facebook</a>
-        <a class="item {% if 'task' in app.request.get('_route') %} active {% endif %}" href="{{ path('backend_animal_task_index', {'id': app.request.get('id')}) }}">Taken</a>
-    </div>
-    {{ render(controller('AnimalBundle:Backend:animalInfo', {'id': app.request.attributes.get('id')})) }}
-
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="box box-primary box-padding-small">
+                <div class="box-header with-border">
+                    {{ render(controller('AnimalBundle:Backend:animalInfo', {'id': app.request.attributes.get('id')})) }}
+                </div>
+            <br />
 {% endblock %}

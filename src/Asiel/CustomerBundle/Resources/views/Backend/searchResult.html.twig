@@ -1,62 +1,78 @@
-<table class="ui table compact striped">
-    <thead>
-    {% for customer in result|slice(0,1) %}
-        {% if customer.isPrivate %}
-            <tr>
-                <th></th>
-                <th>Naam</th>
-                <th>Email</th>
-                <th>Gemeente</th>
-                <th>BSN</th>
-                <th>Telefoonnummer</th>
-                <th class="collapsing">Op zwarte lijst?</th>
-            </tr>
-        {% endif %}
-    {% endfor %}
-    {% for customer in result|slice(0,1) %}
-        {% if customer.isBusiness %}
-            <tr>
-                <th></th>
-                <th>Naam</th>
-                <th>Email</th>
-                <th>Gemeente</th>
-                <th>Bedrijfsnaam</th>
-                <th>Telefoonnummer</th>
-            </tr>
-        {% endif %}
-    {% endfor %}
-    </thead>
-    <tbody>
-    {% for customer in result %}
-        {% if customer.isPrivate %}
-            <tr
-                    {% if customer.blacklisted %}
-                        class="negative"
-                    {% endif %}
-            >
-                <td><a href="{{ path('backend_customer_show', {'customerid' : customer.id}) }}">
-                        <button class="ui tiny button primary"><i class="eye icon"></i></button>
-                    </a></td>
-                <td><a href="{{ path('backend_customer_edit', {'id' : customer.id }) }}">{{ customer.name }}</a></td>
-                <td>{{ customer.email }}</td>
-                <td>{{ customer.municipality }}</td>
-                <td>{{ customer.citizenservicenumber }}</td>
-                <td>{{ customer.phone }}</td>
-                <td>{{ outputBool(customer.blacklisted) }}</td>
-            </tr>
-        {% elseif customer.isBusiness %}
-            <tr>
-                <td><a href="{{ path('backend_customer_show', {'customerid' : customer.id}) }}">
-                        <button class="ui tiny button primary"><i class="eye icon"></i></button>
-                    </a></td>
-                <td>{{ customer.contactname }}</td>
-                <td>{{ customer.email }}</td>
-                <td>{{ customer.municipality }}</td>
-                <td><a href="{{ path('backend_customer_edit', {'id' : customer.id }) }}">{{ customer.companyname }}</a>
-                </td>
-                <td>{{ customer.phone }}</td>
-            </tr>
-        {% endif %}
-    {% endfor %}
-    </tbody>
-</table>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Resultaten</h3>
+            </div>
+            <div class="box-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover table-condensed">
+                        <thead>
+                        {% for customer in result|slice(0,1) %}
+                            {% if customer.isPrivate %}
+                                <tr>
+                                    <th></th>
+                                    <th>Naam</th>
+                                    <th>Email</th>
+                                    <th>Gemeente</th>
+                                    <th>BSN</th>
+                                    <th>Telefoonnummer</th>
+                                    <th class="collapsing">Op zwarte lijst?</th>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                        {% for customer in result|slice(0,1) %}
+                            {% if customer.isBusiness %}
+                                <tr>
+                                    <th></th>
+                                    <th>Naam</th>
+                                    <th>Email</th>
+                                    <th>Gemeente</th>
+                                    <th>Bedrijfsnaam</th>
+                                    <th>Telefoonnummer</th>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                        </thead>
+                        <tbody>
+                        {% for customer in result %}
+                            {% if customer.isPrivate %}
+                                <tr
+                                        {% if customer.blacklisted %}
+                                            class="danger"
+                                        {% endif %}
+                                >
+                                    <td><a href="{{ path('backend_customer_show', {'customerid' : customer.id}) }}">
+                                            <button class="btn btn-sm btn-primary view"><i class="fa fa-eye"></i></button>
+                                        </a></td>
+                                    <td>
+                                        <a href="{{ path('backend_customer_edit', {'id' : customer.id }) }}">{{ customer.name }}</a>
+                                    </td>
+                                    <td>{{ customer.email }}</td>
+                                    <td>{{ customer.municipality }}</td>
+                                    <td>{{ customer.citizenservicenumber }}</td>
+                                    <td>{{ customer.phone }}</td>
+                                    <td>{{ outputBool(customer.blacklisted) }}</td>
+                                </tr>
+                            {% elseif customer.isBusiness %}
+                                <tr>
+                                    <td><a href="{{ path('backend_customer_show', {'customerid' : customer.id}) }}">
+                                            <button class="btn btn-sm btn-primary view"><i class="fa fa-eye"></i></button>
+                                        </a></td>
+                                    <td>{{ customer.contactname }}</td>
+                                    <td>{{ customer.email }}</td>
+                                    <td>{{ customer.municipality }}</td>
+                                    <td>
+                                        <a href="{{ path('backend_customer_edit', {'id' : customer.id }) }}">{{ customer.companyname }}</a>
+                                    </td>
+                                    <td>{{ customer.phone }}</td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

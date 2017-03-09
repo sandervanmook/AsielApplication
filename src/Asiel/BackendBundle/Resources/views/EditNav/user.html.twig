@@ -1,10 +1,9 @@
 {% block editUser %}
-    <div class="ui top attached tabular menu">
-        <a class="item {% if app.request.get('_route') == 'backend_employee_show' %} active {% endif %}" href="{{ path('backend_employee_show', {'id' : app.request.get('id')}) }}">Overzicht</a>
-        <a class="item {% if app.request.get('_route') == 'backend_employee_edit' %} active {% endif %}" href="{{ path('backend_employee_edit', {'id' : app.request.get('id')}) }}">Aanpassen</a>
-        <a class="item {% if 'password' in app.request.get('_route') %} active {% endif %}" href="{{ path('backend_employee_edit_password', {'id' : app.request.get('id')}) }}">Wachtwoord aanpassen</a>
-        <a class="item {% if 'picture' in app.request.get('_route') %} active {% endif %}" href="{{ path('backend_employee_user_picture_index', {'id' : app.request.get('id')}) }}">Foto Uploaden</a>
-        <a class="item {% if 'workschedule' in app.request.get('_route') %} active {% endif %}" href="{{ path('backend_employee_workschedule_index', {'id' : app.request.get('id')}) }}">Werkschema</a>
-    </div>
-    {{ render(controller('EmployeeBundle:Backend:userInfo', {'id': app.request.attributes.get('id')})) }}
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="box box-primary box-padding-small">
+                <div class="box-header with-border">
+                    {{ render(controller('EmployeeBundle:Backend:userInfo', {'id': app.request.attributes.get('id')})) }}
+                </div>
+    <br/>
 {% endblock %}

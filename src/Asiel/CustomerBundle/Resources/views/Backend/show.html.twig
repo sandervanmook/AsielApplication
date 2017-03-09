@@ -1,11 +1,20 @@
 {% extends '@Backend/Base/Base.html.twig' %}
 {% block pagetitle %}Bekijk klant{% endblock %}
 {% block body %}
-    <div class="ui sixteen column grid container">
-        <div class="eight wide column">
+    <div class="row">
+    <div class="col-sm-8">
+        <div class="box box-primary box-padding-small">
+            <div class="box-header with-border">
+                <h3 class="box-title">
+                    {% if customer.isPrivate %}
+                    Klantinformatie (Particuliere klant)
+                    {% elseif customer.isBusiness %}
+                    Klantinformatie (Zakelijke klant)
+                    {% endif %}
+                </h3>
+            </div>
             {% if customer.isPrivate %}
-                <h3 class="ui header">Klantinformatie (Particuliere klant)</h3>
-                <table class="ui table very basic">
+                <table class="table">
                     <tbody>
                     <tr>
                         <td>Naam</td>
@@ -57,8 +66,7 @@
                 </table>
             {% endif %}
             {% if customer.isBusiness %}
-                <h3 class="ui header">Klantinformatie (Zakelijke klant)</h3>
-                <table class="ui table very basic">
+                <table class="table">
                     <tbody>
                     <tr>
                         <td>Bedrijfsnaam</td>
@@ -101,7 +109,7 @@
             {% endif %}
             {% if customer.idcard is defined and customer.idcard is not null %}
                 <h3 class="ui header">ID kaart informatie</h3>
-                <table class="ui table very basic">
+                <table class="table">
                     <tbody>
                     <tr>
                         <td>Nationalnumber</td>
@@ -173,7 +181,7 @@
                     </tr>
                     <tr>
                         <td>Foto</td>
-                        <td><img class="ui tiny image" src="{{ asset('pictures/customer.gif') }}" alt="customer_photo"></td>
+                        <td><img src="{{ asset('pictures/customer.gif') }}" alt="customer_photo" height="100"></td>
                     </tr>
                     </tbody>
                 </table>

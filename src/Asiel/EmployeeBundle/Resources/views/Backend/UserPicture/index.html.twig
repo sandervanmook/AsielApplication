@@ -1,55 +1,59 @@
 {% extends '@Backend/Base/Base.html.twig' %}
-{% block pagesubtitle %}Foto van gebruiker{% endblock %}
+{% block pagetitle %}Foto van gebruiker{% endblock %}
 {% block body %}
-    <div class="ui tab segment active">
-        <div class="ui twelve column grid container">
-            <div class="six wide column">
-                <div class="ui card">
-                    <div class="image">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-3">
+                <div class="box box-primary">
+                    <div class="box-body box-profile">
                         {% if picture %}
-                            <img src="{{ picture.publicURL }}" alt="picture">
+                            <img class="profile-user-img img-responsive img-circle"
+                                 src="{{ picture.publicURL }}" alt="User profile picture">
                         {% else %}
-                            <img src="{{ asset('img/no_picture.jpg') }}" alt="no_picture_yet">
+                            <img class="profile-user-img img-responsive img-circle"
+                                 src="{{ asset('img/no_picture.jpg') }}" alt="User profile picture">
                         {% endif %}
-                    </div>
-                    <div class="content">
-                        <div class="description">
+                        <br />
+                        <p class="text-center">
                             {% if picture is not null %}
-                                <div id="{{ picture.id }}" class="ui mini negative labeled icon button delete">
-                                    <i class="remove icon"></i> Verwijderen
-                                </div>
-                                {% else %}
-                                    <a href="{{ path('backend_employee_user_picture_create', {'id' : app.request.get('id')}) }}">
-                                        <div class="ui mini positive labeled icon button">
-                                            <i class="add square icon"></i> Toevoegen
-                                        </div>
-                                    </a>
+                                <a id="{{ picture.id }}" class="btn btn-sm btn-danger delete">
+                                    <i class="fa fa-trash-o"></i> Verwijderen
+                                </a>
+                            {% else %}
+                                <a class="btn btn-sm btn-success"
+                                   href="{{ path('backend_employee_user_picture_create', {'id' : app.request.get('id')}) }}">
+                                    <i class="fa fa-plus"></i> Toevoegen
+                                </a>
                             {% endif %}
-                        </div>
-                    </div>
-                    <div class="extra content">
-                        <p>Er kan maar 1 foto tegelijk aanwezig zijn, als u een nieuwe foto wil uploaden moet u eerst de huidige verwijderen.</p>
-                    </div>
-                </div>
-                <div id="confirmmodal" class="ui basic modal">
-                    <div class="ui icon header">
-                        <i class="archive icon"></i>
-                        Foto verwijderen
-                    </div>
-                    <div class="content">
-                        <p>Weet u zeker dat u de foto wil verwijderen?</p>
-                    </div>
-                    <div class="actions">
-                        <div class="ui red basic cancel inverted button">
-                            <i class="remove icon"></i>
-                        </div>
-                        <div id="approve" class="ui green ok inverted button">
-                            <i class="checkmark icon"></i>
-                        </div>
+                        </p>
+                        <p>Er kan maar 1 foto tegelijk aanwezig zijn, als u een nieuwe foto wil uploaden moet u eerst de
+                            huidige verwijderen.</p>
                     </div>
                 </div>
             </div>
-        </div>   </div>
+        </div>
+    </div>
+    <div id="confirmmodal" class="modal modal-danger">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title">Waarschuwing</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Weet u zeker dat u de foto wil verwijderen?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Nee</button>
+                    <button id="approve" type="button" class="btn btn-outline">Ja</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div> <!-- end div row -->
+    </div> <!-- end col-sm-12 -->
+    </div> <!-- end box box-primary -->
 {% endblock %}
 {% block javascripts %}
     {{ parent() }}

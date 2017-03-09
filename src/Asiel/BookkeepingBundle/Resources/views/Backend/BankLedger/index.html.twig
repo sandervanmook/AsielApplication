@@ -1,73 +1,102 @@
 {% extends '@Backend/Base/Base.html.twig' %}
 {% block pagetitle %}Bank overzicht{% endblock %}
 {% block body %}
-    <div class="ui sixteen column grid container">
-        <div class="four wide column">
-            <h3 class="ui header">Filters</h3>
-            {{ form_start(form) }}
-            <table class="ui table very basic collapsing">
-                <tbody>
-                <tr>
-                    <td>Van</td>
-                </tr>
-                <tr>
-                    <td>{{ form_row(form.datestart) }}</td>
-                </tr>
-                <tr>
-                    <td>Tot</td>
-                </tr>
-                <tr>
-                    <td>{{ form_row(form.dateend) }}</td>
-                </tr>
-                <tr>
-                    <td>{{ form_row(form.showall) }}</td>
-                </tr>
-                </tbody>
-            </table>
-            {{ form_end(form) }}
-            <a href="{{ path('backend_bookkeeping_index') }}">
-                <button class="ui button primary">Terug naar boekhouding</button>
-            </a>
-        </div>
-        <div class="twelve wide column">
-            {% if result is defined %}
-                <p>Periode: {{ datestart }} t/m {{ dateend }}</p>
-            {% endif %}
-            <table class="ui table very basic">
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Datum</th>
-                    <th>Dier</th>
-                    <th>Klant</th>
-                    <th>Hoeveelheid</th>
-                    <th>Actie</th>
-                    <th>Aanbetaling</th>
-                    <th>Volledig</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                {% if result is defined %}
-                    {% for transaction in result %}
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="box box-primary box-padding-small">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Filters</h3>
+                </div>
+                {{ form_start(form) }}
+                <div class="table-responsive">
+                    <table class="table table-condensed">
+                        <tbody>
                         <tr>
-                            <td>
-                                <a href="{{ path('backend_bookkeeping_transaction_show', {'transactionid' : transaction.id}) }}"><button class="ui tiny button primary"><i class="eye icon"></i></button></a>
-                            </td>
-                            <td>{{ transaction.date|date('d-m-Y') }}</td>
-                            <td><a href="{{ path('backend_animal_show', {'id' : transaction.action.animal.id}) }}">{{ transaction.action.animal.name }}</a></td>
-                            <td><a href="{{ path('backend_customer_edit', {'id' : transaction.customer.id}) }}">{{ transaction.customer.name }}</a></td>
-                            <td><i class="euro icon"></i>{{ transaction.paidAmount }}</td>
-                            <td><a href="{{ path('backend_bookkeeping_action_show', {'actionid' : transaction.action.id}) }}">{{ transaction.action.id }}</a></td>
-                            <td>{{ outputBool(transaction.deposit) }}</td>
-                            <td>{{ outputBool(transaction.inFull) }}</td>
-                            <td><a href="{{ path('backend_bookkeeping_transaction_print_single_invoice', {'transactionid' : transaction.id}) }}" target="_blank"><button class="ui tiny button"><i class="print icon"></i></button></a></td>
+                            <td>Van</td>
                         </tr>
-                    {% endfor %}
-                {% endif %}
-                </tbody>
-            </table>
+                        <tr>
+                            <td>{{ form_row(form.datestart) }}</td>
+                        </tr>
+                        <tr>
+                            <td>Tot</td>
+                        </tr>
+                        <tr>
+                            <td>{{ form_row(form.dateend) }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ form_row(form.showall) }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                {{ form_end(form) }}
+                <a href="{{ path('backend_bookkeeping_index') }}">
+                    <button class="btn btn-primary">Terug naar boekhouding</button>
+                </a>
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Resultaten</h3>
+                </div>
+                <div class="box-body">
+                    {% if result is defined %}
+                        <p>Periode: {{ datestart }} t/m {{ dateend }}</p>
+                    {% endif %}
+                    <div class="table-responsive">
+                        <table class="table table-hover table-condensed">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th>Datum</th>
+                                <th>Dier</th>
+                                <th>Klant</th>
+                                <th>Hoeveelheid</th>
+                                <th>Actie</th>
+                                <th>Aanbetaling</th>
+                                <th>Volledig</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% if result is defined %}
+                                {% for transaction in result %}
+                                    <tr>
+                                        <td>
+                                            <a href="{{ path('backend_bookkeeping_transaction_show', {'transactionid' : transaction.id}) }}">
+                                                <button class="btn btn-sm btn-primary"><i class="fa fa-eye"></i>
+                                                </button>
+                                            </a>
+                                        </td>
+                                        <td>{{ transaction.date|date('d-m-Y') }}</td>
+                                        <td>
+                                            <a href="{{ path('backend_animal_show', {'id' : transaction.action.animal.id}) }}">{{ transaction.action.animal.name }}</a>
+                                        </td>
+                                        <td>
+                                            <a href="{{ path('backend_customer_edit', {'id' : transaction.customer.id}) }}">{{ transaction.customer.name }}</a>
+                                        </td>
+                                        <td><i class="fa fa-euro"></i> {{ transaction.paidAmount }}</td>
+                                        <td>
+                                            <a href="{{ path('backend_bookkeeping_action_show', {'actionid' : transaction.action.id}) }}">{{ transaction.action.id }}</a>
+                                        </td>
+                                        <td>{{ outputBool(transaction.deposit) }}</td>
+                                        <td>{{ outputBool(transaction.inFull) }}</td>
+                                        <td>
+                                            <a href="{{ path('backend_bookkeeping_transaction_print_single_invoice', {'transactionid' : transaction.id}) }}"
+                                               target="_blank">
+                                                <button class="btn btn-sm btn-info"><i class="fa fa-print"></i></button>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}

@@ -1,10 +1,10 @@
 {% extends '@Backend/Base/Base.html.twig' %}
 {% block pagetitle %}Transactie aanmaken{% endblock %}
 {% block body %}
-    <div class="ui four column very relaxed grid">
-        <div class="four wide column">
-            <h3 class="ui header">Actie</h3>
-            <table class="ui table very basic">
+    <div class="row">
+        <div class="col-sm-3">
+            <h3>Actie</h3>
+            <table class="table table-condensed">
                 <tbody>
                 <tr>
                     <td>Id</td>
@@ -23,12 +23,12 @@
                     <td><i class="euro icon"></i>{{ action.totalCosts }}</td>
                 </tr>
                 {% if action.customer is not null %}
-                <tr>
-                    <td>Voor klant</td>
-                    <td>
-                        <a href="{{ path('backend_customer_edit', {'id' : action.customer.id}) }}">{{ action.customer.name }}</a>
-                    </td>
-                </tr>
+                    <tr>
+                        <td>Voor klant</td>
+                        <td>
+                            <a href="{{ path('backend_customer_show', {'customerid' : action.customer.id}) }}" target="_blank">{{ action.customer.name }}</a>
+                        </td>
+                    </tr>
                 {% endif %}
                 <tr>
                     <td>Nog te voldoen</td>
@@ -37,51 +37,57 @@
                 </tbody>
             </table>
         </div>
-        <div class="four wide column">
-            <h3 class="ui header">Eerdere transacties</h3>
-            <table class="ui table very basic">
+        <div class="col-sm-3">
+            <h3>Eerdere transacties</h3>
+            <table class="table table-condensed">
                 <tbody>
                 {% for transaction in action.transaction %}
                     <tr>
-                        <td>Id : {{ transaction.id }}</td>
-                        <td>Bedrag: <i class="euro icon"></i>{{ transaction.paidamount }}</td>
+                        <td>Id :
+                            <a href="{{ path('backend_bookkeeping_transaction_show', {'transactionid' : transaction.id}) }}">{{ transaction.id }}</a>
+                        </td>
+                        <td>{{ transaction.paymenttype|trans }}</td>
+                        <td><i class="fa fa-euro"></i> {{ transaction.paidamount }}</td>
                     </tr>
                 {% endfor %}
                 </tbody>
             </table>
         </div>
-        <div class="four wide column">
-            <h3 class="ui header">Transactie voor</h3>
-            <table class="ui table very basic">
+        <div class="col-sm-3">
+            <h3>Transactie voor</h3>
+            <table class="table table-condensed">
                 <tbody>
                 <tr>
                     <td>Naam</td>
                     <td>
-                        <a href="{{ path('backend_customer_edit', {'id' : customer.id}) }}">{{ customer.name }}</a>
+                        <a href="{{ path('backend_customer_show', {'customerid' : customer.id}) }}" target="_blank">{{ customer.name }}</a>
                     </td>
                 </tr>
                 </tbody>
             </table>
         </div>
-        <div class="four wide column">
-            <h3 class="ui header">Betreft dier</h3>
-            <table class="ui table very basic">
+        <div class="col-sm-3">
+            <h3>Betreft dier</h3>
+            <table class="table table-condensed">
                 <tbody>
                 <tr>
                     <td>Naam</td>
-                    <td><a href="{{ path('backend_animal_show', {'id' : action.animal.id}) }}">{{ action.animal.name }}</a></td>
+                    <td>
+                        <a href="{{ path('backend_animal_show', {'id' : action.animal.id}) }}"
+                           target="_blank">{{ action.animal.name }}</a>
+                    </td>
                 </tr>
                 </tbody>
             </table>
         </div>
     </div>
-    <hr />
-    <div class="ui sixteen column grid container">
-        <div class="four wide column">
-        {{ form_start(form) }}
-        {{ form_widget(form) }}
-        {{ outputFormButton('Aanmaken') }}
-        {{ form_end(form) }}
+    <hr/>
+    <div class="row">
+        <div class="col-sm-3 col-sm-offset-1">
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            {{ outputFormButton('Aanmaken') }}
+            {{ form_end(form) }}
         </div>
     </div>
 {% endblock %}

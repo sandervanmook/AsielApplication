@@ -1,23 +1,5 @@
-/**
-Site and Site-content provide sticky footer.
- */
-.pusher {
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
-}
-
-.pusher > .footer {
-    flex: 1;
-}
-
-.page {
-    margin-top: 25px;
-    margin-bottom: 50px;
-}
-
-#leftsidebar {
-    font-size: 1.2em;
+.content-wrapper {
+    background-color: white;
 }
 
 .qtip-bootstrap {
@@ -29,6 +11,18 @@ Site and Site-content provide sticky footer.
     list-style: none;
 }
 
-#profile-edit-password {
-    margin-top: 135px;
+.box-padding-small {
+    padding: 10px;
+}
+
+.output-form-button {
+    margin-top: 20px;
+}
+
+.output-form-button button {
+    margin-left: 5px;
+}
+
+.callout {
+    font-size: 1.2em;
 }

@@ -1,80 +1,76 @@
 {% extends '@Backend/Base/Base.html.twig' %}
 {% block pagetitle %}Profiel{% endblock %}
 {% block body %}
-    <div class="ui sixteen column very relaxed grid">
-        <div class="eight wide column">
-            <div class="ui small image">
-                {% if user.picture %}
-                    <img src="{{ user.picture.publicurl }}" alt="user_picture">
-                {% else %}
-                    <img src="{{ asset('img/no_picture.jpg') }}" alt="user_picture">
-                {% endif %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-3">
+                <div class="box box-primary">
+                    <div class="box-body box-profile">
+                        {% if user.picture %}
+                            <img class="profile-user-img img-responsive img-circle"
+                                 src="{{ user.picture.publicurl }}" alt="User profile picture">
+                        {% else %}
+                            <img class="profile-user-img img-responsive img-circle"
+                                 src="{{ asset('img/no_picture.jpg') }}" alt="User profile picture">
+                        {% endif %}
+
+                        <h3 class="profile-username text-center">{{ user.firstname }} {{ user.lastname }}</h3>
+
+                        <p class="text-muted text-center">
+                            {% for role in user.roles %}
+                                {{ role|trans }},
+                            {% endfor %}
+                        </p>
+
+                        <ul class="list-group list-group-unbordered">
+                            <li class="list-group-item">
+                                <b>BSN/Rijksnummer</b> <span class="pull-right">{{ user.citizenServiceNumber }}</span>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Adres</b> <span class="pull-right">{{ user.address }} {{ user.houseNumber }}</span>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Postcode</b> <span class="pull-right">{{ user.zipcode }}</span>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Land</b> <span class="pull-right">{{ user.country }}</span>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Telefoonnummer</b> <span class="pull-right">{{ user.phone }}</span>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Mobiel</b> <span class="pull-right">{{ user.mobilePhone }}</span>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Gebruikersnaam</b> <span class="pull-right">{{ user.username }}</span>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Email</b> <span class="pull-right">{{ user.email }}</span>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Account is actief</b> <span class="pull-right">{{ outputBool(user.isActive) }}</span>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Start contract</b> <span class="pull-right">{{ user.startContract|date('d/m/Y') }}</span>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Einde contract</b> <span class="pull-right">{{ user.endContract|date('d/m/Y') }}</span>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Noodgeval contactpersoon</b> <span class="pull-right">{{ user.emergencyContact }}</span>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Noodgeval contact telefoonnummer</b> <span class="pull-right">{{ user.emergencyContactPhone }}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <h2>Wachtwoord wijzigen</h2>
+                {{ form_start(form) }}
+                {{ form_widget(form) }}
+                {{ outputFormButton('Aanpassen') }}
+                {{ form_end(form) }}
             </div>
-            <table class="ui table very basic">
-                <tbody>
-                <tr>
-                    <td>Gebruikersnaam</td>
-                    <td>{{ user.firstname }} {{ user.lastname }}</td>
-                </tr>
-                <tr>
-                    <td>BSN/Rijksnummer:</td>
-                    <td>{{ user.citizenServiceNumber }}</td>
-                </tr>
-                <tr>
-                    <td>Adres:</td>
-                    <td>{{ user.address }} {{ user.houseNumber }}</td>
-                </tr>
-                <tr>
-                    <td>Postcode:</td>
-                    <td>{{ user.zipcode }}</td>
-                </tr>
-                <tr>
-                    <td>Land:</td>
-                    <td>{{ user.country }}</td>
-                </tr>
-                <tr>
-                    <td>Telefoonnummer:</td>
-                    <td>{{ user.phone }}</td>
-                </tr>
-                <tr>
-                    <td>Mobiel:</td>
-                    <td>{{ user.mobilePhone }}</td>
-                </tr>
-                <tr>
-                    <td>Gebruikersnaam:</td>
-                    <td>{{ user.username }}</td>
-                </tr>
-                <tr>
-                    <td>Email:</td>
-                    <td>{{ user.email }}</td>
-                </tr>
-                <tr>
-                    <td>Rollen:</td>
-                    <td>{% for role in user.roles %}
-                            {{ role|trans }},
-                        {% endfor %}</td>
-                </tr>
-                <tr>
-                    <td>Start contract:</td>
-                    <td>{{ user.startContract|date('d-m-Y') }}</td>
-                </tr>
-                <tr>
-                    <td class="collapsing">Noodgeval contactpersoon:</td>
-                    <td>{{ user.emergencyContact }}</td>
-                </tr>
-                <tr>
-                    <td class="collapsing">Noodgeval contact telefoonnummer:</td>
-                    <td>{{ user.emergencyContactPhone }}</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="five wide column">
-            <h2 id="profile-edit-password" class="ui header">Wachtwoord wijzigen</h2>
-            {{ form_start(form) }}
-            {{ form_widget(form) }}
-            {{ outputFormButton('Aanpassen') }}
-            {{ form_end(form) }}
         </div>
     </div>
 {% endblock %}

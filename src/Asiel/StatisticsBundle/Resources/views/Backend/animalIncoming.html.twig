@@ -1,81 +1,97 @@
 {% extends '@Backend/Base/Base.html.twig' %}
-{% block pagetitle %}Statistieken - Dieren - Binnengekomen{% endblock %}
+{% block pagetitle %}Statistieken{% endblock %}
+{% block pagesubtitle %}Dieren binnengekomen{% endblock %}
 {% block body %}
-    <div class="ui sixteen column grid container">
-        <div class="four wide column">
-            <h3 class="ui header">Filters</h3>
+<div class="row">
+    <div class="col-sm-3">
+        <div class="box box-primary box-padding-small">
+            <div class="box-header with-border">
+                <h3 class="box-title">Filters</h3>
+            </div>
             {{ form_start(form) }}
-            <table class="ui table very basic collapsing">
-                <tbody>
-                <tr>
-                    <td>Via</td>
-                </tr>
-                <tr>
-                    <td>{{ form_row(form.via) }}</td>
-                </tr>
-                <tr>
-                    <td>Van</td>
-                </tr>
-                <tr>
-                    <td>{{ form_row(form.datestart) }}</td>
-                </tr>
-                <tr>
-                    <td>Tot</td>
-                </tr>
-                <tr>
-                    <td>{{ form_row(form.dateend) }}</td>
-                </tr>
-                <tr>
-                    <td>Gemeente *</td>
-                </tr>
-                <tr>
-                    <td>{{ form_row(form.municipality) }}</td>
-                </tr>
-                <tr>
-                    <td>{{ outputFormButton('Zoeken') }}</td>
-                </tr>
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table class="table table-condensed">
+                    <tbody>
+                    <tr>
+                        <td>Via</td>
+                    </tr>
+                    <tr>
+                        <td>{{ form_row(form.via) }}</td>
+                    </tr>
+                    <tr>
+                        <td>Van</td>
+                    </tr>
+                    <tr>
+                        <td>{{ form_row(form.datestart) }}</td>
+                    </tr>
+                    <tr>
+                        <td>Tot</td>
+                    </tr>
+                    <tr>
+                        <td>{{ form_row(form.dateend) }}</td>
+                    </tr>
+                    <tr>
+                        <td>Gemeente *</td>
+                    </tr>
+                    <tr>
+                        <td>{{ form_row(form.municipality) }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ outputFormButton('Zoeken') }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
             {{ form_end(form) }}
             <p>* Gebruik de CTRL/SHIFT toets om meerdere gemeente te selecteren.</p>
             <p>Bij zoeken via gevangen zal de gemeente gevonden worden via de gemeente die is opgegeven bij de status
                 (Gevonden). Als u zoekt naar afgestaan zal de woonplaats van de persoon die het dier heeft afgestaan
                 gebruikt worden.</p>
         </div>
-        <div class="twelve wide column">
-            {% if result is defined %}
-                <p>Periode: {{ datestart }} t/m {{ dateend }}</p>
-                <p>Via: {{ via|trans }}</p>
-                <p>Gemeentes: {{ municipalities }}</p>
-            {% endif %}
-            <table id="result" class="ui table very basic">
-                <thead>
-                <tr>
-                    <th>Gemeente</th>
-                    <th>Katten</th>
-                    <th>Honden</th>
-                </tr>
-                </thead>
-                <tbody>
+    </div>
+    <div class="col-sm-9">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Resultaten</h3>
+            </div>
+            <div class="box-body">
                 {% if result is defined %}
-                    {% for municipalityname,municipalityarray in result %}
-                        <tr>
-                            <td>{{ municipalityname }}</td>
-                            {% if municipalityarray.Cat is defined and municipalityarray.Cat is not empty %}
-                                <td>{{ municipalityarray.Cat|length }}</td>
-                            {% else %}
-                                <td>0</td>
-                            {% endif %}
-                            {% if municipalityarray.Dog is defined and municipalityarray.Dog is not empty %}
-                                <td>{{ municipalityarray.Dog|length }}</td>
-                            {% else %}
-                                <td>0</td>
-                            {% endif %}
-                        </tr>
-                    {% endfor %}
+                    <p>Periode: {{ datestart }} t/m {{ dateend }}</p>
+                    <p>Via: {{ via|trans }}</p>
+                    <p>Gemeentes: {{ municipalities }}</p>
                 {% endif %}
-                </tbody>
-            </table>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover table-condensed">
+                        <thead>
+                        <tr>
+                            <th>Gemeente</th>
+                            <th>Katten</th>
+                            <th>Honden</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% if result is defined %}
+                            {% for municipalityname,municipalityarray in result %}
+                                <tr>
+                                    <td>{{ municipalityname }}</td>
+                                    {% if municipalityarray.Cat is defined and municipalityarray.Cat is not empty %}
+                                        <td>{{ municipalityarray.Cat|length }}</td>
+                                    {% else %}
+                                        <td>0</td>
+                                    {% endif %}
+                                    {% if municipalityarray.Dog is defined and municipalityarray.Dog is not empty %}
+                                        <td>{{ municipalityarray.Dog|length }}</td>
+                                    {% else %}
+                                        <td>0</td>
+                                    {% endif %}
+                                </tr>
+                            {% endfor %}
+                        {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
+</div>
 {% endblock %}

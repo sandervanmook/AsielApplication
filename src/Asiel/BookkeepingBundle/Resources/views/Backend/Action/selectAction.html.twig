@@ -1,41 +1,34 @@
 {% extends '@Backend/Base/Base.html.twig' %}
-{% block pagetitle %}Actie aanmaken - Selecteer actie{% endblock %}
+{% block pagetitle %}Actie aanmaken{% endblock %}
+{% block pagesubtitle %}Selecteer actie{% endblock %}
 {% block body %}
-    <div class="ui sixteen column grid container">
-        <div class="six wide column">
-            <div class="ui relaxed divided list">
-                <div class="item">
-                    <div class="content">
-                        <a class="header" href="{{ path('backend_bookkeeping_action_adopted_start') }}">Adoptie</a>
-                        <div class="description">Als u een dier wil laten adopteren</div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="content">
-                        <a class="header" href="{{ path('backend_bookkeeping_action_abandoned_start') }}">Afstaan</a>
-                        <div class="description">Als iemand een dier wil afstaan</div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="content">
-                        <a class="header" href="{{ path('backend_bookkeeping_action_seized_start', {'animalid' : app.request.get('animalid')}) }}">In beslag nemen</a>
-                        <div class="description">Als het dier in beslag genomen wordt</div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="content">
-                        <a class="header" href="{{ path('backend_bookkeeping_action_found_start', {'animalid' : app.request.get('animalid')}) }}">Gevonden</a>
-                        <div class="description">Als een dier gevonden is krijgt het eerst de gevonden status voordat het terug of afgestaan kan worden.</div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="content">
-                        <a class="header" href="{{ path('backend_bookkeeping_action_returnedowner_start', {'animalid' : app.request.get('animalid')}) }}">Terug naar eigenaar</a>
-                        <div class="description">Als een dier gevonden is en het moet terug naar de eigenaar.</div>
-                    </div>
-                </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4">
+                <ul class="list-group list-group-unbordered">
+                    <li class="list-group-item">
+                        <a href="{{ path('backend_bookkeeping_action_adopted_start') }}">Adoptie</a>
+                        <div>Als u een dier wil laten adopteren</div>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="{{ path('backend_bookkeeping_action_abandoned_start') }}">Afstaan</a>
+                        <div>Als iemand een dier wil afstaan</div>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="{{ path('backend_bookkeeping_action_seized_start', {'animalid' : app.request.get('animalid')}) }}">In beslag nemen</a>
+                        <div>Als het dier in beslag genomen wordt</div>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="{{ path('backend_bookkeeping_action_found_start', {'animalid' : app.request.get('animalid')}) }}">Gevonden</a>
+                        <div>Als een dier gevonden is krijgt het eerst de gevonden status voordat het terug of afgestaan kan worden.</div>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="{{ path('backend_bookkeeping_action_returnedowner_start', {'animalid' : app.request.get('animalid')}) }}">Terug naar eigenaar</a>
+                        <div>Als een dier gevonden is en het moet terug naar de eigenaar.</div>
+                    </li>
+                </ul>
                 <br />
-                <a href="{{ path('backend_bookkeeping_index') }}"><button class="ui button negative">Terug</button></a>
+                <a href="{{ path('backend_bookkeeping_index') }}"><button class="btn btn-sm btn-danger">Terug</button></a>
             </div>
         </div>
     </div>
