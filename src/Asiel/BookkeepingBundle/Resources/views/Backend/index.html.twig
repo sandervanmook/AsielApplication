@@ -1,52 +1,42 @@
 {% extends '@Backend/Base/Base.html.twig' %}
 {% block pagetitle %}Boekhouding{% endblock %}
 {% block body %}
-    <div class="ui sixteen column grid container">
-        <div class="six wide column">
-            <div class="ui relaxed divided list">
-                <div class="item">
-                    <div class="content">
-                        <a class="header" href="{{ path('backend_bookkeeping_action_searchanimal') }}">Status
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4">
+                <ul class="list-group list-group-unbordered">
+                    <li class="list-group-item">
+                        <a href="{{ path('backend_bookkeeping_action_searchanimal') }}">Status
                             aanpassen</a>
-                        <div class="description">Een dier verandert van status en er moeten kosten berekend worden.
+                        <div>
+                            Een dier verandert van status en er moeten kosten berekend worden.
                         </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="content">
-                        <a class="header" href="{{ path('backend_bookkeeping_action_index') }}">Actie overzicht</a>
-                        <div class="description">Laat de status zien van de acties die voortkomen uit de statusaanpassingen van dieren.
+                    </li>
+                    <li class="list-group-item">
+                        <a href="{{ path('backend_bookkeeping_action_index') }}">Actie overzicht</a>
+                        <div>Laat de status zien van de acties die voortkomen uit de statusaanpassingen van
+                            dieren.
                         </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="content">
-                        <a class="header" href="{{ path('backend_bookkeeping_cashledger_index') }}">Kas overzicht</a>
-                        <div class="description">Bekijk de kas historie.
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="content">
-                        <a class="header" href="{{ path('backend_bookkeeping_bankledger_index') }}">Bank overzicht</a>
-                        <div class="description">Bekijk de bank historie.
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="content">
-                        <a class="header" href="{{ path('backend_bookkeeping_invoiceledger_index') }}">Factuur overzicht</a>
-                        <div class="description">Bekijk de factuur historie.
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="content">
-                        <a class="header" href="{{ path('backend_bookkeeping_invoiceledger_searchcustomer') }}">Verzamelfactuur per klant</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="{{ path('backend_bookkeeping_cashledger_index') }}">Kas overzicht</a>
+                        <div>Bekijk de kas historie.</div>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="{{ path('backend_bookkeeping_bankledger_index') }}">Bank overzicht</a>
+                        <div>Bekijk de bank historie.</div>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="{{ path('backend_bookkeeping_invoiceledger_index') }}">Factuur overzicht</a>
+                        <div>Bekijk de factuur historie.</div>
+                    </li>
+                    <li class="list-group-item">
+                        <a class="header" href="{{ path('backend_bookkeeping_invoiceledger_searchcustomer') }}">Verzamelfactuur per
+                            klant</a>
                         <div class="description">Print een document met alle facturen voor 1 klant per tijdsperiode.
                         </div>
-                    </div>
-                </div>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>

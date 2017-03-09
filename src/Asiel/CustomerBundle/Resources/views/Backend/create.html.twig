@@ -1,10 +1,16 @@
 {% extends '@Backend/Base/Base.html.twig' %}
 {% block pagetitle %}Klant aanmaken{% endblock %}
 {% block body %}
-    <div class="ui twelve column grid container">
-        <div class="six wide column">
-            <a href="{{ path('backend_customer_create_private') }}"><button class="ui button teal">Particuliere klant</button></a>
-            <a href="{{ path('backend_customer_create_business') }}"><button class="ui button olive">Zakelijke klant</button></a>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4">
+                <a href="{{ path('backend_customer_create_private') }}">
+                    <button class="btn bg-olive">Particuliere klant</button>
+                </a>
+                <a href="{{ path('backend_customer_create_business') }}">
+                    <button class="btn bg-orange">Zakelijke klant</button>
+                </a>
+            </div>
         </div>
     </div>
 {% endblock %}

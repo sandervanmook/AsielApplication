@@ -32,7 +32,9 @@
                             <td>{{ task.dateCreated|date('d-m-Y') }}</td>
                             <td>{{ task.datedue|date('d-m-Y') }}</td>
                             <td>{{ task.createdBy }}</td>
-                            <td><a href="{{ path('backend_animal_task_edit', {'id' : task.animal.id, 'taskid' : task.id}) }}">{{ task.title|length > 25 ? task.title|slice(0, 25)~'..' : task.title }}</a></td>
+                            <td>
+                                <a href="{{ path('backend_animal_task_edit', {'id' : task.animal.id, 'taskid' : task.id}) }}">{{ task.title|length > 25 ? task.title|slice(0, 25)~'..' : task.title }}</a>
+                            </td>
                             <td>{{ outputBool(task.isComplete) }}</td>
                             <td>
                                 <div id="{{ task.id }}" class="btn btn-sm btn-danger delete">
@@ -86,9 +88,11 @@
                     </div>
                 </div>
             </div>
-            </div>
         </div>
     </div>
+    </div> <!-- end div row -->
+    </div> <!-- end col-sm-12 -->
+    </div> <!-- end box box-primary -->
 {% endblock %}
 {% block javascripts %}
     {{ parent() }}

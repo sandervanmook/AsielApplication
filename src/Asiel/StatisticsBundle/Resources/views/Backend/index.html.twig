@@ -1,27 +1,24 @@
 {% extends '@Backend/Base/Base.html.twig' %}
 {% block pagetitle %}Statistieken{% endblock %}
 {% block body %}
-    <div class="ui sixteen column grid container">
-        <div class="six wide column">
-            <p>Maak een keuze:</p>
-            <div class="ui celled list">
-                <div class="item">Dieren
-                    <div class="list">
-                        <div class="item"><a href="{{ path('backend_statistics_animal_incoming') }}">Binnengekomen
-                                (gevangen/afgestaan)</a></div>
-                        <div class="item"><a href="{{ path('backend_statistics_animal_incoming_kitten') }}">Binnengekomen
-                                kittens</a></div>
-                        <div class="item"><a href="{{ path('backend_statistics_animal_leaving') }}">Uitgeschreven dieren
-                            </a></div>
-                    </div>
-                </div>
-                <div class="item">Klanten
-                    <div class="list">
-                        <div class="item"><a href="{{ path('backend_statistics_customer_actions') }}">Handeling per
-                                klant</a>
-                        </div>
-                    </div>
-                </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4">
+                <ul class="list-group list-group-unbordered">
+                    <li class="list-group-item"><b>Dieren</b></li>
+                    <li class="list-group-item"><a href="{{ path('backend_statistics_animal_incoming') }}">Binnengekomen
+                            (gevangen/afgestaan)</a>
+                    </li>
+                    <li class="list-group-item"><a href="{{ path('backend_statistics_animal_incoming_kitten') }}">Binnengekomen
+                            kittens</a>
+                    </li>
+                    <li class="list-group-item"><a href="{{ path('backend_statistics_animal_leaving') }}">Uitgeschreven dieren
+                        </a>
+                    </li>
+                    <li class="list-group-item"><b>Klanten</b></li>
+                    <li class="list-group-item"><a href="{{ path('backend_statistics_customer_actions') }}">Handeling per
+                            klant</a></li>
+                </ul>
             </div>
         </div>
     </div>

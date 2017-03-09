@@ -1,33 +1,35 @@
 {% extends '@Backend/Base/Base.html.twig' %}
-{% block pagetitle %}Statistieken - Klanten - Handelingen{% endblock %}
+{% block pagetitle %}Statistieken{% endblock %}
+{% block pagesubtitle %}Klanten handelingen{% endblock %}
 {% block body %}
-    <div class="ui sixteen column grid container">
-        <div class="twelve wide column">
-            <h3 class="ui header">Zoek een klant</h3>
-            <table class="ui table very basic">
-                <thead>
-                <tr>
-                    <th class="four wide">Achternaam</th>
-                    <th class="four wide">BSN/Rijksnummer</th>
-                    <th class="four wide">Gemeente</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>{{ form_row(form.lastname) }}</td>
-                    <td>{{ form_row(form.citizenservicenumber) }}</td>
-                    <td>{{ form_row(form.municipality) }}</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="sixteen wide column">
-            <div class="ui divider horizontal"></div>
-            <div id="searchresult"></div>
-            <div class="ui divider horizontal"></div>
-            <div class="ui divider horizontal"></div>
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Zoek een klant</h3>
+                </div>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th class="four wide">Achternaam</th>
+                            <th class="four wide">BSN/Rijksnummer</th>
+                            <th class="four wide">Gemeente</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>{{ form_row(form.lastname) }}</td>
+                            <td>{{ form_row(form.citizenservicenumber) }}</td>
+                            <td>{{ form_row(form.municipality) }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
+    <div id="searchresult"></div>
 {% endblock %}
 {% block javascripts %}
     {{ parent() }}

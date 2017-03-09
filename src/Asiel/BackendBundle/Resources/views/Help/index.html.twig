@@ -1,864 +1,962 @@
 {% extends '@Backend/Base/Base.html.twig' %}
 {% block pagetitle %}{% endblock %}
 {% block body %}
-    <div class="ui sixteen column grid container">
-        <div class="twelve wide column">
-            <div class="ui ordered list">
-                <a href="#introductie" class="item">Introductie</a>
-                <div class="item">
-                    <a href="#frontend">Frontend</a>
-                    <div class="list">
-                        <a href="#menu-frontend" class="item">Menu</a>
-                        <a href="#overons" class="item">Over ons</a>
-                        <a href="#contact" class="item">Contact</a>
-                        <a href="#inloggen" class="item">Inloggen</a>
-                    </div>
+    <div class="containter">
+        <div class="row">
+            <div class="col-sm-8 col-sm-offset-1">
+                <ol>
+                    <li><a href="#introductie">Introductie</a></li>
+                    <li><a href="#frontend">Frontend</a></li>
+                    <ul>
+                        <li><a href="#menu-frontend">Menu</a></li>
+                        <li><a href="#overons">Over ons</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#inloggen">Inloggen</a></li>
+                    </ul>
+                    <li><a href="#backend">Backend</a></li>
+                    <ul>
+                        <li><a href="#menu-backend">Menu</a></li>
+                        <li><a href="#agenda-backend">Agenda</a></li>
+                        <li><a href="#instellingen-backend">Instellingen</a></li>
+                        <li><a href="#profiel">Profiel</a></li>
+                    </ul>
+                    <li><a href="#dieren">Dieren</a></li>
+                    <ul>
+                        <li><a href="#alledieren">Alle dieren</a></li>
+                        <li><a href="#aanmelden">Aanmelden</a></li>
+                        <li><a href="#dier-aanpassen">Aanpassen</a></li>
+                        <li><a href="#incidenten">Incidenten</a></li>
+                        <li><a href="#medischdossier">Medisch dossier</a></li>
+                        <li><a href="#status">Status</a></li>
+                        <li><a href="#fotos">Foto's</a></li>
+                        <li><a href="#facebook">Facebook</a></li>
+                        <li><a href="#taken">Taken</a></li>
+                    </ul>
+                    <li><a href="#locaties">Locaties</a></li>
+                    <li><a href="#klanten">Klanten</a></li>
+                    <ul>
+                        <li><a href="#klanten-beheer">Beheer</a></li>
+                        <li><a href="#klanten-toevoegen">Toevoegen</a></li>
+                    </ul>
+                    <li><a href="#gebruikers">Gebruikers</a></li>
+                    <ul>
+                        <li><a href="#gebruikers-beheer">Beheer</a></li>
+                        <li><a href="#gebruikers-toevoegen">Toevoegen</a></li>
+                        <li><a href="#gebruikers-overzicht">Overzicht</a></li>
+                        <li><a href="#gebruikers-aanpassen">Aanpassen</a></li>
+                        <li><a href="#gebruikers-wachtwoord">Wachtwoord aanpassen</a></li>
+                        <li><a href="#gebruikers-foto">Foto uploaden</a></li>
+                        <li><a href="#gebruikers-werkschema">Werkschema</a></li>
+                        <li><a href="#gebruikers-rollen">Rollen</a></li>
+                    </ul>
+                    <li><a href="#statistieken">Statistieken</a></li>
+                    <ul>
+                        <li><a href="#statistieken-binnengekomen">Binnengekomen</a></li>
+                        <li><a href="#statistieken-binnengekomen-kittens">Binnengekomen kittens</a></li>
+                        <li><a href="#statistieken-uitgeschreven">Uitgeschreven dieren</a></li>
+                        <li><a href="#statistieken-handelingen-klant">Handelingen per klant</a></li>
+                    </ul>
+                    <li><a href="#boekhouding">Boekhouding</a></li>
+                    <ul>
+                        <li><a href="#boekhouding-status-aanpassen">Status aanpassen</a></li>
+                        <li><a href="#boekhouding-actieoverzicht">Actie overzicht</a></li>
+                        <li><a href="#boekhouding-kas-overzicht">Kas overzicht</a></li>
+                        <li><a href="#boekhouding-bank-overzicht">Bank overzicht</a></li>
+                        <li><a href="#boekhouding-factuur-overzicht">Factuur overzicht</a></li>
+                        <li><a href="#boekhouding-verzamelfactuur">Verzamelfactuur per klant</a></li>
+                        <li><a href="#boekhouding-aparte-factuur">Aparte factuur</a></li>
+                    </ul>
+                    <li><a href="#agenda">Agenda</a></li>
+                    <ul>
+                        <li><a href="#agenda-taken">Taken</a></li>
+                        <li><a href="#agenda-punten">Agenda punten</a></li>
+                    </ul>
+                </ol>
+
+                <hr/>
+                <div>
+                    <h1 id="introductie" class="text-aqua">Introductie</h1>
+                    <p>
+                        Deze applicatie bestaat uit een aantal samenwerkende modules. Op deze pagina staan
+                        de verschillende modules en hun onderlinge relatie beschreven.
+                    </p>
+                    <p>
+                        De 2 belangrijkste modules zijn de "frontend" en "backend" modules. Deze modules
+                        brengen de overige modules samen tot 1 applicatie. Alles wat zich in het publieke
+                        gedeelte van de website afspeelt valt onder de frontend (voorkant). Dit gedeelte is
+                        bedoeld voor klanten die interesse hebben om een dier te adopteren. Alles wat u te
+                        zien krijgt na het inloggen valt onder de backend (achterkant) van de applicatie.
+                        Hier kunt u wijzigingen aanbrengen. Zonder een geldig account is dit gedeelte niet
+                        toegankelijk.
+                    </p>
                 </div>
-                <div class="item">
-                    <a href="#backend">Backend</a>
-                    <div class="list">
-                        <a href="#menu-backend" class="item">Menu</a>
-                        <a href="#agenda-backend" class="item">Agenda</a>
-                        <a href="#instellingen-backend" class="item">Instellingen</a>
-                        <a href="#profiel" class="item">Profiel</a>
-                    </div>
+
+                <br/>
+                <hr/>
+                <div>
+                    <h1 id="frontend" class="text-aqua">Frontend</h1>
+                    <p>
+                        Dit is het publieke gedeelte van de website. De informatie in de "footer" (het onderste
+                        gedeelte van de pagina) vult u zelf in onder de <a href="#frontend-instellingen">frontend
+                            instellingen</a>.
+                    </p>
+                    <p>
+                        Of een dier wel of niet getoond wordt in het publieke gedeelte heeft met 2 zaken te maken:
+                    </p>
+                    <ul>
+                        <li>Is het zichtbaar voor publiek ? Dit kunt u terugvinden in het overzicht van het dier</li>
+                        <li>Heeft het dier een onsite <a href="#status">status ?</a></li>
+                    </ul>
+
+                    <h3 id="menu-frontend" class="text-light-blue">Menu</h3>
+                    <p>
+                        Hier kunnen klanten een keuze maken in wat ze willen bekijken. Ze kunnen een
+                        categorie kiezen (honden of katten) of naar een pagina gaan waar ze kunnen zoeken
+                        d.m.v. een filter.
+                    </p>
+
+                    <h3 id="overons" class="text-light-blue">Over Ons</h3>
+                    <p>
+                        Op deze pagina kunnen klanten informatie over uw organisatie vinden. Deze informatie
+                        kunt u zelf invoeren in de backend module bij de <a href="#frontend-instellingen">frontend
+                            instellingen</a>.
+                    </p>
+
+                    <h3 id="contact" class="text-light-blue">Contact</h3>
+                    <p>
+                        Op deze pagina kunnen klanten d.m.v. een formulier contact met u opnemen. Het
+                        is momenteel niet mogelijk zelf op te geven waar deze informatie (email) terecht
+                        komt, dit stellen wij in bij installatie. De contact informatie geeft u zelf in
+                        via de backend module bij de <a href="#frontend-instellingen">frontend instellingen</a>.
+                    </p>
+
+                    <h3 id="inloggen" class="text-light-blue">Inloggen</h3>
+                    <p>
+                        Op deze pagina kunt u met een geldig gebruikersaccount inloggen. In het hoofdstuk
+                        over de <a href="#gebruikers">gebruikersmodule</a> vind u meer informatie hierover.
+                    </p>
+
                 </div>
-                <div class="item">
-                    <a href="#dieren">Dieren</a>
-                    <div class="list">
-                        <a href="#alledieren" class="item">Alle dieren</a>
-                        <a href="#aanmelden" class="item">Aanmelden</a>
-                        <a href="#dier-aanpassen" class="item">Aanpassen</a>
-                        <a href="#incidenten" class="item">Incidenten</a>
-                        <a href="#medischdossier" class="item">Medisch dossier</a>
-                        <a href="#status" class="item">Status</a>
-                        <a href="#fotos" class="item">Foto's</a>
-                        <a href="#facebook" class="item">Facebook</a>
-                        <a href="#taken" class="item">Taken</a>
-                    </div>
+
+                <br/>
+                <hr/>
+                <div>
+                    <h1 id="backend" class="text-aqua">Backend</h1>
+                    <p>
+                        Deze module geeft toegang tot andere modules binnen de applicatie.
+                    </p>
+
+                    <h3 id="menu-backend" class="text-light-blue">Menu</h3>
+                    <p>
+                        In het menu vind u links naar alle andere modules. Voor meer informatie over
+                        de betreffende module verwijzen wij u naar het betreffende hoofdstuk.
+                    </p>
+
+                    <h3 id="agenda-backend" class="text-light-blue">Agenda</h3>
+                    <p>
+                        <i class="fa fa-calendar"></i> Via deze link kunt u de centrale agenda bekijken
+                        of een nieuwe afspraak in de agenda maken. Meer informatie is beschikbaar in het
+                        hoofdstuk over de <a href="#agenda">agenda</a>.
+                    </p>
+
+                    <h3 id="instellingen-backend" class="text-light-blue">Instellingen</h3>
+                    <p>
+                        <i class="fa fa-gears"></i>Onder deze link zitten momenteel 2 opties:
+                    </p>
+                    <ul>
+                        <li>Boekhoud instellingen</li>
+                        <li>Frontend instellingen</li>
+                    </ul>
+                    <h5 id="boekhoud-instellingen" class="ui header">Boekhoud instellingen</h5>
+                    <p>
+                        Op deze pagina geeft u informatie in die de boekhoudmodule nodig heeft om goed
+                        te kunnen werken. De instellingen hebben veelal te maken met prijzen of informatie
+                        die op de factuur moet komen te staan.
+                    </p>
+
+                    <h5 id="frontend-instellingen" class="ui header">Frontend instellingen</h5>
+                    <p>
+                        Op deze pagina geeft u informatie in die terugkomt op het publieke gedeelte van de website.
+                    </p>
+
+                    <h3 id="profiel" class="text-light-blue">Profiel</h3>
+                    <p>
+                        <i class="fa fa-user"></i>Het menu met dit icoon en daarnaast u gebruikersnaam
+                        geeft de mogelijkheid om:
+                    </p>
+                    <ul>
+                        <li>
+                            Uw profiel te bewerken. Momenteel laat deze pagina uw persoonlijke gegevens
+                            zien. Ook kunt u hier uw wachtwoord om in te loggen wijzigen. Een beheerder
+                            kan het wachtwoord van andere gebruikers ook wijzigen.
+                        </li>
+                        <li>Direct naar het publieke gedeelte van de website te gaan</li>
+                        <li>Uit te loggen</li>
+                    </ul>
+
                 </div>
-                <div class="item">
-                    <a href="#locaties">Locaties</a>
-                </div>
-                <div class="item">
-                    <a href="#klanten">Klanten</a>
-                    <div class="list">
-                        <a href="#klanten-beheer" class="item">Beheer</a>
-                        <a href="#klanten-toevoegen" class="item">Toevoegen</a>
-                    </div>
-                </div>
-                <div class="item">
-                    <a href="#gebruikers">Gebruikers</a>
-                    <div class="list">
-                        <a href="#gebruikers-beheer" class="item">Beheer</a>
-                        <a href="#gebruikers-toevoegen" class="item">Toevoegen</a>
-                        <a href="#gebruikers-overzicht" class="item">Overzicht</a>
-                        <a href="#gebruikers-aanpassen" class="item">Aanpassen</a>
-                        <a href="#gebruikers-wachtwoord" class="item">Wachtwoord aanpassen</a>
-                        <a href="#gebruikers-foto" class="item">Foto uploaden</a>
-                        <a href="#gebruikers-werkschema" class="item">Werkschema</a>
-                        <a href="#gebruikers-rollen" class="item">Rollen</a>
-                    </div>
-                </div>
-                <div class="item">
-                    <a href="#statistieken">Statistieken</a>
-                    <div class="list">
-                        <a href="#statistieken-binnengekomen" class="item">Binnengekomen</a>
-                        <a href="#statistieken-binnengekomen-kittens" class="item">Binnengekomen kittens</a>
-                        <a href="#statistieken-uitgeschreven" class="item">Uitgeschreven dieren</a>
-                        <a href="#statistieken-handelingen-klant" class="item">Handelingen per klant</a>
-                    </div>
-                </div>
-                <div class="item">
-                    <a href="#boekhouding">Boekhouding</a>
-                    <div class="list">
-                        <a href="#boekhouding-status-aanpassen" class="item">Status aanpassen</a>
-                        <a href="#boekhouding-actieoverzicht" class="item">Actie overzicht</a>
-                        <a href="#boekhouding-kas-overzicht" class="item">Kas overzicht</a>
-                        <a href="#boekhouding-bank-overzicht" class="item">Bank overzicht</a>
-                        <a href="#boekhouding-factuur-overzicht" class="item">Factuur overzicht</a>
-                        <a href="#boekhouding-verzamelfactuur" class="item">Verzamelfactuur per klant</a>
-                        <a href="#boekhouding-aparte-factuur" class="item">Aparte factuur</a>
-                    </div>
-                </div>
-                <div class="item">
-                    <a href="#agenda">Agenda</a>
-                    <div class="list">
-                        <a href="#agenda-taken" class="item">Taken</a>
-                        <a href="#agenda-punten" class="item">Agenda punten</a>
-                    </div>
-                </div>
-            </div>
 
-            <div class="ui divider horizontal"></div>
-            <div class="ui divider horizontal"></div>
-
-            <div class="ui sizer vertical segment">
-                <h1 id="introductie" class="ui header teal">Introductie</h1>
-                <p>
-                    Deze applicatie bestaat uit een aantal samenwerkende modules. Op deze pagina staan
-                    de verschillende modules en hun onderlinge relatie beschreven.
-                </p>
-                <p>
-                    De 2 belangrijkste modules zijn de "frontend" en "backend" modules. Deze modules
-                    brengen de overige modules samen tot 1 applicatie. Alles wat zich in het publieke
-                    gedeelte van de website afspeelt valt onder de frontend (voorkant). Dit gedeelte is
-                    bedoeld voor klanten die interesse hebben om een dier te adopteren. Alles wat u te
-                    zien krijgt na het inloggen valt onder de backend (achterkant) van de applicatie.
-                    Hier kunt u wijzigingen aanbrengen. Zonder een geldig account is dit gedeelte niet
-                    toegankelijk.
-                </p>
-            </div>
-
-            <div class="ui divider horizontal"></div>
-
-            <div class="ui sizer vertical segment">
-                <h1 id="frontend" class="ui header teal">Frontend</h1>
-                <p>
-                    Dit is het publieke gedeelte van de website. De informatie in de "footer" (het onderste
-                    gedeelte van de pagina) vult u zelf in onder de <a href="#frontend-instellingen">frontend instellingen</a>.
-                </p>
-                <p>
-                    Of een dier wel of niet getoond wordt in het publieke gedeelte heeft met 2 zaken te maken:
-                </p>
-                <ul>
-                    <li>Is het zichtbaar voor publiek ? Dit kunt u terugvinden in het overzicht van het dier</li>
-                    <li>Heeft het dier een onsite <a href="#status">status ?</a></li>
-                </ul>
-
-                <h3 id="menu-frontend" class="ui header blue">Menu</h3>
-                <p>
-                    Hier kunnen klanten een keuze maken in wat ze willen bekijken. Ze kunnen een
-                    categorie kiezen (honden of katten) of naar een pagina gaan waar ze kunnen zoeken
-                    d.m.v. een filter.
-                </p>
-
-                <h3 id="overons" class="ui header blue">Over Ons</h3>
-                <p>
-                    Op deze pagina kunnen klanten informatie over uw organisatie vinden. Deze informatie
-                    kunt u zelf invoeren in de backend module bij de <a href="#frontend-instellingen">frontend instellingen</a>.
-                </p>
-
-                <h3 id="contact" class="ui header blue">Contact</h3>
-                <p>
-                    Op deze pagina kunnen klanten d.m.v. een formulier contact met u opnemen. Het
-                    is momenteel niet mogelijk zelf op te geven waar deze informatie (email) terecht
-                    komt, dit stellen wij in bij installatie. De contact informatie geeft u zelf in
-                    via de backend module bij de <a href="#frontend-instellingen">frontend instellingen</a>.
-                </p>
-
-                <h3 id="inloggen" class="ui header blue">Inloggen</h3>
-                <p>
-                    Op deze pagina kunt u met een geldig gebruikersaccount inloggen. In het hoofdstuk
-                    over de <a href="#gebruikers">gebruikersmodule</a> vind u meer informatie hierover.
-                </p>
-
-            </div>
-
-            <div class="ui divider horizontal"></div>
-
-            <div class="ui sizer vertical segment">
-                <h1 id="backend" class="ui header teal">Backend</h1>
-                <p>
-                    Deze module geeft toegang tot andere modules binnen de applicatie.
-                </p>
-
-                <h3 id="menu-backend" class="ui header blue">Menu</h3>
-                <p>
-                    In het menu vind u links naar alle andere modules. Voor meer informatie over
-                    de betreffende module verwijzen wij u naar het betreffende hoofdstuk.
-                </p>
-
-                <h3 id="agenda-backend" class="ui header blue">Agenda</h3>
-                <p>
-                    <i class="calendar icon"></i> Via deze link kunt u de centrale agenda bekijken
-                    of een nieuwe afspraak in de agenda maken. Meer informatie is beschikbaar in het
-                    hoofdstuk over de <a href="#agenda">agenda</a>.
-                </p>
-
-                <h3 id="instellingen-backend" class="ui header blue">Instellingen</h3>
-                <p>
-                    <i class="configure icon"></i>Onder deze link zitten momenteel 2 opties:
-                </p>
-                <ul>
-                    <li>Boekhoud instellingen</li>
-                    <li>Frontend instellingen</li>
-                </ul>
-                <h5 id="boekhoud-instellingen" class="ui header">Boekhoud instellingen</h5>
-                <p>
-                    Op deze pagina geeft u informatie in die de boekhoudmodule nodig heeft om goed
-                    te kunnen werken. De instellingen hebben veelal te maken met prijzen of informatie
-                    die op de factuur moet komen te staan.
-                </p>
-
-                <h5 id="frontend-instellingen" class="ui header">Frontend instellingen</h5>
-                <p>
-                    Op deze pagina geeft u informatie in die terugkomt op het publieke gedeelte van de website.
-                </p>
-
-                <h3 id="profiel" class="ui header blue">Profiel</h3>
-                <p>
-                    <i class="user icon"></i>Het menu met dit icoon en daarnaast u gebruikersnaam
-                    geeft de mogelijkheid om:
-                </p>
-                <ul>
-                    <li>
-                        Uw profiel te bewerken. Momenteel laat deze pagina uw persoonlijke gegevens
-                        zien. Ook kunt u hier uw wachtwoord om in te loggen wijzigen. Een beheerder
-                        kan het wachtwoord van andere gebruikers ook wijzigen.
-                    </li>
-                    <li>Direct naar het publieke gedeelte van de website te gaan</li>
-                    <li>Uit te loggen</li>
-                </ul>
-
-            </div>
-
-            <div class="ui divider horizontal"></div>
-
-            <div class="ui sizer vertical segment">
-                <h1 id="dieren" class="ui header teal">Dieren</h1>
-                <p>Deze module is het hart van de applicatie. Hier staat alle informatie over
-                de dieren die in het asiel zitten of hebben gezeten.</p>
-                <p>
-                    Via het algemene menu kunt u een overzicht krijgen van alle dieren (of sorteren met het filter.
-                    Ook is het mogelijk nieuwe dieren aan te melden.
-                </p>
+                <br/>
+                <hr/>
+                <div>
+                    <h1 id="dieren" class="text-aqua">Dieren</h1>
+                    <p>Deze module is het hart van de applicatie. Hier staat alle informatie over
+                        de dieren die in het asiel zitten of hebben gezeten.</p>
+                    <p>
+                        Via het algemene menu kunt u een overzicht krijgen van alle dieren (of sorteren met het filter.
+                        Ook is het mogelijk nieuwe dieren aan te melden.
+                    </p>
 
 
-                <h3 id="alledieren" class="ui header blue">Alle dieren</h3>
-                <p>
-                    Via een filter krijgt u inzicht in alle dieren die in het asiel zitten of hebben
-                    gezeten. Als u op de naam van het dier wat u gevonden heeft klikt gaat u naar
-                    de overzichtspagina van het dier. Als het dier openstaande taken heeft en u klikt
-                    op de "Ja" komt u direct in het takenoverzicht van dit dier.
-                    <span class="text-danger">Let op: U moet altijd de kat/hond filter gebruiken.</span>
-                </p>
+                    <h3 id="alledieren" class="text-light-blue">Alle dieren</h3>
+                    <p>
+                        Via een filter krijgt u inzicht in alle dieren die in het asiel zitten of hebben
+                        gezeten. Als u op de naam van het dier wat u gevonden heeft klikt gaat u naar
+                        de overzichtspagina van het dier. Als het dier openstaande taken heeft en u klikt
+                        op de "Ja" komt u direct in het takenoverzicht van dit dier.
+                        <span class="text-danger">Let op: U moet altijd de kat/hond filter gebruiken.</span>
+                    </p>
 
-                <h3 id="aanmelden" class="ui header blue">Aanmelden</h3>
-                <p>
-                    Via het algemene menu kunt u direct een dier aanmelden. Het systeem zal u eerst vragen
-                    een chipnummer in te voeren om te voorkomen dat dieren dubbel in de database komen te staan.
-                    U kunt deze stap ook overslaan als u geen chipnummer beschikbaar heeft. Indien u wel een
-                    chipnummer invoert zal het systeem in externe databases gaan zoeken (momenteel 3) en u daar,
-                     indien van toepassing, de resultaten van laten zien. Als het dier al in de database staat
-                    wordt u daarna doorverwezen. Indien het dier nog niet in de database staat kunt u hem als
-                    nieuw dier aanmelden.
-                </p>
-                <p>
-                    De procedure om een kat of hond aan te melden is nagenoeg hetzelfde. U krijgt een formulier
-                    te zien wat u in dient te vullen. Zodra het is ingevuld kunt u het dier "aanmaken". Deze
-                    gegevens zijn later nog te wijzigen.
-                </p>
+                    <h3 id="aanmelden" class="text-light-blue">Aanmelden</h3>
+                    <p>
+                        Via het algemene menu kunt u direct een dier aanmelden. Het systeem zal u eerst vragen
+                        een chipnummer in te voeren om te voorkomen dat dieren dubbel in de database komen te staan.
+                        U kunt deze stap ook overslaan als u geen chipnummer beschikbaar heeft. Indien u wel een
+                        chipnummer invoert zal het systeem in externe databases gaan zoeken (momenteel 3) en u daar,
+                        indien van toepassing, de resultaten van laten zien. Als het dier al in de database staat
+                        wordt u daarna doorverwezen. Indien het dier nog niet in de database staat kunt u hem als
+                        nieuw dier aanmelden.
+                    </p>
+                    <p>
+                        De procedure om een kat of hond aan te melden is nagenoeg hetzelfde. U krijgt een formulier
+                        te zien wat u in dient te vullen. Zodra het is ingevuld kunt u het dier "aanmaken". Deze
+                        gegevens zijn later nog te wijzigen.
+                    </p>
 
-                <h3 id="dier-aanpassen" class="ui header blue">Aanpassen</h3>
-                <p>
-                    Zodra u een nieuw dier heeft aangemeld (of via een filter geselecteerd) komt u in
-                    overzicht van het dier terecht. Dit is een overzicht met algemene informatie over het dier.
-                </p>
-                <p>
-                    Bovenin het scherm ziet u een aantal links staan waaronder aanpassen. Op deze pagina kunt u
-                    informatie aanpassen die u eerder heeft ingevoerd bij het aanmelden van het dier.
-                </p>
+                    <h3 id="dier-aanpassen" class="text-light-blue">Aanpassen</h3>
+                    <p>
+                        Zodra u een nieuw dier heeft aangemeld (of via een filter geselecteerd) komt u in
+                        overzicht van het dier terecht. Dit is een overzicht met algemene informatie over het dier.
+                    </p>
+                    <p>
+                        Bovenin het scherm ziet u een aantal links staan waaronder aanpassen. Op deze pagina kunt u
+                        informatie aanpassen die u eerder heeft ingevoerd bij het aanmelden van het dier.
+                    </p>
 
-                <h3 id="incidenten" class="ui header blue">Incidenten</h3>
-                <p>
-                    Via de incidenten link kunt u een incident registreren. Hiermee kunt u bijvoorbeeld
-                    vastleggen dat het dier een ander dier heeft gebeten.
-                </p>
+                    <h3 id="incidenten" class="text-light-blue">Incidenten</h3>
+                    <p>
+                        Via de incidenten link kunt u een incident registreren. Hiermee kunt u bijvoorbeeld
+                        vastleggen dat het dier een ander dier heeft gebeten.
+                    </p>
 
-                <h3 id="medischdossier" class="ui header blue">Medisch dossier</h3>
-                <p>
-                    Via het medisch dossier kunt u medische handelingen vastleggen.
-                </p>
+                    <h3 id="medischdossier" class="text-light-blue">Medisch dossier</h3>
+                    <p>
+                        Via het medisch dossier kunt u medische handelingen vastleggen.
+                    </p>
 
-                <h3 id="status" class="ui header blue">Status</h3>
-                <p>
-                    De status is een van de belangrijkste eigenschappen die het systeem over een dier
-                    bijhoudt. De status geeft aan waar in het "proces" het dier zich bevindt. Er zijn 2
-                    soorten statussen, onsite en offsite. Simpel gezien is het de vraag of het dier fysiek
-                    aanwezig in het asiel (onsite) of niet (offsite). Als een dier een onsite status heeft
-                    en bij de opties is aangegeven dat het zichtbaar is voor publiek zal het in het publieke
-                    gedeelte te zien zijn.<span class="text-danger"> Als een dier nieuw binnen komt
+                    <h3 id="status" class="text-light-blue">Status</h3>
+                    <p>
+                        De status is een van de belangrijkste eigenschappen die het systeem over een dier
+                        bijhoudt. De status geeft aan waar in het "proces" het dier zich bevindt. Er zijn 2
+                        soorten statussen, onsite en offsite. Simpel gezien is het de vraag of het dier fysiek
+                        aanwezig in het asiel (onsite) of niet (offsite). Als een dier een onsite status heeft
+                        en bij de opties is aangegeven dat het zichtbaar is voor publiek zal het in het publieke
+                        gedeelte te zien zijn.<span class="text-danger"> Als een dier nieuw binnen komt
                     (geen status) moet het altijd als eerste een "onsite" status krijgen.</span>
-                </p>
-                <p>
-                    Het systeem kent de volgende statussen:
-                </p>
-                <ul>
-                    <li>Afgestaan (onsite), als de eigenaar het dier vrijwillig afstaat;</li>
-                    <li>Adoptie (offsite), als een klant een dier adopteert;</li>
-                    <li>Overleden (offsite), als het dier overleden is;</li>
-                    <li>Gevonden (onsite), als het dier gevonden is;</li>
-                    <li>Vermist (offsite), het dier is ontsnapt uit het asiel;</li>
-                    <li>Geen status (offsite), het dier is nieuw in het systeem en heeft nog geen
-                    status;</li>
-                    <li>Terug naar eigenaar (offsite), het dier is terug naar de oorspronkelijke
-                    eigenaar;</li>
-                    <li>In beslag genomen (onsite), het dier is in beslag genomen.</li>
-                </ul>
-                <p>
-                    Via de knop status kunt u de huidige en gearchiveerde statussen bekijken. U kunt via
-                    dit menu 2 statussen aanmaken, vermist en overleden. Dit zijn namelijk de enige statussen
-                    waar geen "kosten" aan verbonden zijn. Alle andere statussen kunnen alleen via de boekhoud
-                    module aan een dier gekoppeld worden. Het veranderen van de status van een dier wordt verder
-                    besproken in de <a href="#boekhouding">boekhoud</a> module.
-                </p>
-                <p>
-                    Het zou niet logisch zijn als een dier 2 keer dezelfde status kon krijgen, of dat als het overleden
-                    is nog van status zou kunnen veranderen. Daarom is deze matrix opgesteld, houdt daar rekening
-                    mee als u een dier van status wil veranderen. Alleen deze statusaanpassingen zijn toegestaan:
-                </p>
-                <table class="ui single line table">
-                    <thead>
-                    <tr>
-                        <th>Huidige status</th>
-                        <th>Nieuwe status</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr class="ui inverted grey table">
-                        <td>Afgestaan</td>
-                        <td>Adoptie</td>
-                    </tr>
-                    <tr class="ui inverted grey table">
-                        <td>Afgestaan</td>
-                        <td>Overleden</td>
-                    </tr>
-                    <tr class="ui inverted grey table">
-                        <td>Afgestaan</td>
-                        <td>Vermist</td>
-                    </tr>
-                    <tr class="ui inverted grey table">
-                        <td>Afgestaan</td>
-                        <td>Terug naar eigenaar</td>
-                    </tr>
-                    <tr>
-                        <td>Adoptie</td>
-                        <td>Afgestaan</td>
-                    </tr>
-                    <tr>
-                        <td>Adoptie</td>
-                        <td>Gevonden</td>
-                    </tr>
-                    <tr>
-                        <td>Adoptie</td>
-                        <td>In beslag genomen</td>
-                    </tr>
-                    <tr class="ui inverted grey table">
-                        <td>Gevonden</td>
-                        <td>Afgestaan</td>
-                    </tr>
-                    <tr class="ui inverted grey table">
-                        <td>Gevonden</td>
-                        <td>Adoptie</td>
-                    </tr>
-                    <tr class="ui inverted grey table">
-                        <td>Gevonden</td>
-                        <td>Overleden</td>
-                    </tr>
-                    <tr class="ui inverted grey table">
-                        <td>Gevonden</td>
-                        <td>Vermist</td>
-                    </tr>
-                    <tr class="ui inverted grey table">
-                        <td>Gevonden</td>
-                        <td>Terug naar eigenaar</td>
-                    </tr>
-                    <tr class="ui inverted grey table">
-                        <td>Gevonden</td>
-                        <td>In beslag genomen</td>
-                    </tr>
-                    <tr>
-                        <td>Vermist</td>
-                        <td>Gevonden</td>
-                    </tr>
-                    <tr>
-                        <td>Vermist</td>
-                        <td>In beslag genomen</td>
-                    </tr>
-                    <tr class="ui inverted grey table">
-                        <td>Geen status</td>
-                        <td>Gevonden</td>
-                    </tr>
-                    <tr class="ui inverted grey table">
-                        <td>Geen status</td>
-                        <td>In beslag genomen</td>
-                    </tr>
-                    <tr class="ui inverted grey table">
-                        <td>Geen status</td>
-                        <td>Afgestaan</td>
-                    </tr>
-                    <tr>
-                        <td>Terug naar eigenaar</td>
-                        <td>Afgestaan</td>
-                    </tr>
-                    <tr>
-                        <td>Terug naar eigenaar</td>
-                        <td>Gevonden</td>
-                    </tr>
-                    <tr>
-                        <td>Terug naar eigenaar</td>
-                        <td>In beslag genomen</td>
-                    </tr>
-                    <tr class="ui inverted grey table">
-                        <td>In beslag genomen</td>
-                        <td>Adoptie</td>
-                    </tr>
-                    <tr class="ui inverted grey table">
-                        <td>In beslag genomen</td>
-                        <td>Overleden</td>
-                    </tr>
-                    <tr class="ui inverted grey table">
-                        <td>In beslag genomen</td>
-                        <td>Terug naar eigenaar</td>
-                    </tr>
-                    <tr class="ui inverted grey table">
-                        <td>In beslag genomen</td>
-                        <td>Vermist</td>
-                    </tr>
-                    </tbody>
-                </table>
-                <p>
-                    Als u probeert toch een statusaanpassing uit te voeren die hier niet beschreven staat zal het
-                    systeem een foutmelding geven.
-                </p>
+                    </p>
+                    <p>
+                        Het systeem kent de volgende statussen:
+                    </p>
+                    <ul>
+                        <li>Afgestaan (onsite), als de eigenaar het dier vrijwillig afstaat;</li>
+                        <li>Adoptie (offsite), als een klant een dier adopteert;</li>
+                        <li>Overleden (offsite), als het dier overleden is;</li>
+                        <li>Gevonden (onsite), als het dier gevonden is;</li>
+                        <li>Vermist (offsite), het dier is ontsnapt uit het asiel;</li>
+                        <li>Geen status (offsite), het dier is nieuw in het systeem en heeft nog geen
+                            status;
+                        </li>
+                        <li>Terug naar eigenaar (offsite), het dier is terug naar de oorspronkelijke
+                            eigenaar;
+                        </li>
+                        <li>In beslag genomen (onsite), het dier is in beslag genomen.</li>
+                    </ul>
+                    <p>
+                        Via de knop status kunt u de huidige en gearchiveerde statussen bekijken. U kunt via
+                        dit menu 2 statussen aanmaken, vermist en overleden. Dit zijn namelijk de enige statussen
+                        waar geen "kosten" aan verbonden zijn. Alle andere statussen kunnen alleen via de boekhoud
+                        module aan een dier gekoppeld worden. Het veranderen van de status van een dier wordt verder
+                        besproken in de <a href="#boekhouding">boekhoud</a> module.
+                    </p>
+                    <p>
+                        Het zou niet logisch zijn als een dier 2 keer dezelfde status kon krijgen, of dat als het
+                        overleden
+                        is nog van status zou kunnen veranderen. Daarom is deze matrix opgesteld, houdt daar rekening
+                        mee als u een dier van status wil veranderen. Alleen deze statusaanpassingen zijn toegestaan:
+                    </p>
+                    <table class="table table-striped table-condensed">
+                        <thead>
+                        <tr>
+                            <th>Huidige status</th>
+                            <th>Nieuwe status</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr >
+                            <td>Afgestaan</td>
+                            <td>Adoptie</td>
+                        </tr>
+                        <tr >
+                            <td>Afgestaan</td>
+                            <td>Overleden</td>
+                        </tr>
+                        <tr >
+                            <td>Afgestaan</td>
+                            <td>Vermist</td>
+                        </tr>
+                        <tr >
+                            <td>Afgestaan</td>
+                            <td>Terug naar eigenaar</td>
+                        </tr>
+                        <tr>
+                            <td>Adoptie</td>
+                            <td>Afgestaan</td>
+                        </tr>
+                        <tr>
+                            <td>Adoptie</td>
+                            <td>Gevonden</td>
+                        </tr>
+                        <tr>
+                            <td>Adoptie</td>
+                            <td>In beslag genomen</td>
+                        </tr>
+                        <tr >
+                            <td>Gevonden</td>
+                            <td>Afgestaan</td>
+                        </tr>
+                        <tr >
+                            <td>Gevonden</td>
+                            <td>Adoptie</td>
+                        </tr>
+                        <tr >
+                            <td>Gevonden</td>
+                            <td>Overleden</td>
+                        </tr>
+                        <tr >
+                            <td>Gevonden</td>
+                            <td>Vermist</td>
+                        </tr>
+                        <tr >
+                            <td>Gevonden</td>
+                            <td>Terug naar eigenaar</td>
+                        </tr>
+                        <tr >
+                            <td>Gevonden</td>
+                            <td>In beslag genomen</td>
+                        </tr>
+                        <tr>
+                            <td>Vermist</td>
+                            <td>Gevonden</td>
+                        </tr>
+                        <tr>
+                            <td>Vermist</td>
+                            <td>In beslag genomen</td>
+                        </tr>
+                        <tr >
+                            <td>Geen status</td>
+                            <td>Gevonden</td>
+                        </tr>
+                        <tr >
+                            <td>Geen status</td>
+                            <td>In beslag genomen</td>
+                        </tr>
+                        <tr >
+                            <td>Geen status</td>
+                            <td>Afgestaan</td>
+                        </tr>
+                        <tr>
+                            <td>Terug naar eigenaar</td>
+                            <td>Afgestaan</td>
+                        </tr>
+                        <tr>
+                            <td>Terug naar eigenaar</td>
+                            <td>Gevonden</td>
+                        </tr>
+                        <tr>
+                            <td>Terug naar eigenaar</td>
+                            <td>In beslag genomen</td>
+                        </tr>
+                        <tr >
+                            <td>In beslag genomen</td>
+                            <td>Adoptie</td>
+                        </tr>
+                        <tr >
+                            <td>In beslag genomen</td>
+                            <td>Overleden</td>
+                        </tr>
+                        <tr >
+                            <td>In beslag genomen</td>
+                            <td>Terug naar eigenaar</td>
+                        </tr>
+                        <tr >
+                            <td>In beslag genomen</td>
+                            <td>Vermist</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <p>
+                        Als u probeert toch een statusaanpassing uit te voeren die hier niet beschreven staat zal het
+                        systeem een foutmelding geven.
+                    </p>
 
-                <h3 id="fotos" class="ui header blue">Foto's</h3>
-                <p>
-                    Via de foto's link kunt u foto's uploaden van het dier. Deze zijn te zien op de
-                    publieke kant van de website en ook te gebruiken voor de facebook functie.
-                </p>
+                    <h3 id="fotos" class="text-light-blue">Foto's</h3>
+                    <p>
+                        Via de foto's link kunt u foto's uploaden van het dier. Deze zijn te zien op de
+                        publieke kant van de website en ook te gebruiken voor de facebook functie.
+                    </p>
 
-                <h3 id="facebook" class="ui header blue">Facebook</h3>
-                <p>
-                    Via deze functie kunt u een bericht plaatsen op uw facebook pagina.
-                    Zodra u op deze link klikt wordt u gevraagd in te loggen met een facebook account
-                    van uw asiel. Zodra dit gelukt is kunt u een foto selecteren en een bericht erbij typen.
-                    Zodra u bevestigt dat u klaar bent wordt de informatie naar facebook verzonden. Aan het einde
-                    van het bericht komt automatisch een link te staan welke verwijst naar het dier op het publieke
-                    gedeelte. Indien er al een bericht geplaatst werd over dit dier krijgt u de link naar de post te zien.
-                    U kunt opnieuw een post maken voor dit dier, het systeem onthoudt echter alleen de laatste post.
-                    <span class="text-danger">Let op, als het dier niet de optie zichtbaar voor publiek aan
+                    <h3 id="facebook" class="text-light-blue">Facebook</h3>
+                    <p>
+                        Via deze functie kunt u een bericht plaatsen op uw facebook pagina.
+                        Zodra u op deze link klikt wordt u gevraagd in te loggen met een facebook account
+                        van uw asiel. Zodra dit gelukt is kunt u een foto selecteren en een bericht erbij typen.
+                        Zodra u bevestigt dat u klaar bent wordt de informatie naar facebook verzonden. Aan het einde
+                        van het bericht komt automatisch een link te staan welke verwijst naar het dier op het publieke
+                        gedeelte. Indien er al een bericht geplaatst werd over dit dier krijgt u de link naar de post te
+                        zien.
+                        U kunt opnieuw een post maken voor dit dier, het systeem onthoudt echter alleen de laatste post.
+                        <span class="text-danger">Let op, als het dier niet de optie zichtbaar voor publiek aan
                     heeft staan zal er een foutmelding te zien zijn als een klant op de link via facebook klikt.</span>
-                </p>
+                    </p>
 
-                <h3 id="taken" class="ui header blue">Taken</h3>
-                <p>
-                    Via de taken link kunnen er taken voor een dier aangemaakt worden. Er zijn 2 soorten taken,
-                    taken die het systeem automatisch aanmaakt en taken die u als gebruiker aanmaakt. Een taak
-                    is niets anders dan een agendapunt in de agenda welke direct gelinkt is aan dit dier. Bij
-                    het veranderen van de status van een dier kunnen er automatisch taken door het systeem
-                    gegenereerd worden. Meer over taken in het <a href="#agenda">agenda</a> hoofdstuk.
-                </p>
-            </div>
+                    <h3 id="taken" class="text-light-blue">Taken</h3>
+                    <p>
+                        Via de taken link kunnen er taken voor een dier aangemaakt worden. Er zijn 2 soorten taken,
+                        taken die het systeem automatisch aanmaakt en taken die u als gebruiker aanmaakt. Een taak
+                        is niets anders dan een agendapunt in de agenda welke direct gelinkt is aan dit dier. Bij
+                        het veranderen van de status van een dier kunnen er automatisch taken door het systeem
+                        gegenereerd worden. Meer over taken in het <a href="#agenda">agenda</a> hoofdstuk.
+                    </p>
+                </div>
 
-            <div class="ui divider horizontal"></div>
+                <br/>
+                <hr/>
+                <div>
+                    <h1 id="locaties" class="text-aqua">Locaties</h1>
+                    <p>
+                        Via het algemene menu heeft u de mogelijkheid een locatie toe te voegen en
+                        locaties te beheren. Een locatie is niets anders dan de huidige verblijfplaats
+                        van een dier. Een dier heeft een nacht en een dag locatie. Deze zijn via de
+                        aanpassen functie in te stellen. We maken onderscheid in locaties voor katten
+                        en honden. Als u een locatie wil verwijderen is het belangrijk dat u eerst het
+                        dier wat de betreffende locatie heeft een andere locatie geeft, anders is het niet
+                        mogelijk de locatie te verwijderen.
+                    </p>
+                </div>
 
-            <div class="ui sizer vertical segment">
-                <h1 id="locaties" class="ui header teal">Locaties</h1>
-                <p>
-                    Via het algemene menu heeft u de mogelijkheid een locatie toe te voegen en
-                    locaties te beheren. Een locatie is niets anders dan de huidige verblijfplaats
-                    van een dier. Een dier heeft een nacht en een dag locatie. Deze zijn via de
-                    aanpassen functie in te stellen. We maken onderscheid in locaties voor katten
-                    en honden. Als u een locatie wil verwijderen is het belangrijk dat u eerst het
-                    dier wat de betreffende locatie heeft een andere locatie geeft, anders is het niet
-                    mogelijk de locatie te verwijderen.
-                </p>
-            </div>
+                <br/>
+                <hr/>
+                <div>
+                    <h1 id="klanten" class="text-aqua">Klanten</h1>
+                    <p>
+                        Klanten hebben vaak een directe relatie met de dieren in het systeem. Als een dier
+                        wordt afgestaan is er een klant aan verbonden, maar ook als het dier gevonden is of
+                        als een klant een dier adopteert. Er bestaan 2 soorten klanten, particuliere klanten
+                        en zakelijke klanten. Van een particuliere klant leggen we andere gegevens vast dan
+                        een zakelijke klant. Een zakelijke klant, meestal een gemeente, zal vaak gebruikt worden
+                        om facturen naar te sturen. Daarnaast werken we met een zwarte lijst. Als er in het verleden
+                        problemen of incidenten zijn geweest met een persoon, kan dit in het klantaccount worden
+                        opgenomen. Zodra deze klant weer een dier wil afstaan of adopteren zal het systeem melden
+                        dat hij of zij op de zwarte lijst staat zodat u, indien nodig, actie kan ondernemen.
+                    </p>
 
-            <div class="ui divider horizontal"></div>
+                    <h3 id="klanten-beheer" class="text-light-blue">Beheer</h3>
+                    <p>
+                        Via het algemene menu heeft u de mogelijkheid klantbeheer uit te voeren. De pagina
+                        laat een aantal filters zien waarop u kunt zoeken. Zodra u de filters invult verschijnt
+                        er onder de filters een tabel met zoekresultaten. Daar heeft u 2 mogelijkheden, als u op
+                        het blauwe icoontje
+                        <button class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></button>
+                        klikt krijgt u een overzicht te zien van de betreffende klant. Klikt u op de naam / bedrijfsnaam
+                        van de klant heeft u de mogelijkheid de klant aan te passen.
+                    </p>
 
-            <div class="ui sizer vertical segment">
-                <h1 id="klanten" class="ui header teal">Klanten</h1>
-                <p>
-                    Klanten hebben vaak een directe relatie met de dieren in het systeem. Als een dier
-                    wordt afgestaan is er een klant aan verbonden, maar ook als het dier gevonden is of
-                    als een klant een dier adopteert. Er bestaan 2 soorten klanten, particuliere klanten
-                    en zakelijke klanten. Van een particuliere klant leggen we andere gegevens vast dan
-                    een zakelijke klant. Een zakelijke klant, meestal een gemeente, zal vaak gebruikt worden
-                    om facturen naar te sturen. Daarnaast werken we met een zwarte lijst. Als er in het verleden
-                    problemen of incidenten zijn geweest met een persoon, kan dit in het klantaccount worden
-                    opgenomen. Zodra deze klant weer een dier wil afstaan of adopteren zal het systeem melden
-                    dat hij of zij op de zwarte lijst staat zodat u, indien nodig, actie kan ondernemen.
-                </p>
+                    <h3 id="klanten-toevoegen" class="text-light-blue">Toevoegen</h3>
+                    <p>
+                        Via het algemene menu heeft u de mogelijkheid een klant toe te voegen. Daarna krijgt
+                        u de keuze te zien of het een zakelijke of particuliere klant is. Een aantal belangrijke
+                        punten:
+                    </p>
+                    <ul>
+                        <li>
+                            Email veld, het systeem controleert of dit een geldig email adres is. Ook is dit
+                            veld uniek in het system, d.w.z. dat een email adres maar voor 1 klant gebruikt mag
+                            worden;
+                        </li>
+                        <li>
+                            Gemeente veld, dit veld is heel belangrijk, het wordt namelijk ook in andere
+                            modules (statistieken) gebruikt;
+                        </li>
+                        <li>
+                            Upload ID card gegevens, deze functie geeft de mogelijkheid een Belgische id kaart
+                            te uploaden. Het systeem verwacht een bestand in XML formaat gemaakt met het programma
+                            wat te downloaden is vanaf <a target="_blank"
+                                                          href="http://eid.belgium.be">http://eid.belgium.be</a>.
+                        </li>
+                    </ul>
 
-                <h3 id="klanten-beheer" class="ui header blue">Beheer</h3>
-                <p>
-                    Via het algemene menu heeft u de mogelijkheid klantbeheer uit te voeren. De pagina
-                    laat een aantal filters zien waarop u kunt zoeken. Zodra u de filters invult verschijnt
-                    er onder de filters een tabel met zoekresultaten. Daar heeft u 2 mogelijkheden, als u op
-                    het blauwe icoontje <button class="ui tiny button primary"><i class="eye icon"></i></button>
-                    klikt krijgt u een overzicht te zien van de betreffende klant. Klikt u op de naam / bedrijfsnaam
-                    van de klant heeft u de mogelijkheid de klant aan te passen.
-                </p>
+                </div>
 
-                <h3 id="klanten-toevoegen" class="ui header blue">Toevoegen</h3>
-                <p>
-                    Via het algemene menu heeft u de mogelijkheid een klant toe te voegen. Daarna krijgt
-                    u de keuze te zien of het een zakelijke of particuliere klant is. Een aantal belangrijke
-                    punten:
-                </p>
-                <ul>
-                    <li>
-                        Email veld, het systeem controleert of dit een geldig email adres is. Ook is dit
-                        veld uniek in het system, d.w.z. dat een email adres maar voor 1 klant gebruikt mag
-                        worden;
-                    </li>
-                    <li>
-                        Gemeente veld, dit veld is heel belangrijk, het wordt namelijk ook in andere
-                        modules (statistieken) gebruikt;
-                    </li>
-                    <li>
-                        Upload ID card gegevens, deze functie geeft de mogelijkheid een Belgische id kaart
-                        te uploaden. Het systeem verwacht een bestand in XML formaat gemaakt met het programma
-                        wat te downloaden is vanaf <a target="_blank" href="http://eid.belgium.be">http://eid.belgium.be</a>.
-                    </li>
-                </ul>
+                <br/>
+                <hr/>
+                <div>
+                    <h1 id="gebruikers" class="text-aqua">Gebruikers</h1>
+                    <p>
+                        Binnen AsielPro zijn gebruikers binnen het systeem gelijk aan werknemers.
+                        Zo kunt u informatie over het arbeidscontract vastleggen binnen het profiel.
+                    </p>
 
-            </div>
+                    <h3 id="gebruikers-beheer" class="text-light-blue">Beheer</h3>
+                    <p>
+                        Via het algemene menu kunt u kiezen voor gebruikersbeheer. U krijgt een overzicht
+                        te zien van alle werknemers. Als u op de gebruikersnaam van een gebruiker klikt komt
+                        u in het overzicht van deze gebruiker terecht.
+                    </p>
 
-            <div class="ui divider horizontal"></div>
+                    <h3 id="gebruikers-toevoegen" class="text-light-blue">Toevoegen</h3>
+                    <p>
+                        Via het algemene menu kunt u een gebruiker toevoegen. U krijgt een formulier te zien
+                        met vragen over de gebruiker.
+                    </p>
 
-            <div class="ui sizer vertical segment">
-                <h1 id="gebruikers" class="ui header teal">Gebruikers</h1>
-                <p>
-                    Binnen AsielPro zijn gebruikers binnen het systeem gelijk aan werknemers.
-                    Zo kunt u informatie over het arbeidscontract vastleggen binnen het profiel.
-                </p>
+                    <h3 id="gebruikers-overzicht" class="text-light-blue">Overzicht</h3>
+                    <p>
+                        Via gebruikersbeheer komt u door op de gebruikersnaam te klikken in het overzicht
+                        van een gebruiker terecht. Op deze pagina staan de gegevens die u bij het aanmaken
+                        van de gebruiker heeft ingevoerd.
+                    </p>
 
-                <h3 id="gebruikers-beheer" class="ui header blue">Beheer</h3>
-                <p>
-                    Via het algemene menu kunt u kiezen voor gebruikersbeheer. U krijgt een overzicht
-                    te zien van alle werknemers. Als u op de gebruikersnaam van een gebruiker klikt komt
-                    u in het overzicht van deze gebruiker terecht.
-                </p>
+                    <h3 id="gebruikers-aanpassen" class="text-light-blue">Aanpassen</h3>
+                    <p>
+                        In het gebruikersoverzicht scherm heeft u de mogelijkheid om gegevens aan te passen
+                        van deze gebruiker. De gebruikersnaam zelf kunt u niet meer aanpassen. Het wachtwoord
+                        aanpassen doet u op een andere pagina. De gebruiker kan ook zelf zijn wachtwoord aanpassen
+                        via <a href="#profiel">profiel</a>.
+                    </p>
 
-                <h3 id="gebruikers-toevoegen" class="ui header blue">Toevoegen</h3>
-                <p>
-                    Via het algemene menu kunt u een gebruiker toevoegen. U krijgt een formulier te zien
-                    met vragen over de gebruiker.
-                </p>
+                    <h3 id="gebruikers-wachtwoord" class="text-light-blue">Wachtwoord aanpassen</h3>
+                    <p>
+                        In het gebruikersoverzicht scherm heeft u de mogelijkheid om het wachtwoord aan te passen
+                        van deze gebruiker.
+                    </p>
 
-                <h3 id="gebruikers-overzicht" class="ui header blue">Overzicht</h3>
-                <p>
-                    Via gebruikersbeheer komt u door op de gebruikersnaam te klikken in het overzicht
-                    van een gebruiker terecht. Op deze pagina staan de gegevens die u bij het aanmaken
-                    van de gebruiker heeft ingevoerd.
-                </p>
+                    <h3 id="gebruikers-foto" class="text-light-blue">Foto uploaden</h3>
+                    <p>
+                        In het gebruikersoverzicht scherm heeft u de mogelijkheid om een foto te uploaden
+                        van deze gebruiker.
+                    </p>
 
-                <h3 id="gebruikers-aanpassen" class="ui header blue">Aanpassen</h3>
-                <p>
-                    In het gebruikersoverzicht scherm heeft u de mogelijkheid om gegevens aan te passen
-                    van deze gebruiker. De gebruikersnaam zelf kunt u niet meer aanpassen. Het wachtwoord
-                    aanpassen doet u op een andere pagina. De gebruiker kan ook zelf zijn wachtwoord aanpassen
-                    via <a href="#profiel">profiel</a>.
-                </p>
+                    <h3 id="gebruikers-werkschema" class="text-light-blue">Werkschema</h3>
+                    <p>
+                        In het gebruikersoverzicht scherm heeft u de mogelijkheid om een werkschema in te voeren
+                        voor deze gebruiker.
+                    </p>
 
-                <h3 id="gebruikers-wachtwoord" class="ui header blue">Wachtwoord aanpassen</h3>
-                <p>
-                    In het gebruikersoverzicht scherm heeft u de mogelijkheid om het wachtwoord aan te passen
-                    van deze gebruiker.
-                </p>
+                    <h3 id="gebruikers-rollen" class="text-light-blue">Rollen</h3>
+                    <p>
+                        Tijdens het aanmaken/aanpassen van de gebruiker kunt u rollen opgeven. Momenteel zit hier nog
+                        geen functionaliteit achter. In de toekomst zullen aan de rollen rechten worden verbonden. Zo
+                        zal
+                        een beheerder alles kunnen doen binnen het systeem en een honden verzorger alleen toegang
+                        krijgen
+                        tot de honden binnen het systeem.
+                    </p>
+                </div>
 
-                <h3 id="gebruikers-foto" class="ui header blue">Foto uploaden</h3>
-                <p>
-                    In het gebruikersoverzicht scherm heeft u de mogelijkheid om een foto te uploaden
-                    van deze gebruiker.
-                </p>
+                <br/>
+                <hr/>
+                <div>
+                    <h1 id="statistieken" class="text-aqua">Statistieken</h1>
+                    <p>
+                        Via het algemene menu kunt u de statistieken module openen. Deze module is gemaakt om u inzicht
+                        te
+                        geven in wat er de afgelopen periode in uw asiel gebeurd is.
+                    </p>
 
-                <h3 id="gebruikers-werkschema" class="ui header blue">Werkschema</h3>
-                <p>
-                    In het gebruikersoverzicht scherm heeft u de mogelijkheid om een werkschema in te voeren
-                    voor deze gebruiker.
-                </p>
+                    <h3 id="statistieken-binnengekomen" class="text-light-blue">Binnengekomen dieren</h3>
+                    <p>
+                        In dit overzicht kunt filteren op:
+                    </p>
+                    <ul>
+                        <li>Op welke manier de dieren zijn binnengekomen, via afstand, gevangen of beide</li>
+                        <li>In welke periode</li>
+                        <li>
+                            Uit welke gemeente de dieren kwamen. U kunt met CTRL en SHIFT makkelijk een selectie maken.
+                            Met CTRL + A selecteert u alle gemeenten.
+                        </li>
+                    </ul>
+                    <p>
+                        Bij zoeken via gevangen zal de gemeente gevonden worden via de gemeente die is opgegeven bij de
+                        status
+                        (Gevonden). Als u zoekt naar afgestaan zal de woonplaats van de persoon die het dier heeft
+                        afgestaan
+                        gebruikt worden.
+                    </p>
 
-                <h3 id="gebruikers-rollen" class="ui header blue">Rollen</h3>
-                <p>
-                    Tijdens het aanmaken/aanpassen van de gebruiker kunt u rollen opgeven. Momenteel zit hier nog
-                    geen functionaliteit achter. In de toekomst zullen aan de rollen rechten worden verbonden. Zo zal
-                    een beheerder alles kunnen doen binnen het systeem en een honden verzorger alleen toegang krijgen
-                    tot de honden binnen het systeem.
-                </p>
-            </div>
+                    <h3 id="statistieken-binnengekomen-kittens" class="text-light-blue">Binnengekomen kittens</h3>
+                    <p>
+                        Op deze pagina kunt u zien hoeveel kittens er in een bepaalde periode zijn binnengekomen.
+                        De data zal worden opgehaald d.m.v. de registratiedatum te vergelijken met de geboortedatum.
+                    </p>
 
-            <div class="ui divider horizontal"></div>
+                    <h3 id="statistieken-uitgeschreven" class="text-light-blue">Uitgeschreven dieren</h3>
+                    <p>
+                        Hier kunt u zien hoeveel dieren er in een bepaalde periode het asiel hebben verlaten.
+                        De data zal worden opgehaald d.m.v. de registratiedatum te vergelijken met de geboortedatum.
+                        De verdeling is gebaseerd op de actieve status van het dier.
+                    </p>
 
-            <div class="ui sizer vertical segment">
-                <h1 id="statistieken" class="ui header teal">Statistieken</h1>
-                <p>
-                    Via het algemene menu kunt u de statistieken module openen. Deze module is gemaakt om u inzicht te
-                    geven in wat er de afgelopen periode in uw asiel gebeurd is.
-                </p>
+                    <h3 id="statistieken-handelingen-klant" class="text-light-blue">Handelingen per klant</h3>
+                    <p>
+                        U krijgt eerst de mogelijkheid een klant te zoeken. Als u op de achternaam van de klant klikt
+                        krijgt u een overzicht te zien van alle handelingen van deze klant. Dat wil zeggen, wanneer de
+                        klant
+                        een dier heeft afgestaan, geadopteerd of gevonden heeft.
+                    </p>
+                </div>
 
-                <h3 id="statistieken-binnengekomen" class="ui header blue">Binnengekomen dieren</h3>
-                <p>
-                    In dit overzicht kunt filteren op:
-                </p>
-                <ul>
-                    <li>Op welke manier de dieren zijn binnengekomen, via afstand, gevangen of beide</li>
-                    <li>In welke periode</li>
-                    <li>
-                        Uit welke gemeente de dieren kwamen. U kunt met CTRL en SHIFT makkelijk een selectie maken.
-                        Met CTRL + A selecteert u alle gemeenten.
-                    </li>
-                </ul>
-                <p>
-                    Bij zoeken via gevangen zal de gemeente gevonden worden via de gemeente die is opgegeven bij de status
-                    (Gevonden). Als u zoekt naar afgestaan zal de woonplaats van de persoon die het dier heeft afgestaan
-                    gebruikt worden.
-                </p>
+                <br/>
+                <hr/>
+                <div>
+                    <h1 id="boekhouding" class="text-aqua">Boekhouding</h1>
+                    <p>
+                        De boekhoudmodule is nauw verbonden met de andere modules. Als u de status van een dier wil
+                        veranderen
+                        , en er zitten kosten aan verbonden voor de klant, moet u dit doen via de boekhoudmodule. De
+                        bouwstenen
+                        van deze module zijn acties en transacties. Telkens als u de status van een dier aanpast start u
+                        een
+                        actie.
+                        Deze actie heeft een totaalprijs welke voldaan moet worden met transacties. Transacties kunnen
+                        worden
+                        voldaan
+                        via contante betaling, overmaken via de bank en d.m.v. een factuur.
+                    </p>
+                    <p>
+                        Een actie bestaat uit :
+                    </p>
+                    <ul>
+                        <li>Alle aan deze actie gekoppelde transacties;</li>
+                        <li>Het type actie, dit komt 1 op 1 overeen met de nieuwe status van het dier;</li>
+                        <li>Totale kosten, hoeveel moet de klant betalen om deze actie te voltooien, te voldoen via
+                            transacties;
+                        </li>
+                        <li>Het dier voor wie deze actie is aangemaakt;</li>
+                        <li>De klant voor wie we deze actie starten;</li>
+                        <li>
+                            Is de actie afgerond, indien een dier nog een openstaande actie heeft kan er geen nieuwe
+                            actie
+                            gestart
+                            worden.
+                        </li>
+                    </ul>
+                    <p>
+                        Een transactie bestaat uit :
+                    </p>
+                    <ul>
+                        <li>Een uniek identificatienummer;</li>
+                        <li>De klant die de transactie uitvoerd;</li>
+                        <li>Het betaalde bedrag;</li>
+                        <li>De manier van betalen, contant, bank of factuur;</li>
+                        <li>Bij welke actie deze transactie hoort;</li>
+                        <li>Datum waarop deze transactie is aangemaakt;</li>
+                        <li>Vervaldatum van de transactie (indien de klant op een later moment mag betalen);</li>
+                        <li>Of het een aanbetaling is, of het volledige bedrag;</li>
+                        <li>Of de transactie voldaan is.</li>
+                    </ul>
+                    <p>
+                        Doordat we al deze informatie bijhouden kunnen we daar overzichten van genereren. Ook kunnen we
+                        makkelijk
+                        facturen genereren die u naar de klant kan versturen. Voor meer informatie daarover zie
+                        onderstaande
+                        hoofdstukken.
+                    </p>
 
-                <h3 id="statistieken-binnengekomen-kittens" class="ui header blue">Binnengekomen kittens</h3>
-                <p>
-                    Op deze pagina kunt u zien hoeveel kittens er in een bepaalde periode zijn binnengekomen.
-                    De data zal worden opgehaald d.m.v. de registratiedatum te vergelijken met de geboortedatum.
-                </p>
-
-                <h3 id="statistieken-uitgeschreven" class="ui header blue">Uitgeschreven dieren</h3>
-                <p>
-                    Hier kunt u zien hoeveel dieren er in een bepaalde periode het asiel hebben verlaten.
-                    De data zal worden opgehaald d.m.v. de registratiedatum te vergelijken met de geboortedatum.
-                    De verdeling is gebaseerd op de actieve status van het dier.
-                </p>
-
-                <h3 id="statistieken-handelingen-klant" class="ui header blue">Handelingen per klant</h3>
-                <p>
-                    U krijgt eerst de mogelijkheid een klant te zoeken. Als u op de achternaam van de klant klikt
-                    krijgt u een overzicht te zien van alle handelingen van deze klant. Dat wil zeggen, wanneer de klant
-                    een dier heeft afgestaan, geadopteerd of gevonden heeft.
-                </p>
-            </div>
-
-            <div class="ui divider horizontal"></div>
-
-            <div class="ui sizer vertical segment">
-                <h1 id="boekhouding" class="ui header teal">Boekhouding</h1>
-                <p>
-                    De boekhoudmodule is nauw verbonden met de andere modules. Als u de status van een dier wil veranderen
-                    , en er zitten kosten aan verbonden voor de klant, moet u dit doen via de boekhoudmodule. De bouwstenen
-                    van deze module zijn acties en transacties. Telkens als u de status van een dier aanpast start u een actie.
-                    Deze actie heeft een totaalprijs welke voldaan moet worden met transacties. Transacties kunnen worden voldaan
-                    via contante betaling, overmaken via de bank en d.m.v. een factuur.
-                </p>
-                <p>
-                    Een actie bestaat uit :
-                </p>
-                <ul>
-                    <li>Alle aan deze actie gekoppelde transacties;</li>
-                    <li>Het type actie, dit komt 1 op 1 overeen met de nieuwe status van het dier;</li>
-                    <li>Totale kosten, hoeveel moet de klant betalen om deze actie te voltooien, te voldoen via transacties;</li>
-                    <li>Het dier voor wie deze actie is aangemaakt;</li>
-                    <li>De klant voor wie we deze actie starten;</li>
-                    <li>
-                        Is de actie afgerond, indien een dier nog een openstaande actie heeft kan er geen nieuwe actie gestart
-                        worden.
-                    </li>
-                </ul>
-                <p>
-                    Een transactie bestaat uit :
-                </p>
-                <ul>
-                    <li>Een uniek identificatienummer;</li>
-                    <li>De klant die de transactie uitvoerd;</li>
-                    <li>Het betaalde bedrag;</li>
-                    <li>De manier van betalen, contant, bank of factuur;</li>
-                    <li>Bij welke actie deze transactie hoort;</li>
-                    <li>Datum waarop deze transactie is aangemaakt;</li>
-                    <li>Vervaldatum van de transactie (indien de klant op een later moment mag betalen);</li>
-                    <li>Of het een aanbetaling is, of het volledige bedrag;</li>
-                    <li>Of de transactie voldaan is.</li>
-                </ul>
-                <p>
-                    Doordat we al deze informatie bijhouden kunnen we daar overzichten van genereren. Ook kunnen we makkelijk
-                    facturen genereren die u naar de klant kan versturen. Voor meer informatie daarover zie onderstaande hoofdstukken.
-                </p>
-
-                <h3 id="boekhouding-status-aanpassen" class="ui header blue">Status aanpassen</h3>
-                <p>
-                    Dit is een belangrijke functie binnen deze module. Hiermee start u een actie om de status van een dier aan te passen.
-                    Selecteer eerst het dier waar het over gaat. In de zoekresultaten ziet u de huidige status van het dier. Ook ziet u
-                    of er al een actie open staat voor het dier. Indien dit het geval is kunt u niet verder en zult u eerst die actie moeten
-                    afmaken. Let ook op de huidige status, u kunt niet zomaar naar elke status wijzigen, zie hiervoor de status <a href="#status">matrix</a>.
-                    Selecteer het dier door op de naam te klikken. Selecteer nu de klant waarvoor u de actie wil starten. Als de klant niet bekend
-                    is kunt u op de bijbehorende optie klikken. Sommige acties, zoals afstand doen of adoptie vereisen een klant. Klik op de naam
-                    van de klant om verder te gaan. Nu kunt u kiezen welke status het dier moet gaan krijgen. Als de combinatie van de huidige status
-                    en nieuwe status niet voorkomt in de status matrix zal u een foutmelding krijgen. Als er een open actie is voor dit dier kunt u
-                    ook niet verder, maak eerst de open actie af. De prijs die per actie berekend moet worden kunt u aanpassen in de
-                    boekhoud <a href="#instellingen-backend">instellingen</a> Daar haalt het systeem ook de gegevens op die op een factuur moeten komen.
-                    <span class="text-danger">Maak binnen deze module, om problemen te voorkomen, altijd gebruik van de beschikbare knoppen en niet
+                    <h3 id="boekhouding-status-aanpassen" class="text-light-blue">Status aanpassen</h3>
+                    <p>
+                        Dit is een belangrijke functie binnen deze module. Hiermee start u een actie om de status van
+                        een
+                        dier aan
+                        te passen.
+                        Selecteer eerst het dier waar het over gaat. In de zoekresultaten ziet u de huidige status van
+                        het
+                        dier. Ook
+                        ziet u
+                        of er al een actie open staat voor het dier. Indien dit het geval is kunt u niet verder en zult
+                        u
+                        eerst die
+                        actie moeten
+                        afmaken. Let ook op de huidige status, u kunt niet zomaar naar elke status wijzigen, zie
+                        hiervoor de
+                        status
+                        <a href="#status">matrix</a>.
+                        Selecteer het dier door op de naam te klikken. Selecteer nu de klant waarvoor u de actie wil
+                        starten. Als de
+                        klant niet bekend
+                        is kunt u op de bijbehorende optie klikken. Sommige acties, zoals afstand doen of adoptie
+                        vereisen
+                        een
+                        klant. Klik op de naam
+                        van de klant om verder te gaan. Nu kunt u kiezen welke status het dier moet gaan krijgen. Als de
+                        combinatie
+                        van de huidige status
+                        en nieuwe status niet voorkomt in de status matrix zal u een foutmelding krijgen. Als er een
+                        open
+                        actie is
+                        voor dit dier kunt u
+                        ook niet verder, maak eerst de open actie af. De prijs die per actie berekend moet worden kunt u
+                        aanpassen
+                        in de
+                        boekhoud <a href="#instellingen-backend">instellingen</a> Daar haalt het systeem ook de gegevens
+                        op
+                        die op
+                        een factuur moeten komen.
+                        <span class="text-danger">Maak binnen deze module, om problemen te voorkomen, altijd gebruik van de beschikbare knoppen en niet
                         de terug knop in uw browser.</span> Dit zijn de aandachtspunten per actie die u kunt starten:
-                </p>
+                    </p>
 
-                <p><b>Adoptie</b></p>
-                <p>
-                    De prijs die berekent wordt komt uit de boekhoud instellingen.
-                </p>
+                    <p><b>Adoptie</b></p>
+                    <p>
+                        De prijs die berekent wordt komt uit de boekhoud instellingen.
+                    </p>
 
-                <p><b>Afstaan</b></p>
-                <p>
-                    Elke optie die aangezet wordt heeft invloed op de totaalprijs. Voor sommige opties worden automatisch taken aangemaakt in de agenda.
-                    Deze komen er pas in te staan als de actie compleet is.
-                </p>
+                    <p><b>Afstaan</b></p>
+                    <p>
+                        Elke optie die aangezet wordt heeft invloed op de totaalprijs. Voor sommige opties worden
+                        automatisch taken
+                        aangemaakt in de agenda.
+                        Deze komen er pas in te staan als de actie compleet is.
+                    </p>
 
-                <p><b>In beslag nemen</b></p>
-                <p>
-                    De geselecteerde gemeente komt terug in de statistieken module. Omdat er variabele kosten zijn kunt u voor deze actie zelf
-                    de totale kosten invullen.
-                </p>
+                    <p><b>In beslag nemen</b></p>
+                    <p>
+                        De geselecteerde gemeente komt terug in de statistieken module. Omdat er variabele kosten zijn
+                        kunt
+                        u voor
+                        deze actie zelf
+                        de totale kosten invullen.
+                    </p>
 
-                <p><b>Gevonden</b></p>
-                <p>
-                    Hoe het dier is binnengekomen en de gevonden gemeente hebben invloed op de statistieken module. Voor sommige opties worden
-                    automatisch taken aangemaakt in de agenda. Deze komen er pas in te staan als de actie compleet is. De prijzen voor de opties
-                    komen uit de boekhoud module instellingen. Deze actie heeft als enige een extra stap, extra kosten. Deze moet genomen worden.
-                    Deze stap kan maar 1 keer genomen worden. Indien er geen extra kosten zijn zet u alle opties op 0. Zodra de stap genomen is worden
-                    de kosten toegevoegd aan het totaalbedrag. U kunt nu transacties aanmaken.
-                </p>
+                    <p><b>Gevonden</b></p>
+                    <p>
+                        Hoe het dier is binnengekomen en de gevonden gemeente hebben invloed op de statistieken module.
+                        Voor
+                        sommige
+                        opties worden
+                        automatisch taken aangemaakt in de agenda. Deze komen er pas in te staan als de actie compleet
+                        is.
+                        De
+                        prijzen voor de opties
+                        komen uit de boekhoud module instellingen. Deze actie heeft als enige een extra stap, extra
+                        kosten.
+                        Deze
+                        moet genomen worden.
+                        Deze stap kan maar 1 keer genomen worden. Indien er geen extra kosten zijn zet u alle opties op
+                        0.
+                        Zodra de
+                        stap genomen is worden
+                        de kosten toegevoegd aan het totaalbedrag. U kunt nu transacties aanmaken.
+                    </p>
 
-                <p><b>Terug naar eigenaar</b></p>
-                <p>
-                    U kunt zelf de totale kosten opgeven.
-                </p>
+                    <p><b>Terug naar eigenaar</b></p>
+                    <p>
+                        U kunt zelf de totale kosten opgeven.
+                    </p>
 
-                <p>
-                    Zodra de actie gestart is moet u transacties invoeren totdat het totaalbedrag voldaan is. Indien er om wat voor reden geen
-                    kosten gerekend moeten worden kiest u voor de optie geen kosten berekenen. Dit zorgt ervoor dat het totaalbedrag van de actie
-                    0 wordt. Een transactie invoeren kunt u o.a. doen vanuit het actie overzicht (waar u terecht komt als de actie is aangemaakt).
-                    U moet eerst een klant kiezen die de transactie uitvoerd. Indien het de klant is die aan deze actie gekoppeld kunt u gebruikmaken
-                    van de bijbehorende link. U kunt nu opgeven voor welke datum er betaald moet worden (indien van toepassing). Daarna geeft u op hoe
-                    er betaald wordt en uiteindelijk het te betalen bedrag. Als niet het volledige bedrag van de actie ingevoerd wordt zal deze transactie
-                    als een aanbetaling worden gezien. Na elke transactie komt u terug in het actie overzicht. Zodra alle kosten zijn voldaan kunt u de
-                    actie voltooien. Pas op dat moment zal de status van het dier veranderen.
-                </p>
+                    <p>
+                        Zodra de actie gestart is moet u transacties invoeren totdat het totaalbedrag voldaan is. Indien
+                        er
+                        om wat
+                        voor reden geen
+                        kosten gerekend moeten worden kiest u voor de optie geen kosten berekenen. Dit zorgt ervoor dat
+                        het
+                        totaalbedrag van de actie
+                        0 wordt. Een transactie invoeren kunt u o.a. doen vanuit het actie overzicht (waar u terecht
+                        komt
+                        als de
+                        actie is aangemaakt).
+                        U moet eerst een klant kiezen die de transactie uitvoerd. Indien het de klant is die aan deze
+                        actie
+                        gekoppeld kunt u gebruikmaken
+                        van de bijbehorende link. U kunt nu opgeven voor welke datum er betaald moet worden (indien van
+                        toepassing).
+                        Daarna geeft u op hoe
+                        er betaald wordt en uiteindelijk het te betalen bedrag. Als niet het volledige bedrag van de
+                        actie
+                        ingevoerd
+                        wordt zal deze transactie
+                        als een aanbetaling worden gezien. Na elke transactie komt u terug in het actie overzicht. Zodra
+                        alle kosten
+                        zijn voldaan kunt u de
+                        actie voltooien. Pas op dat moment zal de status van het dier veranderen.
+                    </p>
 
-                <h3 id="boekhouding-actieoverzicht" class="ui header blue">Actieoverzicht</h3>
-                <p>
-                    Deze pagina geeft een overzicht van alles acties die in het systeem staan. Met het blauwe icoon
-                    <button class="ui tiny button primary"><i class="eye icon"></i></button> gaat u naar het actie
-                    overzicht van de betreffende actie.
-                </p>
+                    <h3 id="boekhouding-actieoverzicht" class="text-light-blue">Actieoverzicht</h3>
+                    <p>
+                        Deze pagina geeft een overzicht van alles acties die in het systeem staan. Met het blauwe icoon
+                        <button class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></button>
+                        gaat u naar het actie
+                        overzicht van de betreffende actie.
+                    </p>
 
-                <h3 id="boekhouding-kas-overzicht" class="ui header blue">Kas overzicht</h3>
-                <p>
-                    Deze pagina geeft een overzicht van alle transacties die via contant betaling voldaan zijn. Het blauwe icoon
-                    stuurt u naar een overzicht pagina van de transactie. Via het printicoon
-                    <button class="ui tiny button"><i class="print icon"></i></button> kunt u de
-                    <a href="#boekhouding-aparte-factuur">factuur</a> afdrukken.
-                </p>
+                    <h3 id="boekhouding-kas-overzicht" class="text-light-blue">Kas overzicht</h3>
+                    <p>
+                        Deze pagina geeft een overzicht van alle transacties die via contant betaling voldaan zijn. Het
+                        blauwe icoon
+                        stuurt u naar een overzicht pagina van de transactie. Via het printicoon
+                        <button class="btn btn-sm"><i class="fa fa-print"></i></button>
+                        kunt u de
+                        <a href="#boekhouding-aparte-factuur">factuur</a> afdrukken.
+                    </p>
 
-                <h3 id="boekhouding-bank-overzicht" class="ui header blue">Bank overzicht</h3>
-                <p>
-                    Deze pagina geeft een overzicht van alle transacties die via bank betaling voldaan zijn. Het blauwe icoon
-                    stuurt u naar een overzicht pagina van de transactie. Via het printicoon
-                    <button class="ui tiny button"><i class="print icon"></i></button> kunt u de
-                    <a href="#boekhouding-aparte-factuur">factuur</a> afdrukken.
-                </p>
+                    <h3 id="boekhouding-bank-overzicht" class="text-light-blue">Bank overzicht</h3>
+                    <p>
+                        Deze pagina geeft een overzicht van alle transacties die via bank betaling voldaan zijn. Het
+                        blauwe
+                        icoon
+                        stuurt u naar een overzicht pagina van de transactie. Via het printicoon
+                        <button class="btn btn-sm"><i class="fa fa-print"></i></button>
+                        kunt u de
+                        <a href="#boekhouding-aparte-factuur">factuur</a> afdrukken.
+                    </p>
 
-                <h3 id="boekhouding-factuur-overzicht" class="ui header blue">Factuur overzicht</h3>
-                <p>
-                    Deze pagina geeft een overzicht van alle transacties met als betaalwijze factuur. Hier kunt facturen bekijken
-                    (blauwe icoon), een <a href="#boekhouding-aparte-factuur">factuur</a> printen (print icoon) en een factuur
-                    op voldaan zetten. Het overzicht laat ook zien welke facturen vervallen zijn (al betaald hadden moeten zijn).
-                </p>
+                    <h3 id="boekhouding-factuur-overzicht" class="text-light-blue">Factuur overzicht</h3>
+                    <p>
+                        Deze pagina geeft een overzicht van alle transacties met als betaalwijze factuur. Hier kunt
+                        facturen
+                        bekijken
+                        (blauwe icoon), een <a href="#boekhouding-aparte-factuur">factuur</a> printen (print icoon) en
+                        een
+                        factuur
+                        op voldaan zetten. Het overzicht laat ook zien welke facturen vervallen zijn (al betaald hadden
+                        moeten
+                        zijn).
+                    </p>
 
-                <h3 id="boekhouding-verzamelfactuur" class="ui header blue">Verzamelfactuur</h3>
-                <p>
-                    Als u een klant (bv een gemeente) een verzamelfactuur wil sturen kunt u deze optie gebruiken.
-                    U selecteert eerst de betreffende klant en vervolgens de periode. Het systeem haalt nu alle
-                    openstaande(!) facturen op en verzamelt deze.
-                </p>
+                    <h3 id="boekhouding-verzamelfactuur" class="text-light-blue">Verzamelfactuur</h3>
+                    <p>
+                        Als u een klant (bv een gemeente) een verzamelfactuur wil sturen kunt u deze optie gebruiken.
+                        U selecteert eerst de betreffende klant en vervolgens de periode. Het systeem haalt nu alle
+                        openstaande(!) facturen op en verzamelt deze.
+                    </p>
 
-                <h3 id="boekhouding-aparte-factuur" class="ui header blue">Aparte factuur</h3>
-                <p>
-                    Het afdrukken van een aparte transactie staat gelijk aan het afdrukken van een aparte factuur.
-                    Indien de transactie een factuur betreft welke nog niet voldaan is zal onderaan de pagina een verzoek
-                    staan om te betalen binnen 14 dagen.
-                </p>
-            </div>
+                    <h3 id="boekhouding-aparte-factuur" class="text-light-blue">Aparte factuur</h3>
+                    <p>
+                        Het afdrukken van een aparte transactie staat gelijk aan het afdrukken van een aparte factuur.
+                        Indien de transactie een factuur betreft welke nog niet voldaan is zal onderaan de pagina een
+                        verzoek
+                        staan om te betalen binnen 14 dagen.
+                    </p>
+                </div>
 
-            <div class="ui divider horizontal"></div>
+                <br/>
+                <hr/>
+                <div>
+                    <h1 id="agenda" class="text-aqua">Agenda</h1>
+                    <p>
+                        Om alle taken die binnen het asiel moeten gebeuren overzichtelijk te houden is er een centrale
+                        agenda.
+                        Deze is te openen via de agenda knop <i class="fa fa-calendar"></i> in het bovenste menu. Er
+                        bestaan
+                        2 type
+                        agenda items, een taak en een agenda punt.
+                    </p>
 
-            <div class="ui sizer vertical segment">
-                <h1 id="agenda" class="ui header teal">Agenda</h1>
-                <p>
-                    Om alle taken die binnen het asiel moeten gebeuren overzichtelijk te houden is er een centrale agenda.
-                    Deze is te openen via de agenda knop <i class="calendar icon"></i> in het bovenste menu. Er bestaan 2 type
-                    agenda items, een taak en een agenda punt.
-                </p>
+                    <h3 id="agenda-taken" class="text-light-blue">Taken</h3>
+                    <p>
+                        Taken horen bij een specifiek dier. Er zijn taken die worden aangemaakt door het systeem en er
+                        zijn
+                        taken
+                        die een gebruiker aanmaakt. Het zelf aanmaken van een taak gaat via het dieren overzicht
+                        <a href="#dieren">menu</a>. Een taak heeft een datum wanneer hij klaar moet zijn. Als dit niet
+                        voor
+                        deze
+                        datum
+                        gebeurd zal dit duidelijk in het systeem te zien zijn. Via het bewerken van de taak kunt u hem
+                        op
+                        volbracht
+                        zetten.
+                        Als een dier van status wisselt heeft u de mogelijkheid om een aantal opties aan te vinken. In
+                        dit
+                        overzicht staan de verschillende taken en het tijdstip wanneer ze (automatisch) in de agenda
+                        komen.
+                    </p>
+                    <br/>
+                    <table class="table table-striped table-condensed">
+                        <thead>
+                        <tr>
+                            <th>Status</th>
+                            <th>Omschrijving</th>
+                            <th>Tijdsverschil</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>Afstand</td>
+                            <td>Chippen</td>
+                            <td>Morgen</td>
+                        </tr>
+                        <tr>
+                            <td>Afstand</td>
+                            <td>Vaccinatie</td>
+                            <td>Morgen</td>
+                        </tr>
+                        <tr>
+                            <td>Afstand</td>
+                            <td>Sterilisatie</td>
+                            <td>Morgen</td>
+                        </tr>
+                        <tr>
+                            <td>Afstand</td>
+                            <td>Paspoort</td>
+                            <td>Morgen</td>
+                        </tr>
+                        <tr>
+                            <td>Gevonden</td>
+                            <td>Chippen</td>
+                            <td>Morgen</td>
+                        </tr>
+                        <tr>
+                            <td>Gevonden</td>
+                            <td>Checkup</td>
+                            <td>Over 3 dagen</td>
+                        </tr>
+                        <tr>
+                            <td>Gevonden</td>
+                            <td>Beschikbaar</td>
+                            <td>Over 15 dagen</td>
+                        </tr>
+                        <tr>
+                            <td>Gevonden</td>
+                            <td>Ontwormen</td>
+                            <td>Morgen</td>
+                        </tr>
+                        <tr>
+                            <td>Gevonden</td>
+                            <td>Vaccinatie</td>
+                            <td>Morgen</td>
+                        </tr>
+                        </tbody>
+                    </table>
 
-                <h3 id="agenda-taken" class="ui header blue">Taken</h3>
-                <p>
-                    Taken horen bij een specifiek dier. Er zijn taken die worden aangemaakt door het systeem en er zijn taken
-                    die een gebruiker aanmaakt. Het zelf aanmaken van een taak gaat via het dieren overzicht
-                    <a href="#dieren">menu</a>. Een taak heeft een datum wanneer hij klaar moet zijn. Als dit niet voor deze datum
-                    gebeurd zal dit duidelijk in het systeem te zien zijn. Via het bewerken van de taak kunt u hem op volbracht zetten.
-                    Als een dier van status wisselt heeft u de mogelijkheid om een aantal opties aan te vinken. In dit
-                    overzicht staan de verschillende taken en het tijdstip wanneer ze (automatisch) in de agenda komen.
-                </p>
-                <div class="ui divider horizontal"></div>
-                <table class="ui very basic table">
-                    <thead>
-                    <tr>
-                        <th>Status</th>
-                        <th>Omschrijving</th>
-                        <th>Tijdsverschil</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>Afstand</td>
-                        <td>Chippen</td>
-                        <td>Morgen</td>
-                    </tr>
-                    <tr>
-                        <td>Afstand</td>
-                        <td>Vaccinatie</td>
-                        <td>Morgen</td>
-                    </tr>
-                    <tr>
-                        <td>Afstand</td>
-                        <td>Sterilisatie</td>
-                        <td>Morgen</td>
-                    </tr>
-                    <tr>
-                        <td>Afstand</td>
-                        <td>Paspoort</td>
-                        <td>Morgen</td>
-                    </tr>
-                    <tr>
-                        <td>Gevonden</td>
-                        <td>Chippen</td>
-                        <td>Morgen</td>
-                    </tr>
-                    <tr>
-                        <td>Gevonden</td>
-                        <td>Checkup</td>
-                        <td>Over 3 dagen</td>
-                    </tr>
-                    <tr>
-                        <td>Gevonden</td>
-                        <td>Beschikbaar</td>
-                        <td>Over 15 dagen</td>
-                    </tr>
-                    <tr>
-                        <td>Gevonden</td>
-                        <td>Ontwormen</td>
-                        <td>Morgen</td>
-                    </tr>
-                    <tr>
-                        <td>Gevonden</td>
-                        <td>Vaccinatie</td>
-                        <td>Morgen</td>
-                    </tr>
-                    </tbody>
-                </table>
-
-                <h3 id="agenda-punten" class="ui header blue">Agenda punten</h3>
-                <p>
-                    Naast de taken die specifiek voor 1 dier zijn kunt u ook losse agenda punten (afspraken) aanmaken.
-                    De optie hiervoor staat in het bovenste menu onder het agenda icoon <i class="calendar icon"></i>.
-                </p>
+                    <h3 id="agenda-punten" class="text-light-blue">Agenda punten</h3>
+                    <p>
+                        Naast de taken die specifiek voor 1 dier zijn kunt u ook losse agenda punten (afspraken)
+                        aanmaken.
+                        De optie hiervoor staat in het bovenste menu onder het agenda icoon <i
+                                class="fa fa-calendar"></i>.
+                    </p>
+                </div>
             </div>
         </div>
     </div>

@@ -1,68 +1,67 @@
 {% extends '@Backend/Base/Base.html.twig' %}
 {% block pagetitle %}Gebruikers{% endblock %}
 {% block body %}
-    <div class="ui sixteen column grid container">
-        <div class="sixteen wide column">
-            <table class="ui table striped">
-                <thead>
-                <tr>
-                    <th></th>
-                    <th>Gebruikersnaam</th>
-                    <th>Naam</th>
-                    <th>Email</th>
-                    <th>Telefoon</th>
-                    <th>Mobiel</th>
-                    <th>Actief</th>
-                    <th>Rollen</th>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for user in users %}
-                    <tr>
-                        <td>
-                            {% if user.picture %}
-                                <img src="{{ user.picture.publicurl }}" height="30" alt="user_picture">
-                            {% else %}
-                                <img src="{{ asset('img/no_picture.jpg') }}" height="30" alt="no_user_picture">
-                            {% endif %}
-                        </td>
-                        <td><a href="{{ path('backend_employee_show', {'id' : user.id}) }}">{{ user.username }}</a></td>
-                        <td>{{ user.firstname }} {{ user.lastname }}</td>
-                        <td>{{ user.email }}</td>
-                        <td>{{ user.phone }}</td>
-                        <td>{{ user.mobilePhone }}</td>
-                        <td>{{ outputBool(user.isactive) }}</td>
-                        <td>
-                            <ul>
-                                {% for role in user.roles %}
-                                    <li>{{ role|trans }}</li>
-                                {% endfor %}
-                            </ul>
-                        </td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-                <tfoot>
-                <tr>
-                    <th class="collapsing">{{ users|length }} Gebruiker(s)</th>
-                    <th class="collapsing">
-                        <a href="{{ path('backend_employee_create') }}">
-                            <div class="ui tiny positive labeled icon button">
-                                <i class="add square icon"></i> Gebruiker toevoegen
-                            </div>
-                        </a>
-                    </th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                </tr>
-                </tfoot>
-            </table>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="box box-primary">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th></th>
+                            <th>Gebruikersnaam</th>
+                            <th>Naam</th>
+                            <th>Email</th>
+                            <th>Telefoon</th>
+                            <th>Mobiel</th>
+                            <th>Actief</th>
+                            <th>Rollen</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for user in users %}
+                            <tr>
+                                <td>
+                                    {% if user.picture %}
+                                        <img src="{{ user.picture.publicurl }}" height="30" alt="user_picture">
+                                    {% else %}
+                                        <img src="{{ asset('img/no_picture.jpg') }}" height="30" alt="no_user_picture">
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <a href="{{ path('backend_employee_show', {'id' : user.id}) }}">{{ user.username }}</a>
+                                </td>
+                                <td>{{ user.firstname }} {{ user.lastname }}</td>
+                                <td>{{ user.email }}</td>
+                                <td>{{ user.phone }}</td>
+                                <td>{{ user.mobilePhone }}</td>
+                                <td>{{ outputBool(user.isactive) }}</td>
+                                <td>
+                                    <ul>
+                                        {% for role in user.roles %}
+                                            <li>{{ role|trans }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <th></th>
+                            <th>{{ users|length }} Gebruiker(s)</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}

@@ -1,80 +1,115 @@
 {% extends '@Backend/Base/Base.html.twig' %}
 {% block pagetitle %}Boekhouding instellingen{% endblock %}
 {% block body %}
-    <div class="ui sixteen column grid container">
-        {{ form_start(form) }}
-        <div class="ui three column very relaxed grid">
-            <div class="five wide column">
-                <h3 class="ui header">Algemeen</h3>
-                {{ form_row(form.iban) }}
-                {{ form_row(form.bic) }}
-                {{ form_row(form.invoiceEmailAddress) }}
+    <div class="row">
+        <div class="col-sm-12">
+            {{ form_start(form) }}
+            <div class="col-sm-4">
+                <div class="box box-primary box-padding-small">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Algemeen</h3>
+                    </div>
+                    {{ form_row(form.iban) }}
+                    {{ form_row(form.bic) }}
+                    {{ form_row(form.invoiceEmailAddress) }}
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="box box-primary box-padding-small">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Adoptie</h3>
+                    </div>
+                    {{ form_row(form.priceAdoptedKitten) }}
+                    {{ form_row(form.priceAdoptedCat) }}
+                    {{ form_row(form.priceAdoptedPuppy) }}
+                    {{ form_row(form.priceAdoptedDog) }}
+                    {{ form_row(form.priceAdoptedDog) }}
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="box box-primary box-padding-small">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Gevonden toeslagen</h3>
+                    </div>
+                    {{ form_row(form.priceFoundFee) }}
+                    {{ form_row(form.priceFoundNotChipped) }}
+                    {{ form_row(form.priceFoundNotVaccinated) }}
+                    {{ form_row(form.priceFoundDeWorm) }}
+                    {{ form_row(form.priceFoundTenancyPerDay) }}
+                </div>
             </div>
         </div>
-        <div class="ui three column very relaxed grid">
-            <div class="five wide column">
-                <h3 class="ui header">Adoptie</h3>
-                {{ form_row(form.priceAdoptedKitten) }}
-                {{ form_row(form.priceAdoptedCat) }}
-                {{ form_row(form.priceAdoptedPuppy) }}
-                {{ form_row(form.priceAdoptedDog) }}
-                {{ form_row(form.priceAdoptedDog) }}
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="col-sm-4">
+                <div class="box box-primary box-padding-small">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Afstand honden niet aangesloten gemeente</h3>
+                    </div>
+                    {{ form_row(form.priceAbandonedDogUnaffiliatedYoungerThanOne) }}
+                    {{ form_row(form.priceAbandonedDogUnaffiliatedOlderThanOne) }}
+                    {{ form_row(form.priceAbandonedDogUnaffiliatedPuppy) }}
+                    {{ form_row(form.priceAbandonedDogUnaffiliatedAdditionNotChipped) }}
+                    {{ form_row(form.priceAbandonedDogUnaffiliatedAdditionNotVaccinated) }}
+                    {{ form_row(form.priceAbandonedDogUnaffiliatedAdditionFurTreatmentSmallDog) }}
+                    {{ form_row(form.priceAbandonedDogUnaffiliatedAdditionFurTreatmentLargeDog) }}
+                    {{ form_row(form.priceAbandonedDogUnaffiliatedAdditionIll) }}
+                </div>
             </div>
-            <div class="five wide column">
-                <h3 class="ui header">Afstand honden niet aangesloten gemeente</h3>
-                {{ form_row(form.priceAbandonedDogUnaffiliatedYoungerThanOne) }}
-                {{ form_row(form.priceAbandonedDogUnaffiliatedOlderThanOne) }}
-                {{ form_row(form.priceAbandonedDogUnaffiliatedPuppy) }}
-                {{ form_row(form.priceAbandonedDogUnaffiliatedAdditionNotChipped) }}
-                {{ form_row(form.priceAbandonedDogUnaffiliatedAdditionNotVaccinated) }}
-                {{ form_row(form.priceAbandonedDogUnaffiliatedAdditionFurTreatmentSmallDog) }}
-                {{ form_row(form.priceAbandonedDogUnaffiliatedAdditionFurTreatmentLargeDog) }}
-                {{ form_row(form.priceAbandonedDogUnaffiliatedAdditionIll) }}
-            </div>
-            <div class="five wide column">
-                <h3 class="ui header">Afstand honden aangesloten gemeente</h3>
-                {{ form_row(form.priceAbandonedDogAffiliatedYoungerThanOne) }}
-                {{ form_row(form.priceAbandonedDogAffiliatedOlderThanOne) }}
-                {{ form_row(form.priceAbandonedDogAffiliatedPuppy) }}
-                {{ form_row(form.priceAbandonedDogAffiliatedAdditionNotChipped) }}
-                {{ form_row(form.priceAbandonedDogAffiliatedAdditionNotVaccinated) }}
-                {{ form_row(form.priceAbandonedDogAffiliatedAdditionFurTreatmentSmallDog) }}
-                {{ form_row(form.priceAbandonedDogAffiliatedAdditionFurTreatmentLargeDog) }}
-                {{ form_row(form.priceAbandonedDogAffiliatedAdditionIll) }}
-            </div>
-        </div>
-        <div class="ui three column very relaxed grid">
-            <div class="five wide column">
-                <h3 class="ui header">Afstand katten niet aangesloten gemeente</h3>
-                {{ form_row(form.priceAbandonedCatUnaffiliatedYoungerThanThreeMonths) }}
-                {{ form_row(form.priceAbandonedCatUnaffiliatedBetweenThreeMonthsAndTenYears) }}
-                {{ form_row(form.priceAbandonedCatUnaffiliatedOlderThanTenYears) }}
-                {{ form_row(form.priceAbandonedCatUnaffiliatedKitten) }}
-                {{ form_row(form.priceAbandonedCatUnaffiliatedAdditionNotChipped) }}
-                {{ form_row(form.priceAbandonedCatUnaffiliatedAdditionNotVaccinated) }}
-                {{ form_row(form.priceAbandonedCatUnaffiliatedAdditionNeedsSterilization) }}
-            </div>
-            <div class="five wide column">
-                <h3 class="ui header">Afstand katten aangesloten gemeente</h3>
-                {{ form_row(form.priceAbandonedCatAffiliatedYoungerThanThreeMonths) }}
-                {{ form_row(form.priceAbandonedCatAffiliatedBetweenThreeMonthsAndTenYears) }}
-                {{ form_row(form.priceAbandonedCatAffiliatedOlderThanTenYears) }}
-                {{ form_row(form.priceAbandonedCatAffiliatedKitten) }}
-                {{ form_row(form.priceAbandonedCatAffiliatedAdditionNotChipped) }}
-                {{ form_row(form.priceAbandonedCatAffiliatedAdditionNotVaccinated) }}
-                {{ form_row(form.priceAbandonedCatAffiliatedAdditionNeedsSterilization) }}
-            </div>
-            <div class="five wide column">
-                <h3 class="ui header">Gevonden toeslagen</h3>
-                {{ form_row(form.priceFoundFee) }}
-                {{ form_row(form.priceFoundNotChipped) }}
-                {{ form_row(form.priceFoundNotVaccinated) }}
-                {{ form_row(form.priceFoundDeWorm) }}
-                {{ form_row(form.priceFoundTenancyPerDay) }}
+            <div class="col-sm-4">
+                <div class="box box-primary box-padding-small">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Afstand honden aangesloten gemeente</h3>
+                    </div>
+                    {{ form_row(form.priceAbandonedDogAffiliatedYoungerThanOne) }}
+                    {{ form_row(form.priceAbandonedDogAffiliatedOlderThanOne) }}
+                    {{ form_row(form.priceAbandonedDogAffiliatedPuppy) }}
+                    {{ form_row(form.priceAbandonedDogAffiliatedAdditionNotChipped) }}
+                    {{ form_row(form.priceAbandonedDogAffiliatedAdditionNotVaccinated) }}
+                    {{ form_row(form.priceAbandonedDogAffiliatedAdditionFurTreatmentSmallDog) }}
+                    {{ form_row(form.priceAbandonedDogAffiliatedAdditionFurTreatmentLargeDog) }}
+                    {{ form_row(form.priceAbandonedDogAffiliatedAdditionIll) }}
+                </div>
             </div>
         </div>
-        <div class="ui divider horizontal"></div>
-        {{ outputFormButton('Wijzigen') }}
-        {{ form_end(form) }}
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="col-sm-4">
+                <div class="box box-primary box-padding-small">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Afstand katten niet aangesloten gemeente</h3>
+                    </div>
+                    {{ form_row(form.priceAbandonedCatUnaffiliatedYoungerThanThreeMonths) }}
+                    {{ form_row(form.priceAbandonedCatUnaffiliatedBetweenThreeMonthsAndTenYears) }}
+                    {{ form_row(form.priceAbandonedCatUnaffiliatedOlderThanTenYears) }}
+                    {{ form_row(form.priceAbandonedCatUnaffiliatedKitten) }}
+                    {{ form_row(form.priceAbandonedCatUnaffiliatedAdditionNotChipped) }}
+                    {{ form_row(form.priceAbandonedCatUnaffiliatedAdditionNotVaccinated) }}
+                    {{ form_row(form.priceAbandonedCatUnaffiliatedAdditionNeedsSterilization) }}
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="box box-primary box-padding-small">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Afstand katten aangesloten gemeente</h3>
+                    </div>
+                    {{ form_row(form.priceAbandonedCatAffiliatedYoungerThanThreeMonths) }}
+                    {{ form_row(form.priceAbandonedCatAffiliatedBetweenThreeMonthsAndTenYears) }}
+                    {{ form_row(form.priceAbandonedCatAffiliatedOlderThanTenYears) }}
+                    {{ form_row(form.priceAbandonedCatAffiliatedKitten) }}
+                    {{ form_row(form.priceAbandonedCatAffiliatedAdditionNotChipped) }}
+                    {{ form_row(form.priceAbandonedCatAffiliatedAdditionNotVaccinated) }}
+                    {{ form_row(form.priceAbandonedCatAffiliatedAdditionNeedsSterilization) }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            {{ outputFormButton('Wijzigen') }}
+            {{ form_end(form) }}
+        </div>
     </div>
 {% endblock %}
