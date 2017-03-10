@@ -25,7 +25,7 @@ class DefaultController extends Controller
         $employeeRepository = $em->getRepository('EmployeeBundle:User');
 
         $amountAnimalsOnsite = count($animalRepository->onsiteAnimals());
-        $amountAnimalsOffsite = count($animalRepository->onsiteAnimals());
+        $amountAnimalsOffsite = count($animalRepository->offsiteAnimals());
         $amountCustomers = count($customerRepository->findAll());
         $amountEmployees = count($employeeRepository->findAll());
 
