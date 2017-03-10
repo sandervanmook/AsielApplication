@@ -24,7 +24,7 @@ class Medical
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Asiel\AnimalBundle\Entity\Animal")
+     * @ORM\ManyToOne(targetEntity="Asiel\AnimalBundle\Entity\Animal", inversedBy="medicalEntry")
      */
     private $animal;
 
