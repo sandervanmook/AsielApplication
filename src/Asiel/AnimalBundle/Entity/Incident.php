@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Incident
  *
- * @ORM\Table(name="incident")
+ * @ORM\Table(name="animal_incident")
  * @ORM\Entity(repositoryClass="Asiel\AnimalBundle\Repository\IncidentRepository")
  */
 class Incident
@@ -24,7 +24,7 @@ class Incident
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Asiel\AnimalBundle\Entity\Animal")
+     * @ORM\ManyToOne(targetEntity="Asiel\AnimalBundle\Entity\Animal", inversedBy="incidents")
      */
     private $animal;
 
@@ -121,11 +121,11 @@ class Incident
     /**
      * Set animal
      *
-     * @param Animal $animal
+     * @param \Asiel\AnimalBundle\Entity\Animal $animal
      *
      * @return Incident
      */
-    public function setAnimal(Animal $animal = null)
+    public function setAnimal(\Asiel\AnimalBundle\Entity\Animal $animal = null)
     {
         $this->animal = $animal;
 
@@ -135,7 +135,7 @@ class Incident
     /**
      * Get animal
      *
-     * @return Animal
+     * @return \Asiel\AnimalBundle\Entity\Animal
      */
     public function getAnimal()
     {
