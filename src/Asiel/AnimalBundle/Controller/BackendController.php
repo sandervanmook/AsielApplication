@@ -65,7 +65,7 @@ class BackendController extends Controller
             $chipnumber = $form->get('chipnumber')->getData();
             $radioNoChipnumber = $form->get('nochipnumber')->getData();
 
-            // If no chipnumber radio was selected
+            // If no chipnumber checkbox was selected
             if ($radioNoChipnumber) {
                 return $this->render('@Animal/Backend/Animal/create.html.twig', [
                     'form' => $form->createView(),
