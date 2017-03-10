@@ -137,7 +137,6 @@ class AnimalRepository extends EntityRepository
         $qb = $this->createQueryBuilder('a');
         $qb->leftJoin('a.status', 's');
         $qb->where('s.onsiteLocation = true' );
-        $qb->where('s.offsiteLocation = false' );
         $qb->andWhere('s.archived = false');
 
         return $qb->getQuery()->getResult();
@@ -148,7 +147,6 @@ class AnimalRepository extends EntityRepository
         $qb = $this->createQueryBuilder('a');
         $qb->leftJoin('a.status', 's');
         $qb->where('s.offsiteLocation = true' );
-        $qb->where('s.onsiteLocation = false' );
         $qb->andWhere('s.archived = false');
 
         return $qb->getQuery()->getResult();
