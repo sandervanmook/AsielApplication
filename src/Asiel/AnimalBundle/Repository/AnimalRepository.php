@@ -126,4 +126,33 @@ class AnimalRepository extends EntityRepository
 
         return $qb->getQuery()->getResult();
     }
+
+
+    /**
+     * Dashboard data
+     */
+
+    public function onsiteAnimals()
+    {
+        $qb = $this->createQueryBuilder('a');
+        $qb->leftJoin('a.status', 's');
+        $qb->where('s.onsiteLocation = true' );
+        $qb->andWhere('s.archived = false');
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function offsiteAnimals()
+    {
+        $qb = $this->createQueryBuilder('a');
+        $qb->leftJoin('a.status', 's');
+        $qb->where('s.offsiteLocation = true' );
+        $qb->andWhere('s.archived = false');
+
+        return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * End Dashboard data
+     */
 }
