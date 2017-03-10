@@ -1,7 +1,70 @@
 {% extends '@Backend/Base/Base.html.twig' %}
-{% block pagetitle %}Welkom{% endblock %}
+{% block pagetitle %}Dashboard{% endblock %}
 {% block body %}
+    <br />
     {% if browser %}
-        <p><i class="info icon"></i>{{ browser }}</p>
+        <div class="row">
+            <div class="col-sm-5 col-sm-offset-3">
+                <div class="alert alert-warning alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h4><i class="icon fa fa-warning"></i> Waarschuwing</h4>
+                    <p>{{ browser }}</p>
+                </div>
+            </div>
+        </div>
     {% endif %}
+    <br />
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="small-box bg-aqua">
+                    <div class="inner">
+                        <h3>{{ amountanimalsonsite }}</h3>
+                        <p>Aantal dieren in asiel</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-stats-bars"></i>
+                    </div>
+                    <a class="small-box-footer" href="{{ path('backend_animal_index') }}">Meer info <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="small-box bg-aqua">
+                    <div class="inner">
+                        <h3>{{ amountanimalsoffsite }}</h3>
+                        <p>Aantal dieren buiten asiel</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-stats-bars"></i>
+                    </div>
+                    <a class="small-box-footer" href="{{ path('backend_animal_index') }}">Meer info <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="small-box bg-green">
+                    <div class="inner">
+                        <h3>{{ amountcustomers }}</h3>
+                        <p>Aantal klanten</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-person"></i>
+                    </div>
+                    <a class="small-box-footer" href="{{ path('backend_customer_index') }}">Meer info <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="small-box bg-green">
+                    <div class="inner">
+                        <h3>{{ amountemployees }}</h3>
+                        <p>Aantal gebruikers</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-person"></i>
+                    </div>
+                    <a class="small-box-footer" href="{{ path('backend_employee_index') }}">Meer info <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}
