@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Medical
  *
- * @ORM\Table(name="medical")
+ * @ORM\Table(name="animal_medical")
  * @ORM\Entity(repositoryClass="Asiel\AnimalBundle\Repository\MedicalRepository")
  */
 class Medical
@@ -60,30 +60,6 @@ class Medical
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set animal
-     *
-     * @param string $animal
-     *
-     * @return Medical
-     */
-    public function setAnimal($animal)
-    {
-        $this->animal = $animal;
-
-        return $this;
-    }
-
-    /**
-     * Get animal
-     *
-     * @return string
-     */
-    public function getAnimal()
-    {
-        return $this->animal;
     }
 
     /**
@@ -157,5 +133,28 @@ class Medical
     {
         return $this->date;
     }
-}
 
+    /**
+     * Set animal
+     *
+     * @param \Asiel\AnimalBundle\Entity\Animal $animal
+     *
+     * @return Medical
+     */
+    public function setAnimal(\Asiel\AnimalBundle\Entity\Animal $animal = null)
+    {
+        $this->animal = $animal;
+
+        return $this;
+    }
+
+    /**
+     * Get animal
+     *
+     * @return \Asiel\AnimalBundle\Entity\Animal
+     */
+    public function getAnimal()
+    {
+        return $this->animal;
+    }
+}

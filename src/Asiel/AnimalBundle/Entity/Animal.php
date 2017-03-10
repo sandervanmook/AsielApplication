@@ -5,6 +5,8 @@ namespace Asiel\AnimalBundle\Entity;
 use Asiel\AnimalBundle\AnimalStateMachine\AnimalStateMachine;
 use Asiel\AnimalBundle\Entity\AnimalType\Cat;
 use Asiel\AnimalBundle\Entity\AnimalType\Dog;
+use Asiel\AnimalBundle\Entity\Incident;
+use Asiel\AnimalBundle\Entity\Medical;
 use Asiel\AnimalBundle\Entity\StatusType\NoState;
 use Asiel\BookkeepingBundle\Entity\Action;
 use Asiel\CalendarBundle\Entity\Task;
@@ -61,16 +63,12 @@ class Animal
     private $nightLocation;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="medical_entry", type="string", length=255, nullable=true)
+     * @ORM\OneToMany(targetEntity="Asiel\AnimalBundle\Entity\Medical", mappedBy="animal")
      */
     private $medicalEntry;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="incidents", type="string", length=255, nullable=true)
+     * @ORM\OneToMany(targetEntity="Asiel\AnimalBundle\Entity\Incident", mappedBy="animal")
      */
     private $incidents;
 
@@ -235,6 +233,8 @@ class Animal
     public function __construct()
     {
         $this->status = new ArrayCollection();
+        $this->medicalEntry = new ArrayCollection();
+        $this->incidents = new ArrayCollection();
         $this->pictures = new ArrayCollection();
         $this->tasks = new ArrayCollection();
         $this->actions = new ArrayCollection();
@@ -1053,23 +1053,57 @@ class Animal
     }
 
     /**
-     * Set incidents
+     * Add medicalEntry
      *
-     * @param string $incidents
+     * @param Medical $medicalEntry
      *
      * @return Animal
      */
-    public function setIncidents($incidents)
+    public function addMedicalEntry(Medical $medicalEntry)
     {
-        $this->incidents = $incidents;
+        $this->medicalEntry[] = $medicalEntry;
 
         return $this;
     }
 
     /**
+     * Remove medicalEntry
+     *
+     * @param Medical $medicalEntry
+     */
+    public function removeMedicalEntry(Medical $medicalEntry)
+    {
+        $this->medicalEntry->removeElement($medicalEntry);
+    }
+
+    /**
+     * Add incident
+     *
+     * @param Incident $incident
+     *
+     * @return Animal
+     */
+    public function addIncident(Incident $incident)
+    {
+        $this->incidents[] = $incident;
+
+        return $this;
+    }
+
+    /**
+     * Remove incident
+     *
+     * @param Incident $incident
+     */
+    public function removeIncident(Incident $incident)
+    {
+        $this->incidents->removeElement($incident);
+    }
+
+    /**
      * Get incidents
      *
-     * @return string
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getIncidents()
     {
