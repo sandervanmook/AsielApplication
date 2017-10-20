@@ -93,11 +93,12 @@ class BackendController extends Controller
             }
 
             // We didn't found the animal internally, search externally and give the option to create new animal
-            if ($formHandler->ndgResult($chipnumber)) {
-                $ndgResult = $formHandler->ndgResult($chipnumber);
-            } else {
-                $ndgResult = null;
-            }
+            // External site changed, code broken
+//            if ($formHandler->ndgResult($chipnumber)) {
+//                $ndgResult = $formHandler->ndgResult($chipnumber);
+//            } else {
+//                $ndgResult = null;
+//            }
 
             if ($formHandler->bhcResult($chipnumber)) {
                 $bhcResult = $formHandler->bhcResult($chipnumber);
@@ -114,7 +115,8 @@ class BackendController extends Controller
             return $this->render('@Animal/Backend/Animal/create.html.twig', [
                 'form' => $form->createView(),
                 'internalresult' => $internalResult,
-                'ndgresult' => $ndgResult,
+                // broken at the moment
+                // 'ndgresult' => $ndgResult,
                 'bhcresult' => $bhcResult,
                 'idchipsresult' => $idchipsResult,
             ]);
