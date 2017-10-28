@@ -3,7 +3,9 @@ services:
     asiel.animalbundle.animalformhandler:
       class: Asiel\AnimalBundle\Service\AnimalFormHandler
       arguments:
-        - '@asiel.backendbundle.baseformhandler'
+        - '@doctrine.orm.entity_manager'
+        - '@event_dispatcher'
+        - '@request_stack'
 
     asiel.animalbundle.incidentformhandler:
       class: Asiel\AnimalBundle\Service\IncidentFormHandler
