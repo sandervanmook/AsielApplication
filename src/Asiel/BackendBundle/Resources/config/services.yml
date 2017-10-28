@@ -8,11 +8,11 @@ services:
           - '@request_stack'
 
     asiel.backendbundle.baseformhandlertrait:
-             class: Asiel\Shared\Service\BaseFormHandlerTrait
-             arguments:
-              - '@doctrine.orm.entity_manager'
-              - '@event_dispatcher'
-              - '@request_stack'
+          class: Asiel\Shared\Service\BaseFormHandlerTrait
+          arguments:
+           - '@doctrine.orm.entity_manager'
+           - '@event_dispatcher'
+           - '@request_stack'
 
     asiel.backendbundle.settingsformhandler:
      class: Asiel\BackendBundle\Service\SettingsFormHandler

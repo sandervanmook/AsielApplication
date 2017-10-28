@@ -34,7 +34,7 @@ class AnimalFormHandler
             new UserAlertEvent(UserAlertEvent::SUCCESS, 'Dier verwijderd.'));
     }
 
-    public function edit(Animal $angetAnimalRepositoryimal)
+    public function edit()
     {
         $this->getEm()->flush();
         $this->getEventDispatcher()->dispatch('user_alert.message',
