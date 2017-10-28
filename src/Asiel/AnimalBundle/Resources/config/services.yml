@@ -10,22 +10,30 @@ services:
     asiel.animalbundle.incidentformhandler:
       class: Asiel\AnimalBundle\Service\IncidentFormHandler
       arguments:
-        - '@asiel.backendbundle.baseformhandler'
+        - '@doctrine.orm.entity_manager'
+        - '@event_dispatcher'
+        - '@request_stack'
 
     asiel.animalbundle.medicalformhandler:
       class: Asiel\AnimalBundle\Service\MedicalFormHandler
       arguments:
-        - '@asiel.backendbundle.baseformhandler'
+        - '@doctrine.orm.entity_manager'
+        - '@event_dispatcher'
+        - '@request_stack'
 
     asiel.animalbundle.statusformhandler:
       class: Asiel\AnimalBundle\Service\StatusFormHandler
       arguments:
-        - '@asiel.backendbundle.baseformhandler'
+        - '@doctrine.orm.entity_manager'
+        - '@event_dispatcher'
+        - '@request_stack'
 
     asiel.animalbundle.pictureformhandler:
       class: Asiel\AnimalBundle\Service\PictureFormHandler
       arguments:
-        - '@asiel.backendbundle.baseformhandler'
+        - '@doctrine.orm.entity_manager'
+        - '@event_dispatcher'
+        - '@request_stack'
 
     asiel.animalbundle.facebookformhandler:
       class: Asiel\AnimalBundle\Service\FacebookFormHandler
@@ -40,5 +48,7 @@ services:
     asiel.animalbundle.taskformhandler:
       class: Asiel\AnimalBundle\Service\TaskFormHandler
       arguments:
-        - '@asiel.backendbundle.baseformhandler'
+        - '@doctrine.orm.entity_manager'
+        - '@event_dispatcher'
+        - '@request_stack'
         - '@security.token_storage'

@@ -6,47 +6,45 @@ use Asiel\AnimalBundle\Entity\Incident;
 use Asiel\AnimalBundle\Repository\AnimalRepository;
 use Asiel\AnimalBundle\Repository\IncidentRepository;
 use Asiel\BackendBundle\Event\UserAlertEvent;
-use Asiel\Shared\Service\BaseFormHandler;
+use Asiel\Shared\Service\BaseFormHandlerTrait;
 
 class IncidentFormHandler
 {
-    protected $baseFormHandler;
-
-    public function __construct(BaseFormHandler $baseFormHandler)
-    {
-        $this->baseFormHandler = $baseFormHandler;
+    use BaseFormHandlerTrait {
+        // Resolve naming conflict
+        getAnimalRepository as AnimalRepository;
     }
 
     public function find(int $incidentId) : Incident
     {
-        return $this->baseFormHandler->findIncident($incidentId);
+        return $this->findIncident($incidentId);
     }
 
     public function create(Incident $incident, int $animalId)
     {
-        $animal = $this->baseFormHandler->getAnimalRepository()->find($animalId);
+        $animal = $this->getAnimalRepository()->find($animalId);
         $incident->setAnimal($animal);
-        $this->baseFormHandler->getEm()->persist($incident);
-        $this->baseFormHandler->getEm()->flush();
-        $this->baseFormHandler->getEventDispatcher()->dispatch('user_alert.message',
+        $this->getEm()->persist($incident);
+        $this->getEm()->flush();
+        $this->getEventDispatcher()->dispatch('user_alert.message',
             new UserAlertEvent(UserAlertEvent::SUCCESS, 'Het incident is aangemaakt.'));
     }
 
     public function delete(Incident $incident)
     {
-        $this->baseFormHandler->getEm()->remove($incident);
-        $this->baseFormHandler->getEm()->flush();
-        $this->baseFormHandler->getEventDispatcher()->dispatch('user_alert.message',
+        $this->getEm()->remove($incident);
+        $this->getEm()->flush();
+        $this->getEventDispatcher()->dispatch('user_alert.message',
             new UserAlertEvent(UserAlertEvent::SUCCESS, 'Incident verwijderd.'));
     }
 
     public function getRepository(): IncidentRepository
     {
-        return $this->baseFormHandler->getIncidentRepository();
+        return $this->getIncidentRepository();
     }
 
     public function getAnimalRepository(): AnimalRepository
     {
-        return $this->baseFormHandler->getAnimalRepository();
+        return $this->AnimalRepository();
     }
 }

@@ -12,9 +12,13 @@ services:
         asiel.calendarbundle.taskformhandler:
           class: Asiel\CalendarBundle\Service\TaskFormHandler
           arguments:
-            - '@asiel.backendbundle.baseformhandler'
+            - '@doctrine.orm.entity_manager'
+            - '@event_dispatcher'
+            - '@request_stack'
 
         asiel.calendarbundle.calendaritemformhandler:
           class: Asiel\CalendarBundle\Service\CalendarItemFormHandler
           arguments:
-            - '@asiel.backendbundle.baseformhandler'
+            - '@doctrine.orm.entity_manager'
+            - '@event_dispatcher'
+            - '@request_stack'
