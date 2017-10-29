@@ -4,6 +4,7 @@
 namespace Asiel\Shared\Filter\Customer;
 
 
+use Asiel\Shared\Validation\CustomerValidation;
 use Iterator;
 
 class CustomerLastnameFilter extends \FilterIterator
@@ -19,7 +20,8 @@ class CustomerLastnameFilter extends \FilterIterator
     public function accept()
     {
         $value = $this->current();
-        if (($value->getClassName() == 'PrivateCustomer') &&
+
+        if (($value->isPrivate()) &&
             (is_int(stripos($value->getLastName(), $this->searchArray['lastname'])))) {
             return $value;
         }

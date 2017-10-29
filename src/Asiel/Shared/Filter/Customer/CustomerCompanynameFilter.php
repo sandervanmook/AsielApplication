@@ -4,6 +4,7 @@
 namespace Asiel\Shared\Filter\Customer;
 
 
+use Asiel\Shared\Validation\CustomerValidation;
 use Iterator;
 
 class CustomerCompanynameFilter extends \FilterIterator
@@ -19,7 +20,7 @@ class CustomerCompanynameFilter extends \FilterIterator
     public function accept()
     {
         $value = $this->current();
-        if (($value->getClassName() == 'BusinessCustomer') &&
+        if (($value->isBusiness()) &&
             (is_int(stripos($value->getCompanyName(), $this->searchArray['companyname'])))) {
             return $value;
         }
