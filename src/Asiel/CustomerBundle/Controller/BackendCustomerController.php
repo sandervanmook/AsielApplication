@@ -9,10 +9,11 @@ use Asiel\CustomerBundle\Form\BusinessCustomerType;
 use Asiel\CustomerBundle\Form\CustomerType;
 use Asiel\CustomerBundle\Form\PrivateCustomerType;
 use Asiel\CustomerBundle\Form\SearchCustomerType;
-use Asiel\CustomerBundle\SearchCustomer\FilterCustomer;
-use Asiel\Shared\Filter\Customer\CustomerFilter;
+use Asiel\Shared\Filter\Customer\CustomerCitizenservicenumberFilter;
+use Asiel\Shared\Filter\Customer\CustomerCompanynameFilter;
+use Asiel\Shared\Filter\Customer\CustomerLastnameFilter;
+use Asiel\Shared\Filter\Customer\CustomerMunicipalityFilter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -48,31 +49,33 @@ class BackendCustomerController extends Controller
         $searchArray['municipality'] = $request->get('municipality');
         $searchArray['companyname'] = $request->get('companyname');
 
-        $filterCustomer = new CustomerFilter($allCustomers, $searchArray);
-        $filterCustomer->filter();
+        $customerIterator = [];
+        $searchArray['lastname'] ? $customerIterator = new CustomerLastnameFilter(new \ArrayIterator($allCustomers), $searchArray) : [];
+        $searchArray['citizenservicenumber'] ? $customerIterator = new CustomerCitizenservicenumberFilter(new \ArrayIterator($allCustomers), $searchArray) : [];
+        $searchArray['municipality'] ? $customerIterator = new CustomerMunicipalityFilter(new \ArrayIterator($allCustomers), $searchArray) : [];
+        $searchArray['companyname'] ? $customerIterator = new CustomerCompanynameFilter(new \ArrayIterator($allCustomers), $searchArray) : [];
 
-        $endResult = $filterCustomer->getFilterResult();
 
         switch ($requestby) {
             case 'statisticsbundle' :
                 return $this->render('@Statistics/Backend/customerSearchResult.html.twig', [
-                    'result' => $endResult,
+                    'result' => $customerIterator,
                 ]);
             case 'bookkeepingbundle_action' :
                 return $this->render('@Bookkeeping/Backend/Action/searchCustomerResult.html.twig', [
-                    'result' => $endResult,
+                    'result' => $customerIterator,
                 ]);
             case 'bookkeepingbundle_transaction' :
                 return $this->render('@Bookkeeping/Backend/Transaction/searchCustomerResult.html.twig', [
-                    'result' => $endResult,
+                    'result' => $customerIterator,
                 ]);
             case 'bookkeepingbundle_invoiceledger' :
                 return $this->render('@Bookkeeping/Backend/InvoiceLedger/searchCustomerResult.html.twig', [
-                    'result' => $endResult,
+                    'result' => $customerIterator,
                 ]);
             default:
                 return $this->render('@Customer/Backend/searchResult.html.twig', [
-                    'result' => $endResult,
+                    'result' => $customerIterator,
                 ]);
         }
     }

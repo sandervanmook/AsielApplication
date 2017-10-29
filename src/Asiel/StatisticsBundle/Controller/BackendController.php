@@ -3,7 +3,6 @@
 namespace Asiel\StatisticsBundle\Controller;
 
 use Asiel\CustomerBundle\Form\SearchCustomerType;
-use Asiel\Shared\Filter\Customer\CustomerFilter;
 use Asiel\StatisticsBundle\Form\FilterAnimalsKittenType;
 use Asiel\StatisticsBundle\Form\FilterAnimalsLeavingType;
 use Asiel\StatisticsBundle\Form\FilterAnimalsType;

@@ -1,0 +1,29 @@
+<?php
+
+
+namespace Asiel\Shared\Filter\Customer;
+
+
+use Iterator;
+
+class CustomerLastnameFilter extends \FilterIterator
+{
+    private $searchArray;
+
+    public function __construct(Iterator $iterator, array $searchArray)
+    {
+        parent::__construct($iterator);
+        $this->searchArray = $searchArray;
+    }
+
+    public function accept()
+    {
+        $value = $this->current();
+        if (($value->getClassName() == 'PrivateCustomer') &&
+            (is_int(stripos($value->getLastName(), $this->searchArray['lastname'])))) {
+            return $value;
+        }
+
+        return false;
+    }
+}
