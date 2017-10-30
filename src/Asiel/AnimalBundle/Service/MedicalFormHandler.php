@@ -6,43 +6,45 @@ use Asiel\AnimalBundle\Entity\Medical;
 use Asiel\AnimalBundle\Repository\AnimalRepository;
 use Asiel\AnimalBundle\Repository\MedicalRepository;
 use Asiel\BackendBundle\Event\UserAlertEvent;
-use Asiel\Shared\Service\BaseFormHandlerTrait;
+use Asiel\Shared\Service\BaseFormHandler;
 
 class MedicalFormHandler
 {
-    use BaseFormHandlerTrait {
-        // Resolve naming conflict
-        getAnimalRepository as AnimalRepository;
+    protected $baseFormHandler;
+
+    public function __construct(BaseFormHandler $baseFormHandler)
+    {
+        $this->baseFormHandler = $baseFormHandler;
     }
     
     public function find(int $medicalId)
     {
-        return $this->findMedical($medicalId);
+        return $this->baseFormHandler->findMedical($medicalId);
     }
 
     public function create(Medical $medical, int $animalId)
     {
         $animal = $this->getAnimalRepository()->find($animalId);
         $medical->setAnimal($animal);
-        $this->getEm()->persist($medical);
-        $this->getEm()->flush();
-        $this->getEventDispatcher()->dispatch('user_alert.message', new UserAlertEvent(UserAlertEvent::SUCCESS, 'Medisch dossier aangemaakt.'));
+        $this->baseFormHandler->getEm()->persist($medical);
+        $this->baseFormHandler->getEm()->flush();
+        $this->baseFormHandler->getEventDispatcher()->dispatch('user_alert.message', new UserAlertEvent(UserAlertEvent::SUCCESS, 'Medisch dossier aangemaakt.'));
     }
 
     public function delete(Medical $medical)
     {
-        $this->getEm()->remove($medical);
-        $this->getEm()->flush();
-        $this->getEventDispatcher()->dispatch('user_alert.message', new UserAlertEvent(UserAlertEvent::SUCCESS, 'Medisch dossier verwijderd.'));
+        $this->baseFormHandler->getEm()->remove($medical);
+        $this->baseFormHandler->getEm()->flush();
+        $this->baseFormHandler->getEventDispatcher()->dispatch('user_alert.message', new UserAlertEvent(UserAlertEvent::SUCCESS, 'Medisch dossier verwijderd.'));
     }
 
     public function getRepository() : MedicalRepository
     {
-        return $this->getMedicalRepository();
+        return $this->baseFormHandler->getMedicalRepository();
     }
 
     public function getAnimalRepository() : AnimalRepository
     {
-        return $this->AnimalRepository();
+        return $this->baseFormHandler->getAnimalRepository();
     }
 }

@@ -6,44 +6,49 @@ use Asiel\AnimalBundle\Entity\Animal;
 use Asiel\AnimalBundle\Entity\Status;
 use Asiel\AnimalBundle\Repository\AnimalRepository;
 use Asiel\BackendBundle\Event\UserAlertEvent;
-use Asiel\Shared\Service\BaseFormHandlerTrait;
+use Asiel\Shared\Service\BaseFormHandler;
 use GuzzleHttp;
 
 class AnimalFormHandler
 {
-    use BaseFormHandlerTrait;
+    protected $baseFormHandler;
+
+    public function __construct(BaseFormHandler $baseFormHandler)
+    {
+        $this->baseFormHandler = $baseFormHandler;
+    }
 
     public function find(int $animalId): Animal
     {
-        return $this->findAnimal($animalId);
+        return $this->baseFormHandler->findAnimal($animalId);
     }
 
     public function create(Animal $animal)
     {
-        $this->getEm()->persist($animal);
-        $this->getEm()->flush();
-        $this->getEventDispatcher()->dispatch('user_alert.message',
+        $this->baseFormHandler->getEm()->persist($animal);
+        $this->baseFormHandler->getEm()->flush();
+        $this->baseFormHandler->getEventDispatcher()->dispatch('user_alert.message',
             new UserAlertEvent(UserAlertEvent::SUCCESS, 'Dier is aangemaakt.'));
     }
 
     public function delete(Animal $animal)
     {
-        $this->getEm()->remove($animal);
-        $this->getEm()->flush();
-        $this->getEventDispatcher()->dispatch('user_alert.message',
+        $this->baseFormHandler->getEm()->remove($animal);
+        $this->baseFormHandler->getEm()->flush();
+        $this->baseFormHandler->getEventDispatcher()->dispatch('user_alert.message',
             new UserAlertEvent(UserAlertEvent::SUCCESS, 'Dier verwijderd.'));
     }
 
     public function edit()
     {
-        $this->getEm()->flush();
-        $this->getEventDispatcher()->dispatch('user_alert.message',
+        $this->baseFormHandler->getEm()->flush();
+        $this->baseFormHandler->getEventDispatcher()->dispatch('user_alert.message',
             new UserAlertEvent(UserAlertEvent::SUCCESS, 'De wijziging is opgeslagen.'));
     }
 
     public function getActiveState(int $id): Status
     {
-        $result = $this->getAnimalRepository()->getActiveState($this->find($id));
+        $result = $this->baseFormHandler->getAnimalRepository()->getActiveState($this->find($id));
         if (is_null($result)) {
             return new Status();
         }
@@ -53,13 +58,13 @@ class AnimalFormHandler
 
     public function getRepository(): AnimalRepository
     {
-        return $this->getAnimalRepository();
+        return $this->baseFormHandler->getAnimalRepository();
     }
 
     public function validChipnumber(string $chipnumber)
     {
         if (strlen($chipnumber) != 15 || intval($chipnumber) === 0) {
-            $this->getEventDispatcher()->dispatch('user_alert.message',
+            $this->baseFormHandler->getEventDispatcher()->dispatch('user_alert.message',
                 new UserAlertEvent(UserAlertEvent::DANGER, 'Een chipnummer bestaat uit 15 cijfers.'));
             return false;
         }

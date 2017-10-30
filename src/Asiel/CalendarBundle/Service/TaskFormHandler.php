@@ -6,13 +6,18 @@ namespace Asiel\CalendarBundle\Service;
 use Asiel\AnimalBundle\Entity\Animal;
 use Asiel\BackendBundle\Event\UserAlertEvent;
 use Asiel\CalendarBundle\Entity\Task;
-use Asiel\Shared\Service\BaseFormHandlerTrait;
+use Asiel\Shared\Service\BaseFormHandler;
 use DateInterval;
 use DateTime;
 
 class TaskFormHandler
 {
-    use BaseFormHandlerTrait;
+    protected $baseFormHandler;
+
+    public function __construct(BaseFormHandler $baseFormHandler)
+    {
+        $this->baseFormHandler = $baseFormHandler;
+    }
 
     public function createByEvent(Animal $animal, $dateDue, $origin)
     {
@@ -34,11 +39,11 @@ class TaskFormHandler
         $task->setCreatedBy('Systeem');
 
         // Save in DB
-        $this->getEm()->persist($task);
-        $this->getEm()->flush();
+        $this->baseFormHandler->getEm()->persist($task);
+        $this->baseFormHandler->getEm()->flush();
 
         // Send alert
-        $this->getEventDispatcher()->dispatch('user_alert.message',
+        $this->baseFormHandler->getEventDispatcher()->dispatch('user_alert.message',
             new UserAlertEvent(UserAlertEvent::INFO, "Taak {$title} is aangemaakt door het systeem."));
     }
 }
