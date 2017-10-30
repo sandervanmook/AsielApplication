@@ -4,39 +4,50 @@
 namespace Asiel\AnimalBundle\Service;
 
 use Asiel\AnimalBundle\Entity\Picture;
+use Asiel\AnimalBundle\Repository\AnimalRepository;
 use Asiel\AnimalBundle\Repository\PictureRepository;
 use Asiel\BackendBundle\Event\UserAlertEvent;
-use Asiel\Shared\Service\BaseFormHandlerTrait;
+use Asiel\Shared\Service\BaseFormHandler;
 
 class PictureFormHandler
 {
-    use BaseFormHandlerTrait;
+    protected $baseFormHandler;
+
+    public function __construct(BaseFormHandler $baseFormHandler)
+    {
+        $this->baseFormHandler = $baseFormHandler;
+    }
 
     public function find(int $pictureId): Picture
     {
-        return $this->findPicture($pictureId);
+        return $this->baseFormHandler->findPicture($pictureId);
     }
 
     public function create(Picture $picture, int $animalId)
     {
-        $picture->setAnimal($this->findAnimal($animalId));
-        $this->getEm()->persist($picture);
-        $this->getEm()->flush();
-        $this->getEventDispatcher()->dispatch('user_alert.message',
+        $picture->setAnimal($this->baseFormHandler->findAnimal($animalId));
+        $this->baseFormHandler->getEm()->persist($picture);
+        $this->baseFormHandler->getEm()->flush();
+        $this->baseFormHandler->getEventDispatcher()->dispatch('user_alert.message',
             new UserAlertEvent(UserAlertEvent::SUCCESS, 'De foto is toegevoegd aan het dier.'));
     }
 
     public function delete(Picture $picture)
     {
-        $this->getEm()->remove($picture);
-        $this->getEm()->flush();
-        $this->getEventDispatcher()->dispatch('user_alert.message',
+        $this->baseFormHandler->getEm()->remove($picture);
+        $this->baseFormHandler->getEm()->flush();
+        $this->baseFormHandler->getEventDispatcher()->dispatch('user_alert.message',
             new UserAlertEvent(UserAlertEvent::SUCCESS, 'Foto verwijderd.'));
     }
 
     public function getRepository(): PictureRepository
     {
-        return $this->getPictureRepository();
+        return $this->baseFormHandler->getPictureRepository();
+    }
+
+    public function getAnimalRepository() : AnimalRepository
+    {
+        return $this->baseFormHandler->getAnimalRepository();
     }
 
 }

@@ -7,59 +7,48 @@ namespace Asiel\AnimalBundle\Service;
 use Asiel\AnimalBundle\Entity\Animal;
 use Asiel\BackendBundle\Event\UserAlertEvent;
 use Asiel\CalendarBundle\Entity\Task;
-use Asiel\Shared\Service\BaseFormHandlerTrait;
-use Doctrine\ORM\EntityManager;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
+use Asiel\Shared\Service\BaseFormHandler;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
 
 class TaskFormHandler
 {
-    use BaseFormHandlerTrait{
-        // Resolve naming conflict
-        findAnimal as findAnimalTrait;
-    }
-
+    protected $baseFormHandler;
     protected $em;
     protected $eventDispatcher;
     protected $requestStack;
     protected $tokenStorage;
 
     public function __construct(
-        EntityManager $em,
-        EventDispatcherInterface $eventDispatcher,
-        RequestStack $requestStack,
+        BaseFormHandler $baseFormHandler,
         TokenStorage $tokenStorage
     ) {
-        $this->em = $em;
-        $this->eventDispatcher = $eventDispatcher;
-        $this->requestStack = $requestStack;
+        $this->baseFormHandler = $baseFormHandler;
         $this->tokenStorage = $tokenStorage;
     }
 
     public function findAnimal(int $animalId): Animal
     {
-        return $this->findAnimalTrait($animalId);
+        return $this->baseFormHandler->findAnimal($animalId);
     }
 
     public function find(int $taskId): Task
     {
-        return $this->findTask($taskId);
+        return $this->baseFormHandler->findTask($taskId);
     }
 
     public function edit()
     {
-        $this->getEm()->flush();
-        $this->getEventDispatcher()->dispatch('user_alert.message',
+        $this->baseFormHandler->getEm()->flush();
+        $this->baseFormHandler->getEventDispatcher()->dispatch('user_alert.message',
             new UserAlertEvent(UserAlertEvent::SUCCESS, 'De wijziging is opgeslagen.'));
     }
 
     public function delete(Task $task)
     {
-        $this->getEm()->remove($task);
-        $this->getEm()->flush();
-        $this->getEventDispatcher()->dispatch('user_alert.message',
+        $this->baseFormHandler->getEm()->remove($task);
+        $this->baseFormHandler->getEm()->flush();
+        $this->baseFormHandler->getEventDispatcher()->dispatch('user_alert.message',
             new UserAlertEvent(UserAlertEvent::SUCCESS, 'Taak verwijderd.'));
     }
 
@@ -68,9 +57,9 @@ class TaskFormHandler
         $animal = $this->findAnimal($animalId);
         $task->setAnimal($animal);
         $task->setCreatedBy($this->tokenStorage->getToken()->getUsername());
-        $this->getEm()->persist($task);
-        $this->getEm()->flush();
-        $this->getEventDispatcher()->dispatch('user_alert.message',
+        $this->baseFormHandler->getEm()->persist($task);
+        $this->baseFormHandler->getEm()->flush();
+        $this->baseFormHandler->getEventDispatcher()->dispatch('user_alert.message',
             new UserAlertEvent(UserAlertEvent::SUCCESS, 'De taak is aangemaakt.'));
     }
 
