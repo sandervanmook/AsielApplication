@@ -11,7 +11,7 @@ interface AnimalState
     public function getId();
 
     /**
-     * Used in the controllers, for \Model\ValueType\Type.php, and to get the Discriminator Column value.
+     * Used in the controllers and to get the Discriminator Column value.
      * Just return the class name not the fully qualified name.
      * @return string
      */
