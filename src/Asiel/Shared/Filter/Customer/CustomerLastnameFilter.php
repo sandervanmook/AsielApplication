@@ -4,7 +4,6 @@
 namespace Asiel\Shared\Filter\Customer;
 
 
-use Asiel\Shared\Validation\CustomerValidation;
 use Iterator;
 
 class CustomerLastnameFilter extends \FilterIterator
