@@ -55,13 +55,6 @@ class AnimalTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($this->animal->getMedicalEntry(), new Medical());
     }
 
-    public function test_set_incidents()
-    {
-        $this->animal->setIncidents(new Incident());
-
-        $this->assertEquals($this->animal->getIncidents(), new Incident());
-    }
-
     public function test_set_chipnumber()
     {
         $this->animal->setChipnumber(1);

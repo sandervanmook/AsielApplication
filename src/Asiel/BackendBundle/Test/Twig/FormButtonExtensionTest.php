@@ -23,7 +23,7 @@ class FormButtonExtensionTest extends \PHPUnit_Framework_TestCase
         $buttonValue = 'Bijwerken';
         $extension = new FormButtonExtension();
         $extension->outputFormButton($buttonValue);
-        $expected = '<div class="inline field"><button type="submit" class="positive ui button">'.$buttonValue.'</button><button type="reset" class="btn-back negative ui button">Terug</button></div>';
+        $expected = '<div class="inline field output-form-button"><button type="submit" class="btn btn-success">Bijwerken</button><button type="reset" class="btn-back btn btn-danger">Terug</button></div>';
 
         $this->expectOutputString($expected);
     }
