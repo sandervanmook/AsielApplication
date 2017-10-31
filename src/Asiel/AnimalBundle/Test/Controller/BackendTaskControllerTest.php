@@ -40,10 +40,4 @@ class BackendTaskControllerTest extends BaseFunctionalTest
         $this->assertStatusCode(200, $this->client);
     }
 
-    public function test_info_action()
-    {
-        $url = $this->getUrl('backend_animal_taskinfo');
-        $this->client->request('GET', $url);
-        $this->assertStatusCode(200, $this->client);
-    }
 }

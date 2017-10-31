@@ -52,6 +52,10 @@ class LoadBookkeepingSettingsData implements FixtureInterface
         $entity->setPriceFoundNotVaccinated(18);
         $entity->setPriceFoundDeWorm(10);
         $entity->setPriceFoundTenancyPerDay(18.15);
+        $entity->setIban(11111);
+        $entity->setBic('abn123');
+        $entity->setInvoiceEmailAddress('test@test.nl');
+
 
         $manager->persist($entity);
         $manager->flush();
