@@ -19,6 +19,7 @@ use Asiel\AnimalBundle\Repository\MedicalRepository;
 use Asiel\AnimalBundle\Repository\PictureRepository;
 use Asiel\AnimalBundle\Repository\StatusRepository;
 use Asiel\BackendBundle\Event\ResourceNotFoundEvent;
+use Asiel\BackendBundle\Event\UserAlertEvent;
 use Asiel\BackendBundle\Repository\BookkeepingSettingsRepository;
 use Asiel\BookkeepingBundle\Entity\Action;
 use Asiel\BookkeepingBundle\Entity\Transaction;
@@ -238,6 +239,14 @@ class BaseFormHandler
         }
 
         return $transaction;
+    }
+
+    public function createAccessDeniedEvent()
+    {
+        $this->getEventDispatcher()->dispatch('user_alert.message',
+            new UserAlertEvent(UserAlertEvent::DANGER, 'U heeft geen toegang tot deze functie.'));
+
+        return null;
     }
 
     public function getAnimalRepository(): AnimalRepository
