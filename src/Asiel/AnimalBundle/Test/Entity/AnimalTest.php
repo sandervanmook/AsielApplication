@@ -80,7 +80,7 @@ class AnimalTest extends \PHPUnit_Framework_TestCase
     public function test_set_age()
     {
         $this->animal->setDayOfBirth(new \DateTime('1-1-2000'));
-        $this->assertEquals($this->animal->getAge(), 17);
+        $this->assertEquals($this->animal->getAge(), date('y'));
 
     }
 

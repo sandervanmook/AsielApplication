@@ -1,6 +1,23 @@
 services:
+    _defaults:
+      # automatically injects dependencies in your services
+      autowire: true
+      # automatically registers your services as commands, event subscribers, etc.
+      autoconfigure: true
+      # this means you cannot fetch services directly from the container via $container->get()
+      # if you need to do this, you can override this setting on individual services
+      public: false
+
     # Services
     asiel.locationbundle.formhandler:
       class: Asiel\LocationBundle\Service\FormHandler
+      public: true
       arguments:
         - '@asiel.backendbundle.baseformhandler'
+
+    asiel.locationbundle.security.voter:
+      class: Asiel\LocationBundle\Security\LocationVoter
+      public: true
+      tags: ['security.voter']
+      arguments:
+        - '@Symfony\Component\Security\Core\Authorization\AccessDecisionManagerInterface'

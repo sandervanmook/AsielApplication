@@ -44,4 +44,9 @@ class FormHandler
         $this->baseFormHandler->getEventDispatcher()->dispatch('user_alert.message',
             new UserAlertEvent(UserAlertEvent::SUCCESS, 'Locatie verwijderd'));
     }
+
+    public function accessDeniedMessage()
+    {
+        return $this->baseFormHandler->createAccessDeniedEvent();
+    }
 }
