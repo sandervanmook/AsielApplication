@@ -1,32 +1,51 @@
 services:
+    _defaults:
+      # automatically injects dependencies in your services
+      autowire: true
+      # automatically registers your services as commands, event subscribers, etc.
+      autoconfigure: true
+      # this means you cannot fetch services directly from the container via $container->get()
+      # if you need to do this, you can override this setting on individual services
+      public: false
+
+    Asiel\AnimalBundle\:
+      resource: '../../../../../src/Asiel/AnimalBundle/*'
+      exclude: '../../../../../src/Asiel/AnimalBundle/{Entity,Repository,Test}'
+
+    Asiel\AnimalBundle\Controller\:
+      resource: '../../../../../src/Asiel/AnimalBundle/Controller'
+      tags: ['controller.service_arguments']
+
     # Services
-    asiel.animalbundle.animalformhandler:
-      class: Asiel\AnimalBundle\Service\AnimalFormHandler
-      arguments:
-        - '@asiel.backendbundle.baseformhandler'
+#    asiel.animalbundle.animalformhandler:
+#      class: Asiel\AnimalBundle\Service\AnimalFormHandler
+#      arguments:
+#        - '@asiel.backendbundle.baseformhandler'
+#
+#    asiel.animalbundle.incidentformhandler:
+#      class: Asiel\AnimalBundle\Service\IncidentFormHandler
+#      arguments:
+#        - '@asiel.backendbundle.baseformhandler'
+#
+#    asiel.animalbundle.medicalformhandler:
+#      class: Asiel\AnimalBundle\Service\MedicalFormHandler
+#      arguments:
+#        - '@asiel.backendbundle.baseformhandler'
+#
+#    asiel.animalbundle.statusformhandler:
+#      class: Asiel\AnimalBundle\Service\StatusFormHandler
+#      arguments:
+#        - '@asiel.backendbundle.baseformhandler'
+#
+#    asiel.animalbundle.pictureformhandler:
+#      class: Asiel\AnimalBundle\Service\PictureFormHandler
+#      arguments:
+#        - '@asiel.backendbundle.baseformhandler'
 
-    asiel.animalbundle.incidentformhandler:
-      class: Asiel\AnimalBundle\Service\IncidentFormHandler
-      arguments:
-        - '@asiel.backendbundle.baseformhandler'
-
-    asiel.animalbundle.medicalformhandler:
-      class: Asiel\AnimalBundle\Service\MedicalFormHandler
-      arguments:
-        - '@asiel.backendbundle.baseformhandler'
-
-    asiel.animalbundle.statusformhandler:
-      class: Asiel\AnimalBundle\Service\StatusFormHandler
-      arguments:
-        - '@asiel.backendbundle.baseformhandler'
-
-    asiel.animalbundle.pictureformhandler:
-      class: Asiel\AnimalBundle\Service\PictureFormHandler
-      arguments:
-        - '@asiel.backendbundle.baseformhandler'
-
-    asiel.animalbundle.facebookformhandler:
-      class: Asiel\AnimalBundle\Service\FacebookFormHandler
+    Asiel\AnimalBundle\Service\FacebookFormHandler:
+#    asiel.animalbundle.facebookformhandler:
+#      class: Asiel\AnimalBundle\Service\FacebookFormHandler
+      autowire: false
       arguments:
         - '%facebook_app_id%'
         - '%facebook_app_secret%'
@@ -35,8 +54,8 @@ services:
         - '@request_stack'
         - '@event_dispatcher'
 
-    asiel.animalbundle.taskformhandler:
-      class: Asiel\AnimalBundle\Service\TaskFormHandler
-      arguments:
-        - '@asiel.backendbundle.baseformhandler'
-        - '@security.token_storage'
+#    asiel.animalbundle.taskformhandler:
+#      class: Asiel\AnimalBundle\Service\TaskFormHandler
+#      arguments:
+#        - '@asiel.backendbundle.baseformhandler'
+#        - '@security.token_storage'

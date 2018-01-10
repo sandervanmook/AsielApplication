@@ -4,6 +4,7 @@ namespace Asiel\AnimalBundle\Controller;
 
 use Asiel\AnimalBundle\Entity\Medical;
 use Asiel\AnimalBundle\Form\MedicalType;
+use Asiel\AnimalBundle\Service\MedicalFormHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,12 +13,17 @@ use Symfony\Component\HttpFoundation\Response;
 
 class BackendMedicalController extends Controller
 {
+    private $medicalFormHandler;
+
+    public function __construct(MedicalFormHandler $medicalFormHandler)
+    {
+        $this->medicalFormHandler = $medicalFormHandler;
+    }
+
     public function indexAction(int $id)
     {
-        $formHandler = $this->get('asiel.animalbundle.medicalformhandler');
-
         return $this->render('@Animal/Backend/Medical/index.html.twig', [
-            'result' => $formHandler->getRepository()->findBy(['animal' => $formHandler->getAnimalRepository()->find($id)]),
+            'result' => $this->medicalFormHandler->getRepository()->findBy(['animal' => $this->medicalFormHandler->getAnimalRepository()->find($id)]),
         ]);
     }
 
@@ -29,8 +35,7 @@ class BackendMedicalController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $formHandler = $this->get('asiel.animalbundle.medicalformhandler');
-            $formHandler->create($medical, $id);
+            $this->medicalFormHandler->create($medical, $id);
 
             return new RedirectResponse($this->generateUrl('backend_animal_medical_index', ['id' => $id]));
         }
@@ -41,16 +46,14 @@ class BackendMedicalController extends Controller
 
     public function showAction($medicalid)
     {
-        $formHandler = $this->get('asiel.animalbundle.medicalformhandler');
         return $this->render('@Animal/Backend/Medical/show.html.twig', [
-            'medical' => $formHandler->find($medicalid),
+            'medical' => $this->medicalFormHandler->find($medicalid),
         ]);
     }
 
     public function deleteAction($id)
     {
-        $formHandler = $this->get('asiel.animalbundle.medicalformhandler');
-        $formHandler->delete($formHandler->find($id));
+        $this->medicalFormHandler->delete($this->medicalFormHandler->find($id));
 
         return new Response('Command received.');
     }

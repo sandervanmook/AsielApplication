@@ -6,6 +6,7 @@ namespace Asiel\BookkeepingBundle\Controller;
 
 use Asiel\BookkeepingBundle\Filter\InvoiceLedgerFilter;
 use Asiel\BookkeepingBundle\Form\InvoiceLedgerSearchType;
+use Asiel\BookkeepingBundle\Service\TransactionFormHandler;
 use Asiel\CustomerBundle\Form\SearchCustomerType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -14,6 +15,13 @@ use Symfony\Component\HttpFoundation\Response;
 
 class InvoiceLedgerController extends Controller
 {
+    private $transactionFormHandler;
+
+    public function __construct(TransactionFormHandler $transactionFormHandler)
+    {
+        $this->transactionFormHandler = $transactionFormHandler;
+    }
+
     /**
      * @param Request $request
      * @return Response
@@ -86,11 +94,9 @@ class InvoiceLedgerController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $formHandler = $this->get('asiel.bookkeepingbundle.transactionformhandler');
-
             $start = $form->get('start')->getData()->getTimestamp();
             $end = $form->get('end')->getData()->getTimestamp();
-            $customer = $formHandler->findCustomer($customerid);
+            $customer = $this->transactionFormHandler->findCustomer($customerid);
 
             $transactions = [];
             $totalCosts = 0;

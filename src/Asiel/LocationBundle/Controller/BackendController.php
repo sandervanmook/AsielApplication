@@ -4,6 +4,7 @@ namespace Asiel\LocationBundle\Controller;
 
 use Asiel\LocationBundle\Entity\Location;
 use Asiel\LocationBundle\Form\LocationType;
+use Asiel\LocationBundle\Service\FormHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,6 +13,13 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class BackendController extends Controller
 {
+    private $formHandler;
+
+    public function __construct(FormHandler $formHandler)
+    {
+        $this->formHandler = $formHandler;
+    }
+
     public function indexAction()
     {
         return $this->render('@Location/Default/index.html.twig', [
@@ -21,11 +29,9 @@ class BackendController extends Controller
 
     public function createAction(Request $request)
     {
-        $formHandler = $this->get('asiel.locationbundle.formhandler');
-
         try {$this->denyAccessUnlessGranted('create', null);
         } catch (AccessDeniedException $e) {
-            $formHandler->accessDeniedMessage();
+            $this->formHandler->accessDeniedMessage();
             exit;
         }
 
@@ -35,7 +41,7 @@ class BackendController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $formHandler->create($location);
+            $this->formHandler->create($location);
 
             return new RedirectResponse($this->generateUrl('backend_location_index'));
         }
@@ -46,15 +52,13 @@ class BackendController extends Controller
 
     public function deleteAction($id)
     {
-        $formHandler = $this->get('asiel.locationbundle.formhandler');
-
         try {$this->denyAccessUnlessGranted('delete', null);
         } catch (AccessDeniedException $e) {
-            $formHandler->accessDeniedMessage();
+            $this->formHandler->accessDeniedMessage();
             exit;
         }
 
-        $formHandler->delete($formHandler->find($id));
+        $this->formHandler->delete($this->formHandler->find($id));
         return new Response('Command received.');
     }
 }

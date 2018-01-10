@@ -6,6 +6,7 @@ namespace Asiel\BookkeepingBundle\Controller;
 
 use Asiel\BookkeepingBundle\Entity\Transaction;
 use Asiel\BookkeepingBundle\Form\TransactionType;
+use Asiel\BookkeepingBundle\Service\TransactionFormHandler;
 use Asiel\CustomerBundle\Form\SearchCustomerType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -14,6 +15,13 @@ use Symfony\Component\HttpFoundation\Response;
 
 class TransactionController extends Controller
 {
+    private $transactionFormHandler;
+
+    public function __construct(TransactionFormHandler $transactionFormHandler)
+    {
+        $this->transactionFormHandler = $transactionFormHandler;
+    }
+
     /**
      * @param Request $request
      * @return Response
@@ -26,8 +34,7 @@ class TransactionController extends Controller
         $this->get('session')->set('bookkeeping_selected_action_id', $request->get('actionid'));
 
         // Show the customer that belongs to the action as separate option so we don't have to search
-        $formHandler = $this->get('asiel.bookkeepingbundle.transactionformhandler');
-        $action = $formHandler->findAction($request->get('actionid'));
+        $action = $this->transactionFormHandler->findAction($request->get('actionid'));
         $actionCustomer = $action->getCustomer();
 
         if (!is_null($actionCustomer)) {
@@ -49,13 +56,11 @@ class TransactionController extends Controller
     public function createAction(Request $request)
     {
         // The customer linked to the action entity can be different than the one chosen for this transation!
-        $formHandler = $this->get('asiel.bookkeepingbundle.transactionformhandler');
-
         $customerId = $request->get('customerid');
         $actionId = $this->get('session')->get('bookkeeping_selected_action_id');
 
-        $action = $formHandler->findAction($actionId);
-        $customer = $formHandler->findCustomer($customerId);
+        $action = $this->transactionFormHandler->findAction($actionId);
+        $customer = $this->transactionFormHandler->findCustomer($customerId);
 
         $transaction = new Transaction();
 
@@ -64,9 +69,9 @@ class TransactionController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             if ($form->get('paidAmount')->getData() > $action->sumRemaining()) {
-                $formHandler->sumLargerThanRemainingMessage();
+                $this->transactionFormHandler->sumLargerThanRemainingMessage();
             } else {
-                $formHandler->create($action, $customer, $transaction);
+                $this->transactionFormHandler->create($action, $customer, $transaction);
 
                 return new RedirectResponse($this->generateUrl('backend_bookkeeping_action_show', ['actionid' => $actionId]));
             }
@@ -85,8 +90,7 @@ class TransactionController extends Controller
      */
     public function showAction(int $transactionid)
     {
-        $formHandler = $this->get('asiel.bookkeepingbundle.transactionformhandler');
-        $transaction = $formHandler->findTransaction($transactionid);
+        $transaction = $this->transactionFormHandler->findTransaction($transactionid);
 
         return $this->render('@Bookkeeping/Backend/Transaction/show.html.twig', [
             'transaction' => $transaction,
@@ -99,10 +103,8 @@ class TransactionController extends Controller
      */
     public function payAction(int $transactionid)
     {
-        $formHandler = $this->get('asiel.bookkeepingbundle.transactionformhandler');
-        $transaction = $formHandler->findTransaction($transactionid);
-
-        $formHandler->payTransaction($transaction);
+        $transaction = $this->transactionFormHandler->findTransaction($transactionid);
+        $this->transactionFormHandler->payTransaction($transaction);
 
         return new RedirectResponse($this->generateUrl('backend_bookkeeping_transaction_show', ['transactionid' => $transactionid]));
     }
@@ -113,8 +115,7 @@ class TransactionController extends Controller
      */
     public function printSingleInvoiceAction(int $transactionid)
     {
-        $formHandler = $this->get('asiel.bookkeepingbundle.transactionformhandler');
-        $transaction = $formHandler->findTransaction($transactionid);
+        $transaction = $this->transactionFormHandler->findTransaction($transactionid);
         $frondendSettings = $this->getDoctrine()->getRepository('BackendBundle:FrontendSettings')->find(1);
         $bookkeepingSettings = $this->getDoctrine()->getRepository('BackendBundle:BookkeepingSettings')->find(1);
 

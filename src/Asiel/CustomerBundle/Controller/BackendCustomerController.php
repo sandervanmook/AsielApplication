@@ -9,6 +9,7 @@ use Asiel\CustomerBundle\Form\BusinessCustomerType;
 use Asiel\CustomerBundle\Form\CustomerType;
 use Asiel\CustomerBundle\Form\PrivateCustomerType;
 use Asiel\CustomerBundle\Form\SearchCustomerType;
+use Asiel\CustomerBundle\Service\CustomerFormHandler;
 use Asiel\Shared\Filter\Customer\CustomerCitizenservicenumberFilter;
 use Asiel\Shared\Filter\Customer\CustomerCompanynameFilter;
 use Asiel\Shared\Filter\Customer\CustomerLastnameFilter;
@@ -20,6 +21,13 @@ use Symfony\Component\HttpFoundation\Response;
 
 class BackendCustomerController extends Controller
 {
+    private $customerFormHandler;
+
+    public function __construct(CustomerFormHandler $customerFormHandler)
+    {
+        $this->customerFormHandler = $customerFormHandler;
+    }
+
     /**
      * @return Response
      */
@@ -40,9 +48,7 @@ class BackendCustomerController extends Controller
      */
     public function searchCustomersDataAction(Request $request, string $requestby)
     {
-        $formHandler = $this->get('asiel.customerbundle.customerformhandler');
-
-        $allCustomers = $formHandler->getRepository()->findAll();
+        $allCustomers = $this->customerFormHandler->getRepository()->findAll();
 
         $searchArray['lastname'] = $request->get('lastname');
         $searchArray['citizenservicenumber'] = $request->get('citizenservicenumber');
@@ -87,9 +93,7 @@ class BackendCustomerController extends Controller
      */
     public function editAction(Request $request, int $id)
     {
-        $formHandler = $this->get('asiel.customerbundle.customerformhandler');
-
-        $customer = $formHandler->findCustomer($id);
+        $customer = $this->customerFormHandler->findCustomer($id);
         $customerType = $customer->getClassName();
 
         $form = $this->createForm('Asiel\CustomerBundle\Form\\'.$customerType.'Type', $customer);
@@ -102,7 +106,7 @@ class BackendCustomerController extends Controller
                 $idCard = null;
             }
 
-            $formHandler->edit($customer, $idCard);
+            $this->customerFormHandler->edit($customer, $idCard);
 
             return new RedirectResponse($this->generateUrl('backend_customer_index'));
         }
@@ -125,7 +129,6 @@ class BackendCustomerController extends Controller
      */
     public function createPrivateAction(Request $request)
     {
-        $formHandler = $this->get('asiel.customerbundle.customerformhandler');
         $privateCustomer = new PrivateCustomer();
 
         $form = $this->createForm(PrivateCustomerType::class, $privateCustomer);
@@ -133,7 +136,7 @@ class BackendCustomerController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $idCard = $form->get('idcard')->getData();
-            $formHandler->createPrivate($privateCustomer, $idCard);
+            $this->customerFormHandler->createPrivate($privateCustomer, $idCard);
 
             return new RedirectResponse($this->generateUrl('backend_customer_index'));
         }
@@ -149,14 +152,13 @@ class BackendCustomerController extends Controller
      */
     public function createBusinessAction(Request $request)
     {
-        $formHandler = $this->get('asiel.customerbundle.customerformhandler');
         $businessCustomer = new BusinessCustomer();
 
         $form = $this->createForm(BusinessCustomerType::class, $businessCustomer);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $formHandler->createBusiness($businessCustomer);
+            $this->customerFormHandler->createBusiness($businessCustomer);
 
             return new RedirectResponse($this->generateUrl('backend_customer_index'));
         }
@@ -172,9 +174,7 @@ class BackendCustomerController extends Controller
      */
     public function showAction(int $customerid)
     {
-        $formHandler = $this->get('asiel.customerbundle.customerformhandler');
-
-        $customer = $formHandler->findCustomer($customerid);
+        $customer = $this->customerFormHandler->findCustomer($customerid);
 
         if ($customer->isPrivate() && $customer->getIdCard()) {
             $photoData = $customer->getIdCard()->getPhoto();

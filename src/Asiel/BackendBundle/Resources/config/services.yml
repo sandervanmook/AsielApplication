@@ -1,46 +1,66 @@
 services:
-    # Services
-    asiel.backendbundle.baseformhandler:
-         class: Asiel\Shared\Service\BaseFormHandler
-         arguments:
-          - '@doctrine.orm.entity_manager'
-          - '@event_dispatcher'
-          - '@request_stack'
+    _defaults:
+        # automatically injects dependencies in your services
+        autowire: true
+        # automatically registers your services as commands, event subscribers, etc.
+        autoconfigure: true
+        # this means you cannot fetch services directly from the container via $container->get()
+        # if you need to do this, you can override this setting on individual services
+        public: false
 
-    asiel.backendbundle.settingsformhandler:
-     class: Asiel\BackendBundle\Service\SettingsFormHandler
-     arguments:
-      - '@asiel.backendbundle.baseformhandler'
+    Asiel\BackendBundle\:
+        resource: '../../../../../src/Asiel/BackendBundle/*'
+        exclude: '../../../../../src/Asiel/BackendBundle/{Entity,Repository,Test}'
+
+    Asiel\Shared\:
+        resource: '../../../../../src/Asiel/Shared/*'
+
+    Asiel\BackendBundle\Controller\:
+        resource: '../../../../../src/Asiel/BackendBundle/Controller'
+        tags: ['controller.service_arguments']
+
+    # Services
+#    asiel.backendbundle.baseformhandler:
+#         class: Asiel\Shared\Service\BaseFormHandler
+#         arguments:
+#          - '@doctrine.orm.entity_manager'
+#          - '@event_dispatcher'
+#          - '@request_stack'
+
+#    asiel.backendbundle.settingsformhandler:
+#     class: Asiel\BackendBundle\Service\SettingsFormHandler
+#     arguments:
+#      - '@asiel.backendbundle.baseformhandler'
 
     # Twig extensions
-    asiel.backendbundle.boolean.twig_extension:
-        class: Asiel\BackendBundle\Twig\BooleanExtension
-        public: false
-        tags:
-          - { name: twig.extension }
-    asiel.backendbundle.gender.twig_extension:
-        class: Asiel\BackendBundle\Twig\GenderExtension
-        public: false
-        tags:
-          - { name: twig.extension }
-    asiel.backendbundle.formbutton.twig_extension:
-        class: Asiel\BackendBundle\Twig\FormButtonExtension
-        public: false
-        tags:
-          - { name: twig.extension }
+#    asiel.backendbundle.boolean.twig_extension:
+#        class: Asiel\BackendBundle\Twig\BooleanExtension
+#        public: false
+#        tags:
+#          - { name: twig.extension }
+#    asiel.backendbundle.gender.twig_extension:
+#        class: Asiel\BackendBundle\Twig\GenderExtension
+#        public: false
+#        tags:
+#          - { name: twig.extension }
+#    asiel.backendbundle.formbutton.twig_extension:
+#        class: Asiel\BackendBundle\Twig\FormButtonExtension
+#        public: false
+#        tags:
+#          - { name: twig.extension }
 
     # Event listeners
     # UserAlert Events
-    asiel.backendbundle.useralert.event:
-          class: Asiel\BackendBundle\EventListener\UserAlertListener
-          arguments:
-            - '@session'
-          tags:
-            - { name: kernel.event_listener, event: user_alert.message, method: onUserAlertEvent }
+#    asiel.backendbundle.useralert.event:
+#          class: Asiel\BackendBundle\EventListener\UserAlertListener
+#          arguments:
+#            - '@session'
+#          tags:
+#            - { name: kernel.event_listener, event: user_alert.message, method: onUserAlertEvent }
     # Resource Not Found Events
-    asiel.backendbundle.resourcenotfound.event:
-          class: Asiel\BackendBundle\EventListener\ResourceNotFoundListener
-          arguments:
-            - '@templating'
-          tags:
-            - { name: kernel.event_listener, event: resourcenotfound, method: onResourceNotFoundEvent }
+#    asiel.backendbundle.resourcenotfound.event:
+#          class: Asiel\BackendBundle\EventListener\ResourceNotFoundListener
+#          arguments:
+#            - '@templating'
+#          tags:
+#            - { name: kernel.event_listener, event: resourcenotfound, method: onResourceNotFoundEvent }

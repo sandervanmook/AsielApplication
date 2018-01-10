@@ -7,6 +7,7 @@ namespace Asiel\BookkeepingBundle\Controller;
 use Asiel\AnimalBundle\Form\SearchAnimalType;
 use Asiel\BookkeepingBundle\Filter\ActionFilter;
 use Asiel\BookkeepingBundle\Form\ActionSearchType;
+use Asiel\BookkeepingBundle\Service\ActionFormHandler;
 use Asiel\CustomerBundle\Form\SearchCustomerType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -15,6 +16,13 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ActionController extends Controller
 {
+    private $actionFormHandler;
+
+    public function __construct(ActionFormHandler $actionFormHandler)
+    {
+        $this->actionFormHandler = $actionFormHandler;
+    }
+
     /**
      * @return Response
      */
@@ -49,7 +57,6 @@ class ActionController extends Controller
      */
     public function selectActionAction(Request $request)
     {
-        $formHandler = $this->get('asiel.bookkeepingbundle.actionformhandler');
         $animalId = $this->get('session')->get('bookkeeping_selected_animal_id');
 
         // Save selected customer in session
@@ -62,10 +69,10 @@ class ActionController extends Controller
             $this->get('session')->set('bookkeeping_selected_customer_id', $request->get('customerid'));
         }
 
-        $currentAnimal = $formHandler->findAnimal($animalId);
+        $currentAnimal = $this->actionFormHandler->findAnimal($animalId);
 
         if ($currentAnimal->hasOpenActions()) {
-            $formHandler->hasOpenActionsMessage();
+            $this->actionFormHandler->hasOpenActionsMessage();
 
             return new RedirectResponse($this->generateUrl('backend_bookkeeping_action_index'));
         }
@@ -121,8 +128,7 @@ class ActionController extends Controller
      */
     public function showAction(int $actionid)
     {
-        $formHandler = $this->get('asiel.bookkeepingbundle.actionformhandler');
-        $action = $formHandler->findAction(($actionid));
+        $action = $this->actionFormHandler->findAction(($actionid));
 
         switch ($action->getType()) {
             case 'Adopted' :
@@ -155,10 +161,9 @@ class ActionController extends Controller
      */
     public function zeroTotalCostsAction(int $actionid)
     {
-        $formHandler = $this->get('asiel.bookkeepingbundle.actionformhandler');
-        $action = $formHandler->findAction(($actionid));
+        $action = $this->actionFormHandler->findAction(($actionid));
 
-        $formHandler->setTotalCostsToZero($action);
+        $this->actionFormHandler->setTotalCostsToZero($action);
 
         return new RedirectResponse($this->generateUrl('backend_bookkeeping_action_show', ['actionid' => $actionid]));
     }

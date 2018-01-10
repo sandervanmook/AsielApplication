@@ -4,11 +4,18 @@
 namespace Asiel\FrontendBundle\Controller;
 
 
+use Asiel\FrontendBundle\Service\CatFormHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 
 class CatController extends Controller
 {
+    private $catFormHandler;
+
+    public function __construct(CatFormHandler $catFormHandler)
+    {
+        $this->catFormHandler = $catFormHandler;
+    }
 
     /**
      * Embedded in templates
@@ -17,8 +24,7 @@ class CatController extends Controller
      */
     public function catCountPublicAction(string $option)
     {
-        $formHandler = $this->get('asiel.frontendbundle.catformhandler');
-        $result = count($formHandler->catsOption($option));
+        $result = count($this->catFormHandler->catsOption($option));
 
         return $this->render('@Frontend/Default/FrontendCount.html.twig', [
             'result'  => $result,
@@ -32,10 +38,8 @@ class CatController extends Controller
      */
     public function showCatAction(int $id)
     {
-        $formHandler = $this->get('asiel.frontendbundle.catformhandler');
-
         return $this->render('@Frontend/Cat/catShow.html.twig', [
-            'cat'   => $formHandler->findCat($id),
+            'cat'   => $this->catFormHandler->findCat($id),
         ]);
     }
 
@@ -46,10 +50,8 @@ class CatController extends Controller
      */
     public function showCatsAction(string $option)
     {
-        $formHandler = $this->get('asiel.frontendbundle.catformhandler');
-
         return $this->render('@Frontend/Cat/catsIndex.html.twig', [
-            'cats'  => $formHandler->catsOption($option),
+            'cats'  => $this->catFormHandler->catsOption($option),
         ]);
     }
 }

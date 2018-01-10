@@ -1,4 +1,17 @@
 services:
-#    cms.example:
-#        class: Asiel\CMSBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
+    _defaults:
+      # automatically injects dependencies in your services
+      autowire: true
+      # automatically registers your services as commands, event subscribers, etc.
+      autoconfigure: true
+      # this means you cannot fetch services directly from the container via $container->get()
+      # if you need to do this, you can override this setting on individual services
+      public: false
+
+    Asiel\CMSBundle\:
+      resource: '../../../../../src/Asiel/CMSBundle/*'
+      exclude: '../../../../../src/Asiel/CMSBundle/{Entity,Repository,Test}'
+
+    Asiel\CMSBundle\Controller\:
+      resource: '../../../../../src/Asiel/CMSBundle/Controller'
+      tags: ['controller.service_arguments']

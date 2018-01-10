@@ -6,6 +6,7 @@ namespace Asiel\AnimalBundle\Controller;
 
 use Asiel\AnimalBundle\Entity\Picture;
 use Asiel\AnimalBundle\Form\PictureType;
+use Asiel\AnimalBundle\Service\PictureFormHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,6 +14,12 @@ use Symfony\Component\HttpFoundation\Response;
 
 class BackendPictureController extends Controller
 {
+    private $pictureFormHandler;
+
+    public function __construct(PictureFormHandler $pictureFormHandler)
+    {
+        $this->pictureFormHandler = $pictureFormHandler;
+    }
 
     /**
      * @param int $id
@@ -20,10 +27,8 @@ class BackendPictureController extends Controller
      */
     public function indexAction(int $id)
     {
-        $formHandler = $this->get('asiel.animalbundle.pictureformhandler');
-
         return $this->render('@Animal/Backend/Picture/index.html.twig', [
-            'pictures' => $formHandler->getRepository()->findBy(['animal' => $formHandler->getAnimalRepository()->find($id)]),
+            'pictures' => $this->pictureFormHandler->getRepository()->findBy(['animal' => $this->pictureFormHandler->getAnimalRepository()->find($id)]),
         ]);
     }
 
@@ -33,10 +38,8 @@ class BackendPictureController extends Controller
      */
     public function showAction(int $pictureid)
     {
-        $formHandler = $this->get('asiel.animalbundle.pictureformhandler');
-
         return $this->render('@Animal/Backend/Picture/show.html.twig', [
-            'picture' => $formHandler->find($pictureid),
+            'picture' => $this->pictureFormHandler->find($pictureid),
         ]);
     }
 
@@ -47,14 +50,13 @@ class BackendPictureController extends Controller
      */
     public function createAction(Request $request, int $id)
     {
-        $formHandler = $this->get('asiel.animalbundle.pictureformhandler');
         $picture = new Picture();
 
         $form = $this->createForm(PictureType::class, $picture);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $formHandler->create($picture, $id);
+            $this->pictureFormHandler->create($picture, $id);
 
             return new RedirectResponse($this->generateUrl('backend_animal_picture_index', ['id' => $id]));
         }
@@ -69,8 +71,7 @@ class BackendPictureController extends Controller
      */
     public function deleteAction(int $id)
     {
-        $formHandler = $this->get('asiel.animalbundle.pictureformhandler');
-        $formHandler->delete($formHandler->find($id));
+        $this->pictureFormHandler->delete($this->pictureFormHandler->find($id));
 
         return new Response('Command received.');
     }

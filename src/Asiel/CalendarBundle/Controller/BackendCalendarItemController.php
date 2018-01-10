@@ -6,6 +6,7 @@ namespace Asiel\CalendarBundle\Controller;
 
 use Asiel\CalendarBundle\Entity\CalendarItem;
 use Asiel\CalendarBundle\Form\CalendarItemType;
+use Asiel\CalendarBundle\Service\CalendarItemFormHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -14,20 +15,26 @@ use Symfony\Component\HttpFoundation\Response;
 
 class BackendCalendarItemController extends Controller
 {
+    private $calenderItemFormHandler;
+
+    public function __construct(CalendarItemFormHandler $calendarItemFormHandler)
+    {
+        $this->calenderItemFormHandler = $calendarItemFormHandler;
+    }
+
     /**
      * @param Request $request
      * @return RedirectResponse|Response
      */
     public function createAction(Request $request)
     {
-        $formHandler = $this->get('asiel.calendarbundle.calendaritemformhandler');
         $calendarItem = new CalendarItem();
 
         $form = $this->createForm(CalendarItemType::class, $calendarItem);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $formHandler->create($calendarItem);
+            $this->calenderItemFormHandler->create($calendarItem);
 
             return new RedirectResponse($this->generateUrl('backend_calendar'));
         }
@@ -44,14 +51,13 @@ class BackendCalendarItemController extends Controller
      */
     public function editAction(Request $request, int $itemid)
     {
-        $formHandler = $this->get('asiel.calendarbundle.calendaritemformhandler');
-        $calendarItem = $formHandler->find($itemid);
+        $calendarItem = $this->calenderItemFormHandler->find($itemid);
 
         $form = $this->createForm(CalendarItemType::class, $calendarItem);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $formHandler->edit();
+            $this->calenderItemFormHandler->edit();
 
             return new RedirectResponse($this->generateUrl('backend_calendar'));
         }

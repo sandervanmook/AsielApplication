@@ -4,6 +4,7 @@ namespace Asiel\AnimalBundle\Controller;
 
 use Asiel\AnimalBundle\Entity\Incident;
 use Asiel\AnimalBundle\Form\IncidentType;
+use Asiel\AnimalBundle\Service\IncidentFormHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,15 +13,29 @@ use Symfony\Component\HttpFoundation\Response;
 
 class BackendIncidentController extends Controller
 {
+    private $incidentFormHandler;
+
+    public function __construct(IncidentFormHandler $incidentFormHandler)
+    {
+        $this->incidentFormHandler = $incidentFormHandler;
+    }
+
+    /**
+     * @param int $id
+     * @return Response
+     */
     public function indexAction(int $id)
     {
-        $formHandler = $this->get('asiel.animalbundle.incidentformhandler');
-
         return $this->render('@Animal/Backend/Incident/index.html.twig', [
-            'incidents' => $formHandler->getRepository()->findBy(['animal' => $formHandler->getAnimalRepository()->find($id)]),
+            'incidents' => $this->incidentFormHandler->getRepository()->findBy(['animal' => $this->incidentFormHandler->getAnimalRepository()->find($id)]),
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @param int $id
+     * @return RedirectResponse|Response
+     */
     public function createAction(Request $request, int $id)
     {
         $incident = new Incident();
@@ -29,8 +44,7 @@ class BackendIncidentController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $formHandler = $this->get('asiel.animalbundle.incidentformhandler');
-            $formHandler->create($incident, $id);
+            $this->incidentFormHandler->create($incident, $id);
 
             return new RedirectResponse($this->generateUrl('backend_animal_incident_index', ['id' => $id]));
         }
@@ -41,16 +55,14 @@ class BackendIncidentController extends Controller
 
     public function showAction($incidentid)
     {
-        $formHandler = $this->get('asiel.animalbundle.incidentformhandler');
         return $this->render('@Animal/Backend/Incident/show.html.twig', [
-            'incident' => $formHandler->find($incidentid),
+            'incident' => $this->incidentFormHandler->find($incidentid),
         ]);
     }
 
     public function deleteAction($id)
     {
-        $formHandler = $this->get('asiel.animalbundle.incidentformhandler');
-        $formHandler->delete($formHandler->find($id));
+        $this->incidentFormHandler->delete($this->incidentFormHandler->find($id));
 
         return new Response('Command received.');
     }

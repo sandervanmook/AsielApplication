@@ -8,7 +8,7 @@ use Asiel\AnimalBundle\Entity\Animal;
 use Asiel\AnimalBundle\Entity\Status;
 use Asiel\BackendBundle\Repository\BookkeepingSettingsRepository;
 use DateTime;
-use Doctrine\ORM\EntityManager;
+use Doctrine\Common\Persistence\ObjectManager;
 
 class TotalActionCosts
 {
@@ -18,7 +18,7 @@ class TotalActionCosts
     private $em;
     private $status;
 
-    public function __construct(EntityManager $entityManager)
+    public function __construct(ObjectManager $entityManager)
     {
         $this->em = $entityManager;
     }

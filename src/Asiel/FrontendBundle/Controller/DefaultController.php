@@ -4,7 +4,7 @@ namespace Asiel\FrontendBundle\Controller;
 
 use Asiel\FrontendBundle\Form\ContactType;
 use Asiel\FrontendBundle\Form\SearchAnimalType;
-use Asiel\FrontendBundle\SearchAnimal\FilterAnimal;
+use Asiel\FrontendBundle\Service\DefaultFormHandler;
 use Asiel\Shared\Filter\Animal\AnimalFilter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -13,6 +13,13 @@ use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends Controller
 {
+    private $defaultFormHandler;
+
+    public function __construct(DefaultFormHandler $defaultFormHandler)
+    {
+        $this->defaultFormHandler = $defaultFormHandler;
+    }
+
     /**
      * @return Response
      */
@@ -39,9 +46,7 @@ class DefaultController extends Controller
      */
     public function searchAnimalsDataAction(Request $request)
     {
-        $formHandler = $this->get('asiel.frontendbundle.defaultformhandler');
-
-        $allPublicAnimals = $formHandler->getAnimalRepository()->allPublicAnimals();
+        $allPublicAnimals = $this->defaultFormHandler->getAnimalRepository()->allPublicAnimals();
 
         $searchArray['type'] = $request->get('type');
         $searchArray['gender'] = $request->get('gender');
@@ -78,14 +83,13 @@ class DefaultController extends Controller
      */
     public function contactAction(Request $request)
     {
-        $formHandler = $this->get('asiel.frontendbundle.defaultformhandler');
         $settings = $this->getDoctrine()->getRepository('BackendBundle:FrontendSettings')->find(1);
 
         $form = $this->createForm(ContactType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $formHandler->sendContactFormEmail($form);
+            $this->defaultFormHandler->sendContactFormEmail($form);
 
             return new RedirectResponse($this->generateUrl('frontend_contact'));
         }
