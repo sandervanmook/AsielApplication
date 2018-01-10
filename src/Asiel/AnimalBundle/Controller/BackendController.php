@@ -5,6 +5,7 @@ namespace Asiel\AnimalBundle\Controller;
 use Asiel\AnimalBundle\AnimalFactory\AnimalFactory;
 use Asiel\AnimalBundle\AnimalFactory\AnimalType;
 use Asiel\AnimalBundle\Form\SearchAnimalType;
+use Asiel\AnimalBundle\Service\AnimalFormHandler;
 use Asiel\Shared\Filter\Animal\AnimalFilter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -17,6 +18,13 @@ use Symfony\Component\HttpFoundation\Response;
 
 class BackendController extends Controller
 {
+    private $animalFormHandler;
+
+    public function __construct(AnimalFormHandler $animalFormHandler)
+    {
+        $this->animalFormHandler = $animalFormHandler;
+    }
+
     /**
      * @return Response
      */
@@ -35,8 +43,6 @@ class BackendController extends Controller
      */
     public function createAction(Request $request)
     {
-        $formHandler = $this->get('asiel.animalbundle.animalformhandler');
-
         $form = $this->createFormBuilder()
             ->add('chipnumber', TextType::class, [
                 'label' => 'Chipnummer',
@@ -74,15 +80,15 @@ class BackendController extends Controller
             }
 
             // If it's not a valid chipnummer show error and let user try again.
-            if (!$formHandler->validChipnumber($chipnumber)) {
+            if (!$this->animalFormHandler->validChipnumber($chipnumber)) {
                 return $this->render('@Animal/Backend/Animal/create.html.twig', [
                     'form' => $form->createView(),
                 ]);
             }
 
             // If we found it internally, show result. User can't create new animal.
-            if ($formHandler->searchChipnumberInternal($chipnumber)) {
-                $internalResult = $formHandler->searchChipnumberInternal($chipnumber);
+            if ($this->animalFormHandler->searchChipnumberInternal($chipnumber)) {
+                $internalResult = $this->animalFormHandler->searchChipnumberInternal($chipnumber);
 
                 return $this->render('@Animal/Backend/Animal/create.html.twig', [
                     'form' => $form->createView(),
@@ -100,14 +106,14 @@ class BackendController extends Controller
 //                $ndgResult = null;
 //            }
 
-            if ($formHandler->bhcResult($chipnumber)) {
-                $bhcResult = $formHandler->bhcResult($chipnumber);
+            if ($this->animalFormHandler->bhcResult($chipnumber)) {
+                $bhcResult = $this->animalFormHandler->bhcResult($chipnumber);
             } else {
                 $bhcResult = null;
             }
 
-            if ($formHandler->idchipsResult($chipnumber)) {
-                $idchipsResult = $formHandler->idchipsResult($chipnumber);
+            if ($this->animalFormHandler->idchipsResult($chipnumber)) {
+                $idchipsResult = $this->animalFormHandler->idchipsResult($chipnumber);
             } else {
                 $idchipsResult = null;
             }
@@ -143,8 +149,7 @@ class BackendController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $formHandler = $this->get('asiel.animalbundle.animalformhandler');
-            $formHandler->create($animal);
+            $this->animalFormHandler->create($animal);
 
             return new RedirectResponse($this->generateUrl('backend_animal_show', ['id' => $animal->getId()]));
         }
@@ -160,10 +165,9 @@ class BackendController extends Controller
      */
     public function showAction(int $id)
     {
-        $formHandler = $this->get('asiel.animalbundle.animalformhandler');
         return $this->render('@Animal/Backend/Animal/show.html.twig', [
-            'animal' => $formHandler->find($id),
-            'activestate' => $formHandler->getActiveState($id),
+            'animal' => $this->animalFormHandler->find($id),
+            'activestate' => $this->animalFormHandler->getActiveState($id),
         ]);
     }
 
@@ -174,8 +178,7 @@ class BackendController extends Controller
      */
     public function editAction(int $id, Request $request)
     {
-        $formHandler = $this->get('asiel.animalbundle.animalformhandler');
-        $animal = $formHandler->find($id);
+        $animal = $this->animalFormHandler->find($id);
         $animalFactory = new AnimalFactory();
         $animalProduct = $animalFactory->startFactory(new AnimalType($animal->getClassName()));
 
@@ -183,7 +186,7 @@ class BackendController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $formHandler->edit($animal);
+            $this->animalFormHandler->edit($animal);
 
             return new RedirectResponse($this->generateUrl('backend_animal_show', ['id' => $animal->getId()]));
         }
@@ -201,9 +204,7 @@ class BackendController extends Controller
      */
     public function searchAnimalsDataAction(Request $request, string $requestby)
     {
-        $formHandler = $this->get('asiel.animalbundle.animalformhandler');
-
-        $allAnimals = $formHandler->getRepository()->findAll();
+        $allAnimals = $this->animalFormHandler->getRepository()->findAll();
 
         $searchArray['type'] = $request->get('type');
         $searchArray['chipnumber'] = $request->get('chipnumber');
@@ -254,15 +255,14 @@ class BackendController extends Controller
      */
     public function animalInfoAction(int $id)
     {
-        $formHandler = $this->get('asiel.animalbundle.animalformhandler');
-        $openTasks = count($formHandler->getRepository()->findIncompleteTasks($id));
-        $animal = $formHandler->find($id);
+        $openTasks = count($this->animalFormHandler->getRepository()->findIncompleteTasks($id));
+        $animal = $this->animalFormHandler->find($id);
         $incidentAmount = count($animal->getIncidents());
         $medicalAmount = count($animal->getMedicalEntry());
         $photoAmount = count($animal->getPictures());
 
         return $this->render('@Animal/Backend/Animal/animalInfo.html.twig', [
-            'info' => $formHandler->getRepository()->find($id),
+            'info' => $this->animalFormHandler->getRepository()->find($id),
             'opentasks' => $openTasks,
             'incidentamount' => $incidentAmount,
             'medicalamount' => $medicalAmount,

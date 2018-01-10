@@ -1,5 +1,23 @@
 services:
-    asiel.statisticsbundle.backendformhandler:
-      class: Asiel\StatisticsBundle\Service\BackendFormHandler
-      arguments:
-        - '@asiel.backendbundle.baseformhandler'
+    _defaults:
+      # automatically injects dependencies in your services
+      autowire: true
+      # automatically registers your services as commands, event subscribers, etc.
+      autoconfigure: true
+      # this means you cannot fetch services directly from the container via $container->get()
+      # if you need to do this, you can override this setting on individual services
+      public: false
+
+    Asiel\StatisticsBundle\:
+      resource: '../../../../../src/Asiel/StatisticsBundle/*'
+      exclude: '../../../../../src/Asiel/StatisticsBundle/{Entity,Repository,Test}'
+
+    Asiel\StatisticsBundle\Controller\:
+      resource: '../../../../../src/Asiel/StatisticsBundle/Controller'
+      tags: ['controller.service_arguments']
+
+
+#    asiel.statisticsbundle.backendformhandler:
+#      class: Asiel\StatisticsBundle\Service\BackendFormHandler
+#      arguments:
+#        - '@asiel.backendbundle.baseformhandler'

@@ -1,20 +1,38 @@
 services:
+    _defaults:
+      # automatically injects dependencies in your services
+      autowire: true
+      # automatically registers your services as commands, event subscribers, etc.
+      autoconfigure: true
+      # this means you cannot fetch services directly from the container via $container->get()
+      # if you need to do this, you can override this setting on individual services
+      public: false
+
+    Asiel\CalendarBundle\:
+      resource: '../../../../../src/Asiel/CalendarBundle/*'
+      exclude: '../../../../../src/Asiel/CalendarBundle/{Entity,Repository,Test}'
+
+    Asiel\CalendarBundle\Controller\:
+      resource: '../../../../../src/Asiel/CalendarBundle/Controller'
+      tags: ['controller.service_arguments']
+
+
     # Event listeners
     # Task Events
-        asiel.calendarbundle.task.event:
-                  class: Asiel\CalendarBundle\EventListener\TaskListener
-                  arguments:
-                   - '@asiel.calendarbundle.taskformhandler'
-                  tags:
-                    - { name: kernel.event_listener, event: createtask, method: onCreateTaskEvent }
+#        asiel.calendarbundle.task.event:
+#                  class: Asiel\CalendarBundle\EventListener\TaskListener
+#                  arguments:
+#                   - '@asiel.calendarbundle.taskformhandler'
+#                  tags:
+#                    - { name: kernel.event_listener, event: createtask, method: onCreateTaskEvent }
 
     # Form handler
-        asiel.calendarbundle.taskformhandler:
-          class: Asiel\CalendarBundle\Service\TaskFormHandler
-          arguments:
-            - '@asiel.backendbundle.baseformhandler'
-
-        asiel.calendarbundle.calendaritemformhandler:
-          class: Asiel\CalendarBundle\Service\CalendarItemFormHandler
-          arguments:
-            - '@asiel.backendbundle.baseformhandler'
+#        asiel.calendarbundle.taskformhandler:
+#          class: Asiel\CalendarBundle\Service\TaskFormHandler
+#          arguments:
+#            - '@asiel.backendbundle.baseformhandler'
+#
+#        asiel.calendarbundle.calendaritemformhandler:
+#          class: Asiel\CalendarBundle\Service\CalendarItemFormHandler
+#          arguments:
+#            - '@asiel.backendbundle.baseformhandler'

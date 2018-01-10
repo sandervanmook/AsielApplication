@@ -6,6 +6,7 @@ namespace Asiel\EmployeeBundle\Controller;
 
 use Asiel\EmployeeBundle\Entity\WorkSchedule;
 use Asiel\EmployeeBundle\Form\WorkScheduleType;
+use Asiel\EmployeeBundle\Service\WorkScheduleFormHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,16 +14,22 @@ use Symfony\Component\HttpFoundation\Response;
 
 class WorkScheduleController extends Controller
 {
+    private $workscheduleFormHandler;
+
+    public function __construct(WorkScheduleFormHandler $workScheduleFormHandler)
+    {
+        $this->workscheduleFormHandler = $workScheduleFormHandler;
+    }
+
     /**
      * @param integer $id
      * @return Response
      */
     public function indexAction(int $id)
     {
-        $formHandler = $this->get('asiel.employeebundle.workscheduleformhandler');
 
         return $this->render('@Employee/Backend/WorkSchedule/index.html.twig', [
-            'schedule' => $formHandler->getRepository()->findOneBy(['user' => $id]),
+            'schedule' => $this->workscheduleFormHandler->getRepository()->findOneBy(['user' => $id]),
         ]);
     }
 
@@ -33,8 +40,7 @@ class WorkScheduleController extends Controller
      */
     public function editAction(Request $request, int $id)
     {
-        $formHandler = $this->get('asiel.employeebundle.workscheduleformhandler');
-        $query = $formHandler->getRepository()->findOneBy(['user' => $id]);
+        $query = $this->workscheduleFormHandler->getRepository()->findOneBy(['user' => $id]);
 
         if (!$query) {
             $schedule = new WorkSchedule();
@@ -47,9 +53,9 @@ class WorkScheduleController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             if (is_null($schedule->getId())) {
-                $formHandler->createSchedule($schedule, $id);
+                $this->workscheduleFormHandler->createSchedule($schedule, $id);
             } else {
-                $formHandler->edit();
+                $this->workscheduleFormHandler->edit();
             }
 
             return new RedirectResponse($this->generateUrl('backend_employee_workschedule_index', ['id' => $id]));

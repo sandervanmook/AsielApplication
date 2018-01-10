@@ -6,6 +6,7 @@ namespace Asiel\BackendBundle\Controller;
 
 use Asiel\BackendBundle\Form\BookkeepingSettingsType;
 use Asiel\BackendBundle\Form\FrontendSettingsType;
+use Asiel\BackendBundle\Service\SettingsFormHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,13 +18,19 @@ use Symfony\Component\HttpFoundation\Request;
 
 class SettingsController extends Controller
 {
+    private $settingsFormHandler;
+
+    public function __construct(SettingsFormHandler $settingsFormHandler)
+    {
+        $this->settingsFormHandler = $settingsFormHandler;
+    }
+
     /**
      * @param Request $request
      * @return RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function bookkeepingAction(Request $request)
     {
-        $formHandler = $this->get('asiel.backendbundle.settingsformhandler');
         $repository = $this->getDoctrine()->getRepository('BackendBundle:BookkeepingSettings');
         $settings = $repository->find(1);
 
@@ -32,7 +39,7 @@ class SettingsController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $formHandler->edit();
+            $this->settingsFormHandler->edit();
 
             return new RedirectResponse($this->generateUrl('backend_settings_bookkeeping'));
         }
@@ -48,7 +55,6 @@ class SettingsController extends Controller
      */
     public function frondendAction(Request $request)
     {
-        $formHandler = $this->get('asiel.backendbundle.settingsformhandler');
         $repository = $this->getDoctrine()->getRepository('BackendBundle:FrontendSettings');
         $settings = $repository->find(1);
 
@@ -57,7 +63,7 @@ class SettingsController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $formHandler->edit();
+            $this->settingsFormHandler->edit();
 
             return new RedirectResponse($this->generateUrl('backend_settings_frontend'));
         }

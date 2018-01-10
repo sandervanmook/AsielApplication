@@ -3,6 +3,7 @@
 namespace Asiel\AnimalBundle\Controller;
 
 use Asiel\AnimalBundle\Form\NewStatusType;
+use Asiel\AnimalBundle\Service\StatusFormHandler;
 use Asiel\AnimalBundle\StatusFactory\StatusFactory;
 use Asiel\AnimalBundle\StatusFactory\StatusType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -13,17 +14,23 @@ use Symfony\Component\HttpFoundation\Response;
 
 class BackendStatusController extends Controller
 {
+    private $statusFormHandler;
+
+    public function __construct(StatusFormHandler $statusFormHandler)
+    {
+        $this->statusFormHandler = $statusFormHandler;
+    }
+
     /**
      * @param int $id
      * @return Response
      */
     public function indexAction(int $id)
     {
-        $formHandler = $this->get('asiel.animalbundle.statusformhandler');
-        $formHandler->checkNoState($id);
+        $this->statusFormHandler->checkNoState($id);
 
         return $this->render('@Animal/Backend/Status/index.html.twig', [
-            'result' => $formHandler->getRepository()->findBy(['animal' => $formHandler->getAnimalRepository()->find($id)],
+            'result' => $this->statusFormHandler->getRepository()->findBy(['animal' => $this->statusFormHandler->getAnimalRepository()->find($id)],
                 ['id' => 'DESC']),
         ]);
     }
@@ -35,15 +42,13 @@ class BackendStatusController extends Controller
      */
     public function createAction(Request $request, int $id)
     {
-        $formHandler = $this->get('asiel.animalbundle.statusformhandler');
-
         $form = $this->createForm(NewStatusType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $type = $form->get('type')->getData();
 
-            if (!$formHandler->createStatusTypeCheck($id, $type)) {
+            if (!$this->statusFormHandler->createStatusTypeCheck($id, $type)) {
                 return new RedirectResponse($this->generateUrl('backend_animal_status_create', ['id' => $id]));
             } else {
                 return new RedirectResponse($this->generateUrl('backend_animal_status_create_type',
@@ -64,8 +69,6 @@ class BackendStatusController extends Controller
      */
     public function createTypeAction(Request $request, int $id, string $type)
     {
-        $formHandler = $this->get('asiel.animalbundle.statusformhandler');
-
         $statusFactory = new StatusFactory();
         $statusType = new StatusType($type);
         $statusProduct = $statusFactory->startFactory($statusType);
@@ -75,8 +78,8 @@ class BackendStatusController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $currentAnimal = $formHandler->getAnimalRepository()->find($id);
-            $formHandler->createStatus($status, $currentAnimal, $form);
+            $currentAnimal = $this->statusFormHandler->getAnimalRepository()->find($id);
+            $this->statusFormHandler->createStatus($status, $currentAnimal, $form);
 
             return new RedirectResponse($this->generateUrl('backend_animal_status_index', ['id' => $id]));
         }
@@ -91,13 +94,11 @@ class BackendStatusController extends Controller
      */
     public function showAction(int $statusid)
     {
-        $formHandler = $this->get('asiel.animalbundle.statusformhandler');
-
-        $statusType = $formHandler->find($statusid)->getClassName();
+        $statusType = $this->statusFormHandler->find($statusid)->getClassName();
 
         return $this->render('@Animal/Backend/Status/show' . $statusType . '.html.twig',
             [
-                'status' => $formHandler->find($statusid),
+                'status' => $this->statusFormHandler->find($statusid),
             ]);
     }
 

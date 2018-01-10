@@ -5,6 +5,7 @@ namespace Asiel\AnimalBundle\Controller;
 
 
 use Asiel\AnimalBundle\Form\TaskType;
+use Asiel\AnimalBundle\Service\TaskFormHandler;
 use Asiel\CalendarBundle\Entity\Task;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -13,16 +14,21 @@ use Symfony\Component\HttpFoundation\Response;
 
 class BackendTaskController extends Controller
 {
+    private $taskFormHandler;
+
+    public function __construct(TaskFormHandler $taskFormHandler)
+    {
+        $this->taskFormHandler = $taskFormHandler;
+    }
+
     /**
      * @param $id
      * @return Response
      */
     public function indexAction(int $id)
     {
-        $formHandler = $this->get('asiel.animalbundle.taskformhandler');
-
         return $this->render('@Animal/Backend/Task/index.html.twig', [
-            'result'    => $formHandler->findAnimal($id)->getTasks(),
+            'result'    => $this->taskFormHandler->findAnimal($id)->getTasks(),
         ]);
     }
 
@@ -34,14 +40,13 @@ class BackendTaskController extends Controller
      */
     public function editAction(Request $request, int $id, int $taskid)
     {
-        $formHandler = $this->get('asiel.animalbundle.taskformhandler');
-        $task = $formHandler->find($taskid);
+        $task = $this->taskFormHandler->find($taskid);
 
         $form = $this->createForm(TaskType::class, $task);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $formHandler->edit();
+            $this->taskFormHandler->edit();
 
             return new RedirectResponse($this->generateUrl('backend_animal_task_index', ['id' => $id]));
         }
@@ -57,8 +62,7 @@ class BackendTaskController extends Controller
      */
     public function deleteAction(int $id)
     {
-        $formHandler = $this->get('asiel.animalbundle.taskformhandler');
-        $formHandler->delete($formHandler->find($id));
+        $this->taskFormHandler->delete($this->taskFormHandler->find($id));
 
         return new Response('Command received.');
     }
@@ -70,14 +74,13 @@ class BackendTaskController extends Controller
      */
     public function createAction(Request $request, int $id)
     {
-        $formHandler = $this->get('asiel.animalbundle.taskformhandler');
         $task = new Task();
 
         $form = $this->createForm(TaskType::class, $task);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $formHandler->createByForm($task, $id);
+            $this->taskFormHandler->createByForm($task, $id);
 
             return new RedirectResponse($this->generateUrl('backend_animal_task_index', ['id' => $id]));
         }

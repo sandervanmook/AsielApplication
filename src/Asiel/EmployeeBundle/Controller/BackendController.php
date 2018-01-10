@@ -7,6 +7,7 @@ namespace Asiel\EmployeeBundle\Controller;
 use Asiel\EmployeeBundle\Entity\User;
 use Asiel\EmployeeBundle\Form\EditPasswordType;
 use Asiel\EmployeeBundle\Form\UserType;
+use Asiel\EmployeeBundle\Service\UserFormHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,15 +15,20 @@ use Symfony\Component\HttpFoundation\Response;
 
 class BackendController extends Controller
 {
+    private $userFormHandler;
+
+    public function __construct(UserFormHandler $userFormHandler)
+    {
+        $this->userFormHandler = $userFormHandler;
+    }
+
     /**
      * @return Response
      */
     public function indexAction()
     {
-        $formHandler = $this->get('asiel.employeebundle.userformhandler');
-
         return $this->render('@Employee/Backend/index.html.twig', [
-            'users' => $formHandler->getRepository()->findAll(),
+            'users' => $this->userFormHandler->getRepository()->findAll(),
         ]);
     }
 
@@ -32,14 +38,13 @@ class BackendController extends Controller
      */
     public function createAction(Request $request)
     {
-        $formHandler = $this->get('asiel.employeebundle.userformhandler');
         $user = new User();
 
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $formHandler->create($user);
+            $this->userFormHandler->create($user);
 
             return new RedirectResponse($this->generateUrl('backend_employee_index'));
         }
@@ -54,10 +59,8 @@ class BackendController extends Controller
      */
     public function showAction(int $id)
     {
-        $formHandler = $this->get('asiel.employeebundle.userformhandler');
-
         return $this->render('@Employee/Backend/show.html.twig', [
-            'user' => $formHandler->find($id),
+            'user' => $this->userFormHandler->find($id),
         ]);
     }
 
@@ -68,14 +71,13 @@ class BackendController extends Controller
      */
     public function editAction(Request $request, int $id)
     {
-        $formHandler = $this->get('asiel.employeebundle.userformhandler');
-        $user = $formHandler->find($id);
+        $user = $this->userFormHandler->find($id);
 
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $formHandler->edit($user);
+            $this->userFormHandler->edit($user);
 
             return new RedirectResponse($this->generateUrl('backend_employee_show', ['id' => $id]));
         }
@@ -92,14 +94,13 @@ class BackendController extends Controller
      */
     public function editPasswordAction(Request $request, int $id)
     {
-        $formHandler = $this->get('asiel.employeebundle.userformhandler');
-        $user = $formHandler->find($id);
+        $user = $this->userFormHandler->find($id);
 
         $form = $this->createForm(EditPasswordType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $formHandler->edit($user);
+            $this->userFormHandler->edit($user);
 
             return new RedirectResponse($this->generateUrl('backend_employee_show', ['id' => $id]));
         }
@@ -137,7 +138,6 @@ class BackendController extends Controller
 
         $repository = $this->getDoctrine()->getRepository('EmployeeBundle:User');
         $user = $repository->find($id);
-        $formHandler = $this->get('asiel.employeebundle.userformhandler');
 
         $form = $this->createForm(EditPasswordType::class, $user);
 
@@ -145,7 +145,7 @@ class BackendController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $password = $form->get('password')->getData();
-            $formHandler->profileEditPassword($user, $password);
+            $this->userFormHandler->profileEditPassword($user, $password);
 
             return new RedirectResponse($this->generateUrl('backend_employee_profile', ['id' => $id]));
         }

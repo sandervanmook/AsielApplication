@@ -1,6 +1,25 @@
 services:
-    asiel.frontendbundle.defaultformhandler:
-      class: Asiel\FrontendBundle\Service\DefaultFormHandler
+    _defaults:
+      # automatically injects dependencies in your services
+      autowire: true
+      # automatically registers your services as commands, event subscribers, etc.
+      autoconfigure: true
+      # this means you cannot fetch services directly from the container via $container->get()
+      # if you need to do this, you can override this setting on individual services
+      public: false
+
+    Asiel\FrontendBundle\:
+      resource: '../../../../../src/Asiel/FrontendBundle/*'
+      exclude: '../../../../../src/Asiel/FrontendBundle/{Entity,Repository,Test}'
+
+    Asiel\FrontendBundle\Controller\:
+      resource: '../../../../../src/Asiel/FrontendBundle/Controller'
+      tags: ['controller.service_arguments']
+
+
+    Asiel\FrontendBundle\Service\DefaultFormHandler:
+#    asiel.frontendbundle.defaultformhandler:
+#      class: Asiel\FrontendBundle\Service\DefaultFormHandler
       arguments:
         - '@doctrine.orm.entity_manager'
         - '@event_dispatcher'
@@ -11,12 +30,12 @@ services:
         - '%contact_email%'
         - '@templating'
 
-    asiel.frontendbundle.catformhandler:
-      class: Asiel\FrontendBundle\Service\CatFormHandler
-      arguments:
-        - '@asiel.backendbundle.baseformhandler'
-
-    asiel.frontendbundle.dogformhandler:
-      class: Asiel\FrontendBundle\Service\DogFormHandler
-      arguments:
-        - '@asiel.backendbundle.baseformhandler'
+#    asiel.frontendbundle.catformhandler:
+#      class: Asiel\FrontendBundle\Service\CatFormHandler
+#      arguments:
+#        - '@asiel.backendbundle.baseformhandler'
+#
+#    asiel.frontendbundle.dogformhandler:
+#      class: Asiel\FrontendBundle\Service\DogFormHandler
+#      arguments:
+#        - '@asiel.backendbundle.baseformhandler'

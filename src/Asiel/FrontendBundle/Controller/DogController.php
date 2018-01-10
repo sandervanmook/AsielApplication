@@ -4,11 +4,18 @@
 namespace Asiel\FrontendBundle\Controller;
 
 
+use Asiel\FrontendBundle\Service\DogFormHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 
 class DogController extends Controller
 {
+    private $dogFormHandler;
+
+    public function __construct(DogFormHandler $dogFormHandler)
+    {
+        $this->dogFormHandler = $dogFormHandler;
+    }
 
     /**
      * Embedded in templates
@@ -17,8 +24,7 @@ class DogController extends Controller
      */
     public function dogCountPublicAction(string $option)
     {
-        $formHandler = $this->get('asiel.frontendbundle.dogformhandler');
-        $result = count($formHandler->dogsOption($option));
+        $result = count($this->dogFormHandler->dogsOption($option));
 
         return $this->render('@Frontend/Default/FrontendCount.html.twig', [
             'result'  => $result,
@@ -32,9 +38,8 @@ class DogController extends Controller
      */
     public function showDogAction(int $id)
     {
-        $formHandler = $this->get('asiel.frontendbundle.dogformhandler');
         return $this->render('@Frontend/Dog/dogShow.html.twig', [
-            'dog'   => $formHandler->findDog($id),
+            'dog'   => $this->dogFormHandler->findDog($id),
         ]);
     }
 
@@ -45,10 +50,8 @@ class DogController extends Controller
      */
     public function showDogsAction($option)
     {
-        $formHandler = $this->get('asiel.frontendbundle.dogformhandler');
-
         return $this->render('@Frontend/Dog/dogsIndex.html.twig', [
-            'dogs'  => $formHandler->dogsOption($option),
+            'dogs'  => $this->dogFormHandler->dogsOption($option),
         ]);
     }
 

@@ -6,6 +6,7 @@ use Asiel\CustomerBundle\Form\SearchCustomerType;
 use Asiel\StatisticsBundle\Form\FilterAnimalsKittenType;
 use Asiel\StatisticsBundle\Form\FilterAnimalsLeavingType;
 use Asiel\StatisticsBundle\Form\FilterAnimalsType;
+use Asiel\StatisticsBundle\Service\BackendFormHandler;
 use Asiel\StatisticsBundle\Stats\AnimalKittenStats;
 use Asiel\StatisticsBundle\Stats\AnimalLeavingStats;
 use Asiel\StatisticsBundle\Stats\AnimalStats;
@@ -15,6 +16,13 @@ use Symfony\Component\HttpFoundation\Response;
 
 class BackendController extends Controller
 {
+    private $backendFormHandler;
+
+    public function __construct(BackendFormHandler $backendFormHandler)
+    {
+        $this->backendFormHandler = $backendFormHandler;
+    }
+
     /**
      * @return Response
      */
@@ -29,8 +37,6 @@ class BackendController extends Controller
      */
     public function animalIncomingAction(Request $request)
     {
-        $formHandler = $this->get('asiel.statisticsbundle.backendformhandler');
-
         $form = $this->createForm(FilterAnimalsType::class);
         $form->handleRequest($request);
 
@@ -40,7 +46,7 @@ class BackendController extends Controller
             $searchArray['dateend'] = $form->get('dateend')->getData();
             $searchArray['municipality'] = $form->get('municipality')->getData();
 
-            $allAnimals = $formHandler->getAnimalRepository()->findAll();
+            $allAnimals = $this->backendFormHandler->getAnimalRepository()->findAll();
 
             $stats = new AnimalStats($allAnimals, $searchArray);
             $stats->filter();
@@ -68,8 +74,6 @@ class BackendController extends Controller
      */
     public function animalIncomingKittenAction(Request $request)
     {
-        $formHandler = $this->get('asiel.statisticsbundle.backendformhandler');
-
         $form = $this->createForm(FilterAnimalsKittenType::class);
         $form->handleRequest($request);
 
@@ -77,7 +81,7 @@ class BackendController extends Controller
             $searchArray['datestart'] = $form->get('datestart')->getData();
             $searchArray['dateend'] = $form->get('dateend')->getData();
 
-            $allCats = $formHandler->getCatRepository()->findAll();
+            $allCats = $this->backendFormHandler->getCatRepository()->findAll();
 
             $stats = new AnimalKittenStats($allCats, $searchArray);
             $stats->filter();
@@ -102,8 +106,6 @@ class BackendController extends Controller
      */
     public function animalLeavingAction(Request $request)
     {
-        $formHandler = $this->get('asiel.statisticsbundle.backendformhandler');
-
         $form = $this->createForm(FilterAnimalsLeavingType::class);
         $form->handleRequest($request);
 
@@ -111,7 +113,7 @@ class BackendController extends Controller
             $searchArray['datestart'] = $form->get('datestart')->getData();
             $searchArray['dateend'] = $form->get('dateend')->getData();
 
-            $allAnimals = $formHandler->getAnimalRepository()->findAll();
+            $allAnimals = $this->backendFormHandler->getAnimalRepository()->findAll();
 
             $stats = new AnimalLeavingStats($allAnimals, $searchArray);
             $stats->filter();
@@ -148,13 +150,11 @@ class BackendController extends Controller
      */
     public function customerActionsShowAction(int $id)
     {
-        $formHandler = $this->get('asiel.statisticsbundle.backendformhandler');
-
-        $customer = $formHandler->getCustomerRepository()->find($id);
-        $adoptedStatusRepository = $formHandler->getAdoptedStatusRepository();
-        $abandonedStatusRepository = $formHandler->getAbandonedStatusRepository();
-        $foundStatusRepository = $formHandler->getFoundStatusRepository();
-        $returnedOwnerStatusRepository = $formHandler->getReturnedOwnerStatusRepository();
+        $customer = $this->backendFormHandler->getCustomerRepository()->find($id);
+        $adoptedStatusRepository = $this->backendFormHandler->getAdoptedStatusRepository();
+        $abandonedStatusRepository = $this->backendFormHandler->getAbandonedStatusRepository();
+        $foundStatusRepository = $this->backendFormHandler->getFoundStatusRepository();
+        $returnedOwnerStatusRepository = $this->backendFormHandler->getReturnedOwnerStatusRepository();
 
         $adopted = $adoptedStatusRepository->findBy(['customer' => $id]);
         $abandoned = $abandonedStatusRepository->findBy(['abandonedBy' => $id]);

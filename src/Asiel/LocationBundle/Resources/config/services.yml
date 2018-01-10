@@ -8,16 +8,24 @@ services:
       # if you need to do this, you can override this setting on individual services
       public: false
 
-    # Services
-    asiel.locationbundle.formhandler:
-      class: Asiel\LocationBundle\Service\FormHandler
-      public: true
-      arguments:
-        - '@asiel.backendbundle.baseformhandler'
+    Asiel\LocationBundle\:
+      resource: '../../../../../src/Asiel/LocationBundle/*'
+      exclude: '../../../../../src/Asiel/LocationBundle/{Entity,Repository,Test}'
 
-    asiel.locationbundle.security.voter:
-      class: Asiel\LocationBundle\Security\LocationVoter
-      public: true
-      tags: ['security.voter']
-      arguments:
-        - '@Symfony\Component\Security\Core\Authorization\AccessDecisionManagerInterface'
+    Asiel\LocationBundle\Controller\:
+      resource: '../../../../../src/Asiel/LocationBundle/Controller'
+      tags: ['controller.service_arguments']
+
+    # Services
+#    asiel.locationbundle.formhandler:
+#      class: Asiel\LocationBundle\Service\FormHandler
+#      public: true
+#      arguments:
+#        - '@asiel.backendbundle.baseformhandler'
+
+#    asiel.locationbundle.security.voter:
+#      class: Asiel\LocationBundle\Security\LocationVoter
+#      public: true
+#      tags: ['security.voter']
+#      arguments:
+#        - '@Symfony\Component\Security\Core\Authorization\AccessDecisionManagerInterface'

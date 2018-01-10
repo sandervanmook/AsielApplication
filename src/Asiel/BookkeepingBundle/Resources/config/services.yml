@@ -1,43 +1,61 @@
 services:
-    asiel.bookkeepingbundle.adoptedactionformhandler:
-      class: Asiel\BookkeepingBundle\Service\AdoptedActionFormHandler
-      arguments:
-        - '@asiel.backendbundle.baseformhandler'
-        - '@asiel.bookkeepingbundle.totalactioncosts'
+    _defaults:
+      # automatically injects dependencies in your services
+      autowire: true
+      # automatically registers your services as commands, event subscribers, etc.
+      autoconfigure: true
+      # this means you cannot fetch services directly from the container via $container->get()
+      # if you need to do this, you can override this setting on individual services
+      public: false
 
-    asiel.bookkeepingbundle.actionformhandler:
-      class: Asiel\BookkeepingBundle\Service\ActionFormHandler
-      arguments:
-        - '@asiel.backendbundle.baseformhandler'
+    Asiel\BookkeepingBundle\:
+      resource: '../../../../../src/Asiel/BookkeepingBundle/*'
+      exclude: '../../../../../src/Asiel/BookkeepingBundle/{Entity,Repository,Test}'
 
-    asiel.bookkeepingbundle.transactionformhandler:
-      class: Asiel\BookkeepingBundle\Service\TransactionFormHandler
-      arguments:
-        - '@asiel.backendbundle.baseformhandler'
+    Asiel\BookkeepingBundle\Controller\:
+      resource: '../../../../../src/Asiel/BookkeepingBundle/Controller'
+      tags: ['controller.service_arguments']
 
-    asiel.bookkeepingbundle.abandonedactionformhandler:
-      class: Asiel\BookkeepingBundle\Service\AbandonedActionFormHandler
-      arguments:
-        - '@asiel.backendbundle.baseformhandler'
-        - '@asiel.bookkeepingbundle.totalactioncosts'
 
-    asiel.bookkeepingbundle.seizedactionformhandler:
-      class: Asiel\BookkeepingBundle\Service\SeizedActionFormHandler
-      arguments:
-        - '@asiel.backendbundle.baseformhandler'
-
-    asiel.bookkeepingbundle.foundactionformhandler:
-      class: Asiel\BookkeepingBundle\Service\FoundActionFormHandler
-      arguments:
-        - '@asiel.backendbundle.baseformhandler'
-        - '@asiel.bookkeepingbundle.totalactioncosts'
-
-    asiel.bookkeepingbundle.returnedowneractionformhandler:
-      class: Asiel\BookkeepingBundle\Service\ReturnedOwnerActionFormHandler
-      arguments:
-        - '@asiel.backendbundle.baseformhandler'
-
-    asiel.bookkeepingbundle.totalactioncosts:
-      class: Asiel\BookkeepingBundle\Service\TotalActionCosts
-      arguments:
-        - '@doctrine.orm.entity_manager'
+#    asiel.bookkeepingbundle.adoptedactionformhandler:
+#      class: Asiel\BookkeepingBundle\Service\AdoptedActionFormHandler
+#      arguments:
+#        - '@asiel.backendbundle.baseformhandler'
+#        - '@asiel.bookkeepingbundle.totalactioncosts'
+#
+#    asiel.bookkeepingbundle.actionformhandler:
+#      class: Asiel\BookkeepingBundle\Service\ActionFormHandler
+#      arguments:
+#        - '@asiel.backendbundle.baseformhandler'
+#
+#    asiel.bookkeepingbundle.transactionformhandler:
+#      class: Asiel\BookkeepingBundle\Service\TransactionFormHandler
+#      arguments:
+#        - '@asiel.backendbundle.baseformhandler'
+#
+#    asiel.bookkeepingbundle.abandonedactionformhandler:
+#      class: Asiel\BookkeepingBundle\Service\AbandonedActionFormHandler
+#      arguments:
+#        - '@asiel.backendbundle.baseformhandler'
+#        - '@asiel.bookkeepingbundle.totalactioncosts'
+#
+#    asiel.bookkeepingbundle.seizedactionformhandler:
+#      class: Asiel\BookkeepingBundle\Service\SeizedActionFormHandler
+#      arguments:
+#        - '@asiel.backendbundle.baseformhandler'
+#
+#    asiel.bookkeepingbundle.foundactionformhandler:
+#      class: Asiel\BookkeepingBundle\Service\FoundActionFormHandler
+#      arguments:
+#        - '@asiel.backendbundle.baseformhandler'
+#        - '@asiel.bookkeepingbundle.totalactioncosts'
+#
+#    asiel.bookkeepingbundle.returnedowneractionformhandler:
+#      class: Asiel\BookkeepingBundle\Service\ReturnedOwnerActionFormHandler
+#      arguments:
+#        - '@asiel.backendbundle.baseformhandler'
+#
+#    asiel.bookkeepingbundle.totalactioncosts:
+#      class: Asiel\BookkeepingBundle\Service\TotalActionCosts
+#      arguments:
+#        - '@doctrine.orm.entity_manager'
